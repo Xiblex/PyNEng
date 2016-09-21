@@ -71,4 +71,4 @@ while not pass_OK:
 
 
 
-{% pyweb %}test_file.py{% endpyweb %}
+[[[test_file.py]]]
