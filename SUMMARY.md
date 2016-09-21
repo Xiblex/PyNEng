@@ -1,7 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
-* [Подготовка к работе](chapter1.md)
+* [Подготовка к работе](chapter1/README.md)
    * [ОС и редактор](chapter1.md#anchors-in-markdown)
    * [Система управления пакетами pip](chapter1.md#Система управления пакетами pip)
    * [virtualenv, virtualenvwrapper](chapter1.md#virtualenv, virtualenvwrapper)
