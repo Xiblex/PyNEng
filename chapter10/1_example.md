@@ -7,12 +7,91 @@
 * router_config_generator.py - в этом скрипте импортируются два других файла и генерируются конфигурационные файлы маршрутизаторов
 
 
-{% codetabs name="Python", type="py" -%}
-    {% raw %}
-    <h1>Hello {{yourName}}!</h1>
-    {% endraw %}
-{%- language name="React", type="js" -%}
-var React = require('react')
+{% codetabs name="outer_template.py", type="py" -%}
+{% raw %}
+# -*- coding: utf-8 -*-
+from jinja2 import Template
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+template_r1 = Template(u"""
+hostname {{name}}
+!
+interface Loopback10
+ description MPLS loopback
+ ip address 10.10.{{id}}.1 255.255.255.255
+ !
+interface GigabitEthernet0/0
+ description WAN to {{name}} sw1 G0/1
+!
+interface GigabitEthernet0/0.1{{id}}1
+ description MPLS to {{to_name}}
+ encapsulation dot1Q 1{{id}}1
+ ip address 10.{{id}}.1.2 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf hello-interval 1
+ ip ospf cost 10
+!
+interface GigabitEthernet0/1
+ description LAN {{name}} to sw1 G0/2 !
+interface GigabitEthernet0/1.{{IT}}
+ description PW IT {{name}} - {{to_name}}
+ encapsulation dot1Q {{IT}}
+ xconnect 10.10.{{to_id}}.1 {{id}}11 encapsulation mpls
+ backup peer 10.10.{{to_id}}.2 {{id}}21
+  backup delay 1 1
+!
+interface GigabitEthernet0/1.{{BS}}
+ description PW BS {{name}} - {{to_name}}
+ encapsulation dot1Q {{BS}}
+ xconnect 10.10.{{to_id}}.1 {{to_id}}{{id}}11 encapsulation mpls
+  backup peer 10.10.{{to_id}}.2 {{to_id}}{{id}}21
+  backup delay 1 1
+!
+router ospf 10
+ router-id 10.10.{{id}}.1
+ auto-cost reference-bandwidth 10000
+ network 10.0.0.0 0.255.255.255 area 0
+ !
+""")
+{% endraw %}
+{%- language name="routers_info.py", type="py" -%}
+routers = [
+{
+    'id':'11',
+    'name':'Liverpool',
+    'to_name':'LONDON',
+    'IT':791,
+    'BS':1550,
+    'to_id':1
+},
+{
+    'id':'12',
+    'name':'Bristol',
+    'to_name':'LONDON',
+    'IT':793,
+    'BS':1510,
+    'to_id':1
+},
+{
+    'id':'14',
+    'name':'Coventry',
+    'to_name':'Manchester',
+    'IT':892,
+    'BS':1650,
+    'to_id':2
+}]
+{%- language name="router_config_generator.py", type="py" -%}
+# -*- coding: utf-8 -*-
+from jinja2 import Template
+from router_template import template_r1
+from routers_info import routers
+
+for router in routers:
+    r1_conf = router['name']+'_r1'
+    with open(r1_conf,'w') as f:
+        f.write(template_r1.render( router ))
 {%- endcodetabs %}
 
 
