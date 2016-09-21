@@ -56,7 +56,7 @@ router ospf 10
  !
 """)
 ```
-}}
+
 
 Файл routers_info.py
 ```python
