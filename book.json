@@ -5,5 +5,7 @@
         "codetabs",
         "pyweb"
     ],
-    "pluginsConfig": {}
+    "pluginsConfig" : {
+      "brythonPath" : "http://brython-comquas.rhcloud.com/brython.js"
+    }
 }
