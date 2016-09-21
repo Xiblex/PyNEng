@@ -70,5 +70,5 @@ while not pass_OK:
 ```
 
 
-{% codeeditor src='test_file.py', language='python' %}
+{% codeeditor src='./test_file.py', language='python' %}
 {% endcodeeditor %}
