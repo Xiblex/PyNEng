@@ -1,0 +1,31 @@
+### Варианты создания списка
+Создание списка с помощью литерала:
+```python
+In [1]: vlans = [10, 20, 30, 50]
+```
+
+Создание списка с помощью функции __list()__:
+```python
+In [2]: list1 = list('router')
+
+In [3]: print list1
+['r', 'o', 'u', 't', 'e', 'r']
+```
+
+__Генераторы списков__:
+```python
+In [4]: list2 = ['FastEthernet0/'+ str(i) for i in range(10)]
+
+In [5]: list2
+Out[6]: 
+['FastEthernet0/0',
+ 'FastEthernet0/1',
+ 'FastEthernet0/2',
+ 'FastEthernet0/3',
+ 'FastEthernet0/4',
+ 'FastEthernet0/5',
+ 'FastEthernet0/6',
+ 'FastEthernet0/7',
+ 'FastEthernet0/8',
+ 'FastEthernet0/9']
+```
