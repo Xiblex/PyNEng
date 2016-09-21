@@ -16,7 +16,7 @@
   * [Типы данных в Python](chapter3/2_data_types.md)
   * [Числа](chapter3/3_numbers.md)
   * [Строки (Strings)](chapter3/4_strings.md)
-    * [Полезные методы для работы со строками](chapter3/4q_string_methods.md)
+    * [Полезные методы для работы со строками](chapter3/4a_string_methods.md)
   * [Список (List)](chapter3/5_lists.md)
     * [Полезные методы для работы со списками](chapter3/5a_list_methods.md)
     * [Варианты создания списка](chapter3/5b_create_list.md)
