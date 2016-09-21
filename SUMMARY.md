@@ -40,6 +40,7 @@
   * [break, continue, pass](chapter4/4_break_continue_pass.md)
   * [for/else, while/else](chapter4/5_for_while_else.md)
   * [Работа с исключениями try/except/else/finally](chapter4/6_exceptions.md)
+* [Работа с файлами](chapter5/README.md)
 
 
 
