@@ -30,5 +30,6 @@
     * [Полезные методы для работы с множествами](chapter3/8a_set_methods.md)
     * [Операции с множествами](chapter3/8b_set_operations.md)
     * [Варианты создания множества](chapter3/8c_create_set.md)
+  * 
 
 
