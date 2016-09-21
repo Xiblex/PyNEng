@@ -61,6 +61,7 @@ apt-get install python-pip
 > По ссылке можно посмотреть самые популярные пакеты PyPi:
 http://pypi-ranking.info/alltime
 
+##[create an anchor](#anchors-in-markdown)
 
 ##virtualenv, virtualenvwrapper
 Для того чтобы то, что мы будем делать на курсе, не повлияло на вашу систему в целом, мы будем использовать __virtualenv__.
