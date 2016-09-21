@@ -41,6 +41,12 @@
   * [for/else, while/else](chapter4/5_for_while_else.md)
   * [Работа с исключениями try/except/else/finally](chapter4/6_exceptions.md)
 * [Работа с файлами](chapter5/README.md)
+* [Функции](chapter6/README.md)
+  * [Создание функций](chapter6/1_create_func.md)
+  * [Пространства имен. Области видимости](chapter6/2_namespace.md)
+  * [Аргументы функций](chapter6/3_func_args.md)
+    * [Типы аргументов](chapter6/3a_func_args_types.md)
+    * [Аргументы переменной длинны](chapter6/3b_func_args_var_len.md)
 
 
 
