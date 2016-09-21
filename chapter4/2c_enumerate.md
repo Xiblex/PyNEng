@@ -28,9 +28,9 @@ In [2]: for position, string in enumerate(list1, 100):
 ```
 
 #### Пример использования enumerate для EEM (advanced)
-Вероятно, вы знаете о такой вещи в Cisco, как [EEM](xgu.ru/wiki/EEM). Если в двух словах, то EEM позволяет выполнять какие-то действия (action) в ответ на событие (event).
+Вероятно, вы знаете о такой вещи в Cisco, как [EEM](http://xgu.ru/wiki/EEM). Если в двух словах, то EEM позволяет выполнять какие-то действия (action) в ответ на событие (event).
 
-Выглядит applet EEM так (подробнее в статье [EEM](xgu.ru/wiki/EEM)):
+Выглядит applet EEM так (подробнее в статье [EEM](http://xgu.ru/wiki/EEM)):
 ```python
 event manager applet Fa0/1_no_shut
  event syslog pattern "Line protocol on Interface FastEthernet0/0, changed state to down"
