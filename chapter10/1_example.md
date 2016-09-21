@@ -7,7 +7,7 @@
 * router_config_generator.py - в этом скрипте импортируются два других файла и генерируются конфигурационные файлы маршрутизаторов
 
 
-{% codetabs name="outer_template.py", type="py" -%}
+{% codetabs name="router_template.py", type="py" -%}
 {% raw %}
 # -*- coding: utf-8 -*-
 from jinja2 import Template
