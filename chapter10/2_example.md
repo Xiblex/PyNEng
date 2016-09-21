@@ -35,7 +35,7 @@
 Переделанный пример предыдущего скрипта, шаблона и файла с данными:
 
 Шаблон router_template.txt
-```jinja
+```
 hostname {{name}}
 !
 interface Loopback10
