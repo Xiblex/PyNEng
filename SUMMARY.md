@@ -52,11 +52,13 @@
   * [Создание своих модулей](chapter7/2_create.md)
   * [Пути поиска модулей](chapter7/3_search.md)
 * [Регулярные выражения](chapter8/README.md)
-  * [Модуль re](chapter8/.md)
-  * [Специальные символы](chapter8/.md)
-  * [Жадность регулярных выражений](chapter8/.md)
-  * [Группировка выражений](chapter8/.md)
-    * [Разбор вывода команды show ip dhcp snooping с помощью именованных групп](chapter8/.md)
+  * [Модуль re](chapter8/1_re.md)
+  * [Специальные символы](chapter8/2_spec_sym.md)
+  * [Жадность регулярных выражений](chapter8/3_greedy_re.md)
+  * [Группировка выражений](chapter8/4_re_groups.md)
+    * [Разбор вывода команды show ip dhcp snooping с помощью именованных групп](chapter8/4a_group_example.md)
+
+
 
 
 
