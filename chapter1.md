@@ -1,6 +1,5 @@
 # Подготовка к работе
 
-##[create an anchor](#anchors-in-markdown)
 
 ##ОС и редактор
 
@@ -62,6 +61,7 @@ apt-get install python-pip
 > По ссылке можно посмотреть самые популярные пакеты PyPi:
 http://pypi-ranking.info/alltime
 
+##[create an anchor](#anchors-in-markdown)
 
 
 ##virtualenv, virtualenvwrapper
