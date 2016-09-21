@@ -118,8 +118,7 @@ natasha$ python router_config_generator.py
 
 В результате получатся три конфигурационных файла:
 
-Файл Liverpool_r1
-```
+{% codetabs name="Liverpool_r1", type="py" -%}
 hostname Liverpool
 !
 interface Loopback10
@@ -159,10 +158,7 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
-```
-
-Файл Bristol_r1
-```
+{%- language name="Bristol_r1", type="py" -%}
 hostname Bristol
 !
 interface Loopback10
@@ -202,10 +198,7 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
-```
-
-Файл Coventry_r1
-```
+{%- language name="Coventry_r1", type="py" -%}
 hostname Coventry
 !
 interface Loopback10
@@ -245,5 +238,20 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
+{%- endcodetabs %}
+
+Файл Liverpool_r1
+```
+
+```
+
+Файл Bristol_r1
+```
+
+```
+
+Файл Coventry_r1
+```
+
 ```
 
