@@ -1,6 +1,6 @@
 # Summary
 
-* [Содержание](SUMMARY.md)
+* [Содержание](CONTENT.md)
 * [Введение](README.md)
 * [Подготовка к работе](chapter1/README.md)
    * [ОС и редактор](chapter1/os_and_editor.md)
