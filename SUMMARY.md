@@ -57,6 +57,10 @@
   * [Жадность регулярных выражений](chapter8/3_greedy_re.md)
   * [Группировка выражений](chapter8/4_re_groups.md)
     * [Разбор вывода команды show ip dhcp snooping с помощью именованных групп](chapter8/4a_group_example.md)
+* [Шаблоны конфигураций с Jinja](chapter10/README.md)
+  * [Пример использования Jinja](chapter10/1_example.md)
+  * [Пример использования Jinja с корректным использованием программного интерфейса](chapter10/2_example.md)
+
 
 
 
