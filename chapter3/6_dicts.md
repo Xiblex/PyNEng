@@ -1,0 +1,94 @@
+## Словарь (Dictionary)
+Словари -- это изменяемый, неупорядоченный тип данных 
+(к слову, в модуле [https://docs.python.org/2/library/collections.html collections] доступны упорядоченные объекты, внешне идентичные словарям [https://docs.python.org/2/library/collections.html#collections.OrderedDict OrderedDict]).
+
+Словарь (ассоциативный массив, хеш-таблица):
+* данные в словаре это пары "ключ:значение"
+* доступ к значениям осуществляется по ключу, а не по номеру, как в списках
+* словари неупорядоченны, поэтому не стоит полагаться на порядок элементов словаря
+* так как словари изменяемы, то элементы словаря можно менять, добавлять, удалять
+* ключ должен быть объектом неизменяемого типа:
+ * число
+ * строка
+ * кортеж
+* значение может быть данными любого типа
+
+Пример словаря:
+```python
+london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'IOS': '15.4'}
+```
+
+Можно записывать и так:
+```python
+london = {
+        'id': 1,
+        'name':'London',
+        'IT_VLAN':320,
+        'User_VLAN':1010,
+	    'Mngmt_VLAN':99,
+        'to_name': None,
+        'to_id': None,
+        'port':'G1/0/11'
+}
+```
+
+Для того чтобы получить значение из словаря, надо обратиться по ключу, таким же образом, как это было в списках, только вместо номера, будет использоваться ключ:
+```python
+In [1]: london = {'name': 'London1', 'location': 'London Str'}
+
+In [2]: london['name']
+Out[2]: 'London1'
+
+In [3]: london['location']
+Out[3]: 'London Str'
+```
+
+Аналогичным образом можно добавить новую пару ключ:значение:
+```python
+In [4]: london['vendor'] = 'Cisco'
+
+In [5]: print london
+{'vendor': 'Cisco', 'name': 'London1', 'location': 'London Str'}
+```
+
+В словаре в качестве значения можно использовать словарь:
+```python
+london_co = {
+    'r1' : {
+	'hostname': 'london_r1',
+	'location': '21 New Globe Walk',
+	'vendor': 'Cisco',
+	'model': '4451',
+	'IOS': '15.4',
+	'IP': '10.255.0.1'
+	},
+    'r2' : {
+	'hostname': 'london_r2',
+	'location': '21 New Globe Walk',
+	'vendor': 'Cisco',
+	'model': '4451',
+	'IOS': '15.4',
+	'IP': '10.255.0.2'
+	},
+    'sw1' : {
+	'hostname': 'london_sw1',
+	'location': '21 New Globe Walk',
+	'vendor': 'Cisco',
+	'model': '3850',
+	'IOS': '3.6.XE',
+	'IP': '10.255.0.101'
+	}
+}
+```
+
+Получить значения из вложенного словаря можно так:
+```python
+In [7]: london_co['r1']['IOS']
+Out[7]: '15.4'
+
+In [8]: london_co['r1']['model']
+Out[8]: '4451'
+
+In [9]: london_co['sw1']['IP']
+Out[9]: '10.255.0.101'
+```
