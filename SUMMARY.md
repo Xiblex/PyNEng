@@ -30,6 +30,16 @@
     * [Полезные методы для работы с множествами](chapter3/8a_set_methods.md)
     * [Операции с множествами](chapter3/8b_set_operations.md)
     * [Варианты создания множества](chapter3/8c_create_set.md)
-  * 
+* [Контроль хода программы](chapter4/README.md)
+  * [if/elif/else](chapter4/1_if_else.md)
+  * [for](chapter4/2_for.md)
+    * [Вложенные for](chapter4/2a_for_in_for.md)
+    * [Совмещение for и if](chapter4/2b_for_if.md)
+    * [Итератор enumerate](chapter4/2c_enumerate.md)
+  * [while](chapter4/3_while.md)
+  * [break, continue, pass](chapter4/4_break_continue_pass.md)
+  * [for/else, while/else](chapter4/5_for_while_else.md)
+  * [Работа с исключениями try/except/else/finally](chapter4/6_exceptions.md)
+
 
 
