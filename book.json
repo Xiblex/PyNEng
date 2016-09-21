@@ -2,7 +2,8 @@
     "author": "Наташа Самойленко",
     "plugins": [
         "expandable-chapters",
-        "codetabs"
+        "codetabs",
+        "code-editor"
     ],
     "pluginsConfig": {}
 }
