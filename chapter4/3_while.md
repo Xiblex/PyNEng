@@ -68,3 +68,7 @@ while not pass_OK:
 Введите пароль еще раз: 123345345345
 Пароль для пользователя nata установлен
 ```
+
+
+{% codeeditor src='test_file.py', language='python' %}
+{% endcodeeditor %}
