@@ -2,8 +2,7 @@
     "author": "Наташа Самойленко",
     "plugins": [
         "expandable-chapters",
-        "codetabs",
-        "pyweb"
+        "codetabs"
     ],
-    "pluginsConfig" : {}
+    "pluginsConfig": {}
 }
