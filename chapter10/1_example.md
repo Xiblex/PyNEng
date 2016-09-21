@@ -239,19 +239,3 @@ router ospf 10
  network 10.0.0.0 0.255.255.255 area 0
 !
 {%- endcodetabs %}
-
-Файл Liverpool_r1
-```
-
-```
-
-Файл Bristol_r1
-```
-
-```
-
-Файл Coventry_r1
-```
-
-```
-
