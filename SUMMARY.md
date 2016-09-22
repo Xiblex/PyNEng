@@ -75,9 +75,7 @@
     * [ORDER BY](chapter11/3_order_by.md)
   * [Модуль sqlite3](chapter11/4_sqlite3.md)
     * [Пример использования SQLite](chapter11/5_example_sqlite.md)
-
-
-
+* [Полезные ссылки](resources/README.md)
 
 
 
