@@ -40,7 +40,7 @@
   * [for/else, while/else](chapter4/5_for_while_else.md)
   * [Работа с исключениями try/except/else/finally](chapter4/6_exceptions.md)
 * [Работа с файлами](chapter5/README.md)
-  * [Передача аргументов скрипту](chapter2/4_args.md)
+  * [Передача аргументов скрипту](chapter5/1_args.md)
 * [Функции](chapter6/README.md)
   * [Создание функций](chapter6/1_create_func.md)
   * [Пространства имен. Области видимости](chapter6/2_namespace.md)
