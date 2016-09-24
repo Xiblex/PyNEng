@@ -66,5 +66,21 @@ Out[10]: True
 
 В этом может помочь функция ```type()```:
 ```python
+In [11]: type("string")
+Out[11]: str
 
+In [12]: type("string") is str
+Out[12]: True
+```
+
+Аналогично с кортежем (и другими типами данных):
+```python
+In [13]: type((1,2,3))
+Out[13]: tuple
+
+In [14]: type((1,2,3)) is tuple
+Out[14]: True
+
+In [15]: type((1,2,3)) is list
+Out[15]: False
 ```
