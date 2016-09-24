@@ -16,6 +16,7 @@
   * [Числа](chapter3/3_numbers.md)
   * [Строки (Strings)](chapter3/4_strings.md)
     * [Полезные методы для работы со строками](chapter3/4a_string_methods.md)
+    * [Форматирование строк](chapter3/4b_string_format.md)
   * [Список (List)](chapter3/5_lists.md)
     * [Полезные методы для работы со списками](chapter3/5a_list_methods.md)
     * [Варианты создания списка](chapter3/5b_create_list.md)
