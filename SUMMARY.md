@@ -28,6 +28,7 @@
     * [Полезные методы для работы с множествами](chapter3/8a_set_methods.md)
     * [Операции с множествами](chapter3/8b_set_operations.md)
     * [Варианты создания множества](chapter3/8c_create_set.md)
+  * [Преобразование типов](chapter3/9_convert_type.md)
 * [Создание базовых скриптов](chapter3a/README.md)
   * [Передача аргументов скрипту](chapter3a/1_args.md)
   * [Ввод информации пользователем](chapter3a/2_user_input.md)
