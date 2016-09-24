@@ -30,32 +30,40 @@ In [4]: "10".isdigit()
 Out[4]: True
 ```
 
+Пример использования метода:
+```python
+In [5]: vlans = ['10', '20', '30', '40', '100-200']
+
+In [6]: [ int(vlan) for vlan in vlans if vlan.isdigit() ]
+Out[6]: [10, 20, 30, 40]
+```
+
 ####```isalpha()```
 
 Метод isalpha() позволяет проверить состоит ли строка из одних букв:
 ```python
-In [5]: "a".isalpha()
-Out[5]: True
+In [7]: "a".isalpha()
+Out[7]: True
 
-In [6]: "a100".isalpha()
-Out[6]: False
-
-In [7]: "a--  ".isalpha()
-Out[7]: False
-
-In [8]: "a ".isalpha()
+In [8]: "a100".isalpha()
 Out[8]: False
+
+In [9]: "a--  ".isalpha()
+Out[9]: False
+
+In [10]: "a ".isalpha()
+Out[10]: False
 ```
 
 ####```isalnum()```
 
 Метод isalnum() позволяет проверить состоит ли строка из  букв и цифр:
 ```python
-In [9]: "a".isalnum()
-Out[9]: True
+In [11]: "a".isalnum()
+Out[1]: True
 
-In [10]: "a10".isalnum()
-Out[10]: True
+In [12]: "a10".isalnum()
+Out[12]: True
 ```
 
 ####```type()```
@@ -66,21 +74,21 @@ Out[10]: True
 
 В этом может помочь функция ```type()```:
 ```python
-In [11]: type("string")
-Out[11]: str
+In [13]: type("string")
+Out[13]: str
 
-In [12]: type("string") is str
-Out[12]: True
+In [14]: type("string") is str
+Out[14]: True
 ```
 
 Аналогично с кортежем (и другими типами данных):
 ```python
-In [13]: type((1,2,3))
-Out[13]: tuple
+In [15]: type((1,2,3))
+Out[15]: tuple
 
-In [14]: type((1,2,3)) is tuple
-Out[14]: True
+In [16]: type((1,2,3)) is tuple
+Out[16]: True
 
-In [15]: type((1,2,3)) is list
-Out[15]: False
+In [17]: type((1,2,3)) is list
+Out[17]: False
 ```
