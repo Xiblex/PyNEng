@@ -15,8 +15,8 @@
 | Неделя | Темы | Задания |
 | :--: | -- | -- |
 | 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/chapter1/)| 2:2 |
-| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter2/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter3/)| 2:2 |
-| 2 | [Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter3a/)<br>[Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter4/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter5/)| 2:3 |
+| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter2/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter3/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter3a/)| 2:2 |
+| 2 | [Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter4/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter5/)| 2:3 |
 | 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/chapter6/) | 2:4 |
 | 4 | [Модули](https://natenka.gitbooks.io/pyneng/content/chapter7/)<br>[Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/chapter8/) | 2:5 |
 | 5 | [Сериализация данных]() | 2:6 |
