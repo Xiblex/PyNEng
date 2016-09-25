@@ -1,9 +1,5 @@
 # Python для сетевых инженеров
 
-Курс доступен в нескольких форматах:
-* [онлайн](https://natenka.gitbooks.io/pyneng/content/)
-* [PDF, ePub, Mobi](https://www.gitbook.com/book/natenka/pyneng/details)
-
 ##Обратите внимание, что сейчас курс в процессе написания, поэтому не все разделы дописаны
 
 
