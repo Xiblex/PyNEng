@@ -124,11 +124,45 @@ def generate_access_config(access):
                      'switchport port-security violation restrict',
                      'switchport port-security']
 
-
-
-
 access_dict = { 'FastEthernet0/12':'10',
                 'FastEthernet0/14':'11',
                 'FastEthernet0/16':'17',
                 'FastEthernet0/17':'150' }
+```
+
+
+### Задание 6.2
+Создать функцию, которая генерирует конфигурацию для trunk-портов.
+
+Аргумент trunk - это словарь trunk-портов, вида:
+```python
+{ 'FastEthernet0/1':['10','20'],
+  'FastEthernet0/2':['11','30'],
+  'FastEthernet0/4':['17'] }
+```
+
+Функция должна возвращать список всех портов в режиме trunk
+с конфигурацией на основе шаблона trunk_template.
+
+В конце строк в списке не должно быть символа перевода строки.
+
+Проверить работу функции на примере словаря trunk_dict.
+
+```python
+def generate_trunk_config(trunk):
+    """
+    trunk - словарь trunk-портов,
+    для которых необходимо сгенерировать конфигурацию, вида:
+        { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
+    
+    Возвращает список всех команд, которые были сгенерированы на основе шаблона
+    """
+    trunk_template = ['switchport trunk encapsulation dot1q',
+                      'switchport mode trunk',
+                      'switchport trunk native vlan 999',
+                      'switchport trunk allowed vlan']
+
+trunk_dict = { 'FastEthernet0/1':['10','20','30'],
+               'FastEthernet0/2':['11','30'],
+               'FastEthernet0/4':['17'] }
 ```
