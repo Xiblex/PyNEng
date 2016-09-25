@@ -70,10 +70,8 @@
   * [Жадность регулярных выражений](chapter09/3_greedy_re.md)
   * [Группировка выражений](chapter09/4_re_groups.md)
     * [Разбор вывода команды show ip dhcp snooping с помощью именованных групп](chapter09/4a_group_example.md)
-* [Шаблоны конфигураций с Jinja](chapter10/README.md)
-  * [Пример использования Jinja](chapter10/1_example.md)
-  * [Пример использования Jinja с корректным использованием программного интерфейса](chapter10/2_example.md)
-* [Работа с базами данных](chapter11/README.md)
+* [10. Сериализация данных](chapter10/README.md)
+* [11. Работа с базами данных](chapter11/README.md)
   * [SQL](chapter11/1_sql.md)
   * [SQLite](chapter11/2_sqlite.md)
   * [Основы SQL (в sqlite3 CLI)](chapter11/3_sql_basics.md)
@@ -88,6 +86,9 @@
     * [ORDER BY](chapter11/3_order_by.md)
   * [Модуль sqlite3](chapter11/4_sqlite3.md)
     * [Пример использования SQLite](chapter11/5_example_sqlite.md)
+* [13. Шаблоны конфигураций с Jinja](chapter13/README.md)
+  * [Пример использования Jinja](chapter13/1_example.md)
+  * [Пример использования Jinja с корректным использованием программного интерфейса](chapter13/2_example.md)
 * [Полезные ссылки](resources/README.md)
 
 
