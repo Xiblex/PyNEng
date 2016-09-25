@@ -45,6 +45,7 @@
   * [break, continue, pass](chapter4/4_break_continue_pass.md)
   * [for/else, while/else](chapter4/5_for_while_else.md)
   * [Работа с исключениями try/except/else/finally](chapter4/6_exceptions.md)
+  * [Упражнения](chapter4/7_exercises.md)
 * [Работа с файлами](chapter5/README.md)
   * [Открытие файлов](chapter5/1_open.md)
   * [Чтение файлов](chapter5/2_read.md)
