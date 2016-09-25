@@ -9,7 +9,7 @@
 Но попробуйте придерживаться темпа, возможно он вам подойдет.
 
 | Неделя | Темы | Задания |
-| -- | -- | -- |
+| :--: | -- | -- |
 | 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/chapter1/)| 2:2 |
 | 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter2/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter3/)| 2:2 |
 | 2 | [Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter3a/)<br>[Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter4/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter5/)| 2:3 |
