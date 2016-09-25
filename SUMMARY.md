@@ -86,9 +86,12 @@
     * [ORDER BY](chapter11/3_order_by.md)
   * [Модуль sqlite3](chapter11/4_sqlite3.md)
     * [Пример использования SQLite](chapter11/5_example_sqlite.md)
+* [12. Подключение к оборудованию](chapter12/README.md)
 * [13. Шаблоны конфигураций с Jinja](chapter13/README.md)
   * [Пример использования Jinja](chapter13/1_example.md)
   * [Пример использования Jinja с корректным использованием программного интерфейса](chapter13/2_example.md)
+* [14. Обработка вывода команд с TextFSM](chapter14/README.md)
+* [15. Ansible](chapter15/README.md)
 * [Полезные ссылки](resources/README.md)
 
 
