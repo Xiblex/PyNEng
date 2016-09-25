@@ -62,6 +62,7 @@
   * [Импорт модуля](chapter7/1_import.md)
   * [Создание своих модулей](chapter7/2_create.md)
   * [Пути поиска модулей](chapter7/3_search.md)
+  * [Упражнения](chapter7/4_exercises.md)
 * [Регулярные выражения](chapter8/README.md)
   * [Модуль re](chapter8/1_re.md)
   * [Специальные символы](chapter8/2_spec_sym.md)
