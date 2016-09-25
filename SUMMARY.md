@@ -57,6 +57,7 @@
   * [Аргументы функций](chapter6/3_func_args.md)
     * [Типы аргументов](chapter6/3a_func_args_types.md)
     * [Аргументы переменной длинны](chapter6/3b_func_args_var_len.md)
+  * [Упражнения](chapter6/4_exercises.md)
 * [Модули](chapter7/README.md)
   * [Импорт модуля](chapter7/1_import.md)
   * [Создание своих модулей](chapter7/2_create.md)
