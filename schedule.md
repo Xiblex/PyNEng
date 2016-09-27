@@ -15,10 +15,10 @@
 | Неделя | Темы | Задания |
 | :--: | -- | -- |
 | 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/chapter01/)| 2:2 |
-| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter02/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter03/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter04/)| [Задания](https://natenka.gitbooks.io/pyneng/content/chapter03/10_exercises.html) |
-| 2 | [Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter05/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter06/)| [Задания](https://natenka.gitbooks.io/pyneng/content/chapter05/7_exercises.html) |
-| 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/chapter07/) | [Задания](https://natenka.gitbooks.io/pyneng/content/chapter07/4_exercises.html) |
-| 4 | [Модули](https://natenka.gitbooks.io/pyneng/content/chapter08/)<br>[Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/chapter09/) | [Задания по модулям](https://natenka.gitbooks.io/pyneng/content/chapter08/4_exercises.html)<br>[Задания по регулярным выражениям]()|
+| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter02/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter03/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter04/)| [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_03/03_exercises.html) |
+| 2 | [Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter05/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter06/)| [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_05/05_exercises.html) |
+| 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/chapter07/) | [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_07/07_exercises.html) |
+| 4 | [Модули](https://natenka.gitbooks.io/pyneng/content/chapter08/)<br>[Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/chapter09/) | [Задания по модулям](https://natenka.gitbooks.io/pyneng/content/exercises/ch_08/08_exercises.html)<br>[Задания по регулярным выражениям]()|
 | 5 | [Сериализация данных]() | [Задания]() |
 | 6 | [Работа с базами данных](https://natenka.gitbooks.io/pyneng/content/chapter11/) | [Задания]() |
 | 7 | [Подключение к оборудованию]()| [Задания]() |
