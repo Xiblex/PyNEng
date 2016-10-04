@@ -180,4 +180,3 @@ In [8]: print templates
 [u'switchport trunk encapsulation dot1q', u'switchport mode trunk', u'switchport trunk native vlan 999', u'switchport trunk allowed vlan']
 ```
 
-Подробнее о модуле json: [PYMOTW](https://pymotw.com/2/json/index.html) 
