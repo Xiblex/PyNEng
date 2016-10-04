@@ -7,10 +7,10 @@ YAML более приятен для восприятия человеком, �
 ###Синтаксис YAML
 
 Как и Python, YAML использует отступы для указания структуры документа.
-
 Но в YAML можно использовать только пробелы и нельзя использовать знаки табуляции.
 
 Еще одна схожесть с Python: комментарии начинаются с символа # и продолжаются до конца строки.
+
 
 Пройдемся по тому как в YAML записываются различные форматы данных.
 
@@ -92,3 +92,88 @@ trunk:
   to_id: 2
   to_name: Manchester
 ```
+
+### Модуль PyYAML
+Для работы с YAML в Python используется модуль PyYAML. Он не входит в стандартную библиотеку модулей, поэтому его нужно установить (pip install pyyaml).
+
+Работа с ним аналогична модулям csv и json.
+
+
+####Запись в YAML
+Попробуем записать объекты Python в YAML:
+```python
+import yaml
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk native vlan 999',
+                  'switchport trunk allowed vlan']
+
+
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+to_yaml = {'trunk':trunk_template, 'access':access_template}
+
+with open('sw_templates.yaml', 'w') as f:
+    f.write(yaml.dump(to_yaml))
+
+with open('sw_templates.yaml') as f:
+    print f.read()
+
+```
+
+Файл sw_templates.yaml выглядит таким образом:
+```yaml
+access: [switchport mode access, switchport access vlan, switchport nonegotiate, spanning-tree
+    portfast, spanning-tree bpduguard enable]
+trunk: [switchport trunk encapsulation dot1q, switchport mode trunk, switchport trunk
+    native vlan 999, switchport trunk allowed vlan]
+```
+
+То есть, по умолчанию, список записался в одну строку. Но удобнее, когда каждый элемент списка находится в одной строке.
+
+Для того, чтобы изменить формат записи, добавляем параметр ```default_flow_style=False```:
+```python
+import yaml
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk native vlan 999',
+                  'switchport trunk allowed vlan']
+
+
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+to_yaml = {'trunk':trunk_template, 'access':access_template}
+
+with open('sw_templates.yaml', 'w') as f:
+    f.write(yaml.dump(to_yaml, default_flow_style=False))
+
+with open('sw_templates.yaml') as f:
+    print f.read()
+```
+
+Теперь содержимое файла sw_templates.yaml выглядит таким образом:
+```yaml
+access:
+- switchport mode access
+- switchport access vlan
+- switchport nonegotiate
+- spanning-tree portfast
+- spanning-tree bpduguard enable
+trunk:
+- switchport trunk encapsulation dot1q
+- switchport mode trunk
+- switchport trunk native vlan 999
+- switchport trunk allowed vlan
+```
+
+####Чтение из YAML
