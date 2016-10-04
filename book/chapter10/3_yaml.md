@@ -177,3 +177,59 @@ trunk:
 ```
 
 ####Чтение из YAML
+
+Попробуем преобразовать данные из файла YAML в объекты Python.
+
+Файл info.yaml:
+```yaml
+- BS: 1550
+  IT: 791
+  id: 11
+  name: Liverpool
+  to_id: 1
+  to_name: LONDON
+- BS: 1510
+  IT: 793
+  id: 12
+  name: Bristol
+  to_id: 1
+  to_name: LONDON
+- BS: 1650
+  IT: 892
+  id: 14
+  name: Coventry
+  to_id: 2
+  to_name: Manchester
+```
+
+Чтение из YAML выполняется очень просто:
+```python
+In [1]: import yaml
+
+In [2]: templates = yaml.load(open('info.yaml'))
+
+In [3]: templates
+Out[3]:
+[{'BS': 1550,
+  'IT': 791,
+  'id': 11,
+  'name': 'Liverpool',
+  'to_id': 1,
+  'to_name': 'LONDON'},
+ {'BS': 1510,
+  'IT': 793,
+  'id': 12,
+  'name': 'Bristol',
+  'to_id': 1,
+  'to_name': 'LONDON'},
+ {'BS': 1650,
+  'IT': 892,
+  'id': 14,
+  'name': 'Coventry',
+  'to_id': 2,
+  'to_name': 'Manchester'}]
+```
+
+Формат YAML очень удобен для хранения различных параметров. Особенно, если вы их заполняете вручную, а не берете из какого-то источника.
+
+И, как минимум, YAML пригодится нам для работы с Ansible.
