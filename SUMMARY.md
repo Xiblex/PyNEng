@@ -90,6 +90,7 @@
   * [Модуль sqlite3](book/chapter11/4_sqlite3.md)
     * [Пример использования SQLite](book/chapter11/5_example_sqlite.md)
 * [12. Подключение к оборудованию](book/chapter12/README.md)
+  * [Ввод пароля](book/chapter12/0_password.md)
   * [Pexpect](book/chapter12/1_pexpect.md)
   * [Telnetlib](book/chapter12/2_telnetlib.md)
   * [Paramiko](book/chapter12/3_paramiko.md)
