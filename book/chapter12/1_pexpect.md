@@ -270,7 +270,7 @@ pexpect.expect в качестве шаблона может принимать 
 Еще одна очень полезная возможность pexpect.expect: то, что мы можем передевать не одно значение, а список.
 
 Например:
-```
+```python
 In [7]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
 
 In [8]: p.expect(['nattaur', pexpect.TIMEOUT, pexpect.EOF])
