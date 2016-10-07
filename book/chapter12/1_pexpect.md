@@ -59,6 +59,8 @@ t.expect('>')
 
 Тут мы подключаемся по SSH, и ожидаем строку 'Password:'. Как только она появилась, отправляем пароль. Затем ждем строку '>'.
 
+
+### Пример использования pexpect
 Посмотрим на еще один пример использования pexpect, теперь уже чуть более сложный.
 
 Файл 1_pexpect.py:
@@ -159,3 +161,125 @@ R3
 ```
 
 Обратите внимание, что, так как мы в последнем expect ожидали подстроку ```#```, метод before показал и команду и имя хоста.
+
+> На самом деле, before это атрибут класса, но пока что, слово метод будет понятней.
+
+
+###Специальные символы в shell
+
+Pexpect не интерпретирует специальные символы shell, такие как ```>```, ```|```, ```*```.
+
+Для того чтобы, например, команда ```ls -ls | grep SUMMARY``` отработала, нужно запустить shell таким образом:
+```python
+In [1]: import pexpect
+
+In [2]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
+
+In [3]: p.expect(pexpect.EOF)
+Out[3]: 0
+
+In [4]: print p.before
+ 16 -rw-r--r--   1 natasha  staff    7156 Oct  5 13:05 SUMMARY.md
+```
+
+#### pexpect.EOF
+В предыдущем примере встретилось использование pexpect.EOF.
+
+Это специальное значение, которое позволяет отреагировать на завершенние исполнения команды или сессии, которую мы запустили в spawn.
+
+Когда мы запускаем команду ```ls -ls```, мы не получаем интерактивный сеанс. Команда выполняется и всё, на этом завершается её работа.
+
+Поэтому, если бы мы попытались запустить её и указать в expect приглашение, мы бы получили ошибку:
+```python
+In [5]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
+
+In [6]: p.expect('nattaur')
+---------------------------------------------------------------------------
+EOF                                       Traceback (most recent call last)
+<ipython-input-9-9c71777698c2> in <module>()
+----> 1 p.expect('nattaur')
+
+/Library/Python/2.7/site-packages/pexpect/spawnbase.pyc in expect(self, pattern, timeout, searchwindowsize, async)
+    313         compiled_pattern_list = self.compile_pattern_list(pattern)
+    314         return self.expect_list(compiled_pattern_list,
+--> 315                 timeout, searchwindowsize, async)
+    316
+    317     def expect_list(self, pattern_list, timeout=-1, searchwindowsize=-1,
+
+/Library/Python/2.7/site-packages/pexpect/spawnbase.pyc in expect_list(self, pattern_list, timeout, searchwindowsize, async)
+    337             return expect_async(exp, timeout)
+    338         else:
+--> 339             return exp.expect_loop(timeout)
+    340
+    341     def expect_exact(self, pattern_list, timeout=-1, searchwindowsize=-1,
+
+/Library/Python/2.7/site-packages/pexpect/expect.pyc in expect_loop(self, timeout)
+    100                     timeout = end_time - time.time()
+    101         except EOF as e:
+--> 102             return self.eof(e)
+    103         except TIMEOUT as e:
+    104             return self.timeout(e)
+
+/Library/Python/2.7/site-packages/pexpect/expect.pyc in eof(self, err)
+     47             if err is not None:
+     48                 msg = str(err) + '\n' + msg
+---> 49             raise EOF(msg)
+     50
+     51     def timeout(self, err=None):
+
+EOF: End Of File (EOF). Empty string style platform.
+<pexpect.pty_spawn.spawn object at 0x107100b10>
+command: /bin/bash
+args: ['/bin/bash', '-c', 'ls -ls | grep SUMMARY']
+searcher: None
+buffer (last 100 chars): ''
+before (last 100 chars): ' 16 -rw-r--r--   1 natasha  staff    7156 Oct  5 13:05 SUMMARY.md\r\n'
+after: <class 'pexpect.exceptions.EOF'>
+match: None
+match_index: None
+exitstatus: 0
+flag_eof: True
+pid: 85765
+child_fd: 7
+closed: False
+timeout: 30
+delimiter: <class 'pexpect.exceptions.EOF'>
+logfile: None
+logfile_read: None
+logfile_send: None
+maxread: 2000
+ignorecase: False
+searchwindowsize: None
+delaybeforesend: 0.05
+delayafterclose: 0.1
+delayafterterminate: 0.1
+```
+
+Когда мы передаем в expect EOF, мы не получаем эту ошибку.
+
+###Возможности pexpect.expect
+
+pexpect.expect в качестве шаблона может принимать не только строку. Выше, мы уже встретились с вариантом передачи EOF.
+
+Что может использоваться как шаблон в pexpect/expect:
+* строка
+* EOF - этот шаблон позволяет среагировать на исключение EOF
+* TIMEOUT - исключение timeout (по умолчанию значение timeout = 30 секунд)
+* compiled re
+
+Еще одна очень полезная возможность pexpect.expect: то, что мы можем передевать не одно значение, а список.
+
+Например:
+```
+In [7]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
+
+In [8]: p.expect(['nattaur', pexpect.TIMEOUT, pexpect.EOF])
+Out[8]: 2
+```
+
+Тут несколько важных моментов:
+* когда мы вызываем pexpect.expect со списком, мы можем указывать разные ожидаемые строки
+* кроме строк, можно указывать исключения
+* pexpect.expect возвращает номер элемента списка, который стработал
+ * в данном случае, номер 2, так как исключение EOF находится в списке под номером два
+* засчет такого формата, мы можем делать ответвления в программе и говорить, если совпадение с первым элементом, то сделать одни действия, если со вторым - другие и так далее.
