@@ -8,32 +8,33 @@
 
 Файл 2_telnetlib.py:
 ```python
-import pexpect
+import telnetlib
+import time
 import getpass
 import sys
 
-command = sys.argv[1]
-user = raw_input("Username: ")
-password = getpass.getpass()
-enable_pass = getpass.getpass(prompt='Enter enable secret: ')
+COMMAND = sys.argv[1]
+USER = raw_input("Username: ")
+PASSWORD = getpass.getpass()
+ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
-ip_list = ['192.168.100.1','192.168.100.2','192.168.100.3']
+DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
-for ip in ip_list:
-    print "Connection to device %s" % ip
-    t = telnetlib.Telnet(ip)
+for IP in DEVICES_IP:
+    print "Connection to device %s" % IP
+    t = telnetlib.Telnet(IP)
 
     t.read_until("Username:")
-    t.write(user + '\n')
+    t.write(USER + '\n')
 
     t.read_until("Password:")
-    t.write(password + '\n')
+    t.write(PASSWORD + '\n')
     t.write("enable\n")
 
     t.read_until("Password:")
-    t.write(enable_pass + '\n')
+    t.write(ENABLE_PASS + '\n')
     t.write("terminal length 0\n")
-    t.write(command + '\n')
+    t.write(COMMAND + '\n')
 
     time.sleep(5)
 
@@ -58,8 +59,8 @@ natasha@nattaur: $ python 2_telnetlib.py "sh ip int br"
 Username: nata
 Password:
 Enter enable secret:
-
 Connection to device 192.168.100.1
+
 R1#terminal length 0
 R1#sh ip int br
 Interface              IP-Address      OK? Method Status                Protocol
@@ -73,8 +74,8 @@ FastEthernet0/1.50     10.1.50.1       YES manual up                    up
 FastEthernet0/1.60     10.1.60.1       YES manual up                    up
 FastEthernet0/1.70     10.1.70.1       YES manual up                    up
 R1#
-
 Connection to device 192.168.100.2
+
 R2#terminal length 0
 R2#sh ip int br
 Interface              IP-Address      OK? Method Status                Protocol
@@ -88,8 +89,8 @@ FastEthernet0/1.50     10.2.50.1       YES manual up                    up
 FastEthernet0/1.60     10.2.60.1       YES manual up                    up
 FastEthernet0/1.70     10.2.70.1       YES manual up                    up
 R2#
-
 Connection to device 192.168.100.3
+
 R3#terminal length 0
 R3#sh ip int br
 Interface              IP-Address      OK? Method Status                Protocol

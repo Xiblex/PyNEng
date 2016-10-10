@@ -74,31 +74,31 @@ import pexpect
 import getpass
 import sys
 
-command = sys.argv[1]
-user = raw_input("Username: ")
-password = getpass.getpass()
-enable_pass = getpass.getpass(prompt='Enter enable secret: ')
+COMMAND = sys.argv[1]
+USER = raw_input("Username: ")
+PASSWORD = getpass.getpass()
+ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
-ip_list = ['192.168.100.1','192.168.100.2','192.168.100.3']
+DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
-for ip in ip_list:
-    print "Connection to device %s" % ip
-    t = pexpect.spawn('ssh %s@%s' % (user, ip))
+for IP in DEVICES_IP:
+    print "Connection to device %s" % IP
+    t = pexpect.spawn('ssh %s@%s' % (USER, IP))
 
     t.expect('Password:')
-    t.sendline(password)
+    t.sendline(PASSWORD)
 
     t.expect('>')
     t.sendline('enable')
 
     t.expect('Password:')
-    t.sendline(enable_pass)
+    t.sendline(ENABLE_PASS)
 
     t.expect('#')
     t.sendline("terminal length 0")
 
     t.expect('#')
-    t.sendline(command)
+    t.sendline(COMMAND)
 
     t.expect('#')
     print t.before
