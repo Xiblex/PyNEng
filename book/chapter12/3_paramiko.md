@@ -128,3 +128,30 @@ FastEthernet0/1.70     10.3.70.1       YES manual up                    up
 R3#
 
 ```
+
+Обратите внимание, что в вывод попал и процесс ввода пароля enable и команда terminal length.
+
+Это связано с тем, что paramiko собирает весь вывод в буфер. А когда мы вызываем метод recv (например, ssh.recv(1000)), мы получаем всё, что есть в буфере. После того, как мы выполнили recv, буфер пуст.
+
+Поэтому, в нашем примере, если бы, например, нам нужно было получить только вывод команды sh ip int br, то надо было оставить recv, но не делать print:
+```python
+    ssh.send("enable\n")
+    ssh.send(ENABLE_PASS + '\n')
+    time.sleep(1)
+
+    ssh.send("terminal length 0\n")
+    time.sleep(1)
+    #Тут мы вызываем recv, но не выводим содержимое буфера
+    ssh.recv(1000)
+
+    ssh.send(COMMAND + "\n")
+    time.sleep(3)
+    result = ssh.recv(5000)
+    print result
+```
+
+
+###Документация Paramiko
+
+* Всё, что касается клиента: [Paramiko Client](http://docs.paramiko.org/en/2.0/api/client.html)
+* Всё, что касается соединения (в нашем примере, всё, что относится к переменной ssh): [Paramiko Channel](http://docs.paramiko.org/en/2.0/api/channel.html)
