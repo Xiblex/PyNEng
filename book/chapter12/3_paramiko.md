@@ -1,6 +1,15 @@
 ## Модуль paramiko
 
+Paramiko это реализация протокола SSHv2 на Python. Paramiko предоставляет функциональность клиента и сервера. Мы будем рассматривать только функциональность клиента.
 
+Так как Paramiko не входит в стандартную библиотеку модулей Python, его нужно установить:
+```
+pip install paramiko
+```
+
+Посмотрим сразу на пример использования Paramiko (пример аналогичен тому, который мы использовали в разделах с pexpect и telnetlib).
+
+Скрипт 3_paramiko.py:
 ```python
 import paramiko
 import getpass
@@ -16,10 +25,11 @@ DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
     print "Connection to device %s" % IP
-    ssh_pre = paramiko.SSHClient()
-    ssh_pre.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    ssh_pre.connect(IP, username=USER, password=PASSWORD, look_for_keys=False, allow_agent=False)
-    ssh = ssh_pre.invoke_shell()
+    client = paramiko.SSHClient()
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    client.connect(hostname=IP, username=USER, password=PASSWORD, look_for_keys=False, allow_agent=False)
+    ssh = client.invoke_shell()
 
     ssh.send("enable\n")
     ssh.send(ENABLE_PASS + '\n')
@@ -35,7 +45,28 @@ for IP in DEVICES_IP:
     print result
 ```
 
+Разберемся с содержимым скрипта:
+* ```client = paramiko.SSHClient()```
+ * этот класс представляет соединение к SSH-серверу. Он будет заботиться об аутентификации клиента.
+* ```client.set_missing_host_key_policy(paramiko.AutoAddPolicy())```
+ * paramiko.AutoAddPolicy() - политика, которая автоматически добавляет новое имя хоста и ключ в локальный объект HostKeys.
+ * set_missing_host_key_policy - устанавливает какую политику использовать, когда мы подключаемся к серверу ключ которого неизвестен.
+* ```client.connect(IP, username=USER, password=PASSWORD, look_for_keys=False, allow_agent=False)```
+ * client.connect - метод, который выполняет подключение к SSH-серверу и аутентифицирует подключение
+   * hostname - имя хоста или IP-адрес
+   * username - имя пользователя
+   * password - пароль
+   * look_for_keys - по умолчанию paramiko выполняет аутентификацию по ключам. Отключаем это поставив False
+   * allow_agent - paramiko может подключаться к локальному SSH агенту ОС. Это нужно при работе с ключами, а так как мы выполняем аутентификацию по логину/паролю, лучше это отключить.
+ * ```ssh = client.invoke_shell()```
+   * После выполнения предыдущей команды у нас уже есть подключение к серверу. Теперь мы вызываем метод invoke_shell, который позволяет нам установить интерактивную сессию SSH с сервером.
+ * Внутри установленной сессии мы выполняем команды и получаем, если нужно, вывод:
+   * ssh.send - отправляет указанную строку в сессию
+   * ssh.recv - получает данные из сессии. В скобках указывается максимальное значение в байтах, которое можно получить. Этот метод возвращает считанную строку
+ * Кроме этого, между отправкой команды и считыванием, кое-где стоит строка time.sleep
+   * с помощью неё мы указываем паузу - сколько времени подождать, прежде чем скрипт продолжит выполняться. Это мы делаем для того, чтобы дождаться выполнения команды на оборудовании
 
+Так выглядит результат выполнения скрипта:
 ```
 Username: cisco
 Password:
