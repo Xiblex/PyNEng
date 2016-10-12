@@ -16,3 +16,50 @@ Outbound Interface:     FastEthernet0/0
 ospf_route = "O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0"
 ```
 
+###Задание 3.2
+
+Преобразовать строку MAC с формата XXXX:XXXX:XXXX в XXXX.XXXX.XXXX.
+
+```python
+MAC = "AAAA:BBBB:CCCC"
+```
+
+###Задание 3.3
+
+Получить из строки CONFIG список VLAN вида ['10', '20', '30'].
+
+```python
+CONFIG = "switchport trunk allowed vlan 1,3,10,20,30,100"
+```
+
+
+###Задание 3.4
+
+Из строк command1 и command2 получить список VLAN, которые есть и в команде command1 и в команде command1. Не использовать для решения задачи циклы, оператор if.
+
+```python
+command1 = "switchport trunk allowed vlan 1,3,10,20,30,100"
+command2 = "switchport trunk allowed vlan 1,3,100,200,300"
+```
+
+
+###Задание 3.5
+
+Список VLANS это список VLANов, собранных со всех устройств сети, поэтому в списке есть повторяющиеся номера VLAN.
+
+Из списка нужно получить уникальный список VLANов, отсортированный по возрастанию номеров.
+
+Не использовать для решения задачи циклы, оператор if.
+
+```python
+VLANS = [10, 20, 30, 1, 2, 100, 10, 30, 3, 4, 10]
+```
+
+
+###Задание 3.6
+
+Обработать строку NAT таким образом, чтобы в имени интерфейса вместо FastEthernet было GigabitEthernet.
+
+```python
+NAT = "ip nat inside source list ACL interface FastEthernet0/1 overload"
+```
