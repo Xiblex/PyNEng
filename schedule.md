@@ -14,16 +14,16 @@
 
 | Неделя | Темы | Задания |
 | :--: | -- | -- |
-| 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/chapter01/)| 2:2 |
-| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/chapter02/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/chapter03/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/chapter04/)| [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_03/03_exercises.html) |
-| 2 | [Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/chapter05/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/chapter06/)| [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_05/05_exercises.html) |
-| 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/chapter07/) | [Задания](https://natenka.gitbooks.io/pyneng/content/exercises/ch_07/07_exercises.html) |
-| 4 | [Модули](https://natenka.gitbooks.io/pyneng/content/chapter08/)<br>[Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/chapter09/) | [Задания по модулям](https://natenka.gitbooks.io/pyneng/content/exercises/ch_08/08_exercises.html)<br>[Задания по регулярным выражениям]()|
-| 5 | [Сериализация данных]() | [Задания]() |
-| 6 | [Работа с базами данных](https://natenka.gitbooks.io/pyneng/content/chapter11/) | [Задания]() |
-| 7 | [Подключение к оборудованию]()| [Задания]() |
-| 8 | [Шаблоны конфигураций с Jinja](https://natenka.gitbooks.io/pyneng/content/chapter13/)<br>[Обработка неструктурированного вывода команд с TextFSM]()| [Задания]() |
-| 9 | [Ansible]() | [Задания]() |
+| 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/book/chapter01/)| 2:2 |
+| 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/book/chapter02/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/book/chapter03/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/book/chapter04/)| [Задания](https://natenka.gitbooks.io/pyneng/content/book/exercises/ch_03/03_exercises.html) |
+| 2 | [Контроль хода программы (только конструкции if/elif/else, while, for)](https://natenka.gitbooks.io/pyneng/content/book/chapter05/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/book/chapter06/)| [Задания](https://natenka.gitbooks.io/pyneng/content/book/exercises/ch_05/05_exercises.html) |
+| 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/book/chapter07/) | [Задания](https://natenka.gitbooks.io/pyneng/content/book/exercises/ch_07/07_exercises.html) |
+| 4 | [Модули](https://natenka.gitbooks.io/pyneng/content/book/chapter08/)<br>[Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/book/chapter09/) | [Задания по модулям](https://natenka.gitbooks.io/pyneng/content/book/exercises/ch_08/08_exercises.html)<br>[Задания по регулярным выражениям]()|
+| 5 | [Сериализация данных](https://natenka.gitbooks.io/pyneng/content/book/chapter10/) | [Задания]() |
+| 6 | [Работа с базами данных](https://natenka.gitbooks.io/pyneng/content/book/chapter11/) | [Задания]() |
+| 7 | [Подключение к оборудованию](https://natenka.gitbooks.io/pyneng/content/book/chapter12/)| [Задания]() |
+| 8 | [Шаблоны конфигураций с Jinja](https://natenka.gitbooks.io/pyneng/content/book/chapter13/)<br>[Обработка неструктурированного вывода команд с TextFSM](https://natenka.gitbooks.io/pyneng/content/book/chapter14/)| [Задания]() |
+| 9 | [Ansible](https://natenka.gitbooks.io/pyneng/content/book/chapter15/) | [Задания]() |
 
 
 Все задания и вспомогательные файлы можно скачать [тут](https://github.com/natenka/PyNEng/blob/master/exercises.zip) (так будет удобнее их выполнять).
