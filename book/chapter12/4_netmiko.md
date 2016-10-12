@@ -70,6 +70,7 @@ FastEthernet0/1.50     10.1.50.1       YES manual up                    up
 FastEthernet0/1.60     10.1.60.1       YES manual up                    up
 FastEthernet0/1.70     10.1.70.1       YES manual up                    up
 Connection to device 192.168.100.2
+Interface              IP-Address      OK? Method Status                Protocol
 FastEthernet0/0        192.168.100.2   YES NVRAM  up                    up
 FastEthernet0/1        unassigned      YES NVRAM  up                    up
 FastEthernet0/1.10     10.2.10.1       YES manual up                    up
@@ -80,7 +81,7 @@ FastEthernet0/1.50     10.2.50.1       YES manual up                    up
 FastEthernet0/1.60     10.2.60.1       YES manual up                    up
 FastEthernet0/1.70     10.2.70.1       YES manual up                    up
 Connection to device 192.168.100.3
-Interface                  IP-Address      OK? Method Status                Protocol
+Interface              IP-Address      OK? Method Status                Protocol
 FastEthernet0/0        192.168.100.3   YES NVRAM  up                    up
 FastEthernet0/1        unassigned      YES NVRAM  up                    up
 FastEthernet0/1.10     10.3.10.1       YES manual up                    up
@@ -91,3 +92,7 @@ FastEthernet0/1.50     10.3.50.1       YES manual up                    up
 FastEthernet0/1.60     10.3.60.1       YES manual up                    up
 FastEthernet0/1.70     10.3.70.1       YES manual up                    up
 ```
+
+В выводе нет никаких лишних приглашений, только вывод команды sh ip int br.
+
+Так как netmiko наиболее удобный модуль для подключения к сетевому оборудования, мы разберемся с ним подробней.

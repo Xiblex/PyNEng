@@ -95,6 +95,7 @@
   * [Telnetlib](book/chapter12/2_telnetlib.md)
   * [Paramiko](book/chapter12/3_paramiko.md)
   * [Netmiko](book/chapter12/4_netmiko.md)
+    * [Возможности netmiko](book/chapter12/4a_netmiko_details.md)
   * [Одновременное поключение к нескольким устройствам](book/chapter12/5_multiprocessing.md)
 * [13. Шаблоны конфигураций с Jinja](book/chapter13/README.md)
   * [Пример использования Jinja](book/chapter13/1_example.md)
