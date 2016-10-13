@@ -119,5 +119,59 @@ result = ssh.send_config_from_file("config_ospf.txt")
  * ```ssh.find_prompt()```
 * commit - выполнить commit на IOS-XR и Juniper
  * ```ssh.commit()```
+* disconnect - завершить соединение SSH
 
 > Тут ssh это созданное предварительно соединение SSH: ssh = ConnectHandler(**cisco_router)
+
+
+## Telnet
+
+С версии 1.0.0 netmiko поддерживает подключения по Telnet. Пока что, только для Cisco IOS устройств.
+
+Внутри, netmiko использует telnetlib, для подключения по Telnet. Но, при этом, предоставляет нам унифицированный интерфейс.
+
+Для того, чтобы подключиться по Telnet, достаточно в словаре, который определяет параметры подключения, указать тип устройства 'cisco_ios_telnet':
+```python
+DEVICE_PARAMS = {'device_type': 'cisco_ios_telnet',
+                 'ip': IP,
+                 'username':USER,
+                 'password':PASSWORD,
+                 'secret':ENABLE_PASS }
+```
+
+В остальном, методы, которые применимы к SSH, применимы и к Telnet. Пример, аналогичный примеру с SSH:
+```python
+from netmiko import ConnectHandler
+import getpass
+import sys
+import time
+
+COMMAND = sys.argv[1]
+USER = raw_input("Username: ")
+PASSWORD = getpass.getpass()
+ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
+
+DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
+
+for IP in DEVICES_IP:
+    print "Connection to device %s" % IP
+    DEVICE_PARAMS = {'device_type': 'cisco_ios_telnet',
+                     'ip': IP,
+                     'username':USER,
+                     'password':PASSWORD,
+                     'secret':ENABLE_PASS,
+                     'verbose': True}
+    ssh = ConnectHandler(**DEVICE_PARAMS)
+    ssh.enable()
+
+    result = ssh.send_command(COMMAND)
+    print result
+```
+
+Аналогично работают и методы:
+* send_command_timing()
+* find_prompt()
+* send_config_set()
+* send_config_from_file()
+* check_enable_mode()
+* disconnect()
