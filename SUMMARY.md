@@ -1,7 +1,8 @@
 # Summary
 
 * [Введение](README.md)
-* [Пример расписания занятий](schedule.md)
+* [Как учиться по этому курсу](howto.md)
+* [Расписание занятий](schedule.md)
 * [FAQ](faq.md)
 * [1. Подготовка к работе](book/chapter01/README.md)
    * [ОС и редактор](book/chapter01/os_and_editor.md)
