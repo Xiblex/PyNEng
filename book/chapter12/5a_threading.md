@@ -18,7 +18,7 @@
 * параметры устройств перенесем в отдельный файл в формате YAML
 
 Итоговый код такой (файл выполняет те же действия, что финальная версия в разделе netmiko):
-```cisco
+```python
 from netmiko import ConnectHandler
 import sys
 import yaml
@@ -70,7 +70,7 @@ sys     0m0.080s
 ```
 
 Теперь посмотрим как будет выглядеть код с использованием модуля threading:
-```cisco
+```python
 from netmiko import ConnectHandler
 import sys
 import yaml
