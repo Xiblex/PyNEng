@@ -101,6 +101,7 @@
   * [Одновременное поключение к нескольким устройствам](book/chapter12/5_simultaneous_connections.md)
     * [Модуль threading](book/chapter12/5a_threading.md)
     * [Модуль multiprocessing](book/chapter12/5b_multiprocessing.md)
+  * [Упражнения](exercises/ch_12/12_exercises.md)
 * [13. Шаблоны конфигураций с Jinja](book/chapter13/README.md)
   * [Пример использования Jinja](book/chapter13/1_example.md)
   * [Пример использования Jinja с корректным использованием программного интерфейса](book/chapter13/2_example.md)
