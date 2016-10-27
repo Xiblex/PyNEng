@@ -313,10 +313,12 @@ def config_to_dict(config):
 Теперь, если уровня 3, то самый вложенный должен быть списком, а остальные - словарями.
 
 На примере interface Ethernet0/3.100
+```python
 {'interface Ethernet0/3.100':{
                               'encapsulation dot1Q 100':[],
                               'xconnect 10.2.2.2 12100 encapsulation mpls': ['backup peer 10.4.4.4 14100',
                                                                              'backup delay 1 1']}}
+```
 
 ```python
 ignore = ['duplex', 'alias', 'Current configuration']
