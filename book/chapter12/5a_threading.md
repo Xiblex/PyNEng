@@ -80,10 +80,8 @@ COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
 def connect_ssh(device_dict, command):
-
     ssh = ConnectHandler(**device_dict)
     ssh.enable()
-
     result = ssh.send_command(command)
 
     print "Connection to device %s" % device_dict['ip']
@@ -122,3 +120,5 @@ sys     0m0.068s
 * threads.append(th) - добавляет объект потока в список
 * th.join() - этот метод ожидает пока поток завершит работу
  * таким образом мы ожидаем пока все потоки завершатся и только потом завершаем основную программу
+
+

@@ -9,6 +9,7 @@
    * [Система управления пакетами pip](book/chapter01/pip.md)
    * [virtualenv, virtualenvwrapper](book/chapter01/virtualenv.md)
    * [Интерпретатор Python (проверка)](book/chapter01/check_python.md)
+   * [Упражнения](exercises/ch_01/01_exercises.md)
 * [2. Начало работы с Python](book/chapter02/README.md)
   * [Синтаксис Python](book/chapter02/0_syntax.md)
   * [Интерпретатор Python. iPython](book/chapter02/1_ipython.md)
