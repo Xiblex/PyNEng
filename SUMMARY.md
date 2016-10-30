@@ -106,6 +106,8 @@
   * [Пример использования Jinja](book/chapter13/1_example.md)
   * [Пример использования Jinja с корректным использованием программного интерфейса](book/chapter13/2_example.md)
 * [14. TextFSM. Обработка вывода команд](book/chapter14/README.md)
+  * [Примеры использования TextFSM](book/chapter14/1_textfsm_examples.md)
+  * [Синтаксис шаблонов TextFSM](book/chapter14/2_textfsm_syntax.md)
 * [15. Ansible](book/chapter15/README.md)
 * [Полезные ссылки](resources/README.md)
 
