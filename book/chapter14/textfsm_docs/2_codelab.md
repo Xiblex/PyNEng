@@ -366,14 +366,28 @@ it isn't entirely effective for the more complicated output from a Juniper TX ma
 
 ```
 lcc0-re0:
-
                  Temp  CPU Utilization (%)   Memory    Utilization (%)
-Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 24 8 1 512 16 52 1 Online 23 7 1 256 36 53 2 Online 23 5 1 256 36 49 3 Online 21 7 1 256 36 49 4 Empty 5 Empty 6 Empty 7 Empty
+Slot State        (C)  Total  Interrupt      DRAM (MB) Heap     Buffer
+  0 Online         24      8          1        512       16         52
+  1 Online         23      7          1        256       36         53
+  2 Online         23      5          1        256       36         49
+  3 Online         21      7          1        256       36         49
+  4 Empty
+  5 Empty
+  6 Empty
+  7 Empty
 
 lcc1-re1:
-
                  Temp  CPU Utilization (%)   Memory    Utilization (%)
-Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 20 9 1 256 36 50 1 Online 20 13 0 256 36 49 2 Online 21 6 1 256 36 49 3 Online 20 6 0 256 36 49 4 Online 18 5 0 256 35 49 5 Empty 6 Empty 7 Empty
+Slot State        (C)  Total  Interrupt      DRAM (MB) Heap     Buffer
+  0 Online         20      9          1        256       36         50
+  1 Online         20     13          0        256       36         49
+  2 Online         21      6          1        256       36         49
+  3 Online         20      6          0        256       36         49
+  4 Online         18      5          0        256       35         49
+  5 Empty
+  6 Empty
+  7 Empty
 ```
 
 There are two physical chassis in this node (lcc0-re0 and lcc1-re0), and we have two of each slot number, one per chassis.
@@ -425,7 +439,10 @@ Value Temperature (\d+)
 Value DRAM (\d+)
 Value Buffer (\d+)
 
-Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Start
+ ^${Chassis}:
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 ```
 
 But when this is run, there is a slight problem:
@@ -581,10 +598,18 @@ Often it may be necessary to have a particular column contain a list of values.
 For example when parsing a routing table, there may be multiple next hops per prefix.
 The below example is such a routing table, simplified for the purposes of this example:
 ```
-Destination Gateway Dist/Metric Last Change
------------ ------- ----------- -----------
-B EX 0.0.0.0/0 via 192.0.2.73 20/100 4w0d via 192.0.2.201 via 192.0.2.202 via 192.0.2.74 B IN 192.0.2.76/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.204/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.80/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.208/30 via 203.0.113.183 200/100 4w2d
+Destination          Gateway          Dist/Metric Last Change
+-----------          -------          ----------- -----------
+B EX 0.0.0.0/0       via 192.0.2.73      20/100     4w0d
+                     via 192.0.2.201
+                     via 192.0.2.202
+                     via 192.0.2.74
+B IN 192.0.2.76/30   via 203.0.113.183  200/100     4w2d
+B IN 192.0.2.204/30  via 203.0.113.183  200/100     4w2d
+B IN 192.0.2.80/30   via 203.0.113.183  200/100     4w2d
+B IN 192.0.2.208/30  via 203.0.113.183  200/100     4w2d
 ```
+
 For this example, we will extract the following information:
 * Protocol
 * Type
