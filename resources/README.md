@@ -15,6 +15,7 @@
 
 * [Kirk Byers](https://pynet.twb-tech.com/)
 * [Jason Edelman](http://jedelman.com/)
+* [Matt Oswalt](https://keepingitclassless.net/)
 * [Michael Kashin](http://networkop.co.uk/)
 * [Henry Ölsner](https://codingnetworker.com/)
 * [Mat Wood](https://thepacketgeek.com/)
