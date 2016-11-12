@@ -138,7 +138,8 @@ The next line is the row of values that were matched.
 We'll now look at something slightly more complicated - matching values from multiple lines of text.
 For this, we will attempt to parse the output of a Cisco 'show version' command. It looks like this:
 ```
-Cisco IOS Software, Catalyst 4500 L3 Switch Software (cat4500-ENTSERVICESK9-M), Version 12.2(31)SGA1, RELEASE SOFTWARE (fc3) Technical Support: http://www.cisco.com/techsupport
+Cisco IOS Software, Catalyst 4500 L3 Switch Software (cat4500-ENTSERVICESK9-M), Version 12.2(31)SGA1,
+RELEASE SOFTWARE (fc3) Technical Support: http://www.cisco.com/techsupport
 Copyright (c) 1986-2007 by Cisco Systems, Inc.
 Compiled Fri 26-Jan-07 14:28 by kellythw Image text-base: 0x10000000, data-base: 0x118AD800
 
@@ -212,73 +213,158 @@ then the next line of input is fetched, and rule are checked from the start of t
 
 So the following will happen here:
 
-The first line of input will be matched, and the 'Version' value is assigned "12.2(31)SGA1". Until the 'uptime is' line, all other lines fail to match and are discarded. The 'uptime' line will match, and 'Uptime' is assigned "11 weeks, 4 days, 20 hours, 26 minutes" Lines are not matched, and thus discarded, until the 'Last reset' line At this point, there is a match and 'ResetReason' value is assigned 'Reload' Several more lines pass until 'ConfigRegister' is assigned '0x2102' This line also triggers a 'Record' action, and the row is saved. After this line, we reach EOF and the FSM terminates. Run it against the FSM, after saving your template and copying the router output to 'router_output.txt':
+The first line of input will be matched, and the 'Version' value is assigned "12.2(31)SGA1".
+Until the 'uptime is' line, all other lines fail to match and are discarded.
+The 'uptime' line will match, and 'Uptime' is assigned "11 weeks, 4 days, 20 hours, 26 minutes" Lines are not matched,
+and thus discarded, until the 'Last reset' line.
 
-``` $;./textfsm.py cisco_version_template router_output.txt FSM Template: Value Version ([^ ,]+) Value Uptime (.) Value ConfigRegister (\w+) Value ResetReason (.)
+At this point, there is a match and 'ResetReason' value is assigned 'Reload'.
+Several more lines pass until 'ConfigRegister' is assigned '0x2102'.
+This line also triggers a 'Record' action, and the row is saved.
+After this line, we reach EOF and the FSM terminates.
 
-Start ^Cisco IOS .*Version ${Version}, ^.*uptime is ${Uptime} ^Last reset from ${ResetReason} ^Configuration register is ${ConfigRegister} -> Record
+Run it against the FSM, after saving your template and copying the router output to 'router_output.txt':
+```
+$;./textfsm.py cisco_version_template router_output.txt
+FSM Template:
 
-FSM Table: ['Version', 'Uptime', 'ConfigRegister', 'ResetReason'] ['12.2(31)SGA1', '11 weeks, 4 days, 20 hours, 26 minutes', '0x2102', 'Reload'] ```
+Value Version ([^ ,]+)
+Value Uptime (.)
+Value ConfigRegister (\w+)
+Value ResetReason (.)
 
-Parsing tabular data
+Start
+ ^Cisco IOS .*Version ${Version},
+ ^.*uptime is ${Uptime}
+ ^Last reset from ${ResetReason}
+ ^Configuration register is ${ConfigRegister} -> Record
 
-The previous examples showed the simplest application of the FSM - parsing non-repeating data into a single row. In this example, we will look at a more interesting example - the output of the Juniper command show chassis fpc will be parsed. The raw router output from one device looks like this:
+FSM Table:
+['Version', 'Uptime', 'ConfigRegister', 'ResetReason']
+['12.2(31)SGA1', '11 weeks, 4 days, 20 hours, 26 minutes', '0x2102', 'Reload']
+```
 
+### Parsing tabular data
+
+The previous examples showed the simplest application of the FSM - parsing non-repeating data into a single row.
+
+In this example, we will look at a more interesting example - the output of the Juniper command show chassis fpc will be parsed.
+
+The raw router output from one device looks like this:
+```
 Temp CPU Utilization (%) Memory Utilization (%) Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 24 7 0 256 38 51 1 Online 25 7 0 256 38 51 2 Online 24 3 0 256 37 49 3 Online 23 3 0 256 37 49 4 Empty 5 Empty 6 Empty 7 Empty
 
 This text is simple to parse - its information is neatly contained in separate rows, and the FSMs data is always presented as rows. This compatibility will ensure a relatively painless template creation. For our application we'll create a single row of data for each FPC defined, but this will be easy as the text is presented as one line per FPC slot.
+```
 
 The information we want to extract is:
+* Slot number
+* State
+* Temperature
+* DRAM
+* Buffer utilisation
 
-Slot number
-State
-Temperature
-DRAM
-Buffer utilisation
-This give us five values of interest. Create a new file juniper_fpc_template, and first put in it the following Value definitions:
+This give us five values of interest.
 
+Create a new file juniper_fpc_template, and first put in it the following Value definitions:
+```
 Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
 
 Next we put in the State definition and associated rules. We may be able to get away with a single rule.
 
-``` Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start # We can't use .* for unused placeholders, as greedy matching will break it. ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ```
+Start
+ # We can't use .* for unused placeholders, as greedy matching will break it.
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+```
 
 Copy the above raw router output to router_output.txt, save the template, and run it:
+```
+$ ./textfsm.py juniper_fpc_template router_output.txt
+FSM Template:
 
-``` $ ./textfsm.py juniper_fpc_template router_output.txt FSM Template: Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+Start
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
 
-FSM Table: ['Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['0', 'Online', '24', '256', '51'] ['1', 'Online', '25', '256', '51'] ['2', 'Online', '24', '256', '49'] ['3', 'Online', '23', '256', '49'] ```
+FSM Table:
+['Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] 
+['0', 'Online', '24', '256', '51']
+['1', 'Online', '25', '256', '51']
+['2', 'Online', '24', '256', '49']
+['3', 'Online', '23', '256', '49']
+```
 
 Our template has successfully parsed all of the online FPC slots and extracted the correct values.
 
-But what about empty slots? If we need to also extract information about every slot, then we won't see them here as the empty ones only have the Slot and State columns. The way to deal with this is to create a second rule to catch these lines.
+But what about empty slots?
+If we need to also extract information about every slot,
+then we won't see them here as the empty ones only have the Slot and State columns.
+The way to deal with this is to create a second rule to catch these lines.
 
 Add one more rule after the existing one, as follows:
+```
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-``` Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
-
-State # We can't use .* for unused placeholders, as greedy matching will break it. ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record ```
+State
+ # We can't use .* for unused placeholders, as greedy matching will break it. 
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
+```
 
 Now run the FSM:
+```
+$;./textfsm.py juniper_fpc_template router_output.txt
+FSM Template:
 
-``` $;./textfsm.py juniper_fpc_template router_output.txt FSM Template: Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Start
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 
-FSM Table: ['Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['0', 'Online', '24', '256', '51'] ['1', 'Online', '25', '256', '51'] ['2', 'Online', '24', '256', '49'] ['3', 'Online', '23', '256', '49'] ['4', 'Empty', '', '', ''] ['5', 'Empty', '', '', ''] ['6', 'Empty', '', '', ''] ['7', 'Empty', '', '', ''] ```
+FSM Table:
+['Slot', 'State', 'Temperature', 'DRAM', 'Buffer']
+['0', 'Online', '24', '256', '51']
+['1', 'Online', '25', '256', '51']
+['2', 'Online', '24', '256', '49']
+['3', 'Online', '23', '256', '49']
+['4', 'Empty', '', '', '']
+['5', 'Empty', '', '', '']
+['6', 'Empty', '', '', '']
+['7', 'Empty', '', '', '']
+```
 
 Success! We've now extracted info about both filled and empty slots.
 
-Using 'Filldown'
+## Using 'Filldown'
 
-Now that we can extract a table from show chassis fpc, we have to do an enhancement. Whilst it works with the simple example above, it isn't entirely effective for the more complicated output from a Juniper TX matrix, which looks like this:
+Now that we can extract a table from show chassis fpc, we have to do an enhancement.
+
+Whilst it works with the simple example above,
+it isn't entirely effective for the more complicated output from a Juniper TX matrix, which looks like this:
 
 ```
-
 lcc0-re0:
 
                  Temp  CPU Utilization (%)   Memory    Utilization (%)
@@ -287,157 +373,386 @@ Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 24 8 1 512 16 52 1
 lcc1-re1:
 
                  Temp  CPU Utilization (%)   Memory    Utilization (%)
-Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 20 9 1 256 36 50 1 Online 20 13 0 256 36 49 2 Online 21 6 1 256 36 49 3 Online 20 6 0 256 36 49 4 Online 18 5 0 256 35 49 5 Empty 6 Empty 7 Empty ```
+Slot State (C) Total Interrupt DRAM (MB) Heap Buffer 0 Online 20 9 1 256 36 50 1 Online 20 13 0 256 36 49 2 Online 21 6 1 256 36 49 3 Online 20 6 0 256 36 49 4 Online 18 5 0 256 35 49 5 Empty 6 Empty 7 Empty
+```
 
 There are two physical chassis in this node (lcc0-re0 and lcc1-re0), and we have two of each slot number, one per chassis.
 
 If we run this output against the FSM, we will see the following:
 
-``` FSM Template: Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
+FSM Template:
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Start
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 
-FSM Table: ['Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['0', 'Online', '24', '512', '52'] ['1', 'Online', '23', '256', '53'] ['2', 'Online', '23', '256', '49'] ['3', 'Online', '21', '256', '49'] ['4', 'Empty', '', '', ''] ['5', 'Empty', '', '', ''] ['6', 'Empty', '', '', ''] ['7', 'Empty', '', '', ''] ['0', 'Online', '20', '256', '50'] ['1', 'Online', '20', '256', '49'] ['2', 'Online', '21', '256', '49'] ['3', 'Online', '20', '256', '49'] ['4', 'Online', '18', '256', '49'] ['5', 'Empty', '', '', ''] ['6', 'Empty', '', '', ''] ['7', 'Empty', '', '', ''] ```
+FSM Table:
+['Slot', 'State', 'Temperature', 'DRAM', 'Buffer']
+['0', 'Online', '24', '512', '52']
+['1', 'Online', '23', '256', '53']
+['2', 'Online', '23', '256', '49']
+['3', 'Online', '21', '256', '49']
+['4', 'Empty', '', '', '']
+['5', 'Empty', '', '', '']
+['6', 'Empty', '', '', '']
+['7', 'Empty', '', '', '']
+['0', 'Online', '20', '256', '50']
+['1', 'Online', '20', '256', '49']
+['2', 'Online', '21', '256', '49']
+['3', 'Online', '20', '256', '49']
+['4', 'Online', '18', '256', '49']
+['5', 'Empty', '', '', '']
+['6', 'Empty', '', '', '']
+['7', 'Empty', '', '', '']
+```
 
-Unfortunately there's no way to see if the 512Mb FPC is in lcc0 or lcc1, because we have not stored and chassis info. So we can do this by adding another value 'Chassis' which matches ^\S+:. Update the template by adding the new Value and rule:
+Unfortunately there's no way to see if the 512Mb FPC is in lcc0 or lcc1, because we have not stored and chassis info.
+So we can do this by adding another value 'Chassis' which matches ```^\S+:```.
 
-``` Value Chassis (\S+) Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+Update the template by adding the new Value and rule:
 
-Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record ```
+```
+Value Chassis (\S+)
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
+
+Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+```
 
 But when this is run, there is a slight problem:
 
-``` FSM Template: Value Chassis (\S+) Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
+FSM Template:
+Value Chassis (\S+)
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Start
+ ^${Chassis}:
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 
-FSM Table: ['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['lcc0-re0', '0', 'Online', '24', '512', '52'] ['', '1', 'Online', '23', '256', '53'] ['', '2', 'Online', '23', '256', '49'] ['', '3', 'Online', '21', '256', '49'] ['', '4', 'Empty', '', '', ''] ['', '5', 'Empty', '', '', ''] ['', '6', 'Empty', '', '', ''] ['', '7', 'Empty', '', '', ''] ['lcc1-re1', '0', 'Online', '20', '256', '50'] ['', '1', 'Online', '20', '256', '49'] ['', '2', 'Online', '21', '256', '49'] ['', '3', 'Online', '20', '256', '49'] ['', '4', 'Online', '18', '256', '49'] ['', '5', 'Empty', '', '', ''] ['', '6', 'Empty', '', '', ''] ['', '7', 'Empty', '', '', ''] ```
+FSM Table:
+['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer']
+['lcc0-re0', '0', 'Online', '24', '512', '52']
+['', '1', 'Online', '23', '256', '53']
+['', '2', 'Online', '23', '256', '49']
+['', '3', 'Online', '21', '256', '49']
+['', '4', 'Empty', '', '', '']
+['', '5', 'Empty', '', '', '']
+['', '6', 'Empty', '', '', '']
+['', '7', 'Empty', '', '', '']
+['lcc1-re1', '0', 'Online', '20', '256', '50']
+['', '1', 'Online', '20', '256', '49']
+['', '2', 'Online', '21', '256', '49']
+['', '3', 'Online', '20', '256', '49']
+['', '4', 'Online', '18', '256', '49']
+['', '5', 'Empty', '', '', '']
+['', '6', 'Empty', '', '', '']
+['', '7', 'Empty', '', '', '']
+```
 
 The 'Chassis' column is only filled for the first slot in each chassis. Why?
 
-The problem is that each time a 'Record' action is taken, the row is saved, then each Value is cleared. Thus when corresponding rows are filled and saved, there is no longer anything to match the 'Chassis' rule, so this never gets filled until the next chassis specification in the router output.
+The problem is that each time a 'Record' action is taken, the row is saved, then each Value is cleared.
+Thus when corresponding rows are filled and saved, there is no longer anything to match the 'Chassis' rule,
+so this never gets filled until the next chassis specification in the router output.
 
-To fix this, we will add the 'Filldown' option to the Chassis value. This option tells the FSM to retain the value after each 'Record', so that it isnt cleared. Its value will only change if there is either a 'Clearall' action, or if a rule overwrites the value.
+To fix this, we will add the 'Filldown' option to the Chassis value.
+This option tells the FSM to retain the value after each 'Record', so that it isnt cleared.
+Its value will only change if there is either a 'Clearall' action, or if a rule overwrites the value.
 
 Modify the Chassis Value line with a 'Filldown' option, as follows:
-
+```
 Value Filldown Chassis (\S+)
+```
 
 Now run the text through the FSM again:
 
-``` $; /textfsm.py juniper_fpc_template router_output.txt FSM Template: Value Filldown Chassis (\S+) Value Slot (\d) Value State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
+$; /textfsm.py juniper_fpc_template router_output.txt
+FSM Template:
+Value Filldown Chassis (\S+)
+Value Slot (\d)
+Value State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Start
+ ^${Chassis}:
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 
-FSM Table: ['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['lcc0-re0', '0', 'Online', '24', '512', '52'] ['lcc0-re0', '1', 'Online', '23', '256', '53'] ['lcc0-re0', '2', 'Online', '23', '256', '49'] ['lcc0-re0', '3', 'Online', '21', '256', '49'] ['lcc0-re0', '4', 'Empty', '', '', ''] ['lcc0-re0', '5', 'Empty', '', '', ''] ['lcc0-re0', '6', 'Empty', '', '', ''] ['lcc0-re0', '7', 'Empty', '', '', ''] ['lcc1-re1', '0', 'Online', '20', '256', '50'] ['lcc1-re1', '1', 'Online', '20', '256', '49'] ['lcc1-re1', '2', 'Online', '21', '256', '49'] ['lcc1-re1', '3', 'Online', '20', '256', '49'] ['lcc1-re1', '4', 'Online', '18', '256', '49'] ['lcc1-re1', '5', 'Empty', '', '', ''] ['lcc1-re1', '6', 'Empty', '', '', ''] ['lcc1-re1', '7', 'Empty', '', '', ''] ['lcc1-re1', '', '', '', '', ''] ```
+FSM Table:
+['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer']
+['lcc0-re0', '0', 'Online', '24', '512', '52']
+['lcc0-re0', '1', 'Online', '23', '256', '53']
+['lcc0-re0', '2', 'Online', '23', '256', '49']
+['lcc0-re0', '3', 'Online', '21', '256', '49']
+['lcc0-re0', '4', 'Empty', '', '', '']
+['lcc0-re0', '5', 'Empty', '', '', '']
+['lcc0-re0', '6', 'Empty', '', '', '']
+['lcc0-re0', '7', 'Empty', '', '', '']
+['lcc1-re1', '0', 'Online', '20', '256', '50']
+['lcc1-re1', '1', 'Online', '20', '256', '49']
+['lcc1-re1', '2', 'Online', '21', '256', '49']
+['lcc1-re1', '3', 'Online', '20', '256', '49']
+['lcc1-re1', '4', 'Online', '18', '256', '49']
+['lcc1-re1', '5', 'Empty', '', '', '']
+['lcc1-re1', '6', 'Empty', '', '', '']
+['lcc1-re1', '7', 'Empty', '', '', '']
+['lcc1-re1', '', '', '', '', '']
+```
 
-Now we have the Chassis values all 'filled down' in the table. It's almost perfect except for one problem. There is an odd almost-empty row at the bottom of the table. What is it doing there?
+Now we have the Chassis values all 'filled down' in the table.
+It's almost perfect except for one problem.
+There is an odd almost-empty row at the bottom of the table. What is it doing there?
 
-Using 'Required'
+### Using 'Required'
 
-That row comes about because of the Filldown option. When the last valid row is saved (lcc-re1, slot 7), the FSM creates a new empty row ready to have values filled in. Normally the FSM will discard empty rows when it terminates, but in this case the 'Filldown' option has populated the 'Chassis' column, so the FSM keeps this non-empty row and saves it when the FSM terminates.
+That row comes about because of the Filldown option.
+When the last valid row is saved (lcc-re1, slot 7), the FSM creates a new empty row ready to have values filled in.
+Normally the FSM will discard empty rows when it terminates,
+but in this case the 'Filldown' option has populated the 'Chassis' column,
+so the FSM keeps this non-empty row and saves it when the FSM terminates.
 
-In order to fix this, we will make use of another Value option - Required. This option specifies that the value must have been matched otherwise a row will not be saved. For this template, we'll ensure that 'slot' and 'state' both contain a value, so we'll modify as follows:
+In order to fix this, we will make use of another Value option - Required.
+This option specifies that the value must have been matched otherwise a row will not be saved.
 
-``` Value Required Slot (\d) Value Required State (\w+) Now we finally have a correct table:
+For this template, we'll ensure that 'slot' and 'state' both contain a value, so we'll modify as follows:
 
-FSM Template: Value Filldown Chassis (\S+) Value Required Slot (\d) Value Required State (\w+) Value Temperature (\d+) Value DRAM (\d+) Value Buffer (\d+)
+```
+Value Required Slot (\d)
+Value Required State (\w+)
+```
 
-Start ^${Chassis}: ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record ^\s+${Slot}\s+${State} -> Record
+Now we finally have a correct table:
+```
+FSM Template:
+Value Filldown Chassis (\S+)
+Value Required Slot (\d)
+Value Required State (\w+)
+Value Temperature (\d+)
+Value DRAM (\d+)
+Value Buffer (\d+)
 
-FSM Table: ['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer'] ['lcc0-re0', '0', 'Online', '24', '512', '52'] ['lcc0-re0', '1', 'Online', '23', '256', '53'] ['lcc0-re0', '2', 'Online', '23', '256', '49'] ['lcc0-re0', '3', 'Online', '21', '256', '49'] ['lcc0-re0', '4', 'Empty', '', '', ''] ['lcc0-re0', '5', 'Empty', '', '', ''] ['lcc0-re0', '6', 'Empty', '', '', ''] ['lcc0-re0', '7', 'Empty', '', '', ''] ['lcc1-re1', '0', 'Online', '20', '256', '50'] ['lcc1-re1', '1', 'Online', '20', '256', '49'] ['lcc1-re1', '2', 'Online', '21', '256', '49'] ['lcc1-re1', '3', 'Online', '20', '256', '49'] ['lcc1-re1', '4', 'Online', '18', '256', '49'] ['lcc1-re1', '5', 'Empty', '', '', ''] ['lcc1-re1', '6', 'Empty', '', '', ''] ['lcc1-re1', '7', 'Empty', '', '', ''] ```
+Start
+ ^${Chassis}:
+ ^\s+${Slot}\s+${State}\s+${Temperature}\s+\d+\s+\d+\s+${DRAM}\s+\d+\s+${Buffer} -> Record
+ ^\s+${Slot}\s+${State} -> Record
 
-Using 'List'
+FSM Table:
+['Chassis', 'Slot', 'State', 'Temperature', 'DRAM', 'Buffer']
+['lcc0-re0', '0', 'Online', '24', '512', '52']
+['lcc0-re0', '1', 'Online', '23', '256', '53']
+['lcc0-re0', '2', 'Online', '23', '256', '49']
+['lcc0-re0', '3', 'Online', '21', '256', '49']
+['lcc0-re0', '4', 'Empty', '', '', '']
+['lcc0-re0', '5', 'Empty', '', '', '']
+['lcc0-re0', '6', 'Empty', '', '', '']
+['lcc0-re0', '7', 'Empty', '', '', '']
+['lcc1-re1', '0', 'Online', '20', '256', '50']
+['lcc1-re1', '1', 'Online', '20', '256', '49']
+['lcc1-re1', '2', 'Online', '21', '256', '49']
+['lcc1-re1', '3', 'Online', '20', '256', '49']
+['lcc1-re1', '4', 'Online', '18', '256', '49']
+['lcc1-re1', '5', 'Empty', '', '', '']
+['lcc1-re1', '6', 'Empty', '', '', '']
+['lcc1-re1', '7', 'Empty', '', '', '']
+```
 
-Often it may be necessary to have a particular column contain a list of values. For example when parsing a routing table, there may be multiple next hops per prefix. The below example is such a routing table, simplified for the purposes of this example:
+### Using 'List'
 
-Destination Gateway Dist/Metric Last Change ----------- ------- ----------- ----------- B EX 0.0.0.0/0 via 192.0.2.73 20/100 4w0d via 192.0.2.201 via 192.0.2.202 via 192.0.2.74 B IN 192.0.2.76/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.204/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.80/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.208/30 via 203.0.113.183 200/100 4w2d
+Often it may be necessary to have a particular column contain a list of values.
 
+For example when parsing a routing table, there may be multiple next hops per prefix.
+The below example is such a routing table, simplified for the purposes of this example:
+```
+Destination Gateway Dist/Metric Last Change
+----------- ------- ----------- -----------
+B EX 0.0.0.0/0 via 192.0.2.73 20/100 4w0d via 192.0.2.201 via 192.0.2.202 via 192.0.2.74 B IN 192.0.2.76/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.204/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.80/30 via 203.0.113.183 200/100 4w2d B IN 192.0.2.208/30 via 203.0.113.183 200/100 4w2d
+```
 For this example, we will extract the following information:
+* Protocol
+* Type
+* Destination prefix
+* Gateway (for simplicity's sake we will assume all entries will be of the form "via a.b.c.d")
+* Distance
+* Metric
+* Last Change
 
-Protocol
-Type
-Destination prefix
-Gateway (for simplicity's sake we will assume all entries will be of the form "via a.b.c.d")
-Distance
-Metric
-Last Change
 Copy the above routing table output to a file called 'routes.txt'.
 
 We will build a simple FSM to extract data. Put the below text into a file called 'routes.tmpl':
+```
+Value Protocol (\S)
+Value Type (\S\S)
+Value Required Prefix (\S+)
+Value Gateway (\S+)
+Value Distance (\d+)
+Value Metric (\d+)
+Value LastChange (\S+)
 
-``` Value Protocol (\S) Value Type (\S\S) Value Required Prefix (\S+) Value Gateway (\S+) Value Distance (\d+) Value Metric (\d+) Value LastChange (\S+)
+Start
+ ^.*----- -> Routes
 
-Start ^.*----- -> Routes
+Routes
+ ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange} -> Record
+```
 
-Routes ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange} -> Record ```
+Note above that in the 'Start' state we have a special match for a line of dashes.
 
-Note above that in the 'Start' state we have a special match for a line of dashes. This implicitly discards input text until after the headers are complete. It's not really needed or this case, but is useful to demonstrate for other cases where header data may be confused with actual row data.
+This implicitly discards input text until after the headers are complete.
+It's not really needed or this case, but is useful to demonstrate for other cases
+where header data may be confused with actual row data.
 
 Now run the template against the data:
 
-``` $ ./textfsm.py route.tmpl routes.txt FSM Template: Value Protocol (\S) Value Type (\S\S) Value Prefix (\S+) Value Gateway (\S+) Value Distance (\d+) Value Metric (\d+) Value LastChange (\S+)
+```
+$ ./textfsm.py route.tmpl routes.txt
+FSM Template:
+Value Protocol (\S)
+Value Type (\S\S)
+Value Prefix (\S+)
+Value Gateway (\S+)
+Value Distance (\d+)
+Value Metric (\d+)
+Value LastChange (\S+)
 
-Start ^.*----- -> Routes
+Start
+ ^.*----- -> Routes
 
-Routes ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange} -> Record
+Routes
+ ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange} -> Record
 
-FSM Table: ['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange'] ['B', 'EX', '0.0.0.0/0', '192.0.2.73', '20', '100', '4w0d'] ['B', 'IN', '192.0.2.76/30', '203.0.113.183', '200', '100', '4w2d'] ['B', 'IN', '192.0.2.204/30', '203.0.113.183', '200', '100', '4w2d'] ['B', 'IN', '192.0.2.80/30', '203.0.113.183', '200', '100', '4w2d'] ['B', 'IN', '192.0.2.208/30', '203.0.113.183', '200', '100', '4w2d'] ```
+FSM Table:
+['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange']
+['B', 'EX', '0.0.0.0/0', '192.0.2.73', '20', '100', '4w0d']
+['B', 'IN', '192.0.2.76/30', '203.0.113.183', '200', '100', '4w2d']
+['B', 'IN', '192.0.2.204/30', '203.0.113.183', '200', '100', '4w2d']
+['B', 'IN', '192.0.2.80/30', '203.0.113.183', '200', '100', '4w2d']
+['B', 'IN', '192.0.2.208/30', '203.0.113.183', '200', '100', '4w2d']
+```
 
-The table is mostly filled...except that we only see the first Gateway for the default prefix. It's easy to see why - the template does not match the lines defining the other gateways. So how to work around this?
+The table is mostly filled...except that we only see the first Gateway for the default prefix.
+It's easy to see why - the template does not match the lines defining the other gateways.
+So how to work around this?
 
-The option 'List' is useful here, as it can be used to specify a column as a list of strings, rather than just a single string. So we will add this option to the 'Gateway' value definition:
+The option 'List' is useful here, as it can be used to specify a column as a list of strings, rather than just a single string.
 
-``` Value Protocol (\S) Value Type (\S\S) Value Required Prefix (\S+) Value List Gateway (\S+) Value Distance (\d+) Value Metric (\d+) Value LastChange (\S+) Run it again, and we see that the Gateway columns are now a list, albeit with one entry:
+So we will add this option to the 'Gateway' value definition:
 
-FSM Table: ['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange'] ['B', 'EX', '0.0.0.0/0', ['192.0.2.73'], '20', '100', '4w0d'] ['B', 'IN', '192.0.2.76/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.204/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.80/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.208/30', ['203.0.113.183'], '200', '100', '4w2d'] ```
+```
+Value Protocol (\S)
+Value Type (\S\S)
+Value Required Prefix (\S+)
+Value List Gateway (\S+)
+Value Distance (\d+)
+Value Metric (\d+)
+Value LastChange (\S+)
+```
+
+Run it again, and we see that the Gateway columns are now a list, albeit with one entry:
+```
+FSM Table:
+['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange']
+['B', 'EX', '0.0.0.0/0', ['192.0.2.73'], '20', '100', '4w0d']
+['B', 'IN', '192.0.2.76/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.204/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.80/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.208/30', ['203.0.113.183'], '200', '100', '4w2d']
+```
 
 To extract the other Gateway entries, we need to do this in two steps:
 
-Not 'Record' until we start the next Prefix entry (in case of additional Gateway lines)., and Parse the other Gateway lines. To take care of the first, we will need to do make two changes. Firstly we remove the existing 'Record' statement. Secondly, we add a statement before the existing one that upon matching a new Prefix entry it 'Record's the existing one, then continues with the current input line:
+Not 'Record' until we start the next Prefix entry (in case of additional Gateway lines)., and Parse the other Gateway lines.
+To take care of the first, we will need to do make two changes.
 
-Routes ^ \S \S\S -> Continue.Record ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange}
+Firstly we remove the existing 'Record' statement.
+Secondly, we add a statement before the existing one that upon matching a new Prefix entry it 'Record's the existing one,
+then continues with the current input line:
+```
+Routes
+ ^ \S \S\S -> Continue.Record
+ ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange}
+```
 
-The new line does not use value substitutions, as we need to save the previous prefix entry records, not overwrite them. The 'Continue' statement then resumes at the next rule after 'Record'ing the previous data, using the current input line. If we run this now, we see the output is identical to before.
+The new line does not use value substitutions, as we need to save the previous prefix entry records, not overwrite them.
+The 'Continue' statement then resumes at the next rule after 'Record'ing the previous data, using the current input line.
+If we run this now, we see the output is identical to before.
 
-Step two in getting the List to work here is to create a rule to match additional Gateway entries. This will go at the end. Note that we do not Record here - that happens only when the next entry is processed. Remember also that an EOF will also cause the current entry to be 'Record'ed.
+Step two in getting the List to work here is to create a rule to match additional Gateway entries.
+This will go at the end.
 
-Routes ^ \S \S\S -> Continue.Record ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange} ^\s+via ${Gateway}
+Note that we do not Record here - that happens only when the next entry is processed.
+Remember also that an EOF will also cause the current entry to be 'Record'ed.
+```
+Routes
+ ^ \S \S\S -> Continue.Record
+ ^ ${Protocol} ${Type} ${Prefix}\s+via ${Gateway}\s+${Distance}/${Metric}\s+${LastChange}
+ ^\s+via ${Gateway}
+```
 
 Now we run it, and note that we now have our list of all Gateway entries for the default Prefix:
+```
+FSM Table:
+['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange']
+['B', 'EX', '0.0.0.0/0', ['192.0.2.73', '192.0.2.201', '192.0.2.202', '192.0.2.74'], '20', '100', '4w0d']
+['B', 'IN', '192.0.2.76/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.204/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.80/30', ['203.0.113.183'], '200', '100', '4w2d']
+['B', 'IN', '192.0.2.208/30', ['203.0.113.183'], '200', '100', '4w2d']
+```
 
-FSM Table: ['Protocol', 'Type', 'Prefix', 'Gateway', 'Distance', 'Metric', 'LastChange'] ['B', 'EX', '0.0.0.0/0', ['192.0.2.73', '192.0.2.201', '192.0.2.202', '192.0.2.74'], '20', '100', '4w0d'] ['B', 'IN', '192.0.2.76/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.204/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.80/30', ['203.0.113.183'], '200', '100', '4w2d'] ['B', 'IN', '192.0.2.208/30', ['203.0.113.183'], '200', '100', '4w2d']
+This example was somewhat more complex than the average List usage.
 
-This example was somewhat more complex than the average List usage. If there is a clear delimiter between rows, then that can be used for the Record rather than having to do the 'forward match' style here.
+If there is a clear delimiter between rows, then that can be used for the Record rather than having to do the 'forward match' style here.
 
-Using TextFSM in Python
+## Using TextFSM in Python
 
-By itself, the FSM is not entirely useful. It's intended to be used by Python programs for parsing of textual information. Here we will work through a short example of using the FSM within a Python script.
+By itself, the FSM is not entirely useful.
+It's intended to be used by Python programs for parsing of textual information.
+Here we will work through a short example of using the FSM within a Python script.
 
 To start, create a new file called 'routes.py', and add the following into it:
 
-```
-
+```python
 !/usr/bin/python2.4
 
 import textfsm import sys
 
-Open the template file, and initialise a new TextFSM object with it.
-
+# Open the template file, and initialise a new TextFSM object with it.
 template_file = sys.argv[1] fsm = textfsm.TextFSM(open(template_file))
 
-Read stdin until EOF, then pass this to the FSM for parsing.
-
+#Read stdin until EOF, then pass this to the FSM for parsing.
 input_data = sys.stdin.read() fsm_results = fsm.ParseText(input_data)
 
 print 'Header:' print fsm.header
+print 'Prefix | Gateway(s)'
+print '-------------------------------'
 
-print 'Prefix | Gateway(s)' print '-------------------------------'
-
-for row in fsm_results: print '%-18.18s %s' % (row[2], ', '.join(row[3])) ```
+for row in fsm_results:
+    print '%-18.18s %s' % (row[2], ', '.join(row[3]))
+```
 
 Make it executable, and run it as follows:
-
+```
 $ ./routes.py routes.tmpl < routes.txt
+```
 
-Examine the output, and note how each row 'Record'ed in the FSM is represented as a single list type entry in the fsm_results list. Also note that the 3rd entry in the row is a list type, which we connect with a join(). The header, as a list of Value names, is printed also.
+Examine the output, and note how each row 'Record'ed in the FSM is represented as a single list type entry in the fsm_results list.
+Also note that the 3rd entry in the row is a list type, which we connect with a join().
+The header, as a list of Value names, is printed also.
