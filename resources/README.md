@@ -17,7 +17,7 @@
 * [Jason Edelman](http://jedelman.com/)
 * [Michael Kashin](http://networkop.co.uk/)
 * [Henry Ölsner](https://codingnetworker.com/)
-
+* [Mat Wood](https://thepacketgeek.com/)
 
 
 ## Платные и бесплатные курс (python + network)
