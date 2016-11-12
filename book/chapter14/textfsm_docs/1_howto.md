@@ -106,7 +106,7 @@ The template file is the description of how the FSM should parse out data.
 Individual templates are required for different patterns of textual input.
 For example parsing output from router commands generally requires one template for each command.
 
-A full example template follows. In this case, to process the above 'show chassis routing-engine' command output from a router:
+A full example template follows. In this case, to process the above ```show chassis routing-engine``` command output from a router:
 ```
 # Chassis value will be null for single chassis routers.
 
@@ -146,14 +146,14 @@ RESlot
 ```
 
 The template file consists of two top level sections.
-* The 'Value' definitions, which describe the columns of data to extract.
-* One or more 'State' definitions, describing the various states of the engine whilst parsing data.
+* The __Value__ definitions, which describe the columns of data to extract.
+* One or more __State__ definitions, describing the various states of the engine whilst parsing data.
 
 A line is considered a comment if it starts with any optional white space then a hash i.e matches regular expression: ```^\s#```.
 
 ## Value definitions
 
-One or more 'Value' lines are used to describe each column that will be in the resulting table. 
+One or more __Value__ lines are used to describe each column that will be in the resulting table. 
 These Value lines must all appear before any state definitions and must be contiguous lines, separated only by comments.
 
 
@@ -216,7 +216,9 @@ Rules are of the following format:
 ^_regex_ [-> action]
 ```
 
-__regex__ is a regular expression compared against input lines. The match is performed from the start of the input line, so the carat ('^') although implicit, is required syntax as a reminder of this behavior.
+__regex__ is a regular expression compared against input lines.
+The match is performed from the start of the input line, so the carat (```^```) although implicit,
+is required syntax as a reminder of this behavior.
 
 The regex may contain zero or more Value descriptors.
 
@@ -226,7 +228,7 @@ and indicate value assignment.
 The regex of the associated value is substituted into the rule regex, and if the line matches,
 the text that matches this Value is assigned to the current row.
 
-To indicate the end of line (EOL) use a double dollar sign '$$',
+To indicate the end of line (EOL) use a double dollar sign ```$$```,
 this will be substituted for a single dollar sign during Value substitution.
 
 For example, take the following template:
@@ -269,7 +271,7 @@ If actions are not described i.e. no ```->```, then the default implicit action 
 | Continue | Retain the current line and do not resume matching from the first rule of the state. Continue processing rules as if a match did not occur (value assignments still occur). |
 
 ### Record Actions
-After the line action is the optional record action, these are separated by a full stop '.'.
+After the line action is the optional record action, these are separated by a full stop ```.```.
 
 | Action | Description |
 |:-----------|:----------|
@@ -278,7 +280,7 @@ After the line action is the optional record action, these are separated by a fu
 | Clear | Clear non Filldown values. |
 | Clearall | Clear all values. |
 
-The dot '.' separator is only required if both line and record actions are specified.
+The dot ```.``` separator is only required if both line and record actions are specified.
 If one or both are left as the implicit default then the dot is omitted i.e. Next, Next.NoRecord and NoRecord are equivalent.
 
 ### New State Transition
