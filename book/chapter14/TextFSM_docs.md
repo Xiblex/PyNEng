@@ -245,32 +245,48 @@ The entire expanded regex must match, for any Values to be assigned.
 
 ## Rule Actions
 
-Following a regexp, actions may be described, delimited by ```->``` and are of the format 'A.B C'.
+Following a regexp, actions may be described, delimited by ```->``` and are of the format ```A.B C```.
 
-Actions are broken down into three optional parts. * A) Line Actions, actions on the input line. * B) Record Actions, actions on the values collected so far. * C) State transition.
+Actions are broken down into three optional parts.
+* A) Line Actions, actions on the input line.
+* B) Record Actions, actions on the values collected so far.
+* C) State transition.
 
-If actions are not described i.e. no '->', then the default implicit action is Next.NoRecord.
+If actions are not described i.e. no ```->```, then the default implicit action is __Next.NoRecord__.
 
-Line Actions
-| Line Actions | | |:-----------------|:| | Action | Description | | Next | Finish with the input line, read in the next and start matching again from the start of the state. This is the default behavior if no line action is specified. | | Continue | Retain the current line and do not resume matching from the first rule of the state. Continue processing rules as if a match did not occur (value assignments still occur). |
+### Line Actions
+| Action | Description |
+|:-----------------|:---| 
+| Next | Finish with the input line, read in the next and start matching again from the start of the state. This is the default behavior if no line action is specified. |
+| Continue | Retain the current line and do not resume matching from the first rule of the state. Continue processing rules as if a match did not occur (value assignments still occur). |
 
-Record Actions
+### Record Actions
 After the line action is the optional record action, these are separated by a full stop '.'.
 
-| Record Actions | | |:-------------------|:| | Action | Description | | NoRecord | Do nothing. This is the default behavior if no record action is specified. | | Record | Record the values collected so far as a row in the return data. Non Filldown values are cleared. Note: No record will be output if there are any 'Required' values that are unassigned. | | Clear | Clear non Filldown values. | | Clearall | Clear all values. |
+| Action | Description |
+|:-----------|:----------|
+| NoRecord | Do nothing. This is the default behavior if no record action is specified. |
+| Record | Record the values collected so far as a row in the return data. Non Filldown values are cleared. Note: No record will be output if there are any 'Required' values that are unassigned. |
+| Clear | Clear non Filldown values. |
+| Clearall | Clear all values. |
 
-The dot '.' separator is only required if both line and record actions are specified. If one or both are left as the implicit default then the dot is omitted i.e. Next, Next.NoRecord and NoRecord are equivalent.
+The dot '.' separator is only required if both line and record actions are specified.
+If one or both are left as the implicit default then the dot is omitted i.e. Next, Next.NoRecord and NoRecord are equivalent.
 
-New State Transition
-The action can be optionally followed by white spaces and a new State. The State must be one of the reserved states or a valid state defined in the template. Upon matching, after any actions are performed normally, the next line is read from input and the current state is then changed to the new state and processing continues in this new state.
+### New State Transition
+The action can be optionally followed by white spaces and a new State.
+The State must be one of the reserved states or a valid state defined in the template.
+Upon matching, after any actions are performed normally,
+the next line is read from input and the current state is then changed to the new state and processing continues in this new state.
 
-Note that the Continue action does not accept a state transition. This ensures that state machines are loop free.
+> Note that the Continue action does not accept a state transition. This ensures that state machines are loop free.
 
-Error Action
-There is a special action 'Error'. This action will terminate all processing and will not return the table, discarding all rows collected so far, and raises an exception.
+## Error Action
+There is a special action __Error__.
+This action will terminate all processing and will not return the table, discarding all rows collected so far, and raises an exception.
 
 The syntax for this action is:
 
 ```
-
-^_regex_ -> Error [word|"string"] ```
+^_regex_ -> Error [word|"string"]
+```
