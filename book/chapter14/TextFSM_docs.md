@@ -160,7 +160,9 @@ Value [option[,option...]] name regex
 | Keyword | Type | Description |
 |:------------|:---------|:----------------|
 | Value | Keyword | Indicates that this is a Value line entry, mandatory. |
-| option | Flags, comma separated (no spaces) | Extra options regarding the value. May be one or more of: Filldown The previously matched value is retained for subsequent records (unless explicitly cleared or matched again). In other words, the most recently matched value is copied to newer rows unless matched again. Key Declares that the fields contents contribute to the unique identifier for a row. Required The record (row) is only saved into the table if this value is matched. List The value is a list, appended to on each match. Normally a match will overwrite any previous value in that row. Fillup Like Filldown, but populates upwards until it finds a non-empty entry. Not compatible with Required. | | name | Value name | The name of the Value, which will end up as the column name. Must not be the name of a valid option. | | regex | A regex | The regex against which the Value will match. This regex must be contained within parenthesis. |
+| option | Flags, comma separated (no spaces) | Extra options regarding the value. May be one or more of:<br>__Filldown__ The previously matched value is retained for subsequent records (unless explicitly cleared or matched again). In other words, the most recently matched value is copied to newer rows unless matched again.<br>__Key__ Declares that the fields contents contribute to the unique identifier for a row.<br>__Required__ The record (row) is only saved into the table if this value is matched.<br>__List__ The value is a list, appended to on each match. Normally a match will overwrite any previous value in that row.<br>__Fillup__ Like Filldown, but populates upwards until it finds a non-empty entry. Not compatible with Required. |
+| name | Value name | The name of the Value, which will end up as the column name. Must not be the name of a valid option. |
+| regex | A regex | The regex against which the Value will match. This regex must be contained within parenthesis. |
 
 ## State definitions
 
