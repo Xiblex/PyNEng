@@ -1,3 +1,5 @@
+(Formatted copy of TextFSM docs)
+
 ## Introduction
 
 TextFSM is a Python module that implements a template based state machine for parsing semi-formatted text.
@@ -166,65 +168,84 @@ Value [option[,option...]] name regex
 
 ## State definitions
 
-After the Value definitions, the State definitions are described. Each state definition is separated by a blank line. The first line is the state name, an alphanumeric word followed by a series of rules.
+After the Value definitions, the State definitions are described.
+Each state definition is separated by a blank line.
+The first line is the state name, an alphanumeric word followed by a series of rules.
 
 A state definition is of the following format:
-
 ```
 _stateName *^*rule *^*rule... _ 
 ```
 
-Multiple state definitions are to be separated by at least one blank line. Rules are described on consecutive lines immediately following the state name and must be indented by white space and a carat ('^').
+Multiple state definitions are to be separated by at least one blank line.
+Rules are described on consecutive lines immediately following the state name and must be indented by white space and a carat ```('^')```.
 
-Initially, the FSM will begin at the Start state. Input is only compared to the current state but a matched line can trigger a transition to a new state. Evaluation continues line by line until either EOF is encountered or the current state transitions to the End state.
+Initially, the FSM will begin at the Start state.
+Input is only compared to the current state but a matched line can trigger a transition to a new state.
+Evaluation continues line by line until either EOF is encountered or the current state transitions to the End state.
 
-Reserved states
+## Reserved states
 
-The FSM starts in state Start, so this label is mandatory and the template will not parse without it.
+The FSM starts in state __Start__, so this label is mandatory and the template will not parse without it.
 
-If EOF was reached on the input then the EOF state is executed. This is an implicit state that looks like:
-
+If __EOF__ was reached on the input then the EOF state is executed. This is an implicit state that looks like:
+```
 EOF ^.* -> Record
-
-EOF records the current row before returning. To override this behavior - explicitly define an empty EOF state. like so:
-
-EOF
-
-The End state is reserved and terminates processing of input lines and does not execute the EOF state.
-
-State Rules
-
-Each state definition consists of a list of one or more rules. The FSM reads a line from the input buffer and tests it against each rule, in turn, starting from the top of the current state. If a rule matches the line, then the action is carried out and the process repeats (from the top of the state again) with the next line.
-
-Rules are of the following format:
-
 ```
 
-^_regex_ [-> action] ```
+EOF records the current row before returning. To override this behavior - explicitly define an empty EOF state. like so:
+```
+EOF
+```
 
-regex is a regular expression compared against input lines. The match is performed from the start of the input line, so the carat ('^') although implicit, is required syntax as a reminder of this behavior.
+The __End__ state is reserved and terminates processing of input lines and does not execute the EOF state.
 
-The regex may contain zero or more Value descriptors. Value descriptors are in the format $ValueName or ${ValueName} (the latter format is preferred) and indicate value assignment. The regex of the associated value is substituted into the rule regex, and if the line matches, the text that matches this Value is assigned to the current row. To indicate the end of line (EOL) use a double dollar sign '$$', this will be substituted for a single dollar sign during Value substitution.
+### State Rules
+
+Each state definition consists of a list of one or more rules.
+The FSM reads a line from the input buffer and tests it against each rule, in turn, starting from the top of the current state.
+If a rule matches the line, then the action is carried out and the process repeats (from the top of the state again) with the next line.
+
+Rules are of the following format:
+```
+^_regex_ [-> action]
+```
+
+__regex__ is a regular expression compared against input lines. The match is performed from the start of the input line, so the carat ('^') although implicit, is required syntax as a reminder of this behavior.
+
+The regex may contain zero or more Value descriptors.
+Value descriptors are in the format ```$ValueName``` or ```${ValueName}``` (the latter format is preferred)
+and indicate value assignment.
+The regex of the associated value is substituted into the rule regex, and if the line matches,
+the text that matches this Value is assigned to the current row.
+To indicate the end of line (EOL) use a double dollar sign '$$',
+this will be substituted for a single dollar sign during Value substitution.
 
 For example, take the following template:
 
-``` Value Interface (\S+)
+```
+Value Interface (\S+)
 
-Start ^Interface ${Interface} is up ```
+Start
+ ^Interface ${Interface} is up
+```
 
 When initially parsing the template, the FSM will expand the rule's regex to:
-
+```
 ^Interface (\S+) is up
+```
 
 If the following line is parsed through this rule, then the value 'Interface' is given the value GigabitEthernet1/10:
-
+```
 Interface GigabitEthernet1/10 is up.
+```
 
-Multiple value substitutions may be placed into a rule regex. The entire expanded regex must match, for any Values to be assigned.
+Multiple value substitutions may be placed into a rule regex.
+The entire expanded regex must match, for any Values to be assigned.
 
-Rule Actions
+## Rule Actions
 
-Following a regexp, actions may be described, delimited by '->' and are of the format 'A.B C'.
+Following a regexp, actions may be described, delimited by ```->``` and are of the format 'A.B C'.
 
 Actions are broken down into three optional parts. * A) Line Actions, actions on the input line. * B) Record Actions, actions on the values collected so far. * C) State transition.
 
