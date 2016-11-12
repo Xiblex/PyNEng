@@ -110,5 +110,5 @@
   * [Примеры использования TextFSM](book/chapter14/1_textfsm_examples.md)
 * [15. Ansible](book/chapter15/README.md)
 * [Полезные ссылки](resources/README.md)
-  * [Материалы по темам курса](resources/1_references.md)
+  * [Материалы по темам курса](resources/1_additional_info.md)
 
