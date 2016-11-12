@@ -5,6 +5,7 @@
 ## Подкасты об автоматизации с Python
 
 > Хорошо подходят для вдохновления темой автоматизации
+
 * [Packet Pushers Show 176 – Intro To Python & Automation For Network Engineers](http://packetpushers.net/podcast/podcasts/show-176-intro-to-python-automation-for-network-engineers/)
 * [Packet Pushers Show 198 – Kirk Byers On Network Automation With Python & Ansible](http://packetpushers.net/podcast/podcasts/show-198-kirk-byers-network-automation-python-ansible/)
 * [Packet Pushers Show 270: Design & Build 9: Automation With Python And Netmiko](http://packetpushers.net/podcast/podcasts/show-270-design-build-9-automation-python-netmiko/)
