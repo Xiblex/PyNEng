@@ -122,22 +122,25 @@ Value Model (\S+)
 
 Start
 
-^${Chassis}
+ ^${Chassis}
+
 # Record current values and change state.
 # No record will be output on first pass as 'Slot' is 'Required' but empty.
-^Routing Engine status: -> Record RESlot
+
+ ^Routing Engine status: -> Record RESlot
 
 # A state transition was not strictly necessary but helpful for the example.
 
 RESlot
 
-^\s+Slot\s+${Slot}
-^\s+Current state\s+${State}
-^\s+Temperature\s+${Temp} degrees
-^\s+CPU temperature\s+${CPUTemp} degrees
-^\s+DRAM\s+${DRAM} MB
+ ^\s+Slot\s+${Slot}
+ ^\s+Current state\s+${State}
+ ^\s+Temperature\s+${Temp} degrees
+ ^\s+CPU temperature\s+${CPUTemp} degrees
+ ^\s+DRAM\s+${DRAM} MB
+
 # Transition back to Start state.
-^\s+Model\s+${Model} -> Start
+ ^\s+Model\s+${Model} -> Start
 
 # An implicit EOF state outputs the last record.
 ```
@@ -159,10 +162,10 @@ Each Value line is of the following format:
 Value [option[,option...]] name regex
 ```
 
-| Keyword | Type | Description |
+|   Keyword   |   Type   |   Description   |
 |:------------|:---------|:----------------|
-| Value | Keyword | Indicates that this is a Value line entry, mandatory. |
-| option | Flags, comma separated (no spaces) | Extra options regarding the value. May be one or more of:<br>__Filldown__ The previously matched value is retained for subsequent records (unless explicitly cleared or matched again). In other words, the most recently matched value is copied to newer rows unless matched again.<br>__Key__ Declares that the fields contents contribute to the unique identifier for a row.<br>__Required__ The record (row) is only saved into the table if this value is matched.<br>__List__ The value is a list, appended to on each match. Normally a match will overwrite any previous value in that row.<br>__Fillup__ Like Filldown, but populates upwards until it finds a non-empty entry. Not compatible with Required. |
+|    Value    |  Keyword | Indicates that this is a Value line entry, mandatory. |
+|   option    | Flags, comma separated (no spaces) | Extra options regarding the value. May be one or more of:<br>__Filldown__ The previously matched value is retained for subsequent records (unless explicitly cleared or matched again). In other words, the most recently matched value is copied to newer rows unless matched again.<br>__Key__ Declares that the fields contents contribute to the unique identifier for a row.<br>__Required__ The record (row) is only saved into the table if this value is matched.<br>__List__ The value is a list, appended to on each match. Normally a match will overwrite any previous value in that row.<br>__Fillup__ Like Filldown, but populates upwards until it finds a non-empty entry. Not compatible with Required. |
 | name | Value name | The name of the Value, which will end up as the column name. Must not be the name of a valid option. |
 | regex | A regex | The regex against which the Value will match. This regex must be contained within parenthesis. |
 
@@ -181,6 +184,7 @@ Multiple state definitions are to be separated by at least one blank line.
 Rules are described on consecutive lines immediately following the state name and must be indented by white space and a carat ```('^')```.
 
 Initially, the FSM will begin at the Start state.
+
 Input is only compared to the current state but a matched line can trigger a transition to a new state.
 Evaluation continues line by line until either EOF is encountered or the current state transitions to the End state.
 
@@ -203,6 +207,7 @@ The __End__ state is reserved and terminates processing of input lines and does 
 ### State Rules
 
 Each state definition consists of a list of one or more rules.
+
 The FSM reads a line from the input buffer and tests it against each rule, in turn, starting from the top of the current state.
 If a rule matches the line, then the action is carried out and the process repeats (from the top of the state again) with the next line.
 
@@ -214,10 +219,13 @@ Rules are of the following format:
 __regex__ is a regular expression compared against input lines. The match is performed from the start of the input line, so the carat ('^') although implicit, is required syntax as a reminder of this behavior.
 
 The regex may contain zero or more Value descriptors.
+
 Value descriptors are in the format ```$ValueName``` or ```${ValueName}``` (the latter format is preferred)
 and indicate value assignment.
+
 The regex of the associated value is substituted into the rule regex, and if the line matches,
 the text that matches this Value is assigned to the current row.
+
 To indicate the end of line (EOL) use a double dollar sign '$$',
 this will be substituted for a single dollar sign during Value substitution.
 
@@ -256,7 +264,7 @@ If actions are not described i.e. no ```->```, then the default implicit action 
 
 ### Line Actions
 | Action | Description |
-|:-----------------|:---| 
+|:-------|:--------| 
 | Next | Finish with the input line, read in the next and start matching again from the start of the state. This is the default behavior if no line action is specified. |
 | Continue | Retain the current line and do not resume matching from the first rule of the state. Continue processing rules as if a match did not occur (value assignments still occur). |
 
@@ -275,7 +283,9 @@ If one or both are left as the implicit default then the dot is omitted i.e. Nex
 
 ### New State Transition
 The action can be optionally followed by white spaces and a new State.
+
 The State must be one of the reserved states or a valid state defined in the template.
+
 Upon matching, after any actions are performed normally,
 the next line is read from input and the current state is then changed to the new state and processing continues in this new state.
 
@@ -283,6 +293,7 @@ the next line is read from input and the current state is then changed to the ne
 
 ## Error Action
 There is a special action __Error__.
+
 This action will terminate all processing and will not return the table, discarding all rows collected so far, and raises an exception.
 
 The syntax for this action is:
