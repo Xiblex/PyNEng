@@ -15,7 +15,9 @@
 * [Packet Pushers Show 270: Design & Build 9: Automation With Python And Netmiko](http://packetpushers.net/podcast/podcasts/show-270-design-build-9-automation-python-netmiko/)
 
 
-## Курсы (платные и бесплатные). Я эти курсы не проходила, поэтому они собраны в произвольном порядке, просто чтобы было проще оценить, что есть на сегодняшний день и выбрать то, что больше нравится:
+## Курсы (платные и бесплатные).
+
+> Я эти курсы не проходила, поэтому они собраны в произвольном порядке, просто чтобы было проще оценить, что есть на сегодняшний день и выбрать то, что больше нравится.
 
 * [Бесплатный email курс от Kirk Byers](https://pynet.twb-tech.com/email-signup.html)
 * [Платный курс от Kirk Byers](https://pynet.twb-tech.com/class.html)
