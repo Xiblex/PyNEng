@@ -210,6 +210,7 @@ SW1           R2           10.2.2.2    Cisco 2911  GigabitEthernet1/0/21  Gigabi
 
 Обратите внимание, что в файле cdp_detail_output.txt находится вывод с тремя соседями, а в таблице только один сосед, последний.
 
+#### Record
 Так получилось из-за того, что в шаблоне не указано действие __Record__.
 И в итоге, в финальной таблице осталась только последняя строка.
 
@@ -245,6 +246,7 @@ SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/
 Теперь мы получили вывод со всех трёх устройств.
 Но, переменная LOCAL_HOST отображается не в каждой строке, а только в первой.
 
+#### Filldown
 Связано это с тем, что приглашение, из которого мы взяли значение переменной, появляется только один раз. И, для того, чтобы оно появлялось и в последующих строках, надо использовать действие __Filldown__ для переменной LOCAL_HOST:
 ```
 Value Filldown LOCAL_HOST (\S+)
@@ -277,6 +279,7 @@ SW1
 
 Теперь значение переменной LOCAL_HOST появилось во всех трёх строках. Но появился ещё один странный эффект - последняя строка, в которой заполнена только колонка LOCAL_HOST.
 
+#### Required
 Дело в том, что все переменные, которые мы определили, опциональны. И, к тому же, одна переменная с параметром Filldown. И, чтобы избавиться от последней строки, нужна указать одну переменную обязательной, с помощью параметра __Required__:
 ```
 Value Filldown LOCAL_HOST (\S+)
@@ -306,3 +309,44 @@ SW1           R1           10.1.1.1    Cisco 3825            GigabitEthernet1/0/
 SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
 ```
 
+### show ip interface brief
+
+В случае, когда нужно обработать данные, которые выведены столбцами, шаблон TextFSM, наиболее удобен. Посмотрим на шаблон для вывода команды show ip interface brief:
+```
+Value INT (\S+)
+Value ADDR (\S+)
+Value STATUS (up|down|administratively down)
+Value PROTO (up|down)
+
+Start
+  ^${INTF}\s+${ADDR}\s+\w+\s+\w+\s+${STATUS}\s+${PROTO} -> Record
+```
+
+В этом случае, правило можно описать одной строкой.
+
+Посмотрим на результат применения шаблона к такому выводу:
+```
+R1#show ip interface brief
+Interface                  IP-Address      OK? Method Status                Protocol
+FastEthernet0/0            15.0.15.1       YES manual up                    up
+FastEthernet0/1            10.0.12.1       YES manual up                    up
+FastEthernet0/2            10.0.13.1       YES manual up                    up
+FastEthernet0/3            unassigned      YES unset  up                    up
+Loopback0                  10.1.1.1        YES manual up                    up
+Loopback100                100.0.0.1       YES manual up                    up
+```
+
+Результат выполнения будет таким:
+```
+$ python parse_output.py templates/cisco_ios_show_ip_int_brief.template show_ip_int_br.txt
+INT              ADDR        STATUS    PROTO
+---------------  ----------  --------  -------
+FastEthernet0/0  15.0.15.1   up        up
+FastEthernet0/1  10.0.12.1   up        up
+FastEthernet0/2  10.0.13.1   up        up
+FastEthernet0/3  unassigned  up        up
+Loopback0        10.1.1.1    up        up
+Loopback100      100.0.0.1   up        up
+```
+
+### show ip route ospf
