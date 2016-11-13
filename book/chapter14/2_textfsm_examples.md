@@ -481,4 +481,4 @@ Network    Mask      Distance    Metric  NextHop
 10.5.35.0  /24            110        20  ['10.0.13.3']
 ```
 
-На этом мы заканчиваем разбираться с шаблонами. Примеры шаблонов для Cisco и другого оборудования можно посомтреть в проекте [ntc-ansible](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates).
+На этом мы заканчиваем разбираться с шаблонами. Примеры шаблонов для Cisco и другого оборудования можно посмотреть в проекте [ntc-ansible](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates).
