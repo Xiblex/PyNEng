@@ -2,11 +2,198 @@
 
 В этом разделе мы посмотрим на несколько более сложных примеров шаблонов и использования TextFSM.
 
-Формально с синтаксисом мы разберемся в следующем разделе, а в этом просто посмотрим на то как можно практически использовать TextFSM.
 
-### Разбор команды show ip int br
+В этом разделе мы будем использовать скрипт parse_output.py, который не привязан к конкретному шаблону и выводу: шаблон и вывод команды будут передаваться как параметры:
+```python
+import sys
+import textfsm
+from tabulate import tabulate
 
+template = sys.argv[1]
+output_file = sys.argv[2]
+
+f = open(template)
+output = open(output_file).read()
+
+re_table = textfsm.TextFSM(f)
+
+header = re_table.header
+result = re_table.ParseText(output)
+
+print tabulate(result, headers=header)
 
 ```
 
+Запускать скрипт мы будем таким образом:
+```
+python parse_output.py template command_output
+```
+
+> Модуль tabulate используется для отображения данных в табличном виде (его нужно установить, если хотите использовать этот скрипт).
+
+Обработка данных по шаблону всегда выполняется одинаково. Поэтому скрипт будет одинаковый и только шаблон и данные отличаться. Начиная с простого примера, разберемся с тем как использовать TextFSM.
+
+### show clock
+
+Разберемся с простым примером, вывод команды sh clock:
+```
+15:10:44.867 UTC Sun Nov 13 2016
+```
+
+Для начала, в шаблоне надо определить переменные:
+* В начале каждой строки должно быть ключевое слово Value
+ * каждая переменная определяет столбец в таблице
+* следующее слово - название переменной
+* после названия, в скобках, регулярное выражение, которое описывает значение переменной
+
+Определение переменных выглядит так:
+```
+Value Time (..:..:..)
+Value Timezone (\S+)
+Value WeekDay (\w+)
+Value Month (\w+)
+Value MonthDay (\d+)
+Value Year (\d+)
+```
+
+На всякий случай, подсказка по спецсимволам:
+* ```.``` - любой символ
+* ```+``` - одно или более повторений предыдущего символа
+* ```\S``` - все символы, кроме whitespace
+* ```\w``` - любая буква или цифра
+* ```\d``` - любая цифра
+
+После определения переменных, должна идти пустая строка и состояние __Start__, а после, начиная с пробела и символа ```^```, идет правило:
+```
+Value Time (..:..:..)
+Value Timezone (\S+)
+Value WeekDay (\w+)
+Value Month (\w+)
+Value MonthDay (\d+)
+Value Year (\d+)
+
+Start
+  ^${Time}.* ${Timezone} ${WeekDay} ${Month} ${MonthDay} ${Year} -> Record
+```
+
+> Так как, в данном случае, в выводе всего одна строка, можно не писать в шаблоне действие Record. Но лучше его использовать в таких ситуациях, когда надо записать значения, чтобы привыкать к этому синтаксу и не ошибиться, когда нужна обработка нескольких строк.
+
+Когда TextFSM обрабатывает строки вывода, он подставляет вместо переменных, их значения. В итоге правило будет выглядеть так:
+```
+^(..:..:..).* (\S+) (\w+) (\w+) (\d+) (\d+)
+```
+
+Когда это регулярное выражение применяется в выводу show clock, в каждой группе регулярного выражения, будет находится соответствующее значение:
+* 1 группа: 15:10:44
+* 2 группа: UTC
+* 3 группа: Sun
+* 4 группа: Nov
+* 5 группа: 13
+* 6 группа: 2016
+
+В правиле, кроме явного действия Record, которое указывает, что запись надо поместить в финальную таблицу, по умолчанию также используется правило Next, которое указывает, что надо перейти к следующей строке текста. Но так как в выводе команды sh clock, только одна строка, обработка завершается.
+
+Результат отработки скрипта будет таким:
+```
+$ python parse_output.py sh_clock.template show_clock.txt
+Time      Timezone    WeekDay    Month      MonthDay    Year
+--------  ----------  ---------  -------  ----------  ------
+15:10:44  UTC         Sun        Nov              13    2016
+```
+
+### show cdp neighbors detail
+
+Теперь попробуем обработать вывод команды show cdp neighbors detail. Особенность этой команды в том, что нужные нам данныенаходятся не в одной строке, а в разных.
+
+В файле cdp_detail_output.txt находится вывод команды show cdp neighbors detail:
+```
+SW1#show cdp neighbors detail
+-------------------------
+Device ID: SW2
+Entry address(es):
+  IP address: 10.1.1.2
+Platform: cisco WS-C2960-8TC-L,  Capabilities: Switch IGMP
+Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEthernet0/1
+Holdtime : 164 sec
+
+Version :
+Cisco IOS Software, C2960 Software (C2960-LANBASEK9-M), Version 12.2(55)SE9, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2014 by Cisco Systems, Inc.
+Compiled Mon 03-Mar-14 22:53 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Native VLAN: 1
+Duplex: full
+Management address(es):
+  IP address: 10.1.1.2
+
+
+-------------------------
+Device ID: R1
+Entry address(es):
+  IP address: 10.1.1.1
+Platform: Cisco 3825,  Capabilities: Router Switch IGMP
+Interface: GigabitEthernet1/0/22,  Port ID (outgoing port): GigabitEthernet0/0
+Holdtime : 156 sec
+
+Version :
+Cisco IOS Software, 3800 Software (C3825-ADVENTERPRISEK9-M), Version 12.4(24)T1, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2009 by Cisco Systems, Inc.
+Compiled Fri 19-Jun-09 18:40 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+
+-------------------------
+Device ID: R2
+Entry address(es):
+  IP address: 10.2.2.2
+Platform: Cisco 2911,  Capabilities: Router Switch IGMP
+Interface: GigabitEthernet1/0/21,  Port ID (outgoing port): GigabitEthernet0/0
+Holdtime : 156 sec
+
+Version :
+Cisco IOS Software, 2900 Software (C3825-ADVENTERPRISEK9-M), Version 15.2(2)T1, RELEASE SOFTWARE (fc3)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2009 by Cisco Systems, Inc.
+Compiled Fri 19-Jun-09 18:40 by prod_rel_team
+
+advertisement version: 2
+VTP Management Domain: ''
+Duplex: full
+Management address(es):
+
+```
+
+Попробуем получить из вывода такие поля:
+* LOCAL_HOST - имя устройства, которое мы получим из приглашения
+* DEST_HOST - имя соседа
+* MGMNT_IP - IP-адрес соседа
+* PLATFORM - модель соседнего устройства
+* LOCAL_PORT - локальный интерфейс, который соединен с соседом
+* REMOTE_PORT - порт соседнего устройства
+* IOS_VERSION - версия IOS соседа
+
+Шаблон выглядит таким образом:
+```
+Value LOCAL_HOST (\S+)
+Value DEST_HOST (\S+)
+Value MGMNT_IP (.*)
+Value PLATFORM (.*)
+Value LOCAL_PORT (.*)
+Value REMOTE_PORT (.*)
+Value IOS_VERSION (\S+)
+
+Start
+  ^${LOCAL_HOST}[>#].
+  ^Device ID: ${DEST_HOST}
+  ^.*IP address: ${MGMNT_IP}
+  ^Platform: ${PLATFORM},
+  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
+  ^.*Version ${IOS_VERSION},
 ```
