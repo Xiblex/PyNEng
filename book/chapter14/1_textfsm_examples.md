@@ -103,7 +103,7 @@ Time      Timezone    WeekDay    Month      MonthDay    Year
 
 ### show cdp neighbors detail
 
-Теперь попробуем обработать вывод команды show cdp neighbors detail. Особенность этой команды в том, что нужные нам данныенаходятся не в одной строке, а в разных.
+Теперь попробуем обработать вывод команды show cdp neighbors detail. Особенность этой команды в том, что нужные нам данные находятся не в одной строке, а в разных.
 
 В файле cdp_detail_output.txt находится вывод команды show cdp neighbors detail:
 ```
@@ -128,7 +128,6 @@ Native VLAN: 1
 Duplex: full
 Management address(es):
   IP address: 10.1.1.2
-
 
 -------------------------
 Device ID: R1
@@ -197,3 +196,113 @@ Start
   ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
   ^.*Version ${IOS_VERSION},
 ```
+
+Попробуем запустить скрипт:
+```
+$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM    LOCAL_PORT             REMOTE_PORT         IOS_VERSION
+------------  -----------  ----------  ----------  ---------------------  ------------------  -------------
+SW1           R2           10.2.2.2    Cisco 2911  GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
+```
+
+Несмотря на то, что правила с переменными описаны в разных строках, и, соответственно, работают с разными строками, TextFSM собирает их в одну строку таблицы.
+То есть, переменные, которые мы определяем в начале шаблона, задают строку итоговой таблицы.
+
+Обратите внимание, что в файле cdp_detail_output.txt находится вывод с тремя соседями, а в таблице только один сосед, последний.
+
+Так получилось из-за того, что в шаблоне не указано действие __Record__.
+И в итоге, в финальной таблице осталась только последняя строка.
+
+Если мы исправим шаблон таким образом:
+```
+Value LOCAL_HOST (\S+)
+Value DEST_HOST (\S+)
+Value MGMNT_IP (.*)
+Value PLATFORM (.*)
+Value LOCAL_PORT (.*)
+Value REMOTE_PORT (.*)
+Value IOS_VERSION (\S+)
+
+Start
+  ^${LOCAL_HOST}[>#].
+  ^Device ID: ${DEST_HOST}
+  ^.*IP address: ${MGMNT_IP}
+  ^Platform: ${PLATFORM},
+  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
+  ^.*Version ${IOS_VERSION}, -> Record
+```
+
+То, запустив скрипт еще раз, мы получим такой результат:
+```
+$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
+------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
+SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
+              R1           10.1.1.1    Cisco 3825            GigabitEthernet1/0/22  GigabitEthernet0/0  12.4(24)T1
+              R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
+```
+
+Теперь мы получили вывод со всех трёх устройств.
+Но, переменная LOCAL_HOST отображается не в каждой строке, а только в первой.
+
+Связано это с тем, что приглашение, из которого мы взяли значение переменной, появляется только один раз. И, для того, чтобы оно появлялось и в последующих строках, надо использовать действие __Filldown__ для переменной LOCAL_HOST:
+```
+Value Filldown LOCAL_HOST (\S+)
+Value DEST_HOST (\S+)
+Value MGMNT_IP (.*)
+Value PLATFORM (.*)
+Value LOCAL_PORT (.*)
+Value REMOTE_PORT (.*)
+Value IOS_VERSION (\S+)
+
+Start
+  ^${LOCAL_HOST}[>#].
+  ^Device ID: ${DEST_HOST}
+  ^.*IP address: ${MGMNT_IP}
+  ^Platform: ${PLATFORM},
+  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
+  ^.*Version ${IOS_VERSION}, -> Record
+```
+
+Теперь мы получили такой вывод:
+```
+$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
+------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
+SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
+SW1           R1           10.1.1.1    Cisco 3825            GigabitEthernet1/0/22  GigabitEthernet0/0  12.4(24)T1
+SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
+SW1
+```
+
+Теперь значение переменной LOCAL_HOST появилось во всех трёх строках. Но появился ещё один странный эффект - последняя строка, в которой заполнена только колонка LOCAL_HOST.
+
+Дело в том, что все переменные, которые мы определили, опциональны. И, к тому же, одна переменная с параметром Filldown. И, чтобы избавиться от последней строки, нужна указать одну переменную обязательной, с помощью параметра __Required__:
+```
+Value Filldown LOCAL_HOST (\S+)
+Value Required DEST_HOST (\S+)
+Value MGMNT_IP (.*)
+Value PLATFORM (.*)
+Value LOCAL_PORT (.*)
+Value REMOTE_PORT (.*)
+Value IOS_VERSION (\S+)
+
+Start
+  ^${LOCAL_HOST}[>#].
+  ^Device ID: ${DEST_HOST}
+  ^.*IP address: ${MGMNT_IP}
+  ^Platform: ${PLATFORM},
+  ^Interface: ${LOCAL_PORT},  Port ID \(outgoing port\): ${REMOTE_PORT}
+  ^.*Version ${IOS_VERSION}, -> Record
+```
+
+Теперь мы получим корректный вывод:
+```
+$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
+------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
+SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
+SW1           R1           10.1.1.1    Cisco 3825            GigabitEthernet1/0/22  GigabitEthernet0/0  12.4(24)T1
+SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
+```
+
