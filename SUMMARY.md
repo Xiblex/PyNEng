@@ -108,6 +108,7 @@
 * [14. TextFSM. Обработка вывода команд](book/chapter14/README.md)
   * [Синтаксис шаблонов TextFSM](book/chapter14/1_textfsm_syntax.md)
   * [Примеры использования TextFSM](book/chapter14/2_textfsm_examples.md)
+  * [CLI Table](book/chapter14/3_textfsm_clitable.md)
 * [15. Ansible](book/chapter15/README.md)
 * [Полезные ссылки](resources/README.md)
   * [Материалы по темам курса](resources/1_additional_info.md)
