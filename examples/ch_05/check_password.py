@@ -13,22 +13,22 @@ else:
 """
 Usage example:
 
-(test)nata@lab1:~$ python file7.py
+$ python check_password.py
 Введите имя пользователя: nata
 Введите пароль: nata1234
 Пароль содержит имя пользователя
 
-(test)nata@lab1:~$ python file7.py
-Введите имя пользователя: nata 
+$ python check_password.py
+Введите имя пользователя: nata
 Введите пароль: 123nata123
 Пароль содержит имя пользователя
 
-(test)nata@lab1:~$ python file7.py
+$ python check_password.py
 Введите имя пользователя: nata
 Введите пароль: 1234
 Пароль слишком короткий
 
-(test)nata@lab1:~$ python file7.py
+$ python check_password.py
 Введите имя пользователя: nata
 Введите пароль: 123456789
 Пароль для пользователя nata установлен
