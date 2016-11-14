@@ -83,7 +83,7 @@ id,name,to_name,IT,BS,to_id
 ```
 
 
-Скрипт для генерации конфигураций router_config_generator.py
+Скрипт для генерации конфигураций router_config_generator_ver2.py
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader

@@ -100,7 +100,7 @@ trunk:
 
 
 ####Запись в YAML
-Попробуем записать объекты Python в YAML:
+Попробуем записать объекты Python в YAML (файл yaml_write.py):
 ```python
 import yaml
 
@@ -136,7 +136,7 @@ trunk: [switchport trunk encapsulation dot1q, switchport mode trunk, switchport 
 
 То есть, по умолчанию, список записался в одну строку. Но удобнее, когда каждый элемент списка находится в одной строке.
 
-Для того, чтобы изменить формат записи, добавляем параметр ```default_flow_style=False```:
+Для того, чтобы изменить формат записи, добавляем параметр ```default_flow_style=False``` (файл yaml_write_ver2.py):
 ```python
 import yaml
 

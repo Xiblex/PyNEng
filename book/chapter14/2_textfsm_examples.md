@@ -35,7 +35,7 @@ python parse_output.py template command_output
 
 ### show clock
 
-Разберемся с простым примером, вывод команды sh clock:
+Разберемся с простым примером, вывод команды sh clock (файл output/sh_clock.txt):
 ```
 15:10:44.867 UTC Sun Nov 13 2016
 ```
@@ -63,7 +63,7 @@ Value Year (\d+)
 * ```\w``` - любая буква или цифра
 * ```\d``` - любая цифра
 
-После определения переменных, должна идти пустая строка и состояние __Start__, а после, начиная с пробела и символа ```^```, идет правило:
+После определения переменных, должна идти пустая строка и состояние __Start__, а после, начиная с пробела и символа ```^```, идет правило (файл templates/cisco_show_clock.template):
 ```
 Value Time (..:..:..)
 Value Timezone (\S+)
@@ -105,7 +105,7 @@ Time      Timezone    WeekDay    Month      MonthDay    Year
 
 Теперь попробуем обработать вывод команды show cdp neighbors detail. Особенность этой команды в том, что нужные нам данные находятся не в одной строке, а в разных.
 
-В файле cdp_detail_output.txt находится вывод команды show cdp neighbors detail:
+В файле output/sh_cdp_neighbor_detail.txt находится вывод команды show cdp neighbors detail:
 ```
 SW1#show cdp neighbors detail
 -------------------------
@@ -178,7 +178,7 @@ Management address(es):
 * REMOTE_PORT - порт соседнего устройства
 * IOS_VERSION - версия IOS соседа
 
-Шаблон выглядит таким образом:
+Шаблон выглядит таким образом (файл templates/cisco_show_cdp_neighbors_detail.template):
 ```
 Value LOCAL_HOST (\S+)
 Value DEST_HOST (\S+)
@@ -311,7 +311,7 @@ SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/
 
 ### show ip interface brief
 
-В случае, когда нужно обработать данные, которые выведены столбцами, шаблон TextFSM, наиболее удобен. Посмотрим на шаблон для вывода команды show ip interface brief:
+В случае, когда нужно обработать данные, которые выведены столбцами, шаблон TextFSM, наиболее удобен. Посмотрим на шаблон для вывода команды show ip interface brief (файл templates/cisco_show_ip_int_br.template):
 ```
 Value INT (\S+)
 Value ADDR (\S+)
@@ -324,7 +324,7 @@ Start
 
 В этом случае, правило можно описать одной строкой.
 
-Посмотрим на результат применения шаблона к такому выводу:
+Посмотрим на результат применения шаблона к такому выводу (файл output/sh_ip_int_br.txt):
 ```
 R1#show ip interface brief
 Interface                  IP-Address      OK? Method Status                Protocol
@@ -355,7 +355,7 @@ Loopback100      100.0.0.1   up        up
 
 Допустим, что в таком случае, мы хотим получить для маршрутов к одной сети, вместо нескольких строк, где будет повторяться сеть, одну запись, в которой все доступные next-hop адреса собраны в список.
 
-Пример вывода команды show ip route ospf:
+Пример вывода команды show ip route ospf (файл output/sh_ip_route_ospf.txt):
 ```
 R1#sh ip route ospf
 Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
@@ -453,7 +453,7 @@ Network    Mask      Distance    Metric  NextHop
 ```
 
 
-Итоговый шаблон выглядит так:
+Итоговый шаблон выглядит так (файл templates/cisco_show_ip_route_ospf.template):
 ```
 Value Network (([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}))
 Value Mask (\/\d{1,2})

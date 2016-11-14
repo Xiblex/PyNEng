@@ -4,7 +4,7 @@
 
 Каждому процессу выделяются свои ресурсы. Кроме того, у каждого процесса свой GIL, а значит, у нас нет тех проблем, которые были с потоками и код может выполняться параллельно и задействовать ядра/процессоры компьютера.
 
-Пример использования модуля multiprocessing:
+Пример использования модуля multiprocessing (файл netmiko_multiprocessing.py):
 ```python
 import multiprocessing
 from netmiko import ConnectHandler

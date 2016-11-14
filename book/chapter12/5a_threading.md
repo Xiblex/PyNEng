@@ -17,7 +17,7 @@
 * переведем код подключения по SSH в функцию
 * параметры устройств перенесем в отдельный файл в формате YAML
 
-Итоговый код такой (файл выполняет те же действия, что финальная версия в разделе netmiko):
+Итоговый файл netmiko_function.py такой (файл выполняет те же действия, что финальная версия в разделе netmiko):
 ```python
 from netmiko import ConnectHandler
 import sys
@@ -69,7 +69,7 @@ user    0m0.336s
 sys     0m0.080s
 ```
 
-Теперь посмотрим как будет выглядеть код с использованием модуля threading:
+Теперь посмотрим как будет выглядеть код с использованием модуля threading (файл netmiko_threading.py):
 ```python
 from netmiko import ConnectHandler
 import sys
@@ -131,7 +131,7 @@ sys     0m0.068s
 
 В Python есть модуль Queue, который позволяет создавать разные типы очередей.
 
-Пример использования потоков с получением данных:
+Пример использования потоков с получением данных (файл netmiko_threading_data.py):
 ```python
 from netmiko import ConnectHandler
 import sys

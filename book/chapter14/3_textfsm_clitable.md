@@ -68,7 +68,7 @@ print cli_table.FormattedTable()
 ```
 
 ```
-$ python2 test_clitable.py
+$ python textfsm_clitable.py
 Network, Mask, Distance, Metric, NextHop
 10.0.24.0, /24, 110, 20, ['10.0.12.2']
 10.0.34.0, /24, 110, 20, ['10.0.13.3']

@@ -139,7 +139,7 @@ DEVICE_PARAMS = {'device_type': 'cisco_ios_telnet',
                  'secret':ENABLE_PASS }
 ```
 
-В остальном, методы, которые применимы к SSH, применимы и к Telnet. Пример, аналогичный примеру с SSH:
+В остальном, методы, которые применимы к SSH, применимы и к Telnet. Пример, аналогичный примеру с SSH (файл 4_netmiko_telnet.py):
 ```python
 from netmiko import ConnectHandler
 import getpass
