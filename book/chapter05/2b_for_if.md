@@ -10,7 +10,7 @@
 В словаре будет две категории интерфейсов: access и trunk (пока что только access).
 В словаре fast_int по ключу access также находится словарь, в котором ключ - это номер интерфейса, а значение - это номер VLAN.
 
-Файл file8.py выглядит так:
+Файл generate_access_port_config.py выглядит так:
 ```python
 access_template = ['switchport mode access', 'switchport access vlan', 'spanning-tree portfast', 'spanning-tree bpduguard enable']
 
@@ -38,7 +38,7 @@ for int in fast_int['access']:
 
 В итоге мы получаем такой вывод:
 ```python
-(test)nata@lab1:~$ python file8.py
+(test)nata@lab1:~$ python generate_access_port_config.py
 interface FastEthernet0/12
  switchport mode access
  switchport access vlan 10

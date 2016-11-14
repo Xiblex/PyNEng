@@ -14,7 +14,7 @@ trunk_template = ['switchport trunk encapsulation dot1q',
                   'switchport mode trunk',
                   'switchport trunk allowed vlan']
 
-l2int_template = ['no switchport', 'ip address']
+l3int_template = ['no switchport', 'ip address']
 ```
 
 И файл sw1.py:

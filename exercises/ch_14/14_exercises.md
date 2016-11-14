@@ -17,3 +17,8 @@
 ### Задание 14.2
 
 Преобразовать вывод в CSV.
+
+### Задание 14.3
+
+Сделать шаблон TextFSM для обработки вывода sh ip dhcp snooping binding.
+https://natenka.gitbooks.io/pyneng/content/book/chapter09/4a_group_example.html

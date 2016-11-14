@@ -61,7 +61,7 @@ while not pass_OK:
 
 Теперь скрипт отрабатывает так:
 ```python
-(test)nata@lab1:~$ python file9.py
+$ python check_password_with_while.py
 Введите имя пользователя: nata
 Введите пароль: nata
 Пароль слишком короткий
