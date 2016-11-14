@@ -95,7 +95,7 @@ Start
 
 Результат отработки скрипта будет таким:
 ```
-$ python parse_output.py sh_clock.template show_clock.txt
+$ python parse_output.py templates/cisco_show_clock.template output/sh_clock.txt
 Time      Timezone    WeekDay    Month      MonthDay    Year
 --------  ----------  ---------  -------  ----------  ------
 15:10:44  UTC         Sun        Nov              13    2016
@@ -199,7 +199,7 @@ Start
 
 Попробуем запустить скрипт:
 ```
-$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM    LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  ----------  ---------------------  ------------------  -------------
 SW1           R2           10.2.2.2    Cisco 2911  GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
@@ -235,7 +235,7 @@ Start
 
 То, запустив скрипт еще раз, мы получим такой результат:
 ```
-$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -268,7 +268,7 @@ Start
 
 Теперь мы получили такой вывод:
 ```
-$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -301,7 +301,7 @@ Start
 
 Теперь мы получим корректный вывод:
 ```
-$ python parse_output.py show_cdp_neighbors_detail.template cdp_detail_output.txt
+$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -338,7 +338,7 @@ Loopback100                100.0.0.1       YES manual up                    up
 
 Результат выполнения будет таким:
 ```
-$ python parse_output.py templates/cisco_ios_show_ip_int_brief.template show_ip_int_br.txt
+$ python parse_output.py templates/cisco_show_ip_int_br.template output/sh_ip_int_br.txt
 INT              ADDR        STATUS    PROTO
 ---------------  ----------  --------  -------
 FastEthernet0/0  15.0.15.1   up        up
