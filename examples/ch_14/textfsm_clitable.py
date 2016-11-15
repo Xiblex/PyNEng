@@ -1,6 +1,6 @@
 import textfsm.clitable as clitable
 
-output_sh_ip_route_ospf = open('examples/sh_ip_route_ospf.txt').read()
+output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
 
 cli_table = clitable.CliTable('index', 'templates')
 
