@@ -167,14 +167,11 @@ Out[14]: ['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
 import textfsm.clitable as clitable
 
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
-
 cli_table = clitable.CliTable('index', 'templates')
-
 attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
-
 cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
-print "CLI Table output:\n", cli_table
 
+print "CLI Table output:\n", cli_table
 print "Formatted Table:\n", cli_table.FormattedTable()
 
 data_rows = []
