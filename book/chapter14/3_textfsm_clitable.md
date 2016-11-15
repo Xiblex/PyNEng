@@ -31,6 +31,10 @@ sh_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip rou[[te]] o[[spf]]
 Обратите внимание на то, как записаны команды:
 * sh[[ow]] ip int[[erface]] br[[ief]]
  * эта запись будет преобразована в выражение sh((ow)?)? ip int((erface)?)? br((ief)?)?
+ * это значит, что TextFSM сможет определить какой шаблон использовать, даже если команда набрана не полностью
+ * например, такие варианты команды сработают:
+   * sh ip int br
+   * show ip inter bri
 
 
 ### Как использовать CLI table
@@ -46,29 +50,51 @@ sh_ip_route_ospf.template
 index
 ```
 
+Сначала попробуем поработать с CLI Table в ipython, чтобы посмотреть какие возможности есть у этого класса, а затем посмотрим на финальный скрипт.
 
+Для начала, импортируем класс clitable:
 ```
-import textfsm.clitable as clitable
-
-# Читаем файл с примером вывода команды show ip route ospf
-output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
-
-cli_table = clitable.CliTable('index', 'templates')
-
-# В словаре ключи - имена столбцов, которые мы определили в файле index
-# В данном случае, не обязательно указывать название вендора,
-# так как команде sh ip route ospf соответствет только один шаблон. 
-attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
-
-# Методу ParseCmd надо передать вывод команды и словарь с параметрами
-cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
-print cli_table
-
-print cli_table.FormattedTable()
+In [1]: import textfsm.clitable as clitable
 ```
 
+Проверять работу clitable мы будем на последнем примере из прошлого раздела - выводе команды show ip route ospf. Считываем вывод, который хранится в файле output/sh_ip_route_ospf.txt, в строку:
 ```
-$ python textfsm_clitable.py
+In [2]: output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
+```
+
+Для начала, нам надо инициализировать класс, передав ему имя файла, в котором хранится соответствие между шаблонами и командами, и указать имя каталога, в котором хранятся шаблоны:
+```
+In [3]: cli_table = clitable.CliTable('index', 'templates')
+```
+
+Нам надо указать какую команду мы передаем и указать дополнительные атрибуты, которые помогут идентифицировать шаблон. Для этого, нужно создать словарь, в котором ключи - имена столбцов, которые мы определили в файле index. В данном случае, не обязательно указывать название вендора, так как команде sh ip route ospf соответствет только один шаблон. 
+```
+In [4]: attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
+```
+
+Теперь вызываем метод ParseCmd. Методу ParseCmd надо передать вывод команды и словарь с параметрами:
+```
+In [5]: cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
+```
+
+В результате, мы получаем обработанный вывод команды sh ip route ospf. Он находится в объекте cli_table.
+
+В этом объекте есть несколько методов, для работы с ним (чтобы посмотреть все методы, попробуйте вызвать dir(cli_table)):
+```
+In [6]: cli_table.
+cli_table.AddColumn        cli_table.NewRow           cli_table.index            cli_table.size
+cli_table.AddKeys          cli_table.ParseCmd         cli_table.index_file       cli_table.sort
+cli_table.Append           cli_table.ReadIndex        cli_table.next             cli_table.superkey
+cli_table.CsvToTable       cli_table.Remove           cli_table.raw              cli_table.synchronised
+cli_table.FormattedTable   cli_table.Reset            cli_table.row              cli_table.table
+cli_table.INDEX            cli_table.RowWith          cli_table.row_class        cli_table.template_dir
+cli_table.KeyValue         cli_table.extend           cli_table.row_index
+cli_table.LabelValueTable  cli_table.header           cli_table.separator
+```
+
+Например, если вызвать ```print cli_table```, мы получим такой вывод:
+```
+In [7]: print cli_table
 Network, Mask, Distance, Metric, NextHop
 10.0.24.0, /24, 110, 20, ['10.0.12.2']
 10.0.34.0, /24, 110, 20, ['10.0.13.3']
@@ -76,7 +102,11 @@ Network, Mask, Distance, Metric, NextHop
 10.3.3.3, /32, 110, 11, ['10.0.13.3']
 10.4.4.4, /32, 110, 21, ['10.0.13.3', '10.0.12.2', '10.0.14.4']
 10.5.35.0, /24, 110, 20, ['10.0.13.3']
+```
 
+А метод FormattedTable позволяет получить вывод в виде таблицы:
+```
+In [8]: print cli_table.FormattedTable()
  Network    Mask  Distance  Metric  NextHop
 ====================================================================
  10.0.24.0  /24   110       20      10.0.12.2
@@ -86,3 +116,111 @@ Network, Mask, Distance, Metric, NextHop
  10.4.4.4   /32   110       21      10.0.13.3, 10.0.12.2, 10.0.14.4
  10.5.35.0  /24   110       20      10.0.13.3
 ```
+
+Но, такой вывод это просто строка. И он может пригодится для отображения информации, но нам нужно получить структурированный вывод, например, список списков, из объекта cli_table.
+
+Готового метода для этого нет, но у нас есть возможность получить элементы вывода таким образом:
+```
+In [9]: data_rows = []
+
+In [10]: for row in cli_table:
+   ....:     current_row = []
+   ....:     for value in row:
+   ....:         current_row.append(value)
+   ....:     data_rows.append(current_row)
+   ....:
+
+In [11]: data_rows
+Out[11]:
+[['10.0.24.0', '/24', '110', '20', ['10.0.12.2']],
+ ['10.0.34.0', '/24', '110', '20', ['10.0.13.3']],
+ ['10.2.2.2', '/32', '110', '11', ['10.0.12.2']],
+ ['10.3.3.3', '/32', '110', '11', ['10.0.13.3']],
+ ['10.4.4.4', '/32', '110', '21', ['10.0.13.3', '10.0.12.2', '10.0.14.4']],
+ ['10.5.35.0', '/24', '110', '20', ['10.0.13.3']]]
+
+```
+
+Единственное, чего нам не хватает - названий столбцов:
+```
+In [12]: cli_table.header.viewvalues()
+Out[12]: dict_values([])
+
+In [13]: header = []
+
+In [13]: for name in cli_table.header:
+   ....:     header.append(name)
+   ....:
+
+In [14]: header
+Out[14]: ['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
+```
+
+Теперь мы получили вывод, который аналогичен тому, что мы получали в прошлом разделе.
+
+> В упражнениях к этому разделу будет задание в котором надо объединить описанную процедуру в функцию. А также вариант с получение списка словарей.
+
+Если собрать всё в один файл, мы получим такой результат (файл textfsm_clitable.py):
+```
+import textfsm.clitable as clitable
+
+output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
+
+cli_table = clitable.CliTable('index', 'templates')
+
+attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
+
+cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
+print "CLI Table output:\n", cli_table
+
+print "Formatted Table:\n", cli_table.FormattedTable()
+
+data_rows = []
+
+for row in cli_table:
+    current_row = []
+    for value in row:
+        current_row.append(value)
+    data_rows.append(current_row)
+
+header = []
+for name in cli_table.header:
+    header.append(name)
+
+print header
+for row in data_rows:
+    print row
+```
+
+Вывод будет таким:
+```
+$ python textfsm_clitable.py
+CLI Table output:
+Network, Mask, Distance, Metric, NextHop
+10.0.24.0, /24, 110, 20, ['10.0.12.2']
+10.0.34.0, /24, 110, 20, ['10.0.13.3']
+10.2.2.2, /32, 110, 11, ['10.0.12.2']
+10.3.3.3, /32, 110, 11, ['10.0.13.3']
+10.4.4.4, /32, 110, 21, ['10.0.13.3', '10.0.12.2', '10.0.14.4']
+10.5.35.0, /24, 110, 20, ['10.0.13.3']
+
+Formatted Table:
+ Network    Mask  Distance  Metric  NextHop
+====================================================================
+ 10.0.24.0  /24   110       20      10.0.12.2
+ 10.0.34.0  /24   110       20      10.0.13.3
+ 10.2.2.2   /32   110       11      10.0.12.2
+ 10.3.3.3   /32   110       11      10.0.13.3
+ 10.4.4.4   /32   110       21      10.0.13.3, 10.0.12.2, 10.0.14.4
+ 10.5.35.0  /24   110       20      10.0.13.3
+
+['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
+['10.0.24.0', '/24', '110', '20', ['10.0.12.2']]
+['10.0.34.0', '/24', '110', '20', ['10.0.13.3']]
+['10.2.2.2', '/32', '110', '11', ['10.0.12.2']]
+['10.3.3.3', '/32', '110', '11', ['10.0.13.3']]
+['10.4.4.4', '/32', '110', '21', ['10.0.13.3', '10.0.12.2', '10.0.14.4']]
+['10.5.35.0', '/24', '110', '20', ['10.0.13.3']]
+```
+
+Теперь мы можем не только получать структурированный вывод, но и автоматически определять какой шаблон использовать, по команде и опциональным аргументам.
