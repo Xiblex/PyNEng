@@ -53,7 +53,7 @@
 * [TextFSM and Structured Data. Kirk Byers (22.10.2015)](https://pynet.twb-tech.com/blog/python/textfsm.html) - вводная статья о TextFSM. Тут не описывается синтаксис, но дается общее представление о том, что такое TextFSM и пример его использования
 
 Документация:
-* [Документация TextFSM](https://code.google.com/archive/p/textfsm/wikis)
+* [Документация TextFSM](https://github.com/google/textfsm/wiki)
 
 Проекты, которые используют TextFSM:
 * [Модуль ntc-ansible](https://github.com/networktocode/ntc-ansible)
