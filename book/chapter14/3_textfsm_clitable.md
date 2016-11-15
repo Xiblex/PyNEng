@@ -33,8 +33,8 @@ sh_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip rou[[te]] o[[spf]]
  * эта запись будет преобразована в выражение sh((ow)?)? ip int((erface)?)? br((ief)?)?
  * это значит, что TextFSM сможет определить какой шаблон использовать, даже если команда набрана не полностью
  * например, такие варианты команды сработают:
-   * sh ip int br
-   * show ip inter bri
+     * sh ip int br
+     * show ip inter bri
 
 
 ### Как использовать CLI table
