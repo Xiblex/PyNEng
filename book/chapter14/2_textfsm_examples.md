@@ -63,7 +63,7 @@ Value Year (\d+)
 * ```\w``` - любая буква или цифра
 * ```\d``` - любая цифра
 
-После определения переменных, должна идти пустая строка и состояние __Start__, а после, начиная с пробела и символа ```^```, идет правило (файл templates/cisco_show_clock.template):
+После определения переменных, должна идти пустая строка и состояние __Start__, а после, начиная с пробела и символа ```^```, идет правило (файл templates/sh_clock.template):
 ```
 Value Time (..:..:..)
 Value Timezone (\S+)
@@ -95,7 +95,7 @@ Start
 
 Результат отработки скрипта будет таким:
 ```
-$ python parse_output.py templates/cisco_show_clock.template output/sh_clock.txt
+$ python parse_output.py templates/sh_clock.template output/sh_clock.txt
 Time      Timezone    WeekDay    Month      MonthDay    Year
 --------  ----------  ---------  -------  ----------  ------
 15:10:44  UTC         Sun        Nov              13    2016
@@ -105,7 +105,7 @@ Time      Timezone    WeekDay    Month      MonthDay    Year
 
 Теперь попробуем обработать вывод команды show cdp neighbors detail. Особенность этой команды в том, что нужные нам данные находятся не в одной строке, а в разных.
 
-В файле output/sh_cdp_neighbor_detail.txt находится вывод команды show cdp neighbors detail:
+В файле output/sh_cdp_n_det.txt находится вывод команды show cdp neighbors detail:
 ```
 SW1#show cdp neighbors detail
 -------------------------
@@ -178,7 +178,7 @@ Management address(es):
 * REMOTE_PORT - порт соседнего устройства
 * IOS_VERSION - версия IOS соседа
 
-Шаблон выглядит таким образом (файл templates/cisco_show_cdp_neighbors_detail.template):
+Шаблон выглядит таким образом (файл templates/sh_cdp_n_det.template):
 ```
 Value LOCAL_HOST (\S+)
 Value DEST_HOST (\S+)
@@ -199,7 +199,7 @@ Start
 
 Попробуем запустить скрипт:
 ```
-$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
+$ python parse_output.py templates/sh_cdp_n_det.template output/sh_cdp_n_det.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM    LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  ----------  ---------------------  ------------------  -------------
 SW1           R2           10.2.2.2    Cisco 2911  GigabitEthernet1/0/21  GigabitEthernet0/0  15.2(2)T1
@@ -208,7 +208,7 @@ SW1           R2           10.2.2.2    Cisco 2911  GigabitEthernet1/0/21  Gigabi
 Несмотря на то, что правила с переменными описаны в разных строках, и, соответственно, работают с разными строками, TextFSM собирает их в одну строку таблицы.
 То есть, переменные, которые мы определяем в начале шаблона, задают строку итоговой таблицы.
 
-Обратите внимание, что в файле cdp_detail_output.txt находится вывод с тремя соседями, а в таблице только один сосед, последний.
+Обратите внимание, что в файле sh_cdp_n_det.txt находится вывод с тремя соседями, а в таблице только один сосед, последний.
 
 #### Record
 Так получилось из-за того, что в шаблоне не указано действие __Record__.
@@ -235,7 +235,7 @@ Start
 
 То, запустив скрипт еще раз, мы получим такой результат:
 ```
-$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
+$ python parse_output.py templates/sh_cdp_n_det.template output/sh_cdp_n_det.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -268,7 +268,7 @@ Start
 
 Теперь мы получили такой вывод:
 ```
-$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
+$ python parse_output.py templates/sh_cdp_n_det.template output/sh_cdp_n_det.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -301,7 +301,7 @@ Start
 
 Теперь мы получим корректный вывод:
 ```
-$ python parse_output.py templates/cisco_show_cdp_neighbors_detail.template output/sh_cdp_neighbor_detail.txt
+$ python parse_output.py templates/sh_cdp_n_det.template output/sh_cdp_n_det.txt
 LOCAL_HOST    DEST_HOST    MGMNT_IP    PLATFORM              LOCAL_PORT             REMOTE_PORT         IOS_VERSION
 ------------  -----------  ----------  --------------------  ---------------------  ------------------  -------------
 SW1           SW2          10.1.1.2    cisco WS-C2960-8TC-L  GigabitEthernet1/0/16  GigabitEthernet0/1  12.2(55)SE9
@@ -311,7 +311,7 @@ SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/
 
 ### show ip interface brief
 
-В случае, когда нужно обработать данные, которые выведены столбцами, шаблон TextFSM, наиболее удобен. Посмотрим на шаблон для вывода команды show ip interface brief (файл templates/cisco_show_ip_int_br.template):
+В случае, когда нужно обработать данные, которые выведены столбцами, шаблон TextFSM, наиболее удобен. Посмотрим на шаблон для вывода команды show ip interface brief (файл templates/sh_ip_int_br.template):
 ```
 Value INT (\S+)
 Value ADDR (\S+)
@@ -338,7 +338,7 @@ Loopback100                100.0.0.1       YES manual up                    up
 
 Результат выполнения будет таким:
 ```
-$ python parse_output.py templates/cisco_show_ip_int_br.template output/sh_ip_int_br.txt
+$ python parse_output.py templates/sh_ip_int_br.template output/sh_ip_int_br.txt
 INT              ADDR        STATUS    PROTO
 ---------------  ----------  --------  -------
 FastEthernet0/0  15.0.15.1   up        up
@@ -453,7 +453,7 @@ Network    Mask      Distance    Metric  NextHop
 ```
 
 
-Итоговый шаблон выглядит так (файл templates/cisco_show_ip_route_ospf.template):
+Итоговый шаблон выглядит так (файл templates/sh_ip_route_ospf.template):
 ```
 Value Network (([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}))
 Value Mask (\/\d{1,2})
