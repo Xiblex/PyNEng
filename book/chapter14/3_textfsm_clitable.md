@@ -53,34 +53,34 @@ index
 Сначала попробуем поработать с CLI Table в ipython, чтобы посмотреть какие возможности есть у этого класса, а затем посмотрим на финальный скрипт.
 
 Для начала, импортируем класс clitable:
-```
+```python
 In [1]: import textfsm.clitable as clitable
 ```
 
 Проверять работу clitable мы будем на последнем примере из прошлого раздела - выводе команды show ip route ospf. Считываем вывод, который хранится в файле output/sh_ip_route_ospf.txt, в строку:
-```
+```python
 In [2]: output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
 ```
 
 Для начала, нам надо инициализировать класс, передав ему имя файла, в котором хранится соответствие между шаблонами и командами, и указать имя каталога, в котором хранятся шаблоны:
-```
+```python
 In [3]: cli_table = clitable.CliTable('index', 'templates')
 ```
 
 Нам надо указать какую команду мы передаем и указать дополнительные атрибуты, которые помогут идентифицировать шаблон. Для этого, нужно создать словарь, в котором ключи - имена столбцов, которые мы определили в файле index. В данном случае, не обязательно указывать название вендора, так как команде sh ip route ospf соответствет только один шаблон. 
-```
+```python
 In [4]: attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
 ```
 
 Теперь вызываем метод ParseCmd. Методу ParseCmd надо передать вывод команды и словарь с параметрами:
-```
+```python
 In [5]: cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
 ```
 
 В результате, мы получаем обработанный вывод команды sh ip route ospf. Он находится в объекте cli_table.
 
 В этом объекте есть несколько методов, для работы с ним (чтобы посмотреть все методы, попробуйте вызвать dir(cli_table)):
-```
+```python
 In [6]: cli_table.
 cli_table.AddColumn        cli_table.NewRow           cli_table.index            cli_table.size
 cli_table.AddKeys          cli_table.ParseCmd         cli_table.index_file       cli_table.sort
@@ -93,7 +93,7 @@ cli_table.LabelValueTable  cli_table.header           cli_table.separator
 ```
 
 Например, если вызвать ```print cli_table```, мы получим такой вывод:
-```
+```python
 In [7]: print cli_table
 Network, Mask, Distance, Metric, NextHop
 10.0.24.0, /24, 110, 20, ['10.0.12.2']
@@ -105,7 +105,7 @@ Network, Mask, Distance, Metric, NextHop
 ```
 
 А метод FormattedTable позволяет получить вывод в виде таблицы:
-```
+```python
 In [8]: print cli_table.FormattedTable()
  Network    Mask  Distance  Metric  NextHop
 ====================================================================
@@ -120,7 +120,7 @@ In [8]: print cli_table.FormattedTable()
 Но, такой вывод это просто строка. И он может пригодится для отображения информации, но нам нужно получить структурированный вывод, например, список списков, из объекта cli_table.
 
 Готового метода для этого нет, но у нас есть возможность получить элементы вывода таким образом:
-```
+```python
 In [9]: data_rows = []
 
 In [10]: for row in cli_table:
@@ -142,7 +142,7 @@ Out[11]:
 ```
 
 Единственное, чего нам не хватает - названий столбцов:
-```
+```python
 In [12]: cli_table.header.viewvalues()
 Out[12]: dict_values([])
 
@@ -161,7 +161,7 @@ Out[14]: ['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
 > В упражнениях к этому разделу будет задание в котором надо объединить описанную процедуру в функцию. А также вариант с получение списка словарей.
 
 Если собрать всё в один файл, мы получим такой результат (файл textfsm_clitable.py):
-```
+```python
 import textfsm.clitable as clitable
 
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
