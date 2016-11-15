@@ -22,10 +22,10 @@
 Пример файла index:
 ```
 Template, Hostname, Vendor, Command
-cisco_show_cdp_neighbors_detail.template, .*, Cisco, sh[[ow]] cdp ne[[ighbors]] de[[tail]]
-cisco_show_clock.template, .*, Cisco, sh[[ow]] clo[[ck]]
-cisco_show_ip_int_br.template, .*, Cisco, sh[[ow]] ip int[[erface]] br[[ief]]
-cisco_show_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip rou[[te]] o[[spf]]
+sh_cdp_n_det.template, .*, Cisco, sh[[ow]] cdp ne[[ighbors]] de[[tail]]
+sh_clock.template, .*, Cisco, sh[[ow]] clo[[ck]]
+sh_ip_int_br.template, .*, Cisco, sh[[ow]] ip int[[erface]] br[[ief]]
+sh_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip rou[[te]] o[[spf]]
 ```
 
 Обратите внимание на то, как записаны команды:
@@ -39,10 +39,10 @@ cisco_show_ip_route_ospf.template, .*, Cisco, sh[[ow]] ip rou[[te]] o[[spf]]
 
 Допустим, в каталоге templates у нас такие шаблоны и файл index:
 ```
-cisco_show_cdp_neighbors_detail.template
-cisco_show_clock.template
-cisco_show_ip_int_br.template
-cisco_show_ip_route_ospf.template
+sh_cdp_n_det.template
+sh_clock.template
+sh_ip_int_br.template
+sh_ip_route_ospf.template
 index
 ```
 
@@ -51,7 +51,7 @@ index
 import textfsm.clitable as clitable
 
 # Читаем файл с примером вывода команды show ip route ospf
-output_sh_ip_route_ospf = open('examples/sh_ip_route_ospf.txt').read()
+output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
 
 cli_table = clitable.CliTable('index', 'templates')
 
