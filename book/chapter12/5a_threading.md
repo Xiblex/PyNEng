@@ -62,14 +62,14 @@ routers:
 
 Замерим время выполнения скрипта с помощью утилиты time (вывод самого скрипта не показан), а затем сравним какое время выполнения будет с использованием модуля threading:
 ```
-nata: $ time cisco netmiko_function.py "sh ip int br"
+nata: $ time python netmiko_function.py "sh ip int br"
 ...
 real    0m6.189s
 user    0m0.336s
 sys     0m0.080s
 ```
 
-Теперь посмотрим как будет выглядеть код с использованием модуля threading (файл netmiko_threading.py):
+Теперь посмотрим как будет выглядеть код с использованием модуля threading (файл netmiko_function_threading.py):
 ```python
 from netmiko import ConnectHandler
 import sys
@@ -103,7 +103,7 @@ conn_threads(connect_ssh, devices['routers'], COMMAND)
 
 Прежде чем мы разберемся с кодом, посмотрим на время выполнения кода:
 ```
-nata: $ time cisco netmiko_function_threading.py "sh ip int br"
+nata: $ time python netmiko_function_threading.py "sh ip int br"
 ...
 real    0m2.229s
 user    0m0.408s
