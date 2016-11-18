@@ -38,6 +38,7 @@
 * [4. Создание базовых скриптов](book/chapter04/README.md)
   * [Передача аргументов скрипту](book/chapter04/1_args.md)
   * [Ввод информации пользователем](book/chapter04/2_user_input.md)
+  * [Упражнения](exercises/ch_04/04_exercises.md)
 * [5. Контроль хода программы](book/chapter05/README.md)
   * [if/elif/else](book/chapter05/1_if_else.md)
   * [for](book/chapter05/2_for.md)
