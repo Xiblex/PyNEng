@@ -2,15 +2,41 @@
 '''
 Задание 5.3
 
-Список mac содержит MAC-адреса в формате XXXX:XXXX:XXXX.
-Однако, в оборудовании cisco MAC-адреса используются в формате XXXX.XXXX.XXXX.
+В скрипте сделан генератор конфигурации для access-портов.
 
-Создать скрипт, который преобразует MAC-адреса в формат cisco 
-и добавляет их в новый список mac_cisco
+Сделать аналогичный генератор конфигурации для портов trunk.
 
-Усложненный вариант: сделать преобразование в одну строку.
+В транках ситуация усложняется тем, что VLANов может быть много, и надо понимать,
+что с ним делать.
+
+Поэтому в соответствии каждому порту стоит список
+и первый (нулевой) элемент списка указывает как воспринимать номера VLAN,
+которые идут дальше:
+	add - значит VLANы надо будет добавить (команда switchport trunk allowed vlan add 10,20)
+	del - значит VLANы надо удалить из списка разрешенных (команда switchport trunk allowed vlan remove 17)
+	only - значит, что на интерфейсе должны остаться разрешенными только указанные VLANы (команда switchport trunk allowed 11,30)
+
+Задача для портов 0/1, 0/2, 0/4:
+- сгенерировать конфигурацию на основе шаблона trunk_template
+- с учетом ключевых слов add, del, only
+
 '''
+access_template = ['switchport mode access', 'switchport access vlan', 'spanning-tree portfast', 'spanning-tree bpduguard enable']
 
-mac = ['aabb:cc80:7000','aabb:dd80:7340','aabb:ee80:7000','aabb:ff80:7000']
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk allowed vlan']
 
-mac_cisco = []
+fast_int = {'access':{'0/12':'10','0/14':'11','0/16':'17','0/17':'150'},
+            'trunk':{'0/1':['add','10','20'],
+                     '0/2':['only','11','30'],
+                     '0/4':['del','17']} }
+
+for int in fast_int['access']:
+    print 'interface FastEthernet' + int
+    for command in access_template:
+        if command.endswith('access vlan'):
+            print ' %s %s' % (command, fast_int['access'][int])
+        else:
+            print ' %s' % command
+

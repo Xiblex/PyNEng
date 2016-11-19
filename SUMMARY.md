@@ -55,6 +55,7 @@
   * [Чтение файлов](book/chapter06/2_read.md)
   * [Запись файлов](book/chapter06/3_write.md)
   * [Конструкция with](book/chapter06/4_with.md)
+  * [Упражнения](exercises/ch_06/06_exercises.md)
 * [7. Функции](book/chapter07/README.md)
   * [Создание функций](book/chapter07/1_create_func.md)
   * [Пространства имен. Области видимости](book/chapter07/2_namespace.md)
