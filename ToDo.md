@@ -45,3 +45,4 @@
 * iterator, generator
 * recursive function (basics)
 * запуск команд Linux из Python (subprocess)
+* python package
