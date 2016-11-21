@@ -27,7 +27,7 @@
 Проверить работу функции на каком-то из примеров раздела.
 
 Пример из раздела:
-```
+```python
 import sys
 import textfsm
 from tabulate import tabulate
@@ -108,7 +108,7 @@ print tabulate(result, headers=header)
 Проверить работу функции на примере вывода команды sh ip int br.
 
 Пример из раздела:
-```
+```python
 import textfsm.clitable as clitable
 
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
@@ -195,7 +195,7 @@ for row in data_rows:
 Проверить работу функции send_and_parse_command_parallel на команде sh ip int br.
 
 Пример из раздела multiprocessing:
-```
+```python
 import multiprocessing
 from netmiko import ConnectHandler
 import sys
