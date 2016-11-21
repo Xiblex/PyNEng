@@ -1,0 +1,10 @@
+[linux]
+192.168.1.100:22022
+192.168.1.101
+192.168.1.102
+
+
+[linux:vars]
+ntp_server=ntp.atlanta.example.com
+ansible_user=ansible
+ansible_ssh_pass=ansible

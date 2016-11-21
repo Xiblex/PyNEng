@@ -1,0 +1,51 @@
+---
+
+# Play запускается для хостов в группе cisco-devices
+# Отключается поведение по умолчанию: по сбору фактов с устройств.
+# Подключение будет выполняться под пользователем python
+
+- name: Run traceroute commands
+  hosts: cisco-devices
+  gather_facts: false
+  remote_user: python
+
+# Задачи в play
+
+  tasks:
+
+# Первая задача: выполнение команды "traceroute 10.0.0.4"
+# Для этого используется модуль raw
+# Модуль raw позволяет передавать строку сетевому оборудованию,
+# без дополнительной обработки.
+# Затем, результат выполнения команды записывается в переменную trace_result,
+# с помощью register
+
+    - name: run traceroute to every other host
+      raw: traceroute 10.0.0.4
+      register: trace_result
+
+# Вторая задача: выполнение команды "sh ip int br | ex unass"
+# Тут также используется модуль raw
+# Затем, результат выполнения команды записывается в переменную sh_ip_int_br_result
+# с помощью register
+
+    - name: run sh ip int br
+      raw: sh ip int br | ex unass
+      register: sh_ip_int_br_result
+
+# Третяя задача: отображение переменной sh_ip_int_br_result
+# Для этого используется модуль debug
+# Раскомментируйте эти строки: чтобы увидеть вывод
+
+#    - name: Debug registered variables
+#      debug: var=sh_ip_int_br_result
+
+# Четвертая задача: отображение переменной trace_result
+# Для этого используется модуль debug
+# Раскомментируйте эти строки: чтобы увидеть вывод
+# Обратите внимание на stdout_lines
+# Так как вывод передается в виде словаря, мы можем вывести не полный вывод,
+# а вывести только значение определенного ключа
+
+#    - name: Debug registered variables
+#      debug: var=trace_result.stdout_lines
