@@ -46,3 +46,7 @@
 * recursive function (basics)
 * запуск команд Linux из Python (subprocess)
 * python package
+
+Дополнить ссылки на ресурсы:
+* что почитать после курса
+* пересекающиеся с курсом
