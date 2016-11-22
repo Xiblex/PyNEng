@@ -41,10 +41,11 @@
 
 ### Дополнительная информация
 
+* запуск команд Linux из Python (subprocess)
+* системы контроля версий
 * OOP basics
 * iterator, generator
 * recursive function (basics)
-* запуск команд Linux из Python (subprocess)
 * python package
 
 Дополнить ссылки на ресурсы:
