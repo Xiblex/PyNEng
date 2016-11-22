@@ -4,7 +4,11 @@
     "plugins": [
         "expandable-chapters",
         "codetabs",
-        "richquotes"
+        "richquotes",
+        "ga"
     ],
-    "pluginsConfig": {}
+    "pluginsConfig": {
+        "ga": {
+            "token": "UA-87357288-2"
+    }
 }
