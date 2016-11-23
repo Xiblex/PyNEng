@@ -69,7 +69,7 @@
 
 Отличные видео от Ansible:
 * [AUTOMATING YOUR NETWORK](https://www.ansible.com/webinars-training/automating-your-network)
-
+ * [Репозиторий с примерами из вебинара](https://github.com/privateip/Ansible-Webinar-Mar2016)
 
 ### General links:
 
