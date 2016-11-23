@@ -67,6 +67,10 @@
 У Ansible очень хорошая документация:
 - http://docs.ansible.com/ansible/
 
+Отличные видео от Ansible:
+* [AUTOMATING YOUR NETWORK](https://www.ansible.com/webinars-training/automating-your-network)
+
+
 ### General links:
 
 Очень хорошая серия видео, с транскриптом и хорошими ссылками:
