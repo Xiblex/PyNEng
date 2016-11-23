@@ -109,8 +109,3 @@ Network Config Templating using Ansible (Kirk Byers):
 
 ntc-ansible:
 - https://github.com/networktocode/ntc-ansible (пока что возможны проблемы при работе с Ansible 2.x)
-
-Новые модули для работы с сетевым оборудованием (пока что их нет в основном релизе Ansible):
-- http://www.redhat.com/en/about/press-releases/red-hat-brings-devops-network-new-ansible-capabilities
-- https://github.com/ansible/ansible-modules-core/tree/devel/network/ios
-- https://github.com/ansible/ansible-modules-core/tree/devel/network
