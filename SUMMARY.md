@@ -117,6 +117,8 @@
   * [Основы Ansible](book/chapter15/1_ansible_basics.md)
     * [Инвентарный файл](book/chapter15/1a_inventory.md)
     * [Ad-Hoc команды](book/chapter15/1b_ad-hoc.md)
+  * [Конфигурационный файл](book/chapter15/2_configuration.md)
+  * [Playbooks](book/chapter15/3_playbooks.md)
 * [Полезные ссылки](resources/README.md)
   * [Материалы по темам курса](resources/1_additional_info.md)
   * [Продолжение обучения](resources/2_next_steps.md)
