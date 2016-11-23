@@ -42,6 +42,7 @@
 ### Дополнительная информация
 
 * запуск команд Linux из Python (subprocess)
+* полезные модули (os, sys)
 * системы контроля версий
 * OOP basics
 * iterator, generator
