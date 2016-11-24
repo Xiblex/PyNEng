@@ -9,8 +9,17 @@ Playbook (файл сценариев) — это файл в котором о�
  * модуль и команда (действие в модуле)
 
 
+## Синтаксис playbook
+
+Playbook описываются в формате YAML.
+
+Поэтому, если вы забыли синтаксис YAML, его можно повторить в [разделе YAML](book/chapter10/3_yaml.md) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
+
+
+## Пример playbook
+
 Посмотрим на простой пример plabook (файл 1_show_commands_with_raw.yml):
-```yaml
+```
 ---
 
 - name: Run show commands on routers
@@ -38,9 +47,7 @@ Playbook (файл сценариев) — это файл в котором о�
     - name: run sh vlans
       raw: show vlans
 ```
-<iframe src="https://github.com/natenka/My_Scripts/blob/master/1_show_commands_with_raw.yml"></iframe>
 
-{% gist id="natenka/feb3768494561ae5c93a230d77cd6958" %}{% endgist %}
 
 В этом playbook у нас два сценария (play). Разберемся с первым:
 * 'Run show commands on routers' - будет применяться к устройствам в группе cisco-routers
@@ -54,7 +61,44 @@ Playbook (файл сценариев) — это файл в котором о�
 
 ![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook.png)
 
+Теперь попробуем запустить playbook:
+```
+$ ansible-playbook 1_show_commands_with_raw.yml
+SSH password:
+
+PLAY [Run show commands on routers] ********************************************
+
+TASK [run sh ip int br] ********************************************************
+changed: [192.168.100.1]
+changed: [192.168.100.3]
+changed: [192.168.100.2]
+
+TASK [run sh ip route] *********************************************************
+changed: [192.168.100.2]
+changed: [192.168.100.1]
+changed: [192.168.100.3]
+
+PLAY [Run show commands on switches] *******************************************
+
+TASK [run sh int status] *******************************************************
+changed: [192.168.100.100]
+
+TASK [run sh vlans] ************************************************************
+changed: [192.168.100.100]
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.100            : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.2              : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.3              : ok=2    changed=2    unreachable=0    failed=0
+```
+
 <details> 
   <summary>Вывод запуска playbook (в цвете)</summary>
 <img src=https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook_execution.png alt="Ansible Playbook">
 </details>
+
+
+> **Note** Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, мы использовали команду ansible. А для playbook - ansible-playbook.
+
+
