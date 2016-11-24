@@ -120,6 +120,6 @@
   * [Конфигурационный файл](book/chapter15/2_configuration.md)
   * [Playbooks](book/chapter15/3_playbooks.md)
 * [Полезные ссылки](resources/README.md)
-  * [Материалы по темам курса](resources/1_additional_info.md)
+  * [Материалы по темам курса](resources/1_course_additional_info.md)
   * [Продолжение обучения](resources/2_next_steps.md)
 
