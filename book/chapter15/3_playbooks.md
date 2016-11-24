@@ -40,3 +40,8 @@ Playbook (файл сценариев) — это файл в котором о�
 ```
 
 ![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook.png)
+
+<details> 
+  <summary>Hidden image</summary>
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook.png)
+</details>
