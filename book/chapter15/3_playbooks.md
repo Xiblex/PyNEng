@@ -38,7 +38,7 @@ Playbook (файл сценариев) — это файл в котором о�
     - name: run sh vlans
       raw: show vlans
 ```
-<script src="https://github.com/natenka/My_Scripts/blob/master/1_show_commands_with_raw.yml"></script>
+<iframe src="https://github.com/natenka/My_Scripts/blob/master/1_show_commands_with_raw.yml"></iframe>
 
 {% gist id="natenka/feb3768494561ae5c93a230d77cd6958" %}{% endgist %}
 
