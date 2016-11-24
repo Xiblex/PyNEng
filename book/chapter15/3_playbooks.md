@@ -39,4 +39,4 @@ Playbook (файл сценариев) — это файл в котором о�
       raw: show vlans
 ```
 
-
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook.png)
