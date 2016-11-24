@@ -5,7 +5,8 @@
         "expandable-chapters",
         "codetabs",
         "richquotes",
-        "ga"
+        "ga",
+        "gist"
     ],
     "pluginsConfig": {
         "ga": {
