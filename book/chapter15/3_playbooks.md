@@ -10,7 +10,7 @@ Playbook (файл сценариев) — это файл в котором о�
 
 
 Посмотрим на простой пример plabook (файл 1_show_commands_with_raw.yml):
-```yml
+```yaml
 ---
 
 - name: Run show commands on routers
