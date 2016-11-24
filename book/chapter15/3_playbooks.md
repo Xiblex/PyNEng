@@ -39,7 +39,7 @@ Playbook (файл сценариев) — это файл в котором о�
       raw: show vlans
 ```
 
-{% gist id="https://gist.github.com/natenka/feb3768494561ae5c93a230d77cd6958" %}{% endgist %}
+{% gist id="natenka/feb3768494561ae5c93a230d77cd6958" %}{% endgist %}
 
 В этом playbook у нас два сценария (play). Разберемся с первым:
 * 'Run show commands on routers' - будет применяться к устройствам в группе cisco-routers
