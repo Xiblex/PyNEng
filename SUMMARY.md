@@ -119,6 +119,8 @@
     * [Ad-Hoc команды](book/chapter15/1b_ad-hoc.md)
   * [Конфигурационный файл](book/chapter15/2_configuration.md)
   * [Playbooks](book/chapter15/3_playbooks.md)
+    * [Переменные](book/chapter15/3a_variables.md)
+  * [Сетевые модули](book/chapter15/4_network_modules.md)
 * [Полезные ссылки](resources/README.md)
   * [Материалы по темам курса](resources/1_course_additional_info.md)
   * [Продолжение обучения](resources/2_next_steps.md)

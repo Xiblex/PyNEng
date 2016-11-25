@@ -104,6 +104,30 @@ PLAY RECAP *********************************************************************
 
 > **Note** Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, мы использовали команду ansible. А для playbook - ansible-playbook.
 
+Для того, чтобы убедится, что команды, которые мы указывали в задачах, выполнились на устройствах, запустите playbook с опцией -v (вывод сокращен):
+```
+$ ansible-playbook 1_show_commands_with_raw.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run show commands on routers] ********************************************
+
+TASK [run sh ip int br] ********************************************************
+changed: [192.168.100.1] => {"changed": true, "rc": 0, "stderr": "Shared connection to 192.168.100.1 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \r\nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ", "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
+changed: [192.168.100.2] => {"changed": true, "rc": 0, "stderr": "Shared connection to 192.168.100.2 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.2   YES manual up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.2   YES manual up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
+changed: [192.168.100.3] => {"changed": true, "rc": 0, "stderr": "Connection to 192.168.100.3 closed by remote host.\r\nShared connection to 192.168.100.3 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.3   YES manual up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.3   YES manual up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
+
+...
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.100            : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.2              : ok=2    changed=2    unreachable=0    failed=0
+192.168.100.3              : ok=2    changed=2    unreachable=0    failed=0
+```
+
+В следующих разделах мы научимся отображать эти данные в нормальном формате и посмотрим, что с ними можно делать.
+
 ### Порядок выполнения задач и сценариев
 
 Сценарии (play) и задачи (task) выполняются последовательно, в том порядке, в котором они описаны в playbook.
@@ -203,3 +227,20 @@ $ ansible-playbook 1_show_commands_with_raw.yml --limit 192.168.100.1
 ```
 
 Мы поговорим о параметре limit и других полезных параметрах Ansible в отдельном разделе.
+
+### Идемпотентность
+
+Модули Ansible идемпотентны. Это означает, что мы можем выполнять модуль (задачу) сколько угодно раз, но при этом модуль будет выполнять изменения, только если система не находится в желаемом состоянии.
+
+Это дает возможность запускать playbook сколько угодно раз.
+
+Но, есть исключения из такого поведения.
+Например, модуль raw всегда вносит изменения.
+Поэтому, когда мы смотрели на выполнение playbook выше, мы всегда видели состояние changed.
+
+Но, если, например, в задаче указано, что на сервер Linux надо установить пакет httpd, то он будет установлен только в том случае, если его нет.
+То есть, действие не будет повторяться снова и снова, при каждом запуске.
+А лишь тогда, когда пакета нет.
+
+Также, не всё так просто с сетевыми оборудованием. Например, когда мы отправляем команды show, идемпотентность не актуальна, так как эта команда не меняет поведение системы.
+
