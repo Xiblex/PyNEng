@@ -126,17 +126,51 @@ SW1
 
 Мы могли бы создать такую структуру каталогов:
 ```
-├── group_vars                                _
-│   ├── all.yml                                |
-│   ├── cisco-devices.yml                      |  Каталог с переменными для групп устройств
-│   └── cisco-routers.yml                     _|
+├── group_vars                 _
+│   ├── all.yml                 |
+│   ├── cisco-routers.yml       |  Каталог с переменными для групп устройств
+│   └── cisco-switches.yml     _|
 |
-├── host_vars                                 _
-│   ├── R1                                     |
-│   ├── R2                                     |
-│   ├── R3                                     |  Каталог с переменными для устройств 
-│   ├── R4                                     |
-│   └── SW1                                   _|
+├── host_vars                  _
+│   ├── R1                      |
+│   ├── R2                      |
+│   ├── R3                      |  Каталог с переменными для устройств 
+│   ├── R4                      |
+│   └── SW1                    _|
 |
-└── myhosts                                    |  Инвентарный файл
+└── myhosts                     |  Инвентарный файл
+```
+
+group_vars/all.yml
+```
+---
+
+cli:
+  host: "{{ inventory_hostname }}"
+  username: "cisco"
+  password: "cisco"
+  transport: cli
+  authorize: yes
+  auth_pass: "cisco"
+
+```
+
+group_vars/cisco-routers.yml
+```
+---
+
+log_server: 10.255.100.1
+ntp_server: 10.255.100.1
+users:
+  user1: pass1
+  user2: pass2
+  user3: pass3
+```
+
+group_vars/cisco-switches.yml
+```
+---
+
+log_server: 10.255.100.1
+ntp_server: 10.255.100.1
 ```
