@@ -3,10 +3,10 @@
 
 В этом примере логика разнесена в 3 разных файла:
 * router_template.py - шаблон
-* routers_info.py - в этом файле, в виде списка словарей, находится информация о маршрутизаторах, для которых нам нужно сгенерировать конфигурационный файл
-* router_config_generator.py - в этом скрипте импортируются два других файла и генерируются конфигурационные файлы маршрутизаторов
+* routers_info.yml - в этом файле, в виде списка словарей (в формате YAML), находится информация о маршрутизаторах, для которых нам нужно сгенерировать конфигурационный файл
+* router_config_generator.py - в этом скрипте импортируется файл с шаблоном и считывается информация из файла в формате YAML, а затем генерируются конфигурационные файлы маршрутизаторов
 
-Файл router_template.py
+Файл 1_example/router_template.py
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Template
@@ -57,55 +57,52 @@ router ospf 10
 ```
 
 
-Файл routers_info.py
-```python
-routers = [
-{
-    'id':'11',
-    'name':'Liverpool',
-    'to_name':'LONDON',
-    'IT':791,
-    'BS':1550,
-    'to_id':1
-},
-{
-    'id':'12',
-    'name':'Bristol',
-    'to_name':'LONDON',
-    'IT':793,
-    'BS':1510,
-    'to_id':1
-},
-{
-    'id':'14',
-    'name':'Coventry',
-    'to_name':'Manchester',
-    'IT':892,
-    'BS':1650,
-    'to_id':2
-}]
+Файл 1_example/routers_info.yml
+```yaml
+- id: 11
+  name: Liverpool
+  to_name: LONDON
+  IT: 791
+  BS: 1550
+  to_id: 1
+
+- id: 12
+  name: Bristol
+  to_name: LONDON
+  IT: 793
+  BS: 1510
+  to_id: 1
+
+- id: 14
+  name: Coventry
+  to_name: Manchester
+  IT: 892
+  BS: 1650
+  to_id: 2
 ```
 
-Файл router_config_generator.py
+Файл 1_example/router_config_generator.py
 ```python
 # -*- coding: utf-8 -*-
+import yaml
 from jinja2 import Template
 from router_template import template_r1
-from routers_info import routers
+
+routers = yaml.load(open('routers_info.yml'))
 
 for router in routers:
-    r1_conf = router['name']+'_r1'
+    r1_conf = router['name']+'_r1.txt'
     with open(r1_conf,'w') as f:
         f.write(template_r1.render( router ))
 ```
 
-Файл router_config_generator.py импортирует предыдущие файлы:
-* из файла router_template импортируем шаблон template_r1
-* из файла routers_info импортируем список routers
+Файл router_config_generator.py:
+* импортирует шаблон template_r1
+* из файла routers_info.yml считываем список параметров в переменную routers
 
 Затем в цикле перебираем объекты (словари) в списке routers:
-* название файла будет состоять из поля name в словаре и строки _r1
- * например, Liverpool_r1
+* название файла будет состоять из поля name в словаре и строки _r1.txt
+ * например, Liverpool_r1.txt
 * затем мы открываем файл с таким именем, в режиме для записи
 * пишем в файл результат рендеринга шаблона с использованием текущего словаря
 * конструкция with сама закрывает файл
@@ -113,12 +110,12 @@ for router in routers:
 
 Запускаем файл router_config_generator.py:
 ```python
-natasha$ python router_config_generator.py
+$ python router_config_generator.py
 ```
 
 В результате получатся три конфигурационных файла:
 
-{% codetabs name="Liverpool_r1", type="py" -%}
+{% codetabs name="Liverpool_r1.txt", type="py" -%}
 hostname Liverpool
 !
 interface Loopback10
@@ -158,7 +155,7 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
-{%- language name="Bristol_r1", type="py" -%}
+{%- language name="Bristol_r1.txt", type="py" -%}
 hostname Bristol
 !
 interface Loopback10
@@ -198,7 +195,7 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
-{%- language name="Coventry_r1", type="py" -%}
+{%- language name="Coventry_r1.txt", type="py" -%}
 hostname Coventry
 !
 interface Loopback10

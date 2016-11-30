@@ -32,7 +32,7 @@
 
 Переделанный пример предыдущего скрипта, шаблона и файла с данными:
 
-Шаблон router_template.txt
+Шаблон templates/router_template.txt
 ```
 hostname {{name}}
 !
@@ -74,7 +74,7 @@ router ospf 10
  !
 ```
 
-Файл с данными routers_info.txt
+Файл с данными routers_info.csv
 ```
 id,name,to_name,IT,BS,to_id
 11,Liverpool,LONDON,791,1550,1
@@ -87,6 +87,7 @@ id,name,to_name,IT,BS,to_id
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader
+import csv
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -94,15 +95,14 @@ sys.setdefaultencoding('utf-8')
 env = Environment(loader = FileSystemLoader('templates'))
 template = env.get_template('router_template.txt')
 
-with open('routers_info.txt','r') as file:
-    data = [line.strip().split(',') for line in file]
+with open('routers_info.csv') as f:
+    routers = csv.DictReader(f)
 
-routers = [dict(zip(data[0],i)) for i in data[1:]]
+    for router in routers:
+        r1_conf = router['name']+'_r1.txt'
+        with open(r1_conf,'w') as f:
+            f.write(template.render( router ))
 
-for router in routers:
-    r1_conf = router['name']+'_r1'
-    with open(r1_conf,'w') as f:
-        f.write(template.render( router ))
 ```
 
 
@@ -126,17 +126,40 @@ env = Environment(loader = FileSystemLoader(curr_dir))
 
 Метод __get_template()__ используется для того, чтобы получить шаблон. В скобках указывается имя файла.
 
-Затем мы открываем файл с данными (routers_info.txt):
-* используем генератор списков для того чтобы создать список списков (где каждый вложенный список это список слов в исходной строке):
- * генератор списков - перебираем строки файла
- * __strip()__ - удаляем символ \n в конце строки
- * __split(',')__ - разделяем строку в список элементов, взяв как разделитель запятую
-* далее снова используем list comprehension для того чтобы создать список словарей
- * словари создаются из комбинации двух списков:
-   * первый список в списке data - это ключи, которые используются в словарях
-   * остальные списки это наборы данных
- * как использовать __dict__ и __zip__, можно посмотреть в подразделе "Словарь из двух списков (advanced)"
+Затем мы открываем файл с данными (routers_info.csv).
 
 Последняя часть осталась неизменной.
+
+Теперь попробуем изменить скрипт таким образом, чтобы он был унифицирован:
+* файл с шаблоном и файл с информацией о маршрутизаторах, будут передаваться как аргументы
+* каталог с шаблонами будет определяться автоматически, из пути к шаблону
+
+Итоговый скрипт:
+```python
+# -*- coding: utf-8 -*-
+from jinja2 import Environment, FileSystemLoader
+import csv
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+TEMPLATE_DIR, template = sys.argv[1].split('/')
+routers_info = sys.argv[2]
+
+env = Environment(loader = FileSystemLoader(TEMPLATE_DIR))
+template = env.get_template(template)
+
+routers = csv.DictReader(open(routers_info))
+
+for router in routers:
+    r1_conf = router['name']+'_r1.txt'
+    with open(r1_conf,'w') as f:
+        f.write(template.render( router ))
+```
+
+Запускать скрипт мы будем так:
+```
+$ python final_router_config_generator.py templates/router_template.txt routers_info.csv
+```
 
 В дальнейшем, в практических примерах, мы будем использовать такой вариант.
