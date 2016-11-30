@@ -1,12 +1,12 @@
 ## Пример использования Jinja2
 Аналогичным образом можно использовать Jinja для генерации нескольких конфигурационных файлов.
 
-В этом примере логика разнесена в 3 разных файла:
+В этом примере логика разнесена в 3 разных файла (все файлы находятся в каталоге 1_example/):
 * router_template.py - шаблон
 * routers_info.yml - в этом файле, в виде списка словарей (в формате YAML), находится информация о маршрутизаторах, для которых нам нужно сгенерировать конфигурационный файл
 * router_config_generator.py - в этом скрипте импортируется файл с шаблоном и считывается информация из файла в формате YAML, а затем генерируются конфигурационные файлы маршрутизаторов
 
-Файл 1_example/router_template.py
+Файл router_template.py
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Template
@@ -57,7 +57,7 @@ router ospf 10
 ```
 
 
-Файл 1_example/routers_info.yml
+Файл routers_info.yml
 ```yaml
 - id: 11
   name: Liverpool
@@ -81,7 +81,7 @@ router ospf 10
   to_id: 2
 ```
 
-Файл 1_example/router_config_generator.py
+Файл router_config_generator.py
 ```python
 # -*- coding: utf-8 -*-
 import yaml
