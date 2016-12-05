@@ -135,7 +135,6 @@ SW1
 │   ├── R1                      |
 │   ├── R2                      |
 │   ├── R3                      |  Каталог с переменными для устройств 
-│   ├── R4                      |
 │   └── SW1                    _|
 |
 └── myhosts                     |  Инвентарный файл
@@ -224,15 +223,6 @@ host_vars/R3
 hostname: london_r3
 mgmnt_loopback: 100
 mgmnt_ip: 10.0.0.3
-```
-
-host_vars/R4
-```
----
-
-hostname: london_r4
-mgmnt_loopback: 100
-mgmnt_ip: 10.0.0.4
 ```
 
 host_vars/SW1
