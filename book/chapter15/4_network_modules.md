@@ -65,12 +65,12 @@ gathering = explicit
 В инвентарном файле:
 ```
 [cisco-routers]
-R1
-R2
-R3
+192.168.100.1
+192.168.100.2
+192.168.100.3
 
 [cisco-switches]
-SW1
+192.168.100.100
 
 [cisco-routers:vars]
 ansible_connection=local
