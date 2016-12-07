@@ -7,34 +7,3 @@
 
 
 
-```
-[cisco-routers]
-192.168.100.1
-192.168.100.2
-192.168.100.3
-
-[cisco-switches]
-192.168.100.100
-```
-
-```
-[defaults]
-
-inventory = ./myhosts
-
-remote_user = cisco
-ask_pass = True
-```
-
-group_vars/all.yml
-```
----
-
-cli:
-  host: "{{ inventory_hostname }}"
-  username: "cisco"
-  password: "cisco"
-  transport: cli
-  authorize: yes
-  auth_pass: "cisco"
-```

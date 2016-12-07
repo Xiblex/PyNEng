@@ -121,6 +121,7 @@
   * [Конфигурационный файл](book/chapter15/2_configuration.md)
   * [Playbooks](book/chapter15/3_playbooks.md)
     * [Переменные](book/chapter15/3a_variables.md)
+    * [Работа с результатами выполнения модуля](book/chapter15/3b_result.md)
   * [Сетевые модули](book/chapter15/4_network_modules.md)
     * [ios_command](book/chapter15/4a_ios_command.md)
 * [Полезные ссылки](resources/README.md)

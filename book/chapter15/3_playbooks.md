@@ -44,8 +44,8 @@ Playbook описываются в формате YAML.
     - name: run sh int status
       raw: sh int status
 
-    - name: run sh vlans
-      raw: show vlans
+    - name: run sh vlan
+      raw: show vlan
 ```
 
 
