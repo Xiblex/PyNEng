@@ -63,6 +63,9 @@ $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 
 ![Ansible ad-hoc](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
 
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook.png)
+
+
 Теперь всё прошло успешно. Команда выполнилась и мы видим вывод с каждого устройства.
 
 Аналогичным образом можно попробовать выполнять и другие команды и/или на других комбинациях устройств.
