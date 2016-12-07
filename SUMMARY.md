@@ -123,6 +123,7 @@
     * [Результат выполнения модуля](book/chapter15/3b_result.md)
   * [Сетевые модули](book/chapter15/4_network_modules.md)
     * [ios_command](book/chapter15/4a_ios_command.md)
+    * [ios_facts](book/chapter15/4b_ios_facts.md)
   * [Advanced Playbook](book/chapter15/5_advanced_playbook.md)
     * [Модули](book/chapter15/5a_modules.html)
 * [Полезные ссылки](resources/README.md)
