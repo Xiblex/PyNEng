@@ -36,4 +36,209 @@ changed: [192.168.100.100] => {"changed": true, "rc": 0, "stderr": "Shared conne
 
 ### register
 
+Параметр __register__ позволяет сохранить результат выполнения модуля в переменную.
+Затем эта переменная может использоваться в шаблонах, в принятии решений о ходе сценария и отображении вывода.
 
+Попробуем сохранить результат выполнения команды.
+Для этого будем использовать такой playbook:
+```
+---
+
+- name: Run show commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run sh ip int br
+      raw: sh ip int br | ex unass
+      register: sh_ip_int_br_result
+```
+
+Если запустить этот playbook, вывод не будет отличаться, так как мы отлько записали вывод в переменную, но ничего с ней не делаем.
+Попробуем отобразить результат выполнения команды - для этого будем использовать модуль debug.
+
+
+### debug
+
+Модуль debug позволяет отображать информацию на стандартный поток вывода.
+Это может произвольная строка, переменная, которую мы сохранили ранее или какие-то переменные, которые определили мы или те, которые получены в результате сбора фактов об устройстве.
+
+
+Для отображения сохраненный результатов выполнения команды, добавим задание в playbook:
+```
+---
+
+- name: Run show commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run sh ip int br
+      raw: sh ip int br | ex unass
+      register: sh_ip_int_br_result
+
+    - name: Debug registered var
+      debug: var=sh_ip_int_br_result.stdout_lines
+```
+
+Обратите внимание, что мы выводим не всё содержимое переменной sh_ip_int_br_result, а только содержимое stdout_lines.
+Таким образом вы увидим структурированный вывод.
+
+Результат запуска playbook будет выглядеть  так:
+```
+$ ansible-playbook 2_register_vars.yml
+SSH password:
+
+PLAY [Run show commands on routers] ********************************************
+
+TASK [run sh ip int br] ********************************************************
+changed: [192.168.100.1]
+changed: [192.168.100.2]
+changed: [192.168.100.3]
+
+TASK [Debug registered var] ****************************************************
+ok: [192.168.100.1] => {
+    "sh_ip_int_br_result.stdout_lines": [
+        "",
+        "Interface                  IP-Address      OK? Method Status                Protocol",
+        "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ",
+        "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ",
+        "Loopback0                  10.1.1.1        YES manual up                    up      "
+    ]
+}
+ok: [192.168.100.2] => {
+    "sh_ip_int_br_result.stdout_lines": [
+        "",
+        "Interface                  IP-Address      OK? Method Status                Protocol",
+        "Ethernet0/0                192.168.100.2   YES manual up                    up      ",
+        "Loopback0                  10.1.1.1        YES manual up                    up      "
+    ]
+}
+ok: [192.168.100.3] => {
+    "sh_ip_int_br_result.stdout_lines": [
+        "",
+        "Interface                  IP-Address      OK? Method Status                Protocol",
+        "Ethernet0/0                192.168.100.3   YES manual up                    up      ",
+        "Loopback0                  10.1.1.1        YES manual up                    up      "
+    ]
+}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
+192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
+192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
+```
+
+
+### register, debug, when
+
+С помощью ключевого слова __when__, можно указать условие, при выполнении которого, задача выполняется.
+Если условие не выполняется, то задача пропускается.
+
+Например, создадим такой playbook 3_register_debug_when.yml:
+```
+---
+
+- name: Run show commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run sh ip int br
+      raw: sh ip int bri | ex unass
+      register: sh_ip_int_br_result
+
+    - name: Debug registered var
+      debug:
+        msg: "Error in command"
+      when: "'invalid' in sh_ip_int_br_result.stdout"
+```
+
+В последнем задании у нас несколько изменений:
+* модуль debug теперь отображает не содержимое сохраненной переменной, а сообщение, которое мы указали в переменной msg.
+* условие when позволяет указать, что данное задание будет выполняться только если условие будет выполнено
+ * when: "'invalid' in sh_ip_int_br_result.stdout" - это условие означает, что задача будет выполнена только в том случае, если в выводе sh_ip_int_br_result.stdout будет найдена строка invalid (например, когда неправильно введена команда)
+
+Сначала попробуем выполнить playbook:
+```
+$ ansible-playbook 3_register_debug_when.yml
+SSH password:
+
+PLAY [Run show commands on routers] ********************************************
+
+TASK [run sh ip int br] ********************************************************
+changed: [192.168.100.1]
+changed: [192.168.100.2]
+changed: [192.168.100.3]
+
+TASK [Debug registered var] ****************************************************
+skipping: [192.168.100.1]
+skipping: [192.168.100.2]
+skipping: [192.168.100.3]
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
+192.168.100.2              : ok=1    changed=1    unreachable=0    failed=0
+192.168.100.3              : ok=1    changed=1    unreachable=0    failed=0
+
+```
+
+Обратите внимание на сообщения skipping - это означает, что задача не выполнялась для указанных устройств.
+Не выполнилась она потому, что условие в when не было выполнено.
+
+Теперь попробуем тот же playbook, но сделаем ошибку в команде:
+```
+---
+
+- name: Run show commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+
+  tasks:
+
+    - name: run sh ip int br
+      raw: shh ip int bri | ex unass
+      register: sh_ip_int_br_result
+
+    - name: Debug registered var
+      debug:
+        msg: "Error in command"
+      when: "'invalid' in sh_ip_int_br_result.stdout"
+```
+
+Теперь результат выполнения будет таким:
+```
+$ ansible-playbook 3_register_debug_when.yml
+SSH password:
+
+PLAY [Run show commands on routers] ********************************************
+
+TASK [run sh ip int br] ********************************************************
+changed: [192.168.100.1]
+changed: [192.168.100.2]
+changed: [192.168.100.3]
+
+TASK [Debug registered var] ****************************************************
+ok: [192.168.100.1] => {
+    "msg": "Error in command"
+}
+ok: [192.168.100.2] => {
+    "msg": "Error in command"
+}
+ok: [192.168.100.3] => {
+    "msg": "Error in command"
+}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
+192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
+192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
+
+```
+
+Теперь мы видим сообщение, которое было указано в задаче для модуля debug, так как команда была с ошибкой.
+
+С помощью условий в when, можно не только генерировать какие-то сообщения с модулем debug, но и контролировать то, какие действия будут выполняться, в зависимости от условия.
