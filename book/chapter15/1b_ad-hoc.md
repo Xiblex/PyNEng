@@ -55,9 +55,6 @@ to use the 'ssh' connection type with passwords, you must install the sshpass pr
 to use the 'ssh' connection type with passwords, you must install the sshpass program
 ```
 
-![Ansible ad-hoc fail](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc-fail.png)
-
-
 Ошибка значит, что нужно установить программу sshpass. Эта особенность возникает только тогда, когда мы используем аутентификацию по паролю.
 
 Устанаваливаем sshpass:
@@ -101,7 +98,6 @@ Connection to 192.168.100.3 closed by remote host.
 Shared connection to 192.168.100.3 closed.
 ```
 
-![Ansible ad-hoc](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
 
 Теперь всё прошло успешно. Команда выполнилась и мы видим вывод с каждого устройства.
 
