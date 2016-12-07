@@ -46,7 +46,7 @@ $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 ```
 
-![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc-fail.png)
+![Ansible ad-hoc fail](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc-fail.png)
 
 
 Ошибка значит, что нужно установить программу sshpass. Эта особенность возникает только тогда, когда мы используем аутентификацию по паролю.
@@ -61,8 +61,7 @@ $ sudo apt-get install sshpass
 $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 ```
 
-![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
-
+![Ansible ad-hoc](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
 
 Теперь всё прошло успешно. Команда выполнилась и мы видим вывод с каждого устройства.
 
