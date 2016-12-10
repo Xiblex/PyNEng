@@ -37,34 +37,16 @@
 Первый запуск playbook, с внесением изменений:
 ```
 $ ansible-playbook 6f_ios_config_after.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] *********************************************
-
-TASK [Config interface] ********************************************************
-changed: [192.168.100.1] => {"changed": true, "updates": ["interface Ethernet0/3",
- "ip address 192.168.230.1 255.255.255.0", "no shutdown"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
 ```
+![6f_ios_config_after.png](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6f_ios_config_after.png)
+
 
 Второй запуск playbook (изменений нет, поэтому команда no shutdown не выполняется):
 ```
 $ ansible-playbook 6f_ios_config_after.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config interface] ********************************************************
-ok: [192.168.100.1] => {"changed": false, "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+![6f_ios_config_after_no_change](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6f_ios_config_after_no_change.png)
+
 
 Рассмотрим ещё один пример использования after.
 Сохраним, с помощью after, конфигурацию устройства (playbook 6f_ios_config_after_save.yml):
@@ -94,22 +76,7 @@ PLAY RECAP *********************************************************************
 Результат выполнения playbook (изменения только на маршрутизаторе 192.168.100.1):
 ```
 $ ansible-playbook 6f_ios_config_after_save.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-ok: [192.168.100.2] => {"changed": false, "warnings": []}
-ok: [192.168.100.3] => {"changed": false, "warnings": []}
-changed: [192.168.100.1] => {"changed": true, "updates": ["line vty 0 4",
- "transport input ssh", "end", "write"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+![6f_ios_config_after_save](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6f_ios_config_after_save.png)
 
 
