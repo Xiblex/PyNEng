@@ -372,9 +372,12 @@ SSH password:
 PLAY [Run cfg commands on routers] *********************************************
 
 TASK [Config line vty] *********************************************************
-fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
-fatal: [192.168.100.1]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
-fatal: [192.168.100.2]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
+fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg":
+ "timeout trying to send command: copy running-config startup-config\r"}
+fatal: [192.168.100.1]: FAILED! => {"changed": false, "failed": true, "msg":
+ "timeout trying to send command: copy running-config startup-config\r"}
+fatal: [192.168.100.2]: FAILED! => {"changed": false, "failed": true, "msg":
+ "timeout trying to send command: copy running-config startup-config\r"}
 
 PLAY RECAP *********************************************************************
 192.168.100.1              : ok=0    changed=0    unreachable=0    failed=1
@@ -468,15 +471,22 @@ Playbook 6d_ios_config_backup.yml:
 
 Теперь, каждый раз, когда мы запускаем playbook (даже если не нужно вносить изменения в конфигурацию), в каталог backup будет копироваться текущая конфигурация:
 ```
-$ ansible-playbook 6d_ios_config_backup.yml
+$ ansible-playbook 6d_ios_config_backup.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
 SSH password:
 
 PLAY [Run cfg commands on routers] *********************************************
 
 TASK [Config line vty] *********************************************************
-ok: [192.168.100.2]
-ok: [192.168.100.1]
-ok: [192.168.100.3]
+ok: [192.168.100.1] => {"backup_path":
+ "/home/nata/pyneng_course/chapter15/backup/192.168.100.1_config.2016-12-10@12:35:38",
+ "changed": false, "warnings": []}
+ok: [192.168.100.3] => {"backup_path":
+ "/home/nata/pyneng_course/chapter15/backup/192.168.100.3_config.2016-12-10@12:35:38",
+ "changed": false, "warnings": []}
+ok: [192.168.100.2] => {"backup_path":
+ "/home/nata/pyneng_course/chapter15/backup/192.168.100.2_config.2016-12-10@12:35:38",
+ "changed": false, "warnings": []}
 
 PLAY RECAP *********************************************************************
 192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
@@ -635,11 +645,118 @@ PLAY RECAP *********************************************************************
 
 ```
 
+Рассмотрим ещё один пример использования after.
+Сохраним, с помощью after, конфигурацию устройства (playbook 6f_ios_config_after_save.yml):
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config line vty
+      ios_config:
+        parents:
+          - line vty 0 4
+        lines:
+          - login local
+          - transport input ssh
+        after:
+          - end
+          - write
+        provider: "{{ cli }}"
+```
+
+Результат выполнения playbook (изменения только на маршрутизаторе 192.168.100.1):
+```
+$ ansible-playbook 6f_ios_config_after_save.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config line vty] *********************************************************
+ok: [192.168.100.2] => {"changed": false, "warnings": []}
+ok: [192.168.100.3] => {"changed": false, "warnings": []}
+changed: [192.168.100.1] => {"changed": true, "updates": ["line vty 0 4",
+ "transport input ssh", "end", "write"], "warnings": []}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
+192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
+
+```
+
 
 ## before
 
+Параметр __before__ указывает какие действия выполнить до команд в списке lines.
 
+Команды, которые указаны в параметре before:
+* выполняются только если должны быть внесены изменения.
+* при этом они будут выполнены, независимо от того есть они в конфигурации или нет.
+
+Параметр before полезен в ситуациях, когда вам нужно выполнить какуе-то действия перед выполнением команд в списке lines.
+При этом, также как и параметр after, параметр before не влияет на то, какие команды сравниваются с конфигурацией.
+То есть, по-прежнему, сравниваются только команды в списке lines.
+
+Playbook 6g_ios_config_before.yml:
+```yml
+---
+
+- name: Run cfg commands on router
+  hosts: 192.168.100.1
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config ACL
+      ios_config:
+        before:
+          - no ip access-list extended IN_to_OUT
+        parents:
+          - ip access-list extended IN_to_OUT
+        lines:
+          - permit tcp 10.0.1.0 0.0.0.255 any eq www
+          - permit tcp 10.0.1.0 0.0.0.255 any eq 22
+          - permit icmp any any
+        provider: "{{ cli }}"
 ```
-crypto key generate rsa modulus 1024
-ip ssh version 2
+
+В playbook 6g_ios_config_before.yml мы сначала удаляем ACL IN_to_OUT с помощью параметра before, а затем создаем его заново.
+Таким образом мы будем уверены всегда, что в этом ACL находятся только те строки, которые мы задали в списке lines.
+
+Запуск playbook с изменениями:
 ```
+$ ansible-playbook 6g_ios_config_before.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run cfg commands on router] **********************************************
+
+TASK [Config ACL] **************************************************************
+changed: [192.168.100.1] => {"changed": true, "updates":
+ ["no ip access-list extended IN_to_OUT", "ip access-list extended IN_to_OUT",
+ "permit tcp 10.0.1.0 0.0.0.255 any eq www",
+ "permit tcp 10.0.1.0 0.0.0.255 any eq 22",
+ "permit icmp any any"], "warnings": []}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
+```
+
+Запуск playbook без изменений (команда в списке before не выполняется):
+```
+
+
+## match
+
+## replace
+
+
+## src
