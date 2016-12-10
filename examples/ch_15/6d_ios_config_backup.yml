@@ -14,9 +14,5 @@
         lines:
           - login local
           - transport input ssh
+        backup: yes
         provider: "{{ cli }}"
-      register: cfg
-
-    - name: Show config updates
-      debug: var=cfg.updates
-      when: cfg.changed

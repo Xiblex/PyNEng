@@ -14,9 +14,13 @@
         lines:
           - login local
           - transport input ssh
+        #save: yes - в версии 2.2 не работает корректно
         provider: "{{ cli }}"
       register: cfg
 
-    - name: Show config updates
-      debug: var=cfg.updates
+    - name: Save config
+      ios_command:
+        commands:
+          - write
+        provider: "{{ cli }}"
       when: cfg.changed

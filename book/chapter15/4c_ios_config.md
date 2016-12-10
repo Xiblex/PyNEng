@@ -294,11 +294,12 @@ PLAY RECAP *********************************************************************
       when: cfg.changed == true
 
 ```
-
-Теперь мы сохраняем результат работы первой задачи в переменную cfg.
-Затем в отдельной задаче используем модуль debug для того, чтобы покачать содержимое поля updates.
-Но, так как поле updates в выводе есть только в том случае, когда есть изменения, мы ставим условие when, которое проверяет были ли изменения.
-И задача будет выполняться только тогда, когда изменения были.
+Изменения в playbook:
+* Теперь мы сохраняем результат работы первой задачи в переменную __cfg__.
+* Затем в отдельной задаче используем модуль __debug__ для того, чтобы показать содержимое поля __updates__.
+ * так как поле updates в выводе есть только в том случае, когда есть изменения, мы ставим условие when, которое проверяет были ли изменения.
+ * задача будет выполняться только тогда, когда на устройстве были внесены изменения.
+ * when: cfg.changed эквивалентно записи when: cfg.changed == true
 
 Если запустить повторно playbook, когда изменений не было, задача Show config updates, пропускается:
 ```
@@ -353,6 +354,287 @@ PLAY RECAP *********************************************************************
 ```
 
 Теперь второе задание отображает информацию о том, какие именно изменения были внесены на маршрутизаторе.
+
+## save
+
+Параметр __save__ позволяет указать нужно ли сохранять текущую конфигурацию в стартовую. По умолчанию, значение параметра - __no__.
+
+Доступные варианты значений:
+* no (или false)
+* yes (или true)
+
+К сожалению, на данный момент (версия ansible 2.2), этот параметр не отрабатывает корректно, так как на устройство отправляется команда copy running-config startup-config, но, при этом, не отправляется подтверждение на сохранение.
+Из-за этого, при запуске playbook с параметром save выставленным в yes, появляется такая ошибка:
+```
+$ ansible-playbook 6с_ios_config_save.yml
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config line vty] *********************************************************
+fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
+fatal: [192.168.100.1]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
+fatal: [192.168.100.2]: FAILED! => {"changed": false, "failed": true, "msg": "timeout trying to send command: copy running-config startup-config\r"}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=0    changed=0    unreachable=0    failed=1
+192.168.100.2              : ok=0    changed=0    unreachable=0    failed=1
+192.168.100.3              : ok=0    changed=0    unreachable=0    failed=1
+
+```
+
+Но, мы можем самостоятельно сделать сохранение, используя модуль ios_command (а позже мы посмотрим как сделать это же, с помощью параметра after).
+
+На основе playbook 6a_ios_config_parents_basic.yml сделаем playbook с сохранением конфигурации 6c_ios_config_save.yml:
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config line vty
+      ios_config:
+        parents:
+          - line vty 0 4
+        lines:
+          - login local
+          - transport input ssh
+        #save: yes - в версии 2.2 не работает корректно
+        provider: "{{ cli }}"
+      register: cfg
+
+    - name: Save config
+      ios_command:
+        commands:
+          - write
+        provider: "{{ cli }}"
+      when: cfg.changed
+```
+
+Если мы снова изменим в конфигурации маршрутизатора 192.168.100.1 строку transport input all на transport input ssh, запуск playbook будет выглядеть так:
+```
+$ ansible-playbook 6c_ios_config_save.yml
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config line vty] *********************************************************
+ok: [192.168.100.3]
+ok: [192.168.100.2]
+changed: [192.168.100.1]
+
+TASK [Save config] *************************************************************
+skipping: [192.168.100.2]
+skipping: [192.168.100.3]
+ok: [192.168.100.1]
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
+192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
+
+```
+
+## backup
+
+Параметр __backup__ указывает нужно ли делать резервную копию текущей конфигурации устройства перед внесением изменений.
+Файл будет копироваться в каталог backup, относительно каталога в котором находится playbook (если каталог не существует, он будет создан).
+
+Playbook 6d_ios_config_backup.yml:
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config line vty
+      ios_config:
+        parents:
+          - line vty 0 4
+        lines:
+          - login local
+          - transport input ssh
+        backup: yes
+        provider: "{{ cli }}"
+```
+
+Теперь, каждый раз, когда мы запускаем playbook (даже если не нужно вносить изменения в конфигурацию), в каталог backup будет копироваться текущая конфигурация:
+```
+$ ansible-playbook 6d_ios_config_backup.yml
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config line vty] *********************************************************
+ok: [192.168.100.2]
+ok: [192.168.100.1]
+ok: [192.168.100.3]
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
+```
+
+В каталоге backup файлы такого вида (при каждом запуске playbook они перезаписываются):
+```
+192.168.100.1_config.2016-12-10@10:42:34
+192.168.100.2_config.2016-12-10@10:42:34
+192.168.100.3_config.2016-12-10@10:42:34
+```
+
+## defaults
+
+Параметр __defaults__ указывает нужно ли собираться всю информацию с устройства, в том числе и значения по умолчанию.
+Если включить этот параметр, то модуль будет собирать текущую кофигурацию с помощью команды sh run all.
+По умолчанию этот параметр отключен и конфигурация проверяется командой sh run.
+
+Этот параметр полезен в том случае, если мы указываем в настройках команду, которая не видна в конфигурации.
+Например, такое может быть, когда мы указали параметр, который и так используется по умолчанию.
+
+Если мы не будем использовать параметр defaults, и укажем команду со значением, по умолчанию (например, в playbook ниже мы указываем команду ip mtu 1500), то каждый раз, когда мы запускаем playbook, будут вноситься изменения.
+Присходит это потому, что Ansible каждый раз вначале проверяет наличие команд в соответствующем режиме.
+Если команд нет, то соответствующая задача выполняется.
+
+
+В такой варианте playbook 6e_ios_config_defaults.yml каждый раз будут вноситься изменения (попробуйте самостоятельно):
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config interface
+      ios_config:
+        parents:
+          - interface Ethernet0/2
+        lines:
+          - ip address 192.168.200.1 255.255.255.0
+          - ip mtu 1500
+        provider: "{{ cli }}"
+```
+
+Если же мы добавим параметр defaults: yes, изменения уже не будут внесены, если не хватало только команды ip mtu 1500 (playbook 6e_ios_config_defaults.yml):
+```
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config interface
+      ios_config:
+        parents:
+          - interface Ethernet0/2
+        lines:
+          - ip address 192.168.200.1 255.255.255.0
+          - ip mtu 1500
+        defaults: yes
+        provider: "{{ cli }}"
+```
+
+Запуск playbook:
+```
+$ ansible-playbook 6e_ios_config_defaults.yml
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config interface] ********************************************************
+ok: [192.168.100.1]
+ok: [192.168.100.3]
+ok: [192.168.100.2]
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
+192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
+
+```
+
+## after
+
+Параметр __after__ указывает какие команды выполнить после команд в списке lines (или commands).
+
+Команды, которые указаны в параметре after:
+* выполняются только если должны быть внесены изменения.
+* при этом они будут выполнены, независимо от того есть они в конфигурации или нет.
+
+Параметр after очень полезен в ситуациях, когда нам нужно выполнить команду, которая не сохраняется в конфигурации.
+Например, команда no shutdown не сохраняется в конфигурации маршрутизатора.
+И, если бы мы написали её в списке lines, то изменения вносились бы каждый раз, при выполнении playbook. 
+
+Но, если мы напишем команду no shutdown в списке after, то только в том случае, если нужно вносить изменения (согласно списка lines), будет применена и команда no shutdown.
+
+Пример использования параметра after в playbook 6f_ios_config_after.yml:
+```yml
+---
+
+- name: Run cfg commands on router
+  hosts: 192.168.100.1
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Config interface
+      ios_config:
+        parents:
+          - interface Ethernet0/3
+        lines:
+          - ip address 192.168.230.1 255.255.255.0
+        after:
+          - no shutdown
+        provider: "{{ cli }}"
+```
+
+Первый запуск playbook, с внесением изменений:
+```
+$ ansible-playbook 6f_ios_config_after.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run cfg commands on router] *********************************************
+
+TASK [Config interface] ********************************************************
+changed: [192.168.100.1] => {"changed": true, "updates": ["interface Ethernet0/3",
+ "ip address 192.168.230.1 255.255.255.0", "no shutdown"], "warnings": []}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
+```
+
+Второй запуск playbook (изменений нет, поэтому команда no shutdown не выполняется):
+```
+$ ansible-playbook 6f_ios_config_after.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run cfg commands on routers] *********************************************
+
+TASK [Config interface] ********************************************************
+ok: [192.168.100.1] => {"changed": false, "warnings": []}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
+
+```
+
 
 ## before
 
