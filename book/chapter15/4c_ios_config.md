@@ -752,6 +752,19 @@ PLAY RECAP *********************************************************************
 
 Запуск playbook без изменений (команда в списке before не выполняется):
 ```
+$ ansible-playbook 6g_ios_config_before.yml -v
+Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
+SSH password:
+
+PLAY [Run cfg commands on router] **********************************************
+
+TASK [Config ACL] **************************************************************
+ok: [192.168.100.1] => {"changed": false, "warnings": []}
+
+PLAY RECAP *********************************************************************
+192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
+
+```
 
 
 ## match
