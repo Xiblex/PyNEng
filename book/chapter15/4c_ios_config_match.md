@@ -45,20 +45,9 @@ ip access-list extended IN_to_OUT
 Если мы теперь запустим playbook:
 ```
 $ ansible-playbook 6h_ios_config_match_line.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["ip access-list extended IN_to_OUT",
- "permit tcp 10.0.1.0 0.0.0.255 any eq www", "permit icmp any any"],
- "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
 ```
+![6h_ios_config_match_line](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_line.png)
+
 
 Обратите внимание, что в списке updates только две из трёх строк ACL.
 Так как в режиме lines модуль сравнивает команды независимо друг от друга, он обнаружил, что не хватает только двух команд из трех.
@@ -115,20 +104,9 @@ Playbook 6h_ios_config_match_exact.yml (мы будем его постепен�
 Если запустить playbook, результат будет таким:
 ```
 $ ansible-playbook 6h_ios_config_match_exact.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["ip access-list extended IN_to_OUT", "permit icmp any any",
- "deny ip any any"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-
 ```
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_exact_1.png)
+
 
 Теперь ACL выглядит так:
 ```
@@ -182,20 +160,9 @@ ip access-list extended IN_to_OUT
 Если теперь мы запустим playbook, результат будет таким:
 ```
 $ ansible-playbook 6h_ios_config_match_exact.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["no ip access-list extended IN_to_OUT", "ip access-list extended IN_to_OUT",
- "permit icmp any any"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-
 ```
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_exact_2.png)
+
 
 И, соответственно на маршрутизаторе:
 ```
@@ -238,22 +205,9 @@ ip access-list extended IN_to_OUT
 Применим playbook 6h_ios_config_match_exact.yml к текущему состоянию маршрутизатора (в ACL одна строка):
 ```
 $ ansible-playbook 6h_ios_config_match_exact.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["no ip access-list extended IN_to_OUT", "ip access-list extended IN_to_OUT",
- "permit tcp 10.0.1.0 0.0.0.255 any eq www",
- "permit tcp 10.0.1.0 0.0.0.255 any eq 22",
- "permit icmp any any", "deny   ip any any"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-
 ```
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_exact_final.png)
+
 
 Теперь результат такой:
 ```
@@ -315,17 +269,9 @@ ip access-list extended IN_to_OUT
 И, в таком варианте, playbook будет выполняться каждый раз и пытаться применить все команды из списка lines, что не будет влиять на содержимое ACL:
 ```
 $ ansible-playbook 6h_ios_config_match_exact.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates": ["ip access-list extended IN_to_OUT", "permit tcp 10.0.1.0 0.0.0.255 any eq www", "permit tcp 10.0.1.0 0.0.0.255 any eq 22", "permit icmp any any", "deny   ip any any"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
 ```
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_exact_final_2.png)
+
 
 При использовании ```match:exact```, важно, чтобы был какой-то способ удалить конфигурацию, если она не соответствует тому, что должно быть (или чтобы команды перезаписовались).
 Иначе, эта задача будет выполняться каждый раз, при запуске playbook.
@@ -372,17 +318,9 @@ Playbook 6h_ios_config_match_strict.yml:
 Выполнение playbook:
 ```
 $ ansible-playbook 6h_ios_config_match_strict.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-ok: [192.168.100.1] => {"changed": false, "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
 ```
+![6h_ios_config_match_strict](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_strict.png)
+
 
 Так как изменений не было, ACL остался таким же.
 
@@ -421,20 +359,8 @@ PLAY RECAP *********************************************************************
 Каждый раз при запуске playbook результат будет таким:
 ```
 $ ansible-playbook 6h_ios_config_match_none.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["no ip access-list extended IN_to_OUT", "ip access-list extended IN_to_OUT",
- "permit tcp 10.0.1.0 0.0.0.255 any eq www",
- "permit tcp 10.0.1.0 0.0.0.255 any eq 22", "permit icmp any any"],
- "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
 ```
+![6h_ios_config_match_none](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_none.png)
 
-Такой варинт подходит в тех случаях, когда, независимо от текущей конфигурации, нужно отправить все команды.
+
+Такой вариант подходит в тех случаях, когда, независимо от текущей конфигурации, нужно отправить все команды.
