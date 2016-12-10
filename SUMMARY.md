@@ -133,6 +133,8 @@
       * [defaults](book/chapter15/4c_ios_config_defaults.md)
       * [after](book/chapter15/4c_ios_config_after.md)
       * [before](book/chapter15/4c_ios_config_before.md)
+      * [match](book/chapter15/4c_ios_config_match.md)
+      * [replace](book/chapter15/4c_ios_config_replace.md)
       * [src](book/chapter15/4c_ios_config_src.md)
   * [Advanced Playbook](book/chapter15/5_advanced_playbook.md)
     * [Модули](book/chapter15/5a_modules.html)
