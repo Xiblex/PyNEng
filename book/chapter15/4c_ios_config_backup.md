@@ -28,27 +28,9 @@ Playbook 6d_ios_config_backup.yml:
 Теперь, каждый раз, когда мы запускаем playbook (даже если не нужно вносить изменения в конфигурацию), в каталог backup будет копироваться текущая конфигурация:
 ```
 $ ansible-playbook 6d_ios_config_backup.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-ok: [192.168.100.1] => {"backup_path":
- "/home/nata/pyneng_course/chapter15/backup/192.168.100.1_config.2016-12-10@12:35:38",
- "changed": false, "warnings": []}
-ok: [192.168.100.3] => {"backup_path":
- "/home/nata/pyneng_course/chapter15/backup/192.168.100.3_config.2016-12-10@12:35:38",
- "changed": false, "warnings": []}
-ok: [192.168.100.2] => {"backup_path":
- "/home/nata/pyneng_course/chapter15/backup/192.168.100.2_config.2016-12-10@12:35:38",
- "changed": false, "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
 ```
+![6d_ios_config_backup](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6d_ios_config_backup.png)
+
 
 В каталоге backup файлы такого вида (при каждом запуске playbook они перезаписываются):
 ```
