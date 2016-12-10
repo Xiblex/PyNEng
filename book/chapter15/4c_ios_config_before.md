@@ -40,35 +40,13 @@ Playbook 6g_ios_config_before.yml:
 Запуск playbook с изменениями:
 ```
 $ ansible-playbook 6g_ios_config_before.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-changed: [192.168.100.1] => {"changed": true, "updates":
- ["no ip access-list extended IN_to_OUT", "ip access-list extended IN_to_OUT",
- "permit tcp 10.0.1.0 0.0.0.255 any eq www",
- "permit tcp 10.0.1.0 0.0.0.255 any eq 22",
- "permit icmp any any"], "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
 ```
+![6g_ios_config_before](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6g_ios_config_before.png)
+
 
 Запуск playbook без изменений (команда в списке before не выполняется):
 ```
 $ ansible-playbook 6g_ios_config_before.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on router] **********************************************
-
-TASK [Config ACL] **************************************************************
-ok: [192.168.100.1] => {"changed": false, "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+![6g_ios_config_before_no_updates](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6g_ios_config_before_no_updates.png)
 
