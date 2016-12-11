@@ -182,4 +182,10 @@ $ ansible-playbook 6j_ios_config_src_jinja.yml -v
 ```
 ![6j_ios_config_src_jinja_2](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6j_ios_config_src_jinja_2.png)
 
+### Совмещение с другими параметрами
 
+Параметр __src__ совместим с такими параметрами:
+* backup
+* config
+* defaults
+* save (но у самого save в Ansible 2.2 проблемы с работой) 
