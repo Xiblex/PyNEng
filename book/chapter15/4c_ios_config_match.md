@@ -273,7 +273,7 @@ $ ansible-playbook 6h_ios_config_match_exact.yml -v
 ![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_exact_final_2.png)
 
 
-При использовании ```match:exact```, важно, чтобы был какой-то способ удалить конфигурацию, если она не соответствует тому, что должно быть (или чтобы команды перезаписовались).
+При использовании ```match:exact```, важно, чтобы был какой-то способ удалить конфигурацию, если она не соответствует тому, что должно быть (или чтобы команды перезаписывались).
 Иначе, эта задача будет выполняться каждый раз, при запуске playbook.
 
 ### match: strict
