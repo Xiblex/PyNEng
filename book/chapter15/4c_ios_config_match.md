@@ -363,4 +363,4 @@ $ ansible-playbook 6h_ios_config_match_none.yml -v
 ![6h_ios_config_match_none](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6h_ios_config_match_none.png)
 
 
-Такой вариант подходит в тех случаях, когда, независимо от текущей конфигурации, нужно отправить все команды.
+Использование ```match: none``` подходит в тех случаях, когда, независимо от текущей конфигурации, нужно отправить все команды.
