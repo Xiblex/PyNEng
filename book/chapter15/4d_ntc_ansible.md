@@ -92,56 +92,10 @@ pip install ntc-ansible
 Результат выполнения playbook:
 ```
 $ ansible-playbook 5_ntc-ansible.yml
-SSH password:
-
-PLAY [Run show commands on router] *********************************************
-
-TASK [Run sh ip int br] ********************************************************
-ok: [192.168.100.1]
-
-TASK [debug] *******************************************************************
-ok: [192.168.100.1] => {
-    "result": {
-        "changed": false,
-        "response": [
-            {
-                "intf": "Ethernet0/0",
-                "ipaddr": "192.168.100.1",
-                "proto": "up",
-                "status": "up"
-            },
-            {
-                "intf": "Ethernet0/1",
-                "ipaddr": "192.168.200.1",
-                "proto": "up",
-                "status": "up"
-            },
-            {
-                "intf": "Ethernet0/2",
-                "ipaddr": "unassigned",
-                "proto": "down",
-                "status": "administratively down"
-            },
-            {
-                "intf": "Ethernet0/3",
-                "ipaddr": "unassigned",
-                "proto": "up",
-                "status": "up"
-            },
-            {
-                "intf": "Loopback0",
-                "ipaddr": "10.1.1.1",
-                "proto": "up",
-                "status": "up"
-            }
-        ],
-        "response_list": []
-    }
-}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=0    unreachable=0    failed=0
 ```
+
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/7_ntc_ansible.png)
+
 
 В переменной response мы получили структурированный вывод в виде списка словарей.
 Ключи в словарях получены на основании переменных, которые описаны в шаблоне library/ntc-ansible/ntc-templates/templates/cisco_ios_show_ip_int_brief.template (единственное отличие - регистр):
@@ -196,26 +150,10 @@ Start
 Результат выполнения:
 ```
 $ ansible-playbook 5_ntc-ansible_compare.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [Run sh ip int br] ********************************************************
-ok: [192.168.100.3]
-ok: [192.168.100.1]
-ok: [192.168.100.2]
-
-TASK [Copy facts to files] *****************************************************
-changed: [192.168.100.2]
-changed: [192.168.100.1]
-changed: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
-
 ```
+
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/7a_ntc_ansible_save.png)
+
 
 В результате, в каталоге all_facts повяляются соответствующие файлы для каждого маршрутизатора.
 Пример файла all_facts/192.168.100.1_sh_ip_int_br.json:
