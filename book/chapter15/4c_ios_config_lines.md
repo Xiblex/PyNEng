@@ -25,20 +25,9 @@
 Если мы запустим playbook, то получим такой результат:
 ```
 $ ansible-playbook 6_ios_config_lines.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config password encryption] **********************************************
-changed: [192.168.100.2]
-changed: [192.168.100.3]
-changed: [192.168.100.1]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=1    unreachable=0    failed=0
 ```
+
+![6_ios_config_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6_ios_config_lines.png)
 
 Какие команды Ansible выполняет:
 * terminal length 0
@@ -53,21 +42,9 @@ PLAY RECAP *********************************************************************
 То есть, если мы ещё раз запустим playbook, а команда уже настроена, изменения не будут выполнены:
 ```
 $ ansible-playbook 6_ios_config_lines.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config password encryption] **********************************************
-ok: [192.168.100.1]
-ok: [192.168.100.3]
-ok: [192.168.100.2]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+
+![6_ios_config_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6_ios_config_lines_2.png)
 
 > **Caution** Обязательно пишите команды полностью, а не сокращенно. И обращайте внимание, что, для некоторых команд, IOS сам добавляет параметры. Если писать команду не в том виде, в котором она реально видна в конфигурационном файле, модуль не будет идемпотентен. Он будет всё время считать, что команды нет и вносить изменения каждый раз. 
 
@@ -95,18 +72,6 @@ PLAY RECAP *********************************************************************
 Результат выполнения:
 ```
 $ ansible-playbook 6_ios_config_mult_lines.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Send config commands] ****************************************************
-changed: [192.168.100.1]
-changed: [192.168.100.3]
-changed: [192.168.100.2]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=1    unreachable=0    failed=0
-
 ```
+
+![6_ios_config_mult_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6_ios_config_mult_lines.png)

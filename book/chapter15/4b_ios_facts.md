@@ -80,40 +80,19 @@
 
 ```
 $ ansible-playbook 5_ios_facts.yml
-SSH password:
-
-PLAY [Collect IOS facts] *******************************************************
-
-TASK [Facts] *******************************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.2]
-ok: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+
+![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/5_ios_facts.png)
+
+
 
 Для того, чтобы посмотреть, какие именно факты собираются с устройства, можно добавить флаг -v (информация сокращена):
 ```
 $ ansible-playbook 5_ios_facts.yml -v
 Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Collect IOS facts] *******************************************************
-
-TASK [Facts] *******************************************************************
-ok: [192.168.100.1] => {"ansible_facts": {"ansible_net_all_ipv4_addresses": ["192.168.200.1", "192.168.100.1", "10.1.1.1"], "ansible_net_all_ipv6_addresses": [], "ansible_net_config": }}
-...
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+
+![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/5_ios_facts_verbose.png)
 
 ### Сохранение фактов
 
@@ -171,26 +150,9 @@ Playbook 5a_ios_facts.yml собирает всю информацию об ус
 Результат выполнения playbook:
 ```
 $ ansible-playbook 5a_ios_facts.yml
-SSH password:
-
-PLAY [Collect IOS facts] *******************************************************
-
-TASK [Facts] *******************************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.3]
-ok: [192.168.100.2]
-
-TASK [Copy facts to files] *****************************************************
-changed: [192.168.100.2]
-changed: [192.168.100.1]
-changed: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
-
 ```
+
+![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/5a_ios_facts.png)
 
 После этого, в каталоге all_facts находятся такие файлы:
 ```
@@ -224,25 +186,9 @@ PLAY RECAP *********************************************************************
 Повторный запуск playbook (без изменений):
 ```
 $ ansible-playbook 5a_ios_facts.yml
-SSH password:
-
-PLAY [Collect IOS facts] *******************************************************
-
-TASK [Facts] *******************************************************************
-ok: [192.168.100.2]
-ok: [192.168.100.1]
-ok: [192.168.100.3]
-
-TASK [Copy facts to files] *****************************************************
-ok: [192.168.100.3]
-ok: [192.168.100.1]
-ok: [192.168.100.2]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=0    unreachable=0    failed=0
 ```
+
+![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/5a_ios_facts_no_change.png)
 
 ### Изменения с опцией --diff
 
@@ -251,52 +197,10 @@ PLAY RECAP *********************************************************************
 
 Пример запуска playbook с опцией --diff и с внесенными изменениями на одном из устройств:
 ```
-$ ansible-playbook 3_ios_facts.yml --diff
-SSH password:
-
-PLAY [Collect IOS facts] *******************************************************
-
-TASK [Facts] *******************************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.2]
-ok: [192.168.100.3]
-
-TASK [Copy facts to files] *****************************************************
-ok: [192.168.100.3]
-ok: [192.168.100.2]
---- before: all_facts/192.168.100.1_facts.json
-+++ after: /tmp/tmpuOdT2D
-@@ -3,7 +3,7 @@
-         "ansible_net_all_ipv4_addresses": [
-             "192.168.200.1",
-             "192.168.100.1",
--            "10.10.1.1"
-+            "10.1.1.1"
-         ],
-         "ansible_net_all_ipv6_addresses": [],
-         "ansible_net_gather_subset": [
-@@ -72,11 +72,11 @@
-                 "description": null,
-                 "duplex": null,
-                 "ipv4": {
--                    "address": "10.10.1.1",
-+                    "address": "10.1.1.1",
-                     "masklen": 32
-                 },
-                 "lineprotocol": "up ",
--                "macaddress": "10.10.1.1/32",
-+                "macaddress": "10.1.1.1/32",
-                 "mediatype": null,
-                 "mtu": 1514,
-                 "operstatus": "up",
-
-changed: [192.168.100.1]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=0    unreachable=0    failed=0
+$ ansible-playbook 5a_ios_facts.yml --diff --limit=192.168.100.1
 ```
+
+![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/5a_ios_facts_diff.png)
 
 Таким образом мы не только знаем, что были внесены изменения, но и знаем на каком устройстве и какие именно.
 

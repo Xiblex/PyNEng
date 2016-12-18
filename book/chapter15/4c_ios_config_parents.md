@@ -34,20 +34,10 @@ line vty 0 4
 Запуск будет выполняться аналогично предыдущим playbook:
 ```
 $ ansible-playbook 6a_ios_config_parents_basic.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-changed: [192.168.100.3]
-changed: [192.168.100.2]
-changed: [192.168.100.1]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=1    unreachable=0    failed=0
 ```
+
+![6a_ios_config_parents_basic](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_parents_basic.png)
+
 
 Если нам нужно выполнить команду в нескольких вложенных режимах, мы указываем подрежимы в списке parents.
 Например, нам нужно выполнить такие команды:

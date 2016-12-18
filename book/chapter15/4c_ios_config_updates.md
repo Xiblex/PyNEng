@@ -29,21 +29,9 @@
 Для начала, попробуем вывести изменения с помощью опции verbose:
 ```
 $ ansible-playbook 6a_ios_config_parents_basic.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-ok: [192.168.100.3] => {"changed": false, "warnings": []}
-changed: [192.168.100.1] => {"changed": true, "updates": ["line vty 0 4", "transport input ssh"], "warnings": []}
-ok: [192.168.100.2] => {"changed": false, "warnings": []}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
 ```
+
+![6a_ios_config_parents_basic](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_parents_basic_verbose.png)
 
 В выводе, в поле updates видно, какие именно команды Ansible отправил на устройство.
 Обратите внимание, что команда login local не отправлялась, так как она настроена.
@@ -90,54 +78,16 @@ PLAY RECAP *********************************************************************
 Если запустить повторно playbook, когда изменений не было, задача Show config updates, пропускается:
 ```
 $ ansible-playbook 6b_ios_config_debug.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-ok: [192.168.100.2]
-ok: [192.168.100.3]
-ok: [192.168.100.1]
-
-TASK [Show config updates] *****************************************************
-skipping: [192.168.100.1]
-skipping: [192.168.100.2]
-skipping: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
 ```
+
+![6a_ios_config_debug_skipping](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_debug_skipping.png)
 
 Если теперь опять вручную изменить конфигурацию маршрутизатора 192.168.100.1 (изменить transport input ssh на transport input all):
 ```
 $ ansible-playbook 6b_ios_config_debug.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config line vty] *********************************************************
-ok: [192.168.100.2]
-changed: [192.168.100.1]
-ok: [192.168.100.3]
-
-TASK [Show config updates] *****************************************************
-ok: [192.168.100.1] => {
-    "cfg.updates": [
-        "line vty 0 4",
-        "transport input ssh"
-    ]
-}
-skipping: [192.168.100.2]
-skipping: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
+
+![6a_ios_config_debug_update](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_debug_update.png)
 
 Теперь второе задание отображает информацию о том, какие именно изменения были внесены на маршрутизаторе.
 

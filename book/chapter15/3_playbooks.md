@@ -76,24 +76,9 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 Для того, чтобы убедится, что команды, которые мы указывали в задачах, выполнились на устройствах, запустите playbook с опцией -v (вывод сокращен):
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml -v
-Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1] => {"changed": true, "rc": 0, "stderr": "Shared connection to 192.168.100.1 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \r\nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ", "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
-changed: [192.168.100.2] => {"changed": true, "rc": 0, "stderr": "Shared connection to 192.168.100.2 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.2   YES manual up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.2   YES manual up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
-changed: [192.168.100.3] => {"changed": true, "rc": 0, "stderr": "Connection to 192.168.100.3 closed by remote host.\r\nShared connection to 192.168.100.3 closed.\r\n", "stdout": "\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.3   YES manual up                    up      \r\nLoopback0                  10.1.1.1        YES manual up                    up      \r\n", "stdout_lines": ["", "Interface                  IP-Address      OK? Method Status                Protocol", "Ethernet0/0                192.168.100.3   YES manual up                    up      ", "Loopback0                  10.1.1.1        YES manual up                    up      "]}
-
-...
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.100            : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=2    unreachable=0    failed=0
 ```
+
+[Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook-verbose.png)
 
 В следующих разделах мы научимся отображать эти данные в нормальном формате и посмотрим, что с ними можно делать.
 
@@ -137,19 +122,9 @@ to retry, use: --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_
 В нашем случае, нам нужно опять настроить правильный пароль на маршрутизаторе 192.168.100.1, а затем перезапустить playbook таким образом:
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_raw.retry
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1]
-
-TASK [run sh ip route] *********************************************************
-changed: [192.168.100.1]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=2    unreachable=0    failed=0
 ```
+
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook-retry.png)
 
 Ansible взял список устройств, которые перечислены в файле retry и выполнил playbook только для них.
 

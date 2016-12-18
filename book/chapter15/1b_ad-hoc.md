@@ -55,6 +55,9 @@ to use the 'ssh' connection type with passwords, you must install the sshpass pr
 to use the 'ssh' connection type with passwords, you must install the sshpass program
 ```
 
+![ad-hoc-fail](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc-fail.png)
+
+
 Ошибка значит, что нужно установить программу sshpass. Эта особенность возникает только тогда, когда мы используем аутентификацию по паролю.
 
 Устанаваливаем sshpass:
@@ -65,38 +68,10 @@ $ sudo apt-get install sshpass
 И повторяем команду:
 ```
 $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
-SSH password:
-192.168.100.1 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.1   YES NVRAM  up                    up
-Ethernet0/1                192.168.200.1   YES NVRAM  up                    up
-Ethernet0/2                unassigned      YES NVRAM  administratively down down
-Ethernet0/3                unassigned      YES NVRAM  administratively down down
-Loopback0                  10.1.1.1        YES manual up                    up      
-Shared connection to 192.168.100.1 closed.
-
-192.168.100.2 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.2   YES manual up                    up
-Ethernet0/1                unassigned      YES unset  administratively down down
-Ethernet0/2                unassigned      YES unset  administratively down down
-Ethernet0/3                unassigned      YES unset  administratively down down
-Loopback0                  10.1.1.1        YES manual up                    up      
-Shared connection to 192.168.100.2 closed.
-
-192.168.100.3 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.3   YES manual up                    up
-Ethernet0/1                unassigned      YES unset  administratively down down
-Ethernet0/2                unassigned      YES unset  administratively down down
-Ethernet0/3                unassigned      YES unset  administratively down down
-Loopback0                  10.1.1.1        YES manual up                    up      
-Connection to 192.168.100.3 closed by remote host.
-Shared connection to 192.168.100.3 closed.
 ```
+
+![ad-hoc](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
+
 
 
 Теперь всё прошло успешно. Команда выполнилась и мы видим вывод с каждого устройства.

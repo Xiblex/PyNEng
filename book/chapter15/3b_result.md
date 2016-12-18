@@ -18,10 +18,9 @@
 Пример запуска playbook с флагом verbose (вывод сокращен):
 ```
 ansible-playbook 1_show_commands_with_raw.yml -v
-...
-TASK [run sh vlan] *************************************************************
-changed: [192.168.100.100] => {"changed": true, "rc": 0, "stderr": "Shared connection to 192.168.100.100 closed.\r\n", "stdout": "\r\n\r\nVLAN Name                             Status    Ports\r\n---- -------------------------------- --------- -------------------------------\r\n1    default                          active    Et0/0, Et0/1, Et0/2, Et0/3\r\n                                                Et1/1, Et1/2, Et1/3, Et2/0\r\n                                                Et2/1, Et2/2, Et2/3, Et3/0\r\n                                                Et3/1, Et3/2, Et3/3\r\n2    VLAN0002                         active    \r\n1002 fddi-default                     act/unsup \r\n1003 token-ring-default               act/unsup \r\n1004 fddinet-default                  act/unsup \r\n1005 trnet-default                    act/unsup \r\n\r\nVLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2\r\n---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------\r\n1    enet  100001     1500  -      -      -        -    -        0      0   \r\n2    enet  100002     1500  -      -      -        -    -        0      0   \r\n1002 fddi  101002     1500  -      -      -        -    -        0      0   \r\n1003 tr    101003     1500  -      -      -        -    -        0      0   \r\n1004 fdnet 101004     1500  -      -      -        ieee -        0      0   \r\n1005 trnet 101005     1500  -      -      -        ibm  -        0      0   \r\n\r\nPrimary Secondary Type              Ports\r\n------- --------- ----------------- ------------------------------------------\r\n", "stdout_lines": ["", "", "VLAN Name                             Status    Ports", "---- -------------------------------- --------- -------------------------------", "1    default                          active    Et0/0, Et0/1, Et0/2, Et0/3", "                                                Et1/1, Et1/2, Et1/3, Et2/0", "                                                Et2/1, Et2/2, Et2/3, Et3/0", "                                                Et3/1, Et3/2, Et3/3", "2    VLAN0002                         active    ", "1002 fddi-default                     act/unsup ", "1003 token-ring-default               act/unsup ", "1004 fddinet-default                  act/unsup ", "1005 trnet-default                    act/unsup ", "", "VLAN Type  SAID       MTU   Parent RingNo BridgeNo Stp  BrdgMode Trans1 Trans2", "---- ----- ---------- ----- ------ ------ -------- ---- -------- ------ ------", "1    enet  100001     1500  -      -      -        -    -        0      0   ", "2    enet  100002     1500  -      -      -        -    -        0      0   ", "1002 fddi  101002     1500  -      -      -        -    -        0      0   ", "1003 tr    101003     1500  -      -      -        -    -        0      0   ", "1004 fdnet 101004     1500  -      -      -        ieee -        0      0   ", "1005 trnet 101005     1500  -      -      -        ibm  -        0      0   ", "", "Primary Secondary Type              Ports", "------- --------- ----------------- ------------------------------------------"]}
 ```
+
+[Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook-verbose.png)
 
 При увеличении количества букв v в флаге, вывод становится более подробным.
 Попробуйте вызывать этот же playbook и добавлять к флагу буквы v (5 и больше показывают одинаковый вывод).
@@ -89,47 +88,9 @@ changed: [192.168.100.100] => {"changed": true, "rc": 0, "stderr": "Shared conne
 Результат запуска playbook будет выглядеть  так:
 ```
 $ ansible-playbook 2_register_vars.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1]
-changed: [192.168.100.2]
-changed: [192.168.100.3]
-
-TASK [Debug registered var] ****************************************************
-ok: [192.168.100.1] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        "",
-        "Interface                  IP-Address      OK? Method Status                Protocol",
-        "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ",
-        "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ",
-        "Loopback0                  10.1.1.1        YES manual up                    up      "
-    ]
-}
-ok: [192.168.100.2] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        "",
-        "Interface                  IP-Address      OK? Method Status                Protocol",
-        "Ethernet0/0                192.168.100.2   YES manual up                    up      ",
-        "Loopback0                  10.1.1.1        YES manual up                    up      "
-    ]
-}
-ok: [192.168.100.3] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        "",
-        "Interface                  IP-Address      OK? Method Status                Protocol",
-        "Ethernet0/0                192.168.100.3   YES manual up                    up      ",
-        "Loopback0                  10.1.1.1        YES manual up                    up      "
-    ]
-}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
 ```
+
+[Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/2_register_vars.png)
 
 
 ### register, debug, when
@@ -165,26 +126,9 @@ PLAY RECAP *********************************************************************
 Сначала попробуем выполнить playbook:
 ```
 $ ansible-playbook 3_register_debug_when.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1]
-changed: [192.168.100.2]
-changed: [192.168.100.3]
-
-TASK [Debug registered var] ****************************************************
-skipping: [192.168.100.1]
-skipping: [192.168.100.2]
-skipping: [192.168.100.3]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=1    unreachable=0    failed=0
-
 ```
+
+[Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/3_register_debug_when_skip.png)
 
 Обратите внимание на сообщения skipping - это означает, что задача не выполнялась для указанных устройств.
 Не выполнилась она потому, что условие в when не было выполнено.
@@ -212,32 +156,9 @@ PLAY RECAP *********************************************************************
 Теперь результат выполнения будет таким:
 ```
 $ ansible-playbook 3_register_debug_when.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1]
-changed: [192.168.100.2]
-changed: [192.168.100.3]
-
-TASK [Debug registered var] ****************************************************
-ok: [192.168.100.1] => {
-    "msg": "Error in command"
-}
-ok: [192.168.100.2] => {
-    "msg": "Error in command"
-}
-ok: [192.168.100.3] => {
-    "msg": "Error in command"
-}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=1    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=1    unreachable=0    failed=0
-
 ```
+
+[Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/3_register_debug_when.png)
 
 Теперь мы видим сообщение, которое было указано в задаче для модуля debug, так как команда была с ошибкой.
 

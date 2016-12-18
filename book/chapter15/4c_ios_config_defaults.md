@@ -58,19 +58,6 @@
 Запуск playbook:
 ```
 $ ansible-playbook 6e_ios_config_defaults.yml
-SSH password:
-
-PLAY [Run cfg commands on routers] *********************************************
-
-TASK [Config interface] ********************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.3]
-ok: [192.168.100.2]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=1    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=1    changed=0    unreachable=0    failed=0
-
 ```
 
+![6e_ios_config_default](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6e_ios_config_defaults.png)

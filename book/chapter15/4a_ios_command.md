@@ -38,58 +38,10 @@
 Попробуем запустить playbook:
 ```
 $ ansible-playbook 2_ios_command.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.2]
-ok: [192.168.100.3]
-
-TASK [Debug registered var] ****************************************************
-ok: [192.168.100.1] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ",
-            "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ",
-            "Ethernet0/2                unassigned      YES NVRAM  administratively down down    ",
-            "Ethernet0/3                unassigned      YES NVRAM  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ]
-    ]
-}
-ok: [192.168.100.2] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.2   YES manual up                    up      ",
-            "Ethernet0/1                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/2                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/3                unassigned      YES unset  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ]
-    ]
-}
-ok: [192.168.100.3] => {
-    "sh_ip_int_br_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.3   YES manual up                    up      ",
-            "Ethernet0/1                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/2                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/3                unassigned      YES unset  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ]
-    ]
-}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=0    unreachable=0    failed=0
 ```
+
+![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/2_ios_command.png)
+
 
 В отличии от использования модуля raw, когда мы используем модуль ios_command, playbook не указывает, что были выполнены изменения.
 
@@ -125,121 +77,12 @@ Playbook 4a_ios_command.yml:
 Теперь мы указываем две команды, в модуле ios_command, поэтому синтаксис должен быть немного другим - команды должны быть указаны, как список в формате YAML.
 
 
-Посмотрим на результат выполнения playbook:
+Посмотрим на результат выполнения playbook (вывод сокращен):
 ```
 $ ansible-playbook 2a_ios_command.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run show commands] *******************************************************
-ok: [192.168.100.1]
-ok: [192.168.100.3]
-ok: [192.168.100.2]
-
-TASK [Debug registered var] ****************************************************
-ok: [192.168.100.1] => {
-    "show_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.1   YES NVRAM  up                    up      ",
-            "Ethernet0/1                192.168.200.1   YES NVRAM  up                    up      ",
-            "Ethernet0/2                unassigned      YES NVRAM  administratively down down    ",
-            "Ethernet0/3                unassigned      YES NVRAM  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ],
-        [
-            "Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP",
-            "       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area ",
-            "       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2",
-            "       E1 - OSPF external type 1, E2 - OSPF external type 2",
-            "       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2",
-            "       ia - IS-IS inter area, * - candidate default, U - per-user static route",
-            "       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP",
-            "       + - replicated route, % - next hop override",
-            "",
-            "Gateway of last resort is not set",
-            "",
-            "      10.0.0.0/32 is subnetted, 1 subnets",
-            "C        10.1.1.1 is directly connected, Loopback0",
-            "      192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks",
-            "C        192.168.100.0/24 is directly connected, Ethernet0/0",
-            "L        192.168.100.1/32 is directly connected, Ethernet0/0",
-            "      192.168.200.0/24 is variably subnetted, 2 subnets, 2 masks",
-            "C        192.168.200.0/24 is directly connected, Ethernet0/1",
-            "L        192.168.200.1/32 is directly connected, Ethernet0/1"
-        ]
-    ]
-}
-ok: [192.168.100.2] => {
-    "show_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.2   YES manual up                    up      ",
-            "Ethernet0/1                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/2                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/3                unassigned      YES unset  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ],
-        [
-            "Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP",
-            "       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area ",
-            "       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2",
-            "       E1 - OSPF external type 1, E2 - OSPF external type 2",
-            "       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2",
-            "       ia - IS-IS inter area, * - candidate default, U - per-user static route",
-            "       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP",
-            "       + - replicated route, % - next hop override",
-            "",
-            "Gateway of last resort is not set",
-            "",
-            "      10.0.0.0/32 is subnetted, 1 subnets",
-            "C        10.1.1.1 is directly connected, Loopback0",
-            "      192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks",
-            "C        192.168.100.0/24 is directly connected, Ethernet0/0",
-            "L        192.168.100.2/32 is directly connected, Ethernet0/0",
-            "D     192.168.200.0/24 [90/307200] via 192.168.100.1, 1w6d, Ethernet0/0"
-        ]
-    ]
-}
-ok: [192.168.100.3] => {
-    "show_result.stdout_lines": [
-        [
-            "Interface                  IP-Address      OK? Method Status                Protocol",
-            "Ethernet0/0                192.168.100.3   YES manual up                    up      ",
-            "Ethernet0/1                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/2                unassigned      YES unset  administratively down down    ",
-            "Ethernet0/3                unassigned      YES unset  administratively down down    ",
-            "Loopback0                  10.1.1.1        YES manual up                    up      "
-        ],
-        [
-            "Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP",
-            "       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area ",
-            "       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2",
-            "       E1 - OSPF external type 1, E2 - OSPF external type 2",
-            "       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2",
-            "       ia - IS-IS inter area, * - candidate default, U - per-user static route",
-            "       o - ODR, P - periodic downloaded static route, H - NHRP, l - LISP",
-            "       + - replicated route, % - next hop override",
-            "",
-            "Gateway of last resort is not set",
-            "",
-            "      10.0.0.0/32 is subnetted, 1 subnets",
-            "C        10.1.1.1 is directly connected, Loopback0",
-            "      192.168.100.0/24 is variably subnetted, 2 subnets, 2 masks",
-            "C        192.168.100.0/24 is directly connected, Ethernet0/0",
-            "L        192.168.100.3/32 is directly connected, Ethernet0/0",
-            "D     192.168.200.0/24 [90/307200] via 192.168.100.1, 1w6d, Ethernet0/0"
-        ]
-    ]
-}
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=0    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=0    unreachable=0    failed=0
-
 ```
+
+![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/2a_ios_command.png)
 
 Обе команды выполнились на всех устройствах.
 
@@ -259,25 +102,10 @@ PLAY RECAP *********************************************************************
 
 Например, если сделать ошибку в команде, и запустить playbook еще раз
 ```
-$ ansible-playbook 4_ios_command.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-fatal: [192.168.100.1]: FAILED! => {"changed": false, "failed": true, "msg":
- "matched error in response: shw ip int br\r\n     ^\r\n% Invalid input detected at '^' marker.\r\n\r\nR1#"}
-fatal: [192.168.100.2]: FAILED! => {"changed": false, "failed": true, "msg":
- "matched error in response: shw ip int br\r\n     ^\r\n% Invalid input detected at '^' marker.\r\n\r\nR2#"}
-fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg":
- "matched error in response: shw ip int br\r\n     ^\r\n% Invalid input detected at '^' marker.\r\n\r\nR3#"}
-    to retry, use: --limit @/home/nata/pyneng_course/chapter15/2c_ios_command_fail.retry
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=0    changed=0    unreachable=0    failed=1
-192.168.100.2              : ok=0    changed=0    unreachable=0    failed=1
-192.168.100.3              : ok=0    changed=0    unreachable=0    failed=1
+$ ansible-playbook 2_ios_command.yml
 ```
+
+![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/2_ios_command-fail.png)
 
 То есть, если задача отработала, значит ошибок при выполнении не было.
 

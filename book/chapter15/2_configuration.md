@@ -106,37 +106,9 @@ host_key_checking=False
 И повторим ad-hoc команду:
 ```
 $ ansible cisco-routers -m raw -a "sh ip int br"
-SSH password:
-192.168.100.1 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.1   YES NVRAM  up                    up
-Ethernet0/1                192.168.200.1   YES NVRAM  up                    up
-Ethernet0/2                unassigned      YES NVRAM  administratively down down
-Ethernet0/3                unassigned      YES NVRAM  administratively down down    Warning: Permanently added '192.168.100.1' (RSA) to the list of known hosts.
-Connection to 192.168.100.1 closed by remote host.
-Shared connection to 192.168.100.1 closed.
-
-
-192.168.100.2 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.2   YES manual up                    up
-Ethernet0/1                unassigned      YES unset  administratively down down
-Ethernet0/2                unassigned      YES unset  administratively down down
-Ethernet0/3                unassigned      YES unset  administratively down down    Warning: Permanently added '192.168.100.2' (RSA) to the list of known hosts.
-Shared connection to 192.168.100.2 closed.
-
-
-192.168.100.3 | SUCCESS | rc=0 >>
-
-Interface                  IP-Address      OK? Method Status                Protocol
-Ethernet0/0                192.168.100.3   YES manual up                    up
-Ethernet0/1                unassigned      YES unset  administratively down down
-Ethernet0/2                unassigned      YES unset  administratively down down
-Ethernet0/3                unassigned      YES unset  administratively down down    Warning: Permanently added '192.168.100.3' (RSA) to the list of known hosts.
-Shared connection to 192.168.100.3 closed.
 ```
+
+![ad-hoc](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/ad-hoc.png)
 
 Обратите внимание на строки:
 ```
