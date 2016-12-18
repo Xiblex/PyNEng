@@ -67,40 +67,9 @@ Playbook описываются в формате YAML.
 Теперь попробуем запустить playbook:
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.1]
-changed: [192.168.100.3]
-changed: [192.168.100.2]
-
-TASK [run sh ip route] *********************************************************
-changed: [192.168.100.2]
-changed: [192.168.100.1]
-changed: [192.168.100.3]
-
-PLAY [Run show commands on switches] *******************************************
-
-TASK [run sh int status] *******************************************************
-changed: [192.168.100.100]
-
-TASK [run sh vlans] ************************************************************
-changed: [192.168.100.100]
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.100            : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=2    unreachable=0    failed=0
 ```
 
-<details> 
-  <summary>Вывод запуска playbook (в цвете)</summary>
-<img src=https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook_execution.png alt="Ansible Playbook">
-</details>
-
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook_execution.png)
 
 > **Note** Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, мы использовали команду ansible. А для playbook - ansible-playbook.
 
@@ -139,39 +108,9 @@ PLAY RECAP *********************************************************************
 Например, заменим пароль пользователя cisco на cisco123 (правильный cisco) на маршрутизаторе 192.168.100.1, и запустим playbook заново:
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml
-SSH password:
-
-PLAY [Run show commands on routers] ********************************************
-
-TASK [run sh ip int br] ********************************************************
-changed: [192.168.100.3]
-changed: [192.168.100.2]
-fatal: [192.168.100.1]: FAILED! => {"changed": true, "failed": true, "rc": 5, "stderr": "", "stdout": "", "stdout_lines": []}
-
-TASK [run sh ip route] *********************************************************
-changed: [192.168.100.2]
-changed: [192.168.100.3]
-
-PLAY [Run show commands on switches] *******************************************
-
-TASK [run sh int status] *******************************************************
-changed: [192.168.100.100]
-
-TASK [run sh vlans] ************************************************************
-changed: [192.168.100.100]
-    to retry, use: --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_raw.retry
-
-PLAY RECAP *********************************************************************
-192.168.100.1              : ok=0    changed=0    unreachable=0    failed=1
-192.168.100.100            : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.2              : ok=2    changed=2    unreachable=0    failed=0
-192.168.100.3              : ok=2    changed=2    unreachable=0    failed=0
 ```
 
-<details>
-  <summary>Результат запуска playbook (в цвете)</summary>
-<img src=https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook_failed_execution.png alt="Ansible failed playbook">
-</details>
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/playbook_failed_execution.png)
 
 Обратите внимание на ошибку в выполнении первой задачи для маршрутизатора 192.168.100.1.
 
