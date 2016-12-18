@@ -80,14 +80,14 @@ $ ansible-playbook 6a_ios_config_parents_basic.yml -v
 $ ansible-playbook 6b_ios_config_debug.yml
 ```
 
-![6a_ios_config_debug_skipping](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_debug_skipping.png)
+![6b_ios_config_debug_skipping](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6b_ios_config_debug_skipping.png)
 
 Если теперь опять вручную изменить конфигурацию маршрутизатора 192.168.100.1 (изменить transport input ssh на transport input all):
 ```
 $ ansible-playbook 6b_ios_config_debug.yml
 ```
 
-![6a_ios_config_debug_update](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6a_ios_config_debug_update.png)
+![6b_ios_config_debug_update](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6b_ios_config_debug_update.png)
 
 Теперь второе задание отображает информацию о том, какие именно изменения были внесены на маршрутизаторе.
 
