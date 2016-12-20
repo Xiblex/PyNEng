@@ -107,6 +107,71 @@ $ ansible-playbook 8_playbook_include_tasks.yml
 ![8_playbook_include_tasks](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/8_playbook_include_tasks.png)
 
 
+При выполнении playbook, задачи которые мы добавили через include работают так же, как если бы они находились в самом playbook.
+
+Таким образом мы можем делать отдельные файлы с задачами, которые настраивают определенную функциональность, а затем собирать их в нужной комбинации в итоговом playbook.
+
+
+#### Передача переменных в include
+
+При использовании include, задачам можно передавать аргументы.
+
+Например, когда мы использовали команду ntc_show_command из модуля ntc-ansible, нужно было задать ряд параметров.
+Так как они не вынесены в отдельную переменную, как в случае с модулями ios_config, ios_command и ios_facts, довольно не удобно каждый раз их описывать.
+
+Попробуем вынести задачу с использованием ntc_show_command в отдельный файл tasks/ntc_show.yml:
+```yml
+---
+
+- ntc_show_command:
+    connection: ssh
+    platform: "cisco_ios"
+    command: "{{ ntc_command }}"
+    host: "{{ inventory_hostname }}"
+    username: "cisco"
+    password: "cisco"
+    template_dir: "library/ntc-ansible/ntc-templates/templates"
+```
+
+В этом файле указаны две переменные: ntc_command и inventory_hostname.
+С переменной inventory_hostname мы уже сталкивались раньше, она автоматически становится равной текущеву устройству, для которого Ansible выполняет задачу.
+
+А значение переменной ntc_command мы будем передавать из playbook.
+
+Playbook 8_playbook_include_tasks_var.yml:
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: 192.168.100.1
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - include: tasks/cisco_ospf_cfg.yml
+    - include: tasks/ntc_show.yml ntc_command="sh ip route"
+
+  handlers:
+
+    - name: save config
+      ios_command:
+        commands:
+          - write
+        provider: "{{ cli }}"
+```
+
+В таком варианте, нам достаточно указать какую команду передать ntc_show_command.
+
+Переменные можно передавать и таким образом:
+```
+  tasks:
+
+    - include: tasks/cisco_ospf_cfg.yml
+    - include: tasks/ntc_show.yml
+      vars:
+        ntc_command: "sh ip route"
+```
 
 ### Handler include
 
