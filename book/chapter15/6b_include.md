@@ -10,6 +10,7 @@
 * задачи
 * handlers
 * сценарий (play)
+* playbook
 * файлы с переменными (используют другое ключевое слово)
 
 ### Task include
@@ -164,7 +165,7 @@ Playbook 8_playbook_include_tasks_var.yml:
 В таком варианте, нам достаточно указать какую команду передать ntc_show_command.
 
 Переменные можно передавать и таким образом:
-```
+```yml
   tasks:
 
     - include: tasks/cisco_ospf_cfg.yml
@@ -173,9 +174,125 @@ Playbook 8_playbook_include_tasks_var.yml:
         ntc_command: "sh ip route"
 ```
 
+Такой вариант удобнее, когда вам нужно передать несколько переменных.
+
 ### Handler include
 
-### Play include
+Include можно использовать и в разделе handlers.
+
+Например, перенесем handler из предыдущих примеров в отдельный файл handlers/cisco_save_cfg.yml:
+```yml
+---
+
+- name: save config
+  ios_command:
+    commands:
+      - write
+    provider: "{{ cli }}"
+```
+
+И добавим его в playbook 8_playbook_include_handlers.yml через include:
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Disable services
+      ios_config:
+        lines:
+          - no ip http server
+          - no ip http secure-server
+          - no ip domain lookup
+        provider: "{{ cli }}"
+      notify: save config
+
+    - include: tasks/cisco_ospf_cfg.yml
+    - include: tasks/cisco_vty_cfg.yml
+
+  handlers:
+
+    - include: handlers/cisco_save_cfg.yml
+```
+
+Запуск playbook:
+```
+$ ansible-playbook 8_playbook_include_handlers.yml -v
+```
+![8_playbook_include_handlers](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/8_playbook_include_handlers.png)
+
+Playbook выполняет handler, как-будто он находится в playbook.
+Таким образом можно легко добавлять handler в любой playbook.
+
+### Play/playbook include
+
+С помощью выражения include можно добавить в playbook и целый сценарий (play) или другой playbook.
+От добавления задач это будет отличаться только уровнем, на котором выполняется include.
+
+Например, у нас есть такой сценарий 8_play_to_include.yml:
+```yml
+---
+
+- name: Run show commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: run show commands
+      ios_command:
+        commands:
+          - show ip int br
+          - sh ip route
+        provider: "{{ cli }}"
+      register: show_result
+
+    - name: Debug registered var
+      debug: var=show_result.stdout_lines
+```
+
+Добавим его в playbook 8_playbook_include_play.yml:
+```yml
+---
+
+- name: Run cfg commands on routers
+  hosts: cisco-routers
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Disable services
+      ios_config:
+        lines:
+          - no ip http server
+          - no ip http secure-server
+          - no ip domain lookup
+        provider: "{{ cli }}"
+      notify: save config
+
+    - include: tasks/cisco_ospf_cfg.yml
+    - include: tasks/cisco_vty_cfg.yml
+
+  handlers:
+
+    - include: handlers/cisco_save_cfg.yml
+
+- include: 8_play_to_include.yml
+```
+
+Если выполнить playbook, то все задачи из файла 8_play_to_include.yml выполняются точно так же, как и те, которые находятся в playbook (вывод сокращен):
+```
+$ ansible-playbook 8_playbook_include_play.yml
+```
+
+![8_playbook_include_play](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/8_playbook_include_play.png)
+
 
 ### Vars include
 
