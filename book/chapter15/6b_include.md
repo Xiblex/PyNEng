@@ -296,4 +296,136 @@ $ ansible-playbook 8_playbook_include_play.yml
 
 ### Vars include
 
+Несмотря на то, что файлы с переменными могут быть вынесены в каталоги host_vars и group_vars, и разбиты на части, которые относятся ко всем устройствам, к группе или к конкретному устройству, иногда не хватает этой иерархии и файлы с переменными становятся слишком большими.
+Но и тут Ansible поддерживает возможность создавать дополнительную иерархию.
 
+Можно создавать отдельные файлы с переменными, которые будут относиться, например, к настройке определенного функционала.
+
+#### include_vars
+
+Например, создадим каталог vars и добавим в него файл vars/cisco_bgp_general.yml
+```yml
+---
+
+as: 65000
+network: 120.0.0.0 mask 255.255.252.0
+ttl_security_hops: 3
+send_community: true
+update_source_int: Loopback0
+ibgp_neighbors:
+  - 10.0.0.1
+  - 10.0.0.2
+  - 10.0.0.3
+  - 10.0.0.4
+ebgp_neighbors:
+  - ip: 15.0.0.5
+    as: 500
+  - ip: 26.0.0.6
+    as: 600
+```
+
+Переменные будем использовать для генерации конфигурации BGP по шаблону templates/bgp.j2:
+```
+router bgp {{ as }}
+ network {{ network }}
+ {% for n in ibgp_neighbors %}
+ neighbor {{ n }} remote-as {{ as }}
+ neighbor {{ n }} update-source {{ update_source_int }}
+ {% endfor %}
+ {% for extn in ebgp_neighbors %}
+ neighbor {{ extn.ip }} remote-as {{ extn.as }}
+ neighbor {{ extn.ip }} ttl-security hops {{ ttl_security_hops }}
+ {% if send_community == true %}
+ neighbor {{ extn.ip }} send-community
+ {% endif %}
+ {% endfor %}
+```
+
+> Шаблон подразумевает настройку одного маршрутизатора, просто чтобы показать как добавлять переменные из файла.
+
+Итоговый playbook 8_playbook_include_vars.yml
+```yml
+---
+
+- name: Run cfg commands on router
+  hosts: 192.168.100.1
+  gather_facts: false
+  connection: local
+
+  tasks:
+
+    - name: Include BGP vars
+      include_vars: vars/cisco_bgp_general.yml
+
+    - name: Config BGP
+      ios_config:
+        src: templates/bgp.j2
+        provider: "{{ cli }}"
+
+    - name: Show BGP config
+      ios_command:
+        commands: sh run | s ^router bgp
+        provider: "{{ cli }}"
+      register: bgp_cfg
+
+    - name: Debug registered var
+      debug: var=bgp_cfg.stdout_lines
+```
+
+Обратите внимание, что переменные из файла подключаются отдельной задачей (в данном случае, можно было бы обойтись без имени задачи):
+```yml
+    - name: Include BGP vars
+      include_vars: vars/cisco_bgp_general.yml
+```
+
+Выполнение playbook выглядит так:
+```
+$ ansible-playbook 8_playbook_include_vars.yml
+```
+
+![8_playbook_include_vars](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/8_playbook_include_vars.png)
+
+
+> Модуль include_vars поддерживает большое количество вариантов использования. Подробнее об этом можно почитать в [документации модуля](http://docs.ansible.com/ansible/include_vars_module.html).
+
+#### vars_files
+
+Второй вариант добавления файлов с переменными - использование vars_files.
+
+Его отличие в том, что мы создаем переменные на уровне сценария (play), а не на уровне задаче.
+
+Пример playbook 8_playbook_include_vars_files.yml:
+```yml
+---
+
+- name: Run cfg commands on router
+  hosts: 192.168.100.1
+  gather_facts: false
+  connection: local
+
+  vars_files:
+    - vars/cisco_bgp_general.yml
+
+  tasks:
+
+    - name: Config BGP
+      ios_config:
+        src: templates/bgp.j2
+        provider: "{{ cli }}"
+
+    - name: Show BGP config
+      ios_command:
+        commands: sh run | s ^router bgp
+        provider: "{{ cli }}"
+      register: bgp_cfg
+
+    - name: Debug registered var
+      debug: var=bgp_cfg.stdout_lines
+```
+
+Результат выполнения будет в целом аналогичен предыдущему выводу, но, так как файл с переменными указывался через vars_files, загрузка переменных не будет видна как отдельная задача:
+```
+$ ansible-playbook 8_playbook_include_vars_files.yml
+```
+
+![8_playbook_include_vars_files](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/8_playbook_include_vars_files.png)
