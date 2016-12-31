@@ -4,6 +4,7 @@
 Если вам интересно развивать свои знания по Python в целом, ниже несколько полезных ссылок.
 
 * [The Hitchhiker’s Guide to Python!](http://docs.python-guide.org/en/latest/)
+* [Best Python Resources](https://www.fullstackpython.com/best-python-resources.html)
 
 ### Python + network
 
