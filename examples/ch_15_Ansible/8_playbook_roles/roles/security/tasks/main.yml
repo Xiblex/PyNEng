@@ -6,18 +6,12 @@
       - service password-encryption
       - no ip http server
       - no ip http secure-server
-      - no ip domain lookup
     provider: "{{ cli }}"
-  notify: save config
 
-- name: Configure vty usability/security features
+- name: Configure vty security features
   ios_config:
     parents:
       - line vty 0 4
     lines:
-      - exec-timeout 30 0
-      - logging synchronous
-      - history size 100
       - transport input ssh
     provider: "{{ cli }}" 
-  notify: save config

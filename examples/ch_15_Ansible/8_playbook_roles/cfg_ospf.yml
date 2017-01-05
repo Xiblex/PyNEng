@@ -1,7 +1,7 @@
 ---
 
-- name: Basic config
-  hosts: cisco-routers
+- name: Configure OSPF
+  hosts: 192.168.100.1
   gather_facts: false
   connection: local
   roles:

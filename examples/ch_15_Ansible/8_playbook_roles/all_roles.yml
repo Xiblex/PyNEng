@@ -1,9 +1,10 @@
 ---
 
-- name: Basic config
+- name: Roles config
   hosts: cisco-routers
   gather_facts: false
   connection: local
   roles:
-    - basic
+    - usability
+    - security
     - ospf
