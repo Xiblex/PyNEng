@@ -121,7 +121,7 @@ interface {{ intf }}
 {% endfor %}
 ```
 
->Обратите внимание, что фильтр ожидает словарь, а не список кортежей. Поэтому мы не используем тут выражение ```{% for intf, params in trunks.iteritems()```.
+>Обратите внимание, что фильтр ожидает словарь, а не список кортежей или итератор. Поэтому мы не используем тут выражения ```{% for intf, params in trunks.items() %}``` или ```{% for intf, params in trunks.iteritems() %}```.
 
 Файл с данными (data_files/filter_dictsort.yml):
 ```yml
