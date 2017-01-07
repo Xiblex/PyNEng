@@ -24,7 +24,7 @@ router ospf 1
 {% endif %}
 ```
 
-Выражение ```if ospf``` работает так же, как в Python: если переменная существует и не пустая, результат будет True. Если переменной нет, или они пустая, результат будет False.
+Выражение ```if ospf``` работает так же, как в Python: если переменная существует и не пустая, результат будет True. Если переменной нет, или она пустая, результат будет False.
 
 То есть, в этом шаблоне конфигурация OSPF генерируется только в том случае, если мы передали переменную ospf с какими-то значениями внутри.
 
@@ -95,5 +95,90 @@ router ospf 1
  network 10.0.1.0 0.0.0.255 area 0
  network 10.0.2.0 0.0.0.255 area 2
  network 10.1.1.0 0.0.0.255 area 0
+```
+
+Как и в Python, в Jinja можно делать ответвления в условии.
+
+Посмотрим на пример шаблона templates/if_vlans.txt:
+```
+{% for intf, params in trunks.iteritems() %}
+interface {{ intf }}
+{% if params.action == 'add' %}
+ switchport trunk allowed vlan add {{ params.vlans }}
+{% elif params.action == 'delete' %}
+  switchport trunk allowed vlan remove {{ params.vlans }}
+{% else %}
+  switchport trunk allowed vlan {{ params.vlans }}
+{% endif %}
+{% endfor %}
+```
+
+Файл data_files/if_vlans.yml с данными:
+```yml
+trunks:
+  Fa0/1:
+    action: add
+    vlans: 10,20
+  Fa0/2:
+    action: only
+    vlans: 10,30
+  Fa0/3:
+    action: delete
+    vlans: 10
+```
+
+В данном примере, в зависимости от значения параметра action, генерируются разные команды.
+
+В шаблоне можно было использовать и такой вариант обращения к вложенным словарям:
+```
+{% for intf in trunks %}
+interface {{ intf }}
+{% if trunks[intf]['action'] == 'add' %}
+ switchport trunk allowed vlan add {{ trunks[intf]['vlans'] }}
+{% elif trunks[intf]['action'] == 'delete' %}
+  switchport trunk allowed vlan remove {{ trunks[intf]['vlans'] }}
+{% else %}
+  switchport trunk allowed vlan {{ trunks[intf]['vlans'] }}
+{% endif %}
+{% endfor %}
+```
+
+В итоге, будет сгенерирована такая конфигурация:
+```
+$ python cfg_gen.py templates/if_vlans.txt data_files/if_vlans.yml
+interface Fa0/1
+ switchport trunk allowed vlan add 10,20
+interface Fa0/3
+  switchport trunk allowed vlan remove 10
+interface Fa0/2
+  switchport trunk allowed vlan 10,30
+```
+
+
+Также, с помощью if, можно фильтровать по каким элементам последовательности пройдется цикл for.
+
+Пример шаблона templates/if_for.txt с фильтром, в цикле for:
+```
+{% for vlan, name in vlans.iteritems() if vlan > 15 %}
+vlan {{ vlan }}
+ name {{ name }}
+{% endfor %}
+```
+
+Файл с данными (data_files/if_for.yml):
+```yml
+vlans:
+  10: Marketing
+  20: Voice
+  30: Management
+```
+
+Результат выполнения:
+```
+$ python cfg_gen.py templates/if_for.txt data_files/if_for.yml
+vlan 20
+ name Voice
+vlan 30
+ name Management
 ```
 
