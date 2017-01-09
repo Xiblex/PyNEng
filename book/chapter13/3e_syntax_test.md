@@ -104,4 +104,17 @@ trunks:
 Но, засчет теста ```is iterable``` (в этом случае результат будет false), в этом случае шаблон уходит в ветку else.
 
 
+Результат выполнения:
+```
+$ python cfg_gen.py templates/test_iterable.txt data_files/test_iterable.yml
+  interface Fa0/1
+            switchport trunk allowed vlan add 10,20
+        interface Fa0/2
+            switchport trunk allowed vlan 10,30
+        interface Fa0/3
+            switchport trunk allowed vlan remove 10
+```
+
+> Такие отступы получились из-за того, что мы использовали отступы в шаблоне и не использовали в скрипте cfg_gen.py параметр lstrip_blocks=True (он удалет пробелы и табы в начале строки).
+
 {% endraw %}
