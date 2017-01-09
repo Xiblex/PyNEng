@@ -199,4 +199,3 @@ interface Fa0/3
   switchport trunk allowed vlan remove 10
 
 ```
-
