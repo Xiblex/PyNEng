@@ -112,6 +112,7 @@
         * [for](book/chapter13/3b_syntax_for.md)
         * [if/elif/else](book/chapter13/3c_syntax_if.md)
         * [Фильтры](book/chapter13/3d_syntax_filter.md)
+        * [Тесты](book/chapter13/3e_syntax_test.md)
     * [Упражнения](exercises/ch_13_Jinja2/13_exercises.md)
 * [14. TextFSM. Обработка вывода команд](book/chapter14/README.md)
     * [Синтаксис шаблонов TextFSM](book/chapter14/1_textfsm_syntax.md)
