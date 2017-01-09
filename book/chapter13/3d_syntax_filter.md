@@ -1,3 +1,4 @@
+{% raw %}
 ## Фильтры
 
 В Jinja переменные можно изменять с помощью фильтров.
@@ -199,3 +200,4 @@ interface Fa0/3
   switchport trunk allowed vlan remove 10
 
 ```
+{% endraw %}
