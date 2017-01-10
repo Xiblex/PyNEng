@@ -1,3 +1,4 @@
+{% raw %}
 ## Фильтры Jinja2
 
 Ansible позволяет использовать фильтры Jinja2 не только в шаблонах, но и в playbook.
@@ -415,4 +416,6 @@ interface Tunnel 0
  tunnel destination 192.168.100.1
  tunnel protection ipsec profile GRE
 ```
+
+{% endraw %}
 
