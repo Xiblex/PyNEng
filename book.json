@@ -8,6 +8,9 @@
         "ga",
         "back-to-top-button"
     ],
+    "structure": {
+    "readme": "INTRO.md"
+    },
     "pluginsConfig": {
         "ga": {
             "token": "UA-87357288-2"
