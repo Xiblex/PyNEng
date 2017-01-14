@@ -1,6 +1,6 @@
 # ntc-ansible
 
-__ntc-ansible__ - это модуль для работы с сетевым оборудованием, который не только выполняет команды на оборудовании, но и обрабатывает вывод команд и преобразует с помощью [TextFSM](https://natenka.gitbooks.io/pyneng/content/book/chapter14/).
+__ntc-ansible__ - это модуль для работы с сетевым оборудованием, который не только выполняет команды на оборудовании, но и обрабатывает вывод команд и преобразует с помощью [TextFSM](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/).
 
 Этот модуль не входит в число core модулей Ansible, поэтому его нужно сначала установить.
 Но прежде нужно указать Ansible где искать сторонние модули.
@@ -250,4 +250,4 @@ cisco_ios_show_aliases.template,  .*, cisco_ios, sh[[ow]] alia[[ses]]
 ...
 ```
 
-Синтаксис шаблонов и файла index описаны в разделе [TextFSM](https://natenka.gitbooks.io/pyneng/content/book/chapter14/).
+Синтаксис шаблонов и файла index описаны в разделе [TextFSM](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/).
