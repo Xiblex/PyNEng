@@ -82,7 +82,7 @@ gathering = explicit
 $ ansible cisco-routers -m raw -a "sh ip int br"
 ```
 
-![host_key_checking](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/host_key_checking.png)
+![host_key_checking](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/host_key_checking.png)
 
 Теперь добавим в конфигурационный файл параметр host_key_checking:
 ```
@@ -101,7 +101,7 @@ host_key_checking=False
 $ ansible cisco-routers -m raw -a "sh ip int br"
 ```
 
-![host_key_checking2](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/host_key_checking2.png)
+![host_key_checking2](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/host_key_checking2.png)
 
 Обратите внимание на строки:
 ```

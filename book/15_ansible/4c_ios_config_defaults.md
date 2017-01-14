@@ -60,4 +60,4 @@
 $ ansible-playbook 6e_ios_config_defaults.yml
 ```
 
-![6e_ios_config_default](https://raw.githubusercontent.com/natenka/PyNEng/master/book/chapter15/images/6e_ios_config_defaults.png)
+![6e_ios_config_default](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6e_ios_config_defaults.png)
