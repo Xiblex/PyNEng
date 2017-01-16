@@ -1,5 +1,5 @@
 import sw_int_templates
-from sw1 import sw1_fast_int
+from sw_data import sw1_fast_int
 
 
 def generate_access_cfg(sw_dict):
@@ -13,8 +13,6 @@ def generate_access_cfg(sw_dict):
                 result.append(' %s' % command)
     return result
 
-
-#print '\n'.join(generate_access_cfg(sw1_fast_int))
-
 if __name__ == "__main__":
     print '\n'.join(generate_access_cfg(sw1_fast_int))
+

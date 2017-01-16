@@ -17,71 +17,19 @@ trunk_template = ['switchport trunk encapsulation dot1q',
 l3int_template = ['no switchport', 'ip address']
 ```
 
-И файл sw1.py:
+И файл sw_data.py:
 ```python
 sw1_fast_int = {
                 'access':{
                          '0/12':'10',
                          '0/14':'11',
-                         '0/16':'17',
-                         '0/17':'150'}}
+                         '0/16':'17'}}
 ```
 
-Теперь попробуем совместить все вместе в файле generate_sw_conf.py:
+Теперь попробуем совместить все вместе в файле generate_sw_int_cfg.py:
 ```python
 import sw_int_templates
-from sw1 import sw1_fast_int
-
-
-for intf in sw1_fast_int['access']:
-    print 'interface FastEthernet' + intf
-    for command in sw_int_templates.access_template:
-        if command.endswith('access vlan'):
-            print ' %s %s' % (command, sw1_fast_int['access'][intf])
-        else:
-            print ' %s' % command
-```
-
-Вывод мы получаем такой же:
-```
-$ python generate_sw_conf.py
-interface FastEthernet0/12
- switchport mode access
- switchport access vlan 10
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/14
- switchport mode access
- switchport access vlan 11
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/16
- switchport mode access
- switchport access vlan 17
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/17
- switchport mode access
- switchport access vlan 150
- spanning-tree portfast
- spanning-tree bpduguard enable
-```
-
-В этом примере мы увидели:
-* как импортировать модули
-* что модули - это обычные файлы с кодом Python
-* что мы можем импортировать все объекты модуля (import module)
-* или только некоторые (from module import object)
-
-
-### if __name__ == "__main__"
-
-Иногда, скрипт, который вы создали, может выполняться самостоятельно, а может быть импортирован как модуль, другим скриптом.
-
-На основе файла generate_sw_conf.py создадим новый файл generate_sw_conf2.py.
-```python
-import sw_int_templates
-from sw1 import sw1_fast_int
+from sw_data import sw1_fast_int
 
 
 def generate_access_cfg(sw_dict):
@@ -97,16 +45,18 @@ def generate_access_cfg(sw_dict):
 
 
 print '\n'.join(generate_access_cfg(sw1_fast_int))
+
 ```
 
-Отличия:
-* цикл for перенесен в функцию
-* вместо print, мы добавляем строки в список result
-* функция возвращает полученный список
+В первых двух строках мы импортируем объекты из других файлов:
+* ```import sw_int_templates``` - мы импортируем всё из файла
+ * пример использования одного из шаблонов: ```sw_int_templates.access_template```
+* ```from sw_data import sw1_fast_int``` - из модуля sw_data мы импортируем только sw1_fast_int
+ * пр таком импорте, мы можем напрямую обращаться к имени sw1_fast_int
 
-В последней строке мы выводим полученный результат. Вывод будет таким же:
+Вывод мы получаем такой:
 ```
-$ python generate_sw_conf2.py
+$ python generate_sw_int_cfg.py
 interface FastEthernet0/12
  switchport mode access
  switchport access vlan 10
@@ -122,40 +72,72 @@ interface FastEthernet0/16
  switchport access vlan 17
  spanning-tree portfast
  spanning-tree bpduguard enable
-interface FastEthernet0/17
- switchport mode access
- switchport access vlan 150
- spanning-tree portfast
- spanning-tree bpduguard enable
 ```
 
-А теперь создадим новый файл generate_cfg_sw2.py:
+В этом примере мы увидели:
+* как импортировать модули
+* что модули - это обычные файлы с кодом Python
+* что мы можем импортировать все объекты модуля (import module)
+* или только некоторые (from module import object)
+
+
+### ```if __name__ == "__main__"```
+
+Иногда, скрипт, который вы создали, может выполняться и самостоятельно, и может быть импортирован как модуль, другим скриптом.
+
+До сих пор, файл generate_sw_int_cfg.py вызывался самостоятельно.
+Теперь мы добавим ещё один скрипт, который будет импортировать функцию из этого файла.
+
+Файл sw_cfg_templates.py с шаблонами конфигурации:
 ```python
-import sw_int_templates
-from sw2 import sw2_fast_int
-from generate_sw_conf2 import generate_access_cfg
+basic_cfg = """
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+"""
 
-
-print '\n'.join(generate_access_cfg(sw2_fast_int))
+lines_cfg = """
+!
+line con 0
+ logging synchronous
+ history size 100
+line vty 0 4
+ logging synchronous
+ history size 100
+ transport input ssh
+!
+"""
 ```
 
-В нем мы импортируем шаблон, затем словарь с информацией о коммутаторе (sw2_fast_int) и, последнее, импортируем функцию generate_access_cfg из файла generate_sw_conf2.py.
+То есть, в нем находятся просто строки с конфигурацией, которая всегда одинаковая.
 
-Файл sw2.py:
+В файле generate_sw_cfg.py мы импортируем и эти шаблоны, и предыдущий файл:
 ```python
-sw2_fast_int = {
-                'access':{
-                         '0/10':'20',
-                         '0/12':'21',
-                         '0/13':'27',
-                         '0/14':'50'}}
+from sw_data import sw1_fast_int
+from generate_sw_int_cfg import generate_access_cfg
+from sw_cfg_templates import basic_cfg, lines_cfg
 
+
+print basic_cfg
+print '\n'.join(generate_access_cfg(sw1_fast_int))
+print lines_cfg
+```
+То есть, должны отобразиться такие части конфигурации, по порядку:
+шаблон basic_cfg, настройка интерфейсов, шаблон lines_cfg.
+
+
+Обратите внимание, что из файла можно импортировать несколько объектов:
+```
+from sw_cfg_templates import basic_cfg, lines_cfg
 ```
 
-
-Попробуем выполнить скрипт:
+Результат выполнения:
 ```
-$ python generate_cfg_sw2.py
+$ python generate_sw_cfg.py
 interface FastEthernet0/12
  switchport mode access
  switchport access vlan 10
@@ -171,51 +153,62 @@ interface FastEthernet0/16
  switchport access vlan 17
  spanning-tree portfast
  spanning-tree bpduguard enable
-interface FastEthernet0/17
- switchport mode access
- switchport access vlan 150
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/10
- switchport mode access
- switchport access vlan 20
- spanning-tree portfast
- spanning-tree bpduguard enable
+
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+
 interface FastEthernet0/12
  switchport mode access
- switchport access vlan 21
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/13
- switchport mode access
- switchport access vlan 27
+ switchport access vlan 10
  spanning-tree portfast
  spanning-tree bpduguard enable
 interface FastEthernet0/14
  switchport mode access
- switchport access vlan 50
+ switchport access vlan 11
  spanning-tree portfast
  spanning-tree bpduguard enable
+interface FastEthernet0/16
+ switchport mode access
+ switchport access vlan 17
+ spanning-tree portfast
+ spanning-tree bpduguard enable
+
+!
+line con 0
+ logging synchronous
+ history size 100
+line vty 0 4
+ logging synchronous
+ history size 100
+ transport input ssh
+!
 ```
 
-Обратите внимание, что мы получили конфигурацию для 8 портов.
-Хотя, в файле sw2.py в словаре всего 4 порта.
 
-Так получилось из-за строки print в файле generate_sw_conf2.py:
+Мы получили не такой вывод, как ожидали.
+Перед строками шаблона basic_cfg, идет лищняя конфигурация интерфейсов.
+
+
+Так получилось из-за строки print в файле generate_sw_int_cfg.py:
 ```
 print '\n'.join(generate_access_cfg(sw1_fast_int))
 ```
 
 Когда мы импортируем какой-то модуль, всё, что находится в модуле, выполняется.
 И, так как в данном случае, мы выводим информацию на стандартный поток вывод с помощью print,
-мы видим результат выполнения выражения из файла generate_sw_conf2.py, когда запускаем файл generate_cfg_sw2.py.
+мы видим результат выполнения выражения из файла generate_sw_int_cfg.py, когда запускаем файл generate_sw_int_cfg.py.
 
 В Python есть специальный прием, который позволяет указать, что какой-то код должен выполняться, только когда файл запускается напрямую.
 
-Файл generate_sw_conf2.py:
+Файл generate_sw_int_cfg2.py:
 ```python
 import sw_int_templates
-from sw1 import sw1_fast_int
+from sw_data import sw1_fast_int
 
 
 def generate_access_cfg(sw_dict):
@@ -245,9 +238,28 @@ if __name__ == "__main__":
 
 Таким образом, условие ```if __name__ == "__main__"``` проверяет был ли файл запущен напрямую.
 
-Если мы запустим скрипт generate_sw_conf2.py, конфигурация будет выводиться:
+Измените в файле generate_sw_cfg.py строку:
+```
+from generate_sw_int_cfg import generate_access_cfg
+```
+
+на строку:
+```
+from generate_sw_int_cfg2 import generate_access_cfg
+```
+
+И попробуйте запустить скрипт:
 ```python
-$ python generate_sw_conf2.py
+$ python generate_sw_cfg.py
+
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+
 interface FastEthernet0/12
  switchport mode access
  switchport access vlan 10
@@ -263,36 +275,17 @@ interface FastEthernet0/16
  switchport access vlan 17
  spanning-tree portfast
  spanning-tree bpduguard enable
-interface FastEthernet0/17
- switchport mode access
- switchport access vlan 150
- spanning-tree portfast
- spanning-tree bpduguard enable
+
+!
+line con 0
+ logging synchronous
+ history size 100
+line vty 0 4
+ logging synchronous
+ history size 100
+ transport input ssh
+!
+
 ```
 
-Но теперь, когда мы запускаем скрипт generate_cfg_sw2.py, print из файла generate_sw_conf2.py не выводится:
-```python
-$ python generate_cfg_sw2.py
-interface FastEthernet0/10
- switchport mode access
- switchport access vlan 20
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/12
- switchport mode access
- switchport access vlan 21
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/13
- switchport mode access
- switchport access vlan 27
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/14
- switchport mode access
- switchport access vlan 50
- spanning-tree portfast
- spanning-tree bpduguard enable
-```
-
-
+Теперь print из файла generate_sw_int_cfg2.py не выводится.
