@@ -6,8 +6,8 @@
 In [7]: commands = ['switchport mode access', 'spanning-tree portfast', 'spanning-tree bpduguard enable']
 In [8]: fast_int = ['0/1','0/3','0/4','0/7','0/9','0/10','0/11']
 
-In [9]: for int in fast_int:
-   ...:     print 'interface FastEthernet ' + int
+In [9]: for intf in fast_int:
+   ...:     print 'interface FastEthernet ' + intf
    ...:     for command in commands:
    ...:         print ' %s' % command
    ...:         

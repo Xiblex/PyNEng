@@ -2,11 +2,11 @@ import sw_int_templates
 from sw1 import sw1_fast_int
 
 
-for int in sw1_fast_int['access']:
-    print 'interface FastEthernet' + int
+for intf in sw1_fast_int['access']:
+    print 'interface FastEthernet' + intf
     for command in sw_int_templates.access_template:
         if command.endswith('access vlan'):
-            print ' %s %s' % (command, sw1_fast_int['access'][int])
+            print ' %s %s' % (command, sw1_fast_int['access'][intf])
         else:
             print ' %s' % command
 
