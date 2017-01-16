@@ -26,6 +26,7 @@
 
 > В данном случае, скрипт будет работать как фильтр include в CLI Cisco.
 > Вы можете попробовать использовать регулярные выражения для [фильтрации вывода команд show](http://www.slideshare.net/NatashaSamoylenko/cisco-cli-filter-cheat-sheet).
+
 > Пример: sh ip int br | include up +up
 
 
