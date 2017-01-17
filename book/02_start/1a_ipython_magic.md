@@ -58,7 +58,6 @@ In [5]: if a > b:
     else:
          ^
 IndentationError: unindent does not match any outer indentation level
-
 If you want to paste code into IPython, try the %paste and %cpaste magic functions.
 ```
 

@@ -1,7 +1,8 @@
 ##Интерпретатор Python (проверка)
+
 Проверяем перед началом работы, что при вызове интерпретатора Python, вывод будет таким:
 ```python
-nata@lab1:~$ python
+$ python
 Python 2.7.3 (default, Mar 13 2014, 11:03:55) 
 [GCC 4.7.2] on linux2
 Type "help", "copyright", "credits" or "license" for more information.

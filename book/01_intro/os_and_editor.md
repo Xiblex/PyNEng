@@ -27,8 +27,8 @@ __В курсе используются:__
  * Sublime Text
  * geany
 * Mac OS
- * TextWrangler
  * TextMate
+ * TextWrangler
 * Windows:
  * Notepad++
 

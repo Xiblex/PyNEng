@@ -69,7 +69,7 @@ headers = ['hostname', 'ios', 'image', 'uptime']
 * generate_alias_config - генерирует конфигурацию alias, на основе словаря alias из файла templates.yaml
 * generate_switch_config - генерирует конфигурацию коммутатора, в зависимости от переданных параметров, использует для этого оставильные функции
 
-```
+```python
 import yaml
 
 

@@ -26,11 +26,11 @@ export WORKON_HOME=~/venv
 #### Работа с виртуальными окружениями
 Создание нового виртуального окружения:
 ```
-nata@lab1:~$ mkvirtualenv Py_for_NetEng
-New python executable in Py_for_NetEng/bin/python
+$ mkvirtualenv PyNEng
+New python executable in PyNEng/bin/python
 Installing distribute........................done.
 Installing pip...............done.
-(Py_for_NetEng)nata@lab1:~$ 
+(PyNEng)$ 
 ```
 
 Теперь в скобках перед стандартным приглашением пишется имя проекта (виртуального окружения).
@@ -42,9 +42,9 @@ Installing pip...............done.
 > Это особенно удобно в тех случаях, когда виртуальных окружений много.
 
 
-Теперь в том каталоге, который был указан в WORKON_HOME, создан каталог Py_for_NetEng:
+Теперь в том каталоге, который был указан в WORKON_HOME, создан каталог PyNEng:
 ```
-(Py_for_NetEng)nata@lab1:~$ ls -ls venv
+(PyNEng)$ ls -ls venv
 total 52
 ....
 4 -rwxr-xr-x 1 nata nata   99 Sep 30 16:41 preactivate
@@ -52,38 +52,38 @@ total 52
 4 -rwxr-xr-x 1 nata nata   91 Sep 30 16:41 premkproject
 4 -rwxr-xr-x 1 nata nata  130 Sep 30 16:41 premkvirtualenv
 4 -rwxr-xr-x 1 nata nata  111 Sep 30 16:41 prermvirtualenv
-4 drwxr-xr-x 6 nata nata 4096 Sep 30 16:42 Py_for_NetEng
+4 drwxr-xr-x 6 nata nata 4096 Sep 30 16:42 PyNEng
 ```
 
 Выйти из виртуального окружения:
 ```
-(Py_for_NetEng)nata@lab1:~$ deactivate 
-nata@lab1:~$ 
+(PyNEng)$ deactivate 
+$ 
 ```
 
 Теперь для перехода в созданное виртуальное окружение надо выполнить команду __workon__:
 ```
-nata@lab1:~$ workon Py_for_NetEng
-(Py_for_NetEng)nata@lab1:~$ 
+$ workon PyNEng
+(PyNEng)$ 
 ```
 
 Если необходимо перейти из одного виртуального окружения в другое, то необязательно делать __deactivate__, можно перейти сразу через workon:
 ```
-nata@lab1:~$ workon Test
-(Test)nata@lab1:~$ workon Py_for_NetEng
-(Py_for_NetEng)nata@lab1:~$ 
+$ workon Test
+(Test)$ workon PyNEng
+(PyNEng)$ 
 ```
 
 Если виртуальное окружение нужно удалить, используется команда __rmvirtualenv__:
 ```
-nata@lab1:~$ rmvirtualenv Test
+$ rmvirtualenv Test
 Removing Test...
-nata@lab1:~$ 
+$ 
 ```
 
 Посмотреть какие пакеты установлены в виртуальном окружении:
 ```
-(Py_for_NetEng)nata@lab1:~$ lssitepackages
+(PyNEng)$ lssitepackages
 ANSI.py                                pexpect-3.3-py2.7.egg-info
 ANSI.pyc                               pickleshare-0.5-py2.7.egg-info
 decorator-4.0.4-py2.7.egg-info         pickleshare.py
@@ -105,16 +105,43 @@ path.pyc                               traitlets
 pexpect                                traitlets-4.0.0-py2.7.egg-info
 ```
 
+### Зависимости (requirements)
+
+Когда вы работаете над каким-то проектом, со временем, в виртуальном окружении находится всё больше установленных пакетов.
+И, когда вы хотите поделиться проектом или скопировать его на другой сервер, вам нужно будет заново установить все зависимости.
+
+Но, в Python есть возможность (и принято) записать все зависимости в отдельный файл.
+
+В виртуальных окружениях это делается таким образом:
+```
+$ pip freeze > requirements.txt
+```
+
+Теперь в файле requirements.txt находятся все зависимости, с версиями пакетов (файл requirements.txt):
+```
+Jinja2==2.8
+pexpect==4.0.1
+tornado==4.3
+...
+```
+
+Теперь, когда вам нужно будет воссоздать проект заново, и установить все зависимости, вы переходите в виртуальное окружение и даете команду:
+```
+$ pip install -r requirements.txt
+```
+
+### Установка пакетов
+
 Установим, к примеру, в нашем виртуальном окружении какой-то пакет (тут на примере simplejson). 
 
 Теперь если перейти в ipython (рассматривается ниже) и импортировать simplejson, то он доступен и никаких ошибок нет:
 ```python
-(Py_for_NetEng)nata@lab1:~$ pip install simplejson
+(PyNEng)$ pip install simplejson
 ...
 Successfully installed simplejson
 Cleaning up...
 
-(Py_for_NetEng)nata@lab1:~$ ipython
+(PyNEng)$ ipython
 
 In [1]: import simplejson
 
@@ -134,9 +161,9 @@ simplejson.compat              simplejson.simple_first
 
 Но, если выйти из виртуально окружения, и попытаться сделать то же самое, то такого модуля нет:
 ```python
-(Py_for_NetEng)nata@lab1:~$ deactivate 
+(PyNEng)$ deactivate 
 
-nata@lab1:~$ ipython
+$ ipython
 
 In [1]: import simplejson
 ------------------------------------------------------------------

@@ -9,7 +9,7 @@ PyPi (Python Package Index) это репозиторий пакетов Python.
 
 Проверяем pip:
 ```bash
-nata@lab1:~$ pip --version
+$ pip --version
 pip 1.1 from /usr/lib/python2.7/dist-packages (python 2.7)
 ```
 
