@@ -79,6 +79,7 @@
     * [CSV](book/10_serialization/1_csv.md)
     * [JSON](book/10_serialization/2_json.md)
     * [YAML](book/10_serialization/3_yaml.md)
+    * [Упражнения](exercises/10_serialization/10_exercises.md)
 * [11. Работа с базами данных](book/11_db/README.md)
     * [SQL](book/11_db/1_sql.md)
     * [SQLite](book/11_db/2_sqlite.md)
