@@ -8,7 +8,7 @@
 
 | Неделя | Темы | Задания |
 | :--: | -- | -- |
-| 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/book/01_intro/)| 2:2 |
+| 0 | [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/book/01_intro/)| [Подготовка к работе](https://natenka.gitbooks.io/pyneng/content/book/exercises/01_intro/01_exercises.html) |
 | 1 | [Начало работы с Python](https://natenka.gitbooks.io/pyneng/content/book/02_start/)<br>[Типы данных в Python](https://natenka.gitbooks.io/pyneng/content/book/03_data_structures/)<br>[Создание базовых скриптов](https://natenka.gitbooks.io/pyneng/content/book/04_basic_scripts/)| [Типы данных](https://natenka.gitbooks.io/pyneng/content/book/exercises/03_data_structures/03_exercises.html)<br>[Базовые скрипты](https://natenka.gitbooks.io/pyneng/content/book/exercises/04_basic_scripts/04_exercises.html)|
 | 2 | [Контроль хода программы](https://natenka.gitbooks.io/pyneng/content/book/05_control_structures/)<br>[Работа с файлами](https://natenka.gitbooks.io/pyneng/content/book/06_files/)| [Контроль хода программы](https://natenka.gitbooks.io/pyneng/content/book/exercises/ch_05/05_exercises.html)<br> [Файлы](https://natenka.gitbooks.io/pyneng/content/book/exercises/06_files/06_exercises.html)|
 | 3 | [Функции](https://natenka.gitbooks.io/pyneng/content/book/07_functions/) | [Функции](https://natenka.gitbooks.io/pyneng/content/book/exercises/07_functions/07_exercises.html) |
