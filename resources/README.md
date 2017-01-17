@@ -36,7 +36,7 @@
 
 ## Курсы на Cisco DevNet
 
-На сайте learninglabs.cisco.com вы можете найти множество бесплатных курсов и tutorial по темам программирование + сети:
+На сайте learninglabs.cisco.com вы можете найти множество бесплатных курсов по темам программирование + сети:
 * [Главная страница DevNet Learning Labs](https://learninglabs.cisco.com/)
 * [Курс разбитые по трекам](https://learninglabs.cisco.com/tracks)
 * [Курсы разбитые по модулям](https://learninglabs.cisco.com/modules)
