@@ -1,6 +1,6 @@
 ## Словарь (Dictionary)
 Словари -- это изменяемый, неупорядоченный тип данных 
-(к слову, в модуле [https://docs.python.org/2/library/collections.html collections] доступны упорядоченные объекты, внешне идентичные словарям [https://docs.python.org/2/library/collections.html#collections.OrderedDict OrderedDict]).
+(к слову, в модуле [collections](https://docs.python.org/2/library/collections.html) доступны упорядоченные объекты, внешне идентичные словарям [OrderedDict](https://docs.python.org/2/library/collections.html#collections.OrderedDict)).
 
 Словарь (ассоциативный массив, хеш-таблица):
 * данные в словаре это пары "ключ:значение"
@@ -32,7 +32,7 @@ london = {
 }
 ```
 
-Для того чтобы получить значение из словаря, надо обратиться по ключу, таким же образом, как это было в списках, только вместо номера, будет использоваться ключ:
+Для того, чтобы получить значение из словаря, надо обратиться по ключу, таким же образом, как это было в списках, только вместо номера, будет использоваться ключ:
 ```python
 In [1]: london = {'name': 'London1', 'location': 'London Str'}
 

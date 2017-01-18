@@ -48,3 +48,19 @@ In [14]: list3[0] = 'test'
 In [15]: list3
 Out[15]: ['test', 20, 4.0, 'word']
 ```
+
+Можно создавать и список списков. Мы можем обращаться к элементам во вложенных списках:
+```python
+In [16]: interfaces = [['FastEthernet0/0', '15.0.15.1', 'YES', 'manual', 'up', 'up'],
+   ....: ['FastEthernet0/1', '10.0.1.1', 'YES', 'manual', 'up', 'up'],
+   ....: ['FastEthernet0/2', '10.0.2.1', 'YES', 'manual', 'up', 'down']]
+
+In [17]: interfaces[0][0]
+Out[17]: 'FastEthernet0/0'
+
+In [18]: interfaces[2][0]
+Out[18]: 'FastEthernet0/2'
+
+In [19]: interfaces[2][1]
+Out[19]: '10.0.2.1'
+```

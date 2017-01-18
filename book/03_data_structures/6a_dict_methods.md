@@ -1,4 +1,7 @@
 ### Полезные методы для работы со словарями
+
+####```clear()```
+
 Метод __clear()__ позволяет очистить словарь:
 ```python
 In [1]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'IOS': '15.4'}
@@ -8,6 +11,8 @@ In [2]: london.clear()
 In [3]: london
 Out[3]: {}
 ```
+
+####```copy()```
 
 Метод __copy()__ позволяет создать полную копию словаря. 
 
@@ -49,7 +54,7 @@ In [15]: london2['vendor']
 Out[15]: 'Cisco'
 ```
 
-Метод __get()__.
+####```get()```
 
 Если при обращении к словарю указывается ключ, которого нет в словаре, мы получаем ошибку:
 ```python
@@ -75,6 +80,7 @@ In [20]: print london.get('IOS', 'Ooops')
 Ooops
 ```
 
+####```keys(), values(), items()```
 Методы __keys()__, __values()__, __items()__:
 ```python
 In [24]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
