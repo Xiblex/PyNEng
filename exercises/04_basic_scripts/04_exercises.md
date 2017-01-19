@@ -10,7 +10,7 @@
 
 > Однако, если задания с буквами получается сделать сразу, можно делать их по порядку.
 
-###Задание 4.1
+### Задание 4.1
 
 Запросить у пользователя ввод IP-сети в формате: 10.1.1.0/24
 
@@ -30,7 +30,7 @@ Mask:
 Проверить работу скрипта на разных комбинациях сеть/маска.
 
 
-###Задание 4.1a
+### Задание 4.1a
 
 Всё, как в задании 4.1. Но, если пользователь ввел адрес хоста, а не адрес сети, то надо адрес хоста преобразовать в адрес сети и вывести адрес сети и маску, как в задании 4.1.
 
@@ -48,7 +48,85 @@ Mask:
 Проверить работу скрипта на разных комбинациях сеть/маска.
 
 
-###Задание 4.1b
+### Задание 4.1b
 
 Преобразовать скрипт из задания 4.1a таким образом, чтобы сеть/маска не запрашивались у пользователя,
 а передавались как аргумент скрипту. 
+
+
+### Задание 4.2
+
+(Задача на основе примеров в разделе)
+
+Скрипт должен запрашивать у пользователя:
+* информацию о режиме интерфейса (access/trunk),
+  * пример текста запроса: 'Enter interface mode (access/trunk): '
+* номере интерфейса (тип и номер, вида Gi0/3)
+  * пример текста запроса: 'Enter interface type and number: '
+* номер VLANа (для режима trunk будет вводиться список VLANов)
+  * пример текста запроса: 'Enter vlan(s): ')
+
+В зависимости от выбранного режима, на стандартный поток вывода,
+должна возвращаться соответствующая конфигурация access или trunk
+(шаблоны команд находятся в списках access_template и trunk_template).
+
+При этом, сначала должна идти строка interface и подставлен номер интерфейса,
+а затем соответствующий шаблон, в который подставлен номер VLANа (или список VLANов).
+
+Нельзя использовать условие if.
+
+Ниже примеры выполнения скрипта, чтобы было проще понять задачу.
+
+Пример выполнения скрипта, при выборе режима access:
+```
+$ python task_4_2.py
+Enter interface mode (access/trunk): access
+Enter interface type and number: Fa0/6
+Enter vlan(s): 3
+
+interface Fa0/6
+switchport mode access
+switchport access vlan 3
+switchport nonegotiate
+spanning-tree portfast
+spanning-tree bpduguard enable
+```
+
+Пример выполнения скрипта, при выборе режима trunk:
+```
+$ python task_4_2.py
+Enter interface mode (access/trunk): trunk
+Enter interface type and number: Fa0/7
+Enter vlan(s): 2,3,4,5
+
+interface Fa0/7
+switchport trunk encapsulation dot1q
+switchport mode trunk
+switchport trunk allowed vlan 2,3,4,5
+```
+
+Начальное содержимое скрипта:
+```
+access_template = ['switchport mode access',
+                   'switchport access vlan %s',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk allowed vlan %s']
+
+```
+
+
+### Задание 4.2a
+
+Дополнить скрипт из задания 4.2 таким образом, чтобы, в зависимости от выбранного режима,
+задавались разные вопросы в запросе о номере VLANа или списка VLANов:
+* для access: 'Enter VLAN number:'
+* для trunk: 'Enter allowed VLANs:'
+
+Нельзя использовать условие if.
+
+

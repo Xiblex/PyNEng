@@ -63,7 +63,7 @@ raw_input(), как и argv возвращает данные в виде стр
 Она используется просто для того, чтобы отделить запрос информации от вывода.
 
 Выполняем скрипт:
-```python
+```
 $ python access_template_raw_input.py
 Enter interface type and number: Gi0/3
 Enter VLAN number: 55
