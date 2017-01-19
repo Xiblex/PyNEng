@@ -10,12 +10,12 @@ except (ValueError, ZeroDivisionError):
 """
 Example:
 
-$ python divide.py
+$ python divide_ver2.py
 Введите первое число: wer
 Введите второе число: 4
 Результат:  Что-то пошло не так...
 
-$ python divide.py
+$ python divide_ver2.py
 Введите первое число: 5
 Введите второе число: 0
 Результат:  Что-то пошло не так...

@@ -12,12 +12,12 @@ else:
 """
 Example:
 
-$ python divide.py
+$ python divide_ver3.py
 Введите первое число: 10
 Введите второе число: 2
 Результат в квадрате:  25
 
-$ python divide.py
+$ python divide_ver3.py
 Введите первое число: werq
 Введите второе число: 3
 Что-то пошло не так...

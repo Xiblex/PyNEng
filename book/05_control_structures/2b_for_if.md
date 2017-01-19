@@ -1,5 +1,6 @@
 ### Совмещение for и if
-На примере выше стало понятно, что в настройках не хватает добавления порта  в определенный VLAN.
+
+В примере из предыдущего раздела стало понятно, что в настройках не хватает добавления порта  в определенный VLAN.
 
 Добавим эту возможность.
 
@@ -7,14 +8,19 @@
 
 Вместо списка интерфейсов, теперь мы используем словарь.
 
-В словаре будет две категории интерфейсов: access и trunk (пока что только access).
-В словаре fast_int по ключу access также находится словарь, в котором ключ - это номер интерфейса, а значение - это номер VLAN.
+В словаре fast_int по ключу access находится словарь, в котором ключ - это номер интерфейса, а значение - это номер VLAN.
 
 Файл generate_access_port_config.py выглядит так:
 ```python
-access_template = ['switchport mode access', 'switchport access vlan', 'spanning-tree portfast', 'spanning-tree bpduguard enable']
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
 
-fast_int = {'access':{'0/12':'10','0/14':'11','0/16':'17','0/17':'150'}}
+fast_int = {'access': { '0/12':'10',
+                        '0/14':'11',
+                        '0/16':'17',
+                        '0/17':'150'}}
 
 for intf in fast_int['access']:
     print 'interface FastEthernet' + intf
@@ -27,18 +33,18 @@ for intf in fast_int['access']:
 
 Комментарии к коду:
 * В первом цикле for мы перебираем ключи во вложенном словаре fast_int['access']
-* Ключ, который мы берем на данный момент цикла, будет храниться в переменной int
-* Как и в прошлом примере печатаем строку interface FastEthernet и добавляем к ней номер интерфейса
+* Ключ, который мы берем на данный момент цикла, будет храниться в переменной intf
+* Печатаем строку interface FastEthernet и добавляем к ней номер интерфейса
 * Во втором цикле for мы перебираем команды из списка access_template
-* Но, так как теперь надо надо добавить номер VLAN к команде switchport access vlan:
+* Так как к команде switchport access vlan, надо добавить номер VLAN:
  * мы внутри второго цикла for проверяем команды 
  * если команда заканчивается на access vlan
-   * мы печатаем команду и добавляем к ней номер VLAN, обратившись в вложенному словарю по текущему ключу int
- * во всех остальных случаях, просто печатаем команду
+   * мы выводим команду и добавляем к ней номер VLAN, обратившись к вложенному словарю по текущему ключу intf
+ * во всех остальных случаях, просто выводим команду
 
 В итоге мы получаем такой вывод:
-```python
-(test)nata@lab1:~$ python generate_access_port_config.py
+```
+$ python generate_access_port_config.py
 interface FastEthernet0/12
  switchport mode access
  switchport access vlan 10
@@ -55,3 +61,4 @@ interface FastEthernet0/16
  spanning-tree portfast
  spanning-tree bpduguard enable
 ```
+

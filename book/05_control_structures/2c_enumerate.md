@@ -1,4 +1,5 @@
 ### Итератор enumerate()
+
 Иногда, при переборе объектов в цикле for, нужно не только получить сам объект, но и его порядковый номер. Это можно сделать, создав дополнительную переменную, которая будет расти на единицу с каждым прохождением цикла.
 
 Но, гораздо удобнее это делать с помощью итератора __enumerate()__.
@@ -28,6 +29,9 @@ In [2]: for position, string in enumerate(list1, 100):
 ```
 
 #### Пример использования enumerate для EEM (advanced)
+
+> Слово 'advanced' в заголовке, означает, что то, что рассматривается в этом разделе ещё не было в темах курса. Но, в дальнейшем, вам может пригодится такой прием.
+
 Вероятно, вы знаете о такой вещи в Cisco, как [EEM](http://xgu.ru/wiki/EEM). Если в двух словах, то EEM позволяет выполнять какие-то действия (action) в ответ на событие (event).
 
 Выглядит applet EEM так (подробнее в статье [EEM](http://xgu.ru/wiki/EEM)):
@@ -55,7 +59,7 @@ with open(config, 'r') as file:
 
 В данном примере команды считываются из файла (конструкцию with и как работать с файлами мы рассмотрим позже), а затем мы обрабатываем каждую строку и добавляем к ней приставку, которая нужна для EEM.
 
-Файл с командами выглядит так (r1_config):
+Файл с командами выглядит так (r1_config.txt):
 ```python
 en
 conf t
@@ -72,7 +76,7 @@ interface Port-channel1.300
 
 Вывод будет таким:
 ```python
-(test)nata@lab1:~$ python eem.py r1_config 
+$ python eem.py r1_config.txt
 action 0001 cli command "en"
 action 0002 cli command "conf t"
 action 0003 cli command "no int Gi0/0/0.300"
@@ -120,3 +124,4 @@ action 0009 cli command " encapsulation dot1Q 300"
 action 0010 cli command " vrf forwarding Management"
 action 0011 cli command " ip address 10.16.19.35 255.255.255.248"
 ```
+
