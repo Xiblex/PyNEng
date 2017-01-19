@@ -65,12 +65,11 @@ Mask:
 (информация будет в виде словаря).
 
 
-Пример выполнения скрипта (у вас в выводе все элементы словаря будут в одну строку):
+Пример выполнения скрипта:
 ```
 $ python task_4_2.py
 Enter device name: r1
-{'ios': '15.4', 'model': '4451', 'vendor': 'Cisco',
-'location': '21 New Globe Walk', 'ip': '10.255.0.1'}
+{'ios': '15.4', 'model': '4451', 'vendor': 'Cisco', 'location': '21 New Globe Walk', 'ip': '10.255.0.1'}
 ```
 
 
@@ -337,7 +336,7 @@ switchport trunk allowed vlan 2,3,4,5
 ```
 
 Начальное содержимое скрипта:
-```
+```python
 access_template = ['switchport mode access',
                    'switchport access vlan %s',
                    'switchport nonegotiate',
@@ -360,7 +359,7 @@ trunk_template = ['switchport trunk encapsulation dot1q',
 * для access: 'Enter VLAN number:'
 * для trunk: 'Enter allowed VLANs:'
 
-```
+```python
 access_template = ['switchport mode access',
                    'switchport access vlan %s',
                    'switchport nonegotiate',
