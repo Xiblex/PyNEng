@@ -1,5 +1,6 @@
 ## Запись файлов
-При записи очень важно определиться с режимом открытия файла (чтобы случайно его не удалить):
+
+При записи, очень важно определиться с режимом открытия файла, чтобы случайно его не удалить:
 * append - добавить строки в существующий файл
 * write - перезаписать файл
 * оба режима создают файл, если он не существует
@@ -10,30 +11,141 @@
 
 ####```write()```
 
-Пример использования метода write() и режима append:
-```python
-In [1]: f = open('test2.txt', 'a')
-In [2]: f.write('line1\n')
-In [3]: f.write('line2\n')
-In [4]: f.write('line3\n')
-In [5]: f.close()
+Метод ```write``` ожидает строку, для записи.
 
-In [6]: cat test2.txt
-line1
-line2
-line3
+Для примера, возьмем список строк с конфигурацией:
+```python
+In [1]: cfg_lines = ['!',
+   ...:  'service timestamps debug datetime msec localtime show-timezone year',
+   ...:  'service timestamps log datetime msec localtime show-timezone year',
+   ...:  'service password-encryption',
+   ...:  'service sequence-numbers',
+   ...:  '!',
+   ...:  'no ip domain lookup',
+   ...:  '!',
+   ...:  'ip ssh version 2',
+   ...:  '!']
 ```
 
-Пример использования метода write() и режима write (обратите внимание, что файл перезаписался):
+Теперь открываем файл r2.txt в режие для записи:
 ```python
-In [8]: list1 = ['line4\n','line5\n','line6\n']
+In [2]: f = open('r2.txt', 'w')
+```
 
-In [9]: f = open('test2.txt', 'w')
-In [10]: f.writelines(list1)
+Превращаем список команд в одну большую строку с помощью join:
+```python
+In [3]: cfg_lines_as_string = '\n'.join(cfg_lines)
+
+In [4]: cfg_lines_as_string
+Out[4]: '!\nservice timestamps debug datetime msec localtime show-timezone year\nservice timestamps log datetime msec localtime show-timezone year\nservice password-encryption\nservice sequence-numbers\n!\nno ip domain lookup\n!\nip ssh version 2\n!'
+```
+
+Теперь записываем строку в файл:
+```python
+In [5]: f.write(cfg_lines_as_string)
+```
+
+И добавляем ещё одну строку вручную:
+```python
+In [6]: f.write('\nhostname r2')
+```
+
+Теперь нам нужно закрыть файл:
+```python
+In [7]: f.close()
+```
+
+И, так как ipython поддерживает команду cat, мы можем легко посмотреть содержимое файла:
+```python
+In [8]: cat r2.txt
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
+hostname r2
+```
+
+#### writelines()
+
+Метод writelines() ожидает список строк, как аргемент.
+
+Попробуем записать список cfg_lines в файл:
+```python
+In [9]: f = open('r2.txt', 'w')
+
+In [10]: f.writelines(cfg_lines)
+
 In [11]: f.close()
 
-In [12]: cat test2.txt
-line4
-line5
-line6
+In [12]: cat r2.txt
+!service timestamps debug datetime msec localtime show-timezone yearservice timestamps log datetime msec localtime show-timezone yearservice password-encryptionservice sequence-numbers!no ip domain lookup!ip ssh version 2!
+```
+
+Посмотрите, что получилось в результате - все строки из списка, записались в одну строку файла, так как в конце строк не было символа ```\n```.
+
+Добавить перевод строки можно по-разному.
+Например, можно просто обработать список в цикле:
+```python
+In [13]: cfg_lines2 = []
+
+In [14]: for line in cfg_lines:
+   ....:     cfg_lines2.append( line + '\n' )
+   ....:
+
+In [15]: cfg_lines2
+Out[15]:
+['!\n',
+ 'service timestamps debug datetime msec localtime show-timezone year\n',
+ 'service timestamps log datetime msec localtime show-timezone year\n',
+ 'service password-encryption\n',
+ 'service sequence-numbers\n',
+ '!\n',
+ 'no ip domain lookup\n',
+ '!\n',
+ 'ip ssh version 2\n',
+```
+
+Или использовать list comprehensions:
+```python
+In [16]: cfg_lines3 = [ line + '\n' for line in cfg_lines ]
+
+In [17]: cfg_lines3
+Out[17]:
+['!\n',
+ 'service timestamps debug datetime msec localtime show-timezone year\n',
+ 'service timestamps log datetime msec localtime show-timezone year\n',
+ 'service password-encryption\n',
+ 'service sequence-numbers\n',
+ '!\n',
+ 'no ip domain lookup\n',
+ '!\n',
+ 'ip ssh version 2\n',
+ '!\n']
+```
+
+Если любой, из получившихся списков записать заново в файл, то в нем уже будут переводы строк:
+```python
+In [18]: f = open('r2.txt', 'w')
+
+In [19]: f.writelines(cfg_lines3)
+
+In [20]: f.close()
+
+In [21]: cat r2.txt
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
 ```
