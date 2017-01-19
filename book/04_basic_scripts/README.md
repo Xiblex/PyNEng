@@ -1,25 +1,33 @@
 # Создание базовых скриптов
+
 Если говорить в целом, то скрипт это обычный файл.
 В этом файле хранится последовательность команд, которые необходимо выполнить.
 
 Начнем с базового скрипта. Попробуем просто вывести на стандартный поток вывода несколько строк.
-Для этого надо создать файл file1.py с таким содержимым:
+Для этого надо создать файл access_template.py с таким содержимым:
 ```python
-print "----------------------"
-print "Hello!"
-print "----------------------"
+access_template = ['switchport mode access',
+                   'switchport access vlan %d',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+print '\n'.join(access_template) % 5
 ```
 
 После этого, сохраняем его и переходим в командную строку.
 
 Запускаем скрипт:
 ```python
-nata@lab1:~$ python file1.py
-----------------------
-Hello!
-----------------------
+$ python access_template.py
+switchport mode access
+switchport access vlan 5
+switchport nonegotiate
+spanning-tree portfast
+spanning-tree bpduguard enable
 ```
 
+Сначала мы объединяем элементы списка в строку, которая разделена символом '\n', а затем подставляем номер VLAN, используя форматирование строк.
 
 > Ставить расширение .py у файла не обязательно. 
 
@@ -29,17 +37,25 @@ Hello!
 Можно сказать, что это "хороший тон", создавать скрипты Python  с таким расширением.
 
 ### Кодировка
-Теперь попробуем напечатать текст, который мы набрали кириллицей (file2.py):
+
+Теперь попробуем напечатать текст, который мы набрали кириллицей (access_template_encoding.py):
 ```python
-print "Привет"
-print 'Пойду почитаю xgu.ru :)'
+access_template = ['switchport mode access',
+                   'switchport access vlan %d',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+print "Конфигурация интерфейса в режиме access:"
+print '\n'.join(access_template) % 5
 ```
 
 При попытке запустить скрипт получаем такую ошибку:
 ```python
-nata@lab1:~$ python file2.py
-  File "file3.py", line 2
-SyntaxError: Non-ASCII character '\xd0' in file file3.py on line 2, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details
+$ python access_template_encoding.py
+  File "access_template_encoding.py", line 7
+SyntaxError: Non-ASCII character '\xd0' in file access_template_encoding.py on line 7,
+but no encoding declared; see http://python.org/dev/peps/pep-0263/ for details
 ```
 
 Для того чтобы не было такой ошибки, необходимо добавить в начале файла такую строку:
@@ -47,19 +63,29 @@ SyntaxError: Non-ASCII character '\xd0' in file file3.py on line 2, but no encod
 # -*- coding: utf-8 -*-
 ```
 
-Тогда скрипт file2.py может выглядеть так:
+Тогда скрипт access_template_encoding.py будет выглядеть так:
 ```python
 # -*- coding: utf-8 -*-
 
-print "Привет"
-print 'Пойду почитаю xgu.ru :)'
+access_template = ['switchport mode access',
+                   'switchport access vlan %d',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+print "Конфигурация интерфейса в режиме access:"
+print '\n'.join(access_template) % 5
 ```
 
 Теперь ошибки нет:
 ```
-nata@lab1:~$ python file3.py
-Привет
-Пойду почитаю xgu.ru :)
+$ python access_template_encoding.py
+Конфигурация интерфейса в режиме access:
+switchport mode access
+switchport access vlan 5
+switchport nonegotiate
+spanning-tree portfast
+spanning-tree bpduguard enable
 ```
 
 
@@ -69,19 +95,25 @@ nata@lab1:~$ python file3.py
 * сделать файл исполняемым (для linux)
 * в первой строке файла должна находится строка ```#!/usr/bin/env python```
 
-Пример файла test.py:
+Пример файла access_template_exec.py:
 ```python
 #!/usr/bin/env python
 
-print "TEST"
+access_template = ['switchport mode access',
+                   'switchport access vlan %d',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+print '\n'.join(access_template) % 5
 ```
 
 После этого:
 ```
-chmod +x test.py
+chmod +x access_template_exec.py
 ```
 
 Теперь можно вызывать файл таким образом:
 ```
-nata@lab1:~$ ./test.py
+$ ./access_template_exec.py
 ```
