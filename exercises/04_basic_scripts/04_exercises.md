@@ -56,7 +56,239 @@ Mask:
 
 ### Задание 4.2
 
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
+
+В задании создан словарь, с информацией и разных устройствах.
+
+Вам нужно запросить у пользователя ввод имени устройства (r1, r2 или sw1).
+И вывести информацию о соответствующем устройстве на стандартный поток вывода
+(информация будет в виде словаря).
+
+
+Пример выполнения скрипта (у вас в выводе все элементы словаря будут в одну строку):
+```
+$ python task_4_2.py
+Enter device name: r1
+{'ios': '15.4', 'model': '4451', 'vendor': 'Cisco',
+'location': '21 New Globe Walk', 'ip': '10.255.0.1'}
+```
+
+
+```python
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
+```
+
+### Задание 4.2a
+
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
+
+Переделать скрипт из задания 4.2 таким образом, чтобы,
+кроме имени устройства, запрашивался также параметр устройства, который нужно отобразить.
+
+Вывести информацию о соответствующем параметре, указанного устройства.
+
+Пример выполнения скрипта:
+```
+$ python task_4_2a.py
+Enter device name: r1
+Enter parameter name: ios
+15.4
+```
+
+```python
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
+```
+
+### Задание 4.2b
+
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
+
+Переделать скрипт из задания 4.2a таким образом, чтобы, при запросе параметра,
+отображался список возможных параметров.
+
+Вывести информацию о соответствующем параметре, указанного устройства.
+
+Пример выполнения скрипта:
+```
+$ python task_4_2b.py
+Enter device name: r1
+Enter parameter name (ios,model,vendor,location,ip): ip
+10.255.0.1
+```
+
+```python
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
+```
+
+
+### Задание 4.2c
+
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
+
+Переделать скрипт из задания 4.2b таким образом, чтобы, при запросе параметра,
+которого нет в словаре устройства, отображалось сообщение 'Такого параметра нет'.
+
+Если выбран существующий параметр,
+вывести информацию о соответствующем параметре, указанного устройства.
+
+Пример выполнения скрипта:
+```
+$ python task_4_2c.py
+Enter device name: r1
+Enter parameter name (ios,model,vendor,location,ip): io
+Такого параметра нет
+```
+
+```python
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
+```
+
+
+### Задание 4.2d
+
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
+
+Переделать скрипт из задания 4.2c таким образом, чтобы, при запросе параметра,
+пользователь мог вводить название параметра в любом регистре.
+
+Пример выполнения скрипта:
+```
+$ python task_4_2d.py
+Enter device name: r1
+Enter parameter name (ios,model,vendor,location,ip): IOS
+15.4
+```
+
+```python
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
+```
+
+
+### Задание 4.3
+
 (Задача на основе примеров в разделе)
+
+В этой задаче нельзя использовать условие if.
 
 Скрипт должен запрашивать у пользователя:
 * информацию о режиме интерфейса (access/trunk),
@@ -64,7 +296,7 @@ Mask:
 * номере интерфейса (тип и номер, вида Gi0/3)
   * пример текста запроса: 'Enter interface type and number: '
 * номер VLANа (для режима trunk будет вводиться список VLANов)
-  * пример текста запроса: 'Enter vlan(s): ')
+  * пример текста запроса: 'Enter vlan(s): '
 
 В зависимости от выбранного режима, на стандартный поток вывода,
 должна возвращаться соответствующая конфигурация access или trunk
@@ -73,13 +305,12 @@ Mask:
 При этом, сначала должна идти строка interface и подставлен номер интерфейса,
 а затем соответствующий шаблон, в который подставлен номер VLANа (или список VLANов).
 
-Нельзя использовать условие if.
 
 Ниже примеры выполнения скрипта, чтобы было проще понять задачу.
 
 Пример выполнения скрипта, при выборе режима access:
 ```
-$ python task_4_2.py
+$ python task_4_3.py
 Enter interface mode (access/trunk): access
 Enter interface type and number: Fa0/6
 Enter vlan(s): 3
@@ -94,7 +325,7 @@ spanning-tree bpduguard enable
 
 Пример выполнения скрипта, при выборе режима trunk:
 ```
-$ python task_4_2.py
+$ python task_4_3.py
 Enter interface mode (access/trunk): trunk
 Enter interface type and number: Fa0/7
 Enter vlan(s): 2,3,4,5
@@ -120,13 +351,24 @@ trunk_template = ['switchport trunk encapsulation dot1q',
 ```
 
 
-### Задание 4.2a
+### Задание 4.3a
 
-Дополнить скрипт из задания 4.2 таким образом, чтобы, в зависимости от выбранного режима,
+В этой задаче нельзя использовать условие if.
+
+Дополнить скрипт из задания 4.3 таким образом, чтобы, в зависимости от выбранного режима,
 задавались разные вопросы в запросе о номере VLANа или списка VLANов:
 * для access: 'Enter VLAN number:'
 * для trunk: 'Enter allowed VLANs:'
 
-Нельзя использовать условие if.
+```
+access_template = ['switchport mode access',
+                   'switchport access vlan %s',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
 
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk allowed vlan %s']
 
+```

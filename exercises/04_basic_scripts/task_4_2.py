@@ -1,63 +1,46 @@
 # -*- coding: utf-8 -*-
-
 """
 Задание 4.2
 
-(Задача на основе примеров в разделе)
+В этой задаче нельзя использовать условие if и нельзя изменять словарь london_co.
 
-Скрипт должен запрашивать у пользователя:
-* информацию о режиме интерфейса (access/trunk),
-  * пример текста запроса: 'Enter interface mode (access/trunk): '
-* номере интерфейса (тип и номер, вида Gi0/3)
-  * пример текста запроса: 'Enter interface type and number: '
-* номер VLANа (для режима trunk будет вводиться список VLANов)
-  * пример текста запроса: 'Enter vlan(s): ')
+В задании создан словарь, с информацией и разных устройствах.
 
-В зависимости от выбранного режима, на стандартный поток вывода,
-должна возвращаться соответствующая конфигурация access или trunk
-(шаблоны команд находятся в списках access_template и trunk_template).
+Вам нужно запросить у пользователя ввод имени устройства (r1, r2 или sw1).
+И вывести информацию о соответствующем устройстве на стандартный поток вывода
+(информация будет в виде словаря).
 
-При этом, сначала должна идти строка interface и подставлен номер интерфейса,
-а затем соответствующий шаблон, в который подставлен номер VLANа (или список VLANов).
 
-Нельзя использовать условие if.
-
-Ниже примеры выполнения скрипта, чтобы было проще понять задачу.
-
-Пример выполнения скрипта, при выборе режима access:
-
+Пример выполнения скрипта (у вас в выводе все элементы словаря будут в одну строку):
 $ python task_4_2.py
-Enter interface mode (access/trunk): access
-Enter interface type and number: Fa0/6
-Enter vlan(s): 3
+Enter device name: r1
+{'ios': '15.4', 'model': '4451', 'vendor': 'Cisco',
+'location': '21 New Globe Walk', 'ip': '10.255.0.1'}
 
-interface Fa0/6
-switchport mode access
-switchport access vlan 3
-switchport nonegotiate
-spanning-tree portfast
-spanning-tree bpduguard enable
-
-Пример выполнения скрипта, при выборе режима trunk:
-$ python task_4_2.py
-Enter interface mode (access/trunk): trunk
-Enter interface type and number: Fa0/7
-Enter vlan(s): 2,3,4,5
-
-interface Fa0/7
-switchport trunk encapsulation dot1q
-switchport mode trunk
-switchport trunk allowed vlan 2,3,4,5
 """
 
-access_template = ['switchport mode access',
-                   'switchport access vlan %s',
-                   'switchport nonegotiate',
-                   'spanning-tree portfast',
-                   'spanning-tree bpduguard enable']
-
-trunk_template = ['switchport trunk encapsulation dot1q',
-                  'switchport mode trunk',
-                  'switchport trunk allowed vlan %s']
-
-
+london_co = {
+    'r1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.1'
+    },
+    'r2' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '4451',
+    'ios': '15.4',
+    'ip': '10.255.0.2'
+    },
+    'sw1' : {
+    'location': '21 New Globe Walk',
+    'vendor': 'Cisco',
+    'model': '3850',
+    'ios': '3.6.XE',
+    'ip': '10.255.0.101',
+    'vlans': '10,20,30',
+    'routing': True
+    }
+}
