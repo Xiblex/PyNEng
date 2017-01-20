@@ -12,7 +12,7 @@ __Обязательные аргументы__: надо передать ро�
 
 Функция с обязательными аргументами:
 ```python
-In [1]: def clean_cfg(cfg_file, delete_exclamation):
+In [1]: def cfg_to_list(cfg_file, delete_exclamation):
   ....:     result = []
   ....:     with open( cfg_file ) as f:
   ....:         for line in f:
@@ -23,9 +23,9 @@ In [1]: def clean_cfg(cfg_file, delete_exclamation):
   ....:     return result
 ```
 
-Функция clean_cfg ожидает два аргумента: cfg_file и delete_exclamation.
+Функция cfg_to_list ожидает два аргумента: cfg_file и delete_exclamation.
 
-Внутри, она открывает файл cfg_file чтения, проходится по всем строкам и,
+Внутри, она открывает файл cfg_file для чтения, проходится по всем строкам и,
 если аргумент delete_exclamation истина и строка начинается с восклицательного знака,
 строка пропускается.
 Оператор ```pass``` означает, что ничего не выполняется.
@@ -34,7 +34,7 @@ In [1]: def clean_cfg(cfg_file, delete_exclamation):
 
 Попробуем вызвать функцию, указав аргументы, как позиционные:
 ```python
-In [2]: clean_cfg('r1.txt', True)
+In [2]: cfg_to_list('r1.txt', True)
 Out[2]:
 ['service timestamps debug datetime msec localtime show-timezone year',
  'service timestamps log datetime msec localtime show-timezone year',
@@ -48,7 +48,7 @@ Out[2]:
 
 Теперь попробуем вызвать функцию ещё раз, передав аргументу delete_exclamation значение False:
 ```python
-In [3]: clean_cfg('r1.txt', False)
+In [3]: cfg_to_list('r1.txt', False)
 Out[3]:
 ['!',
  'service timestamps debug datetime msec localtime show-timezone year',
@@ -66,7 +66,7 @@ Out[3]:
 
 При создании функции, можно указывать значение по умолчанию для аргумента:
 ```python
-In [4]: def clean_cfg(cfg_file, delete_exclamation=True):
+In [4]: def cfg_to_list(cfg_file, delete_exclamation=True):
   ....:     result = []
   ....:     with open( cfg_file ) as f:
   ....:         for line in f:
@@ -82,7 +82,7 @@ In [4]: def clean_cfg(cfg_file, delete_exclamation=True):
 Так как теперь у аргумента delete_exclamation значение по умолчанию равно True,
 этот аргумент можно не указывать при вызове функции, если нам подходит значение по умолчанию:
 ```python
-In [5]: clean_cfg('r1.txt')
+In [5]: cfg_to_list('r1.txt')
 Out[5]:
 ['service timestamps debug datetime msec localtime show-timezone year',
  'service timestamps log datetime msec localtime show-timezone year',
@@ -94,7 +94,7 @@ Out[5]:
 
 Но, можно и указать, если нужно поменять значение по умолчанию:
 ```python
-In [6]: clean_cfg('r1.txt', False)
+In [6]: cfg_to_list('r1.txt', False)
 Out[6]:
 ['!',
  'service timestamps debug datetime msec localtime show-timezone year',
@@ -122,7 +122,7 @@ Out[6]:
 
 Посмотрим на разные способы передаци аргументов, на примере функции:
 ```python
-In [7]: def clean_cfg(cfg_file, delete_exclamation):
+In [7]: def cfg_to_list(cfg_file, delete_exclamation):
    ....:     result = []
    ....:     with open( cfg_file ) as f:
    ....:         for line in f:
@@ -143,14 +143,14 @@ In [7]: def clean_cfg(cfg_file, delete_exclamation):
 
 В нашем случае, получается такой результат:
 ```python
-In [8]: clean_cfg(False, 'r1.txt')
+In [8]: cfg_to_list(False, 'r1.txt')
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-18-e6da7e2657eb> in <module>()
-----> 1 clean_cfg(False, 'r1.txt')
+----> 1 cfg_to_list(False, 'r1.txt')
 
-<ipython-input-15-21a013e5e92c> in clean_cfg(cfg_file, delete_exclamation)
-      1 def clean_cfg(cfg_file, delete_exclamation):
+<ipython-input-15-21a013e5e92c> in cfg_to_list(cfg_file, delete_exclamation)
+      1 def cfg_to_list(cfg_file, delete_exclamation):
       2     result = []
 ----> 3     with open( cfg_file ) as f:
       4         for line in f:
@@ -166,7 +166,7 @@ __Ключевые аргументы__:
 
 Если мы теперь передадим оба аргумента, как ключевые, то мы можем передавать их в любом порядке:
 ```python
-In [9]: clean_cfg(delete_exclamation=False, cfg_file='r1.txt')
+In [9]: cfg_to_list(delete_exclamation=False, cfg_file='r1.txt')
 Out[9]:
 ['!',
  'service timestamps debug datetime msec localtime show-timezone year',
@@ -184,16 +184,16 @@ __Но, обратите внимание, что всегда сначала д
 
 Если мы сделаем наоборот, возникнет ошибка:
 ```python
-In [10]: clean_cfg(delete_exclamation=False, 'r1.txt')
+In [10]: cfg_to_list(delete_exclamation=False, 'r1.txt')
   File "<ipython-input-19-5efdee7ce6dd>", line 1
-    clean_cfg(delete_exclamation=False, 'r1.txt')
+    cfg_to_list(delete_exclamation=False, 'r1.txt')
 SyntaxError: non-keyword arg after keyword arg
 
 ```
 
 Но в такой комбинации можно:
 ```python
-In [11]: clean_cfg('r1.txt', delete_exclamation=True)
+In [11]: cfg_to_list('r1.txt', delete_exclamation=True)
 Out[11]:
 ['service timestamps debug datetime msec localtime show-timezone year',
  'service timestamps log datetime msec localtime show-timezone year',
