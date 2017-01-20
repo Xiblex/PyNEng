@@ -20,19 +20,22 @@
  * эти переменные 'глобальны' только в пределах модуля
    * например, чтобы они были доступны в другом модуле, их надо импортировать
 
-Пример локальной и глобальной переменной:
+Пример локальной и глобальной переменной result:
 ```python
-In [7]: s = 'string'
+In [1]: result = 'test string'
 
-In [8]: def printstr( s ):
-   ...:     s = s + ' test'
-   ...:     return s
-   ...: 
+In [2]: def open_file( filename ):
+   ...:     with open(filename) as f:
+   ...:         result = f.read()
+   ...:         return result
+   ...:
 
-In [9]: printstr('function')
-Out[9]: 'function test'
+In [3]: open_file('r1.txt')
+Out[3]: '!\nservice timestamps debug datetime msec localtime show-timezone year\nservice timestamps log datetime msec localtime show-timezone year\nservice password-encryption\nservice sequence-numbers\n!\nno ip domain lookup\n!\nip ssh version 2\n!\n'
 
-In [10]: s
-Out[10]: 'string'
+In [4]: result
+Out[4]: 'test string'
 ```
 
+Обратите внимание, что переменная result по-прежнему осталась равной 'test string'.
+Несмотря на то, что внутри функции мы передали ей содержимое файла.

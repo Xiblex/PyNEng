@@ -1,36 +1,71 @@
 ## Аргументы функций
-Цель создания функции, как правило, заключается в том, чтобы вынести кусок кода, который выполняет определенную задачу, в отдельный объект. Это позволяет нам использовать этот кусок кода многократно, не создавая его заново в программе.
+
+Цель создания функции, как правило, заключается в том, чтобы вынести кусок кода, который выполняет определенную задачу, в отдельный объект.
+Это позволяет нам использовать этот кусок кода многократно, не создавая его заново в программе.
+
 
 Как правило, функция должна выполнять какие-то действия с входящими значениями и на выходе выдавать результат.
 
-Для того чтобы функция могла принимать входящие значения, мы должны ее создать с переменными:
+Для того чтобы функция могла принимать входящие значения, мы должны ее создать с аргументами:
 ```python
-In [11]: def sum_ab(a,b):
-   ...:     return a + b
-   ...: 
+In [1]: def delete_exclamation_from_cfg( in_cfg, out_cfg ):
+   ...:     with open(in_cfg) as in_file:
+   ...:         result = in_file.readlines()
+   ...:     with open(out_cfg, 'w') as out_file:
+   ...:         for line in result:
+   ...:             if not line.startswith('!'):
+   ...:                 out_file.write(line)
+   ...:
 ```
 
-Тогда мы сможем при использовании функции, передавать ей аргументы:
-```python
-In [12]: sum_ab(10,20)
-Out[12]: 30
+В данном случае, у функции delete_exclamation_from_cfg два аргумента: in_cfg и out_cfg.
 
-In [13]: sum_ab('test','string')
-Out[13]: 'teststring'
+Функция открывает файл in_cfg, читает содержимое в список; затем открывает файл out_cfg и записывает в него только те строки, которые не начинаются на знак восклицания.
+
+В данном случае функция ничего не возвращает.
+
+Файл r1.txt будем использовать как первый аргумент (in_cfg):
+```python
+In [2]: cat r1.txt
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
 ```
 
-В данном случае мы создали функцию sum_ab, которая ожидает на вход два аргумента a и b. И на выходе, возвращает сумму этих аргументов.
+Попробуем использовать функцию delete_exclamation_from_cfg:
+```python
+In [3]: delete_exclamation_from_cfg('r1.txt', 'result.txt')
+```
+
+Файл result.txt выглядит так:
+```python
+In [4]: cat result.txt
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+no ip domain lookup
+ip ssh version 2
+
+```
 
 При таком определении функции, мы обязаны передать оба аргумента. Если мы передадим только один аргумент, возникнет ошибка (как и в случае, если мы передадим 3 и больше аргументов):
 
 ```python
-In [14]: sum_ab(50)
--------------------------------------------------------
-TypeError              Traceback (most recent call last)
-<ipython-input-8-cc30973e46d7> in <module>()
-----> 1 sum_ab(50)
+In [5]: delete_exclamation_from_cfg('r1.txt')
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+<ipython-input-7-66ae381f1c4f> in <module>()
+----> 1 delete_exclamation_from_cfg('r1.txt')
 
-TypeError: sum_ab() takes exactly 2 arguments (1 given)
+TypeError: delete_exclamation_from_cfg() takes exactly 2 arguments (1 given)
 ```
 
 Попробуем разобраться как еще можно передавать аргументы и как сделать так, чтобы функция работала для произвольного числа аргументов.

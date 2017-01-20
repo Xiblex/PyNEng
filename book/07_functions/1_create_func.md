@@ -1,4 +1,5 @@
 ## Создание функций
+
 Создание функции:
 * функции создаются с помощью зарезервированного слова __def__
 * за def следуют имя функции и круглые скобки
@@ -11,40 +12,112 @@
 
 Пример функции:
 ```python
-In [1]: def printstr( s ):
+In [1]: def open_file( filename ):
    ...:     """Documentation string"""
-   ...:     print s
+   ...:     with open(filename) as f:
+   ...:         print f.read()
+   ...:
 ```
 
-Эта функция ожидает строку в качестве аргумента, и выводит ее:
-```python
-In [2]: printstr('Test string')
-Test string
+> Когда мы создали функцию, она ещё ничего не выполняет. Только когда мы вызываем функцию, действия, которые в ней перечислены, будут выполняться. Это чем-то похоже на ACL в сетевом оборудовании: когда мы создаем ACL в конфигурации, он ничего не делает до тех пор, пока мы его куда-то не применим.
 
-In [3]: printstr('Test string2')
-Test string2
+Эта функция ожидает имя файла, в качестве аргумента, и затем выводит содержимое файла:
+```python
+In [2]: open_file('r1.txt')
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
+
+In [3]: open_file('ospf.txt')
+router ospf 1
+ router-id 10.0.0.3
+ auto-cost reference-bandwidth 10000
+ network 10.0.1.0 0.0.0.255 area 0
+ network 10.0.2.0 0.0.0.255 area 2
+ network 10.1.1.0 0.0.0.255 area 0
 ```
 
 Первая строка в определении функции - это docstring, строка документации. Это комментарий, который используется как описание функции. Его можно отобразить так:
 ```python
-In [4]: printstr.__doc__
+In [4]: open_file.__doc__
 Out[4]: 'Documentation string'
 ```
 
 ### Оператор return
-Оператор __return__ используется для прекращения работы функции, выхода из нее, и, как правило, возврата какого-то значения. Выражения, которые идут после return, не выполняются:
-```python
-In [5]: def printstr( s ):
-   ...:     """Documentation string"""
-   ...:     print "String: ", s
-   ...:     return s
-   ...:     print "After return"
-   ...: 
 
-In [6]: printstr('Test string')
-String:  Test string
-Out[6]: 'Test string'
+Оператор __return__ используется для прекращения работы функции, выхода из нее, и, как правило, возврата какого-то значения.
+Функция может возвращать любой объект Python.
+
+Функция open_file, в примере выше, просто выводит на стандартный поток вывода содержимое файла.
+Но, чаще всего, нам нужно получить от функции результат её работы.
+
+В данном случае, если мы присвоим вывод функции переменной result, мы получим такой результат:
+```python
+In [5]: result = open_file('ospf.txt')
+router ospf 1
+ router-id 10.0.0.3
+ auto-cost reference-bandwidth 10000
+ network 10.0.1.0 0.0.0.255 area 0
+ network 10.0.2.0 0.0.0.255 area 2
+ network 10.1.1.0 0.0.0.255 area 0
+
+In [6]: print result
+None
 ```
 
-Обратите внимание, что строка 'After return' не выводится.
+Переменная result равна ```None```.
+Так получилось из-за того, что функция ничего не возвращает.
+Она просто выводит сообщение на стандартный поток вывода.
+
+Для того, чтобы функция возвращала значение, которое мы потом можем присвоить переменной, используется оператор ```return```:
+```python
+In [7]: def open_file( filename ):
+   ...:     """Documentation string"""
+   ...:     with open(filename) as f:
+   ...:         return f.read()
+   ...:
+
+In [8]: result = open_file('r1.txt')
+
+In [9]: print result
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
+```
+
+Теперь в переменой result находится содержимое файла.
+
+В реальной жизни, практически всегда, функция будет возвращать какое-то значение.
+Вместе с тем, мы можем использовать выражения print, чтобы дополнительно выводить какие-то сообщения.
+
+
+Ещё один важный аспект работы оператора return: выражения, которые идут после return, не выполняются.
+
+То есть, в функции ниже, строка "Done" не будет выводиться, так как она стоит после return:
+```python
+In [10]: def open_file( filename ):
+    ...:     print "Reading file", filename
+    ...:     with open(filename) as f:
+    ...:         return f.read()
+    ...:         print "Done"
+    ...:
+
+In [11]: result = open_file('r1.txt')
+Reading file r1.txt
+
+```
 
