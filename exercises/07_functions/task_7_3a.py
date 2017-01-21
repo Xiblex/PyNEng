@@ -12,7 +12,9 @@
       То есть, порт находится в VLAN 1
 
     В таком случае, в словарь портов должна добавляться информация, что порт в VLAN 1
-      Пример словаря: {'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/20':'1' }
+      Пример словаря: {'FastEthernet0/12':10,
+                       'FastEthernet0/14':11,
+                       'FastEthernet0/20':1 }
 
 Функция ожидает в качестве аргумента имя конфигурационного файла.
 
@@ -25,11 +27,13 @@ def get_int(config):
 
     Возвращает кортеж словарей:
     - первый словарь: порты в режиме access
-      { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17' }
+      { 'FastEthernet0/12':10,
+        'FastEthernet0/14':11,
+        'FastEthernet0/16':17 }
     - второй словарь: порты в режиме trunk
-      { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
+      { 'FastEthernet0/1':[10,20],
+        'FastEthernet0/2':[11,30],
+        'FastEthernet0/4':[17] }
 
     """
-    with open(config) as f:
-        for line in f:
-
+    pass

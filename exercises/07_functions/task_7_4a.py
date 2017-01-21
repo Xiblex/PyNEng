@@ -18,9 +18,10 @@
 
 На примере interface Ethernet0/3.100
 {'interface Ethernet0/3.100':{
-                              'encapsulation dot1Q 100':[],
-                              'xconnect 10.2.2.2 12100 encapsulation mpls': ['backup peer 10.4.4.4 14100',
-                                                                             'backup delay 1 1']}}
+                    'encapsulation dot1Q 100':[],
+                    'xconnect 10.2.2.2 12100 encapsulation mpls':
+                        ['backup peer 10.4.4.4 14100',
+                         'backup delay 1 1']}}
 
 
 '''
@@ -49,7 +50,4 @@ def config_to_dict(config):
     """
     config - имя конфигурационного файла
     """
-    with open(config) as f:
-        for line in f:
-            pass
-
+    pass

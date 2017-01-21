@@ -16,8 +16,10 @@ def generate_trunk_config(trunk):
     """
     trunk - словарь trunk-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
-    
+        { 'FastEthernet0/1':[10,20],
+          'FastEthernet0/2':[11,30],
+          'FastEthernet0/4':[17] }
+
     Возвращает словарь:
     - ключи: имена интерфейсов, вида 'FastEthernet0/1'
     - значения: список команд, который надо выполнить на этом интерфейсе
@@ -29,6 +31,6 @@ def generate_trunk_config(trunk):
 
 
 
-trunk_dict = { 'FastEthernet0/1':['10','20','30'],
-               'FastEthernet0/2':['11','30'],
-               'FastEthernet0/4':['17'] }
+trunk_dict = { 'FastEthernet0/1':[10,20,30],
+               'FastEthernet0/2':[11,30],
+               'FastEthernet0/4':[17] }

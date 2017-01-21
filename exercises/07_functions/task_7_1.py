@@ -4,8 +4,11 @@
 
 Создать функцию, которая генерирует конфигурацию для access-портов.
 
-Аргумент access - это словарь access-портов, вида:
-    { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17','FastEthernet0/17':'150' }
+Параметр access ожидает, как аргумент, словарь access-портов, вида:
+    { 'FastEthernet0/12':10,
+      'FastEthernet0/14':11,
+      'FastEthernet0/16':17,
+      'FastEthernet0/17':150 }
 
 Функция должна возвращать список всех портов в режиме access
 с конфигурацией на основе шаблона access_template.
@@ -19,8 +22,10 @@ def generate_access_config(access):
     """
     access - словарь access-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17'}
-    
+        { 'FastEthernet0/12':10,
+          'FastEthernet0/14':11,
+          'FastEthernet0/16':17}
+
     Возвращает список всех портов в режиме access с конфигурацией на основе шаблона
     """
     access_template = ['switchport mode access',
@@ -30,7 +35,7 @@ def generate_access_config(access):
                        'spanning-tree bpduguard enable']
 
 
-access_dict = { 'FastEthernet0/12':'10',
-                'FastEthernet0/14':'11',
-                'FastEthernet0/16':'17',
-                'FastEthernet0/17':'150' }
+access_dict = { 'FastEthernet0/12':10,
+                'FastEthernet0/14':11,
+                'FastEthernet0/16':17,
+                'FastEthernet0/17':150 }

@@ -5,10 +5,12 @@
 
 Создать функцию, которая генерирует конфигурацию для trunk-портов.
 
-Аргумент trunk - это словарь trunk-портов. 
+Параметр trunk - это словарь trunk-портов.
 
 Словарь trunk имеет такой формат (тестовый словарь trunk_dict уже создан):
-    { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
+    { 'FastEthernet0/1':[10,20],
+      'FastEthernet0/2':[11,30],
+      'FastEthernet0/4':[17] }
 
 Функция должна возвращать список команд с конфигурацией
 на основе указанных портов и шаблона trunk_template.
@@ -22,7 +24,7 @@
 def generate_trunk_config(trunk):
     """
     trunk - словарь trunk-портов, для которых необходимо сгенерировать конфигурацию
-    
+
     Возвращает список всех команд, которые были сгенерированы на основе шаблона
     """
     trunk_template = ['switchport trunk encapsulation dot1q',
@@ -32,6 +34,6 @@ def generate_trunk_config(trunk):
 
 
 
-trunk_dict = { 'FastEthernet0/1':['10','20','30'],
-               'FastEthernet0/2':['11','30'],
-               'FastEthernet0/4':['17'] }
+trunk_dict = { 'FastEthernet0/1':[10,20,30],
+               'FastEthernet0/2':[11,30],
+               'FastEthernet0/4':[17] }

@@ -14,12 +14,12 @@
 
 Создать функцию, которая генерирует конфигурацию для access-портов.
 
-Аргумент access - это словарь access-портов, вида:
+Параметр access ожидает, как аргумент, словарь access-портов, вида:
 ```python
-{'FastEthernet0/12':'10',
- 'FastEthernet0/14':'11',
- 'FastEthernet0/16':'17',
- 'FastEthernet0/17':'150'}
+{'FastEthernet0/12':10,
+ 'FastEthernet0/14':11,
+ 'FastEthernet0/16':17,
+ 'FastEthernet0/17':150}
 ```
 
 Функция должна возвращать список всех портов в режиме access
@@ -34,7 +34,9 @@ def generate_access_config(access):
     """
     access - словарь access-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17'}
+        { 'FastEthernet0/12':10,
+          'FastEthernet0/14':11,
+          'FastEthernet0/16':17}
     
     Возвращает список всех портов в режиме access с конфигурацией на основе шаблона
     """
@@ -45,28 +47,31 @@ def generate_access_config(access):
                        'spanning-tree bpduguard enable']
 
 
-access_dict = { 'FastEthernet0/12':'10',
-                'FastEthernet0/14':'11',
-                'FastEthernet0/16':'17',
-                'FastEthernet0/17':'150' }
+access_dict = { 'FastEthernet0/12':10,
+                'FastEthernet0/14':11,
+                'FastEthernet0/16':17,
+                'FastEthernet0/17':150 }
 ```
 
 ### Задание 7.1a
 Сделать копию скрипта задания 6.1.
 
 Дополнить скрипт:
-* ввести дополнительный аргумент, который контролирует будет ли настроен port-security
- * имя аргумента 'psecurity'
+* ввести дополнительный параметр, который контролирует будет ли настроен port-security
+ * имя параметра 'psecurity'
  * по умолчанию значение False
 
 Проверить работу функции на примере словаря access_dict,
 с генерацией конфигурации port-security и без.
+
 ```python
 def generate_access_config(access):
     """
     access - словарь access-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17' }
+        { 'FastEthernet0/12':10,
+          'FastEthernet0/14':11,
+          'FastEthernet0/16':17 }
     
     psecurity - контролирует нужна ли настройка Port Security. По умолчанию значение False
         - если значение True, то настройка выполняется с добавлением шаблона port_security
@@ -85,10 +90,10 @@ def generate_access_config(access):
                      'switchport port-security violation restrict',
                      'switchport port-security']
 
-access_dict = { 'FastEthernet0/12':'10',
-                'FastEthernet0/14':'11',
-                'FastEthernet0/16':'17',
-                'FastEthernet0/17':'150' }
+access_dict = { 'FastEthernet0/12':10,
+                'FastEthernet0/14':11,
+                'FastEthernet0/16':17,
+                'FastEthernet0/17':150 }
 ```
 
 
@@ -108,12 +113,15 @@ access_dict = { 'FastEthernet0/12':'10',
 
 Проверить работу функции на примере словаря access_dict,
 с генерацией конфигурации port-security и без.
+
 ```python
 def generate_access_config(access):
     """
     access - словарь access-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17' }
+        { 'FastEthernet0/12':10,
+          'FastEthernet0/14':11,
+          'FastEthernet0/16':17 }
     
     psecurity - контролирует нужна ли настройка Port Security. По умолчанию значение False
         - если значение True, то настройка выполняется с добавлением шаблона port_security
@@ -134,23 +142,23 @@ def generate_access_config(access):
                      'switchport port-security violation restrict',
                      'switchport port-security']
 
-access_dict = { 'FastEthernet0/12':'10',
-                'FastEthernet0/14':'11',
-                'FastEthernet0/16':'17',
-                'FastEthernet0/17':'150' }
+access_dict = { 'FastEthernet0/12':10,
+                'FastEthernet0/14':11,
+                'FastEthernet0/16':17,
+                'FastEthernet0/17':150 }
 ```
 
 
 ### Задание 7.2
 Создать функцию, которая генерирует конфигурацию для trunk-портов.
 
-Аргумент trunk - это словарь trunk-портов. 
+Параметр trunk - это словарь trunk-портов. 
 
 Словарь trunk имеет такой формат (тестовый словарь trunk_dict уже создан):
 ```python
-{ 'FastEthernet0/1':['10','20'],
-  'FastEthernet0/2':['11','30'],
-  'FastEthernet0/4':['17'] }
+{ 'FastEthernet0/1':[10,20],
+  'FastEthernet0/2':[11,30],
+  'FastEthernet0/4':[17] }
 ```
 
 Функция должна возвращать список команд с конфигурацией на основе указанных портов и шаблона trunk_template.
@@ -171,9 +179,9 @@ def generate_trunk_config(trunk):
                       'switchport trunk native vlan 999',
                       'switchport trunk allowed vlan']
 
-trunk_dict = { 'FastEthernet0/1':['10','20','30'],
-               'FastEthernet0/2':['11','30'],
-               'FastEthernet0/4':['17'] }
+trunk_dict = { 'FastEthernet0/1':[10,20,30],
+               'FastEthernet0/2':[11,30],
+               'FastEthernet0/4':[17] }
 ```
 
 ### Задание 7.2a
@@ -184,12 +192,15 @@ trunk_dict = { 'FastEthernet0/1':['10','20','30'],
 * значения: список команд, который надо выполнить на этом интерфейсе
 
 Проверить работу функции на примере словаря trunk_dict.
+
 ```python
 def generate_trunk_config(trunk):
     """
     trunk - словарь trunk-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
+        { 'FastEthernet0/1':[10,20],
+          'FastEthernet0/2':[11,30],
+          'FastEthernet0/4':[17] }
     
     Возвращает словарь:
     - ключи: имена интерфейсов, вида 'FastEthernet0/1'
@@ -200,31 +211,30 @@ def generate_trunk_config(trunk):
                       'switchport trunk native vlan 999',
                       'switchport trunk allowed vlan']
 
-trunk_dict = { 'FastEthernet0/1':['10','20','30'],
-               'FastEthernet0/2':['11','30'],
-               'FastEthernet0/4':['17'] }
+trunk_dict = { 'FastEthernet0/1':[10,20,30],
+               'FastEthernet0/2':[11,30],
+               'FastEthernet0/4':[17] }
 ```
 
 ### Задание 7.3
 Создать функцию get_int_vlan_map, которая обрабатывает конфигурационный файл коммутатора
 и возвращает два объекта:
 * словарь портов в режиме access, где ключи номера портов, а значения access VLAN:
- * Пример словаря:
 
 ```python
-{'FastEthernet0/12':'10',
- 'FastEthernet0/14':'11',
- 'FastEthernet0/16':'17'}
+{'FastEthernet0/12':10,
+ 'FastEthernet0/14':11,
+ 'FastEthernet0/16':17}
  ```
 
 * словарь портов в режиме trunk, где ключи номера портов, а значения список разрешенных VLAN:
- * Пример словаря:
 
 ```python
- {'FastEthernet0/1':['10','20'],
-  'FastEthernet0/2':['11','30'],
-  'FastEthernet0/4':['17']}
+ {'FastEthernet0/1':[10,20],
+  'FastEthernet0/2':[11,30],
+  'FastEthernet0/4':[17]}
 ```
+
 Функция ожидает в качестве аргумента имя конфигурационного файла.
 
 Проверить работу функции на примере файла config_sw1.txt
@@ -243,11 +253,12 @@ interface FastEthernet0/20
 То есть, порт находится в VLAN 1
 
 В таком случае, в словарь портов должна добавляться информация, что порт в VLAN 1
+
 Пример словаря:
 ```python
-{'FastEthernet0/12':'10',
- 'FastEthernet0/14':'11',
- 'FastEthernet0/20':'1' }
+{'FastEthernet0/12':10,
+ 'FastEthernet0/14':11,
+ 'FastEthernet0/20':1 }
 ```
 Функция ожидает в качестве аргумента имя конфигурационного файла.
 
@@ -300,9 +311,7 @@ def config_to_dict(config):
       они должны быть в значении у соответствующего ключа, в виде списка (пробелы вначале можно оставлять).
     - Если у команды верхнего уровня нет подкоманд, то значение будет пустым списком
     """
-    with open(config) as f:
-        for line in f:
-            pass
+    pass
 
 ```
 
@@ -325,9 +334,10 @@ def config_to_dict(config):
 На примере interface Ethernet0/3.100
 ```python
 {'interface Ethernet0/3.100':{
-                              'encapsulation dot1Q 100':[],
-                              'xconnect 10.2.2.2 12100 encapsulation mpls': ['backup peer 10.4.4.4 14100',
-                                                                             'backup delay 1 1']}}
+                    'encapsulation dot1Q 100':[],
+                    'xconnect 10.2.2.2 12100 encapsulation mpls':
+                        ['backup peer 10.4.4.4 14100',
+                         'backup delay 1 1']}}
 ```
 
 ```python
@@ -355,7 +365,5 @@ def config_to_dict(config):
     """
     config - имя конфигурационного файла
     """
-    with open(config) as f:
-        for line in f:
-            pass
+    pass
 ```
