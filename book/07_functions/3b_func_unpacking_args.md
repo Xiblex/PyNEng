@@ -66,7 +66,7 @@ In [6]: interfaces_info = [['Fa0/1', '10.0.1.1', '/24'],
 ```
 
 Если мы теперь попробуем пройтись по списку в цикле, и просто передавать вложенный список, как аргумент, мы получим ошибку:
-```
+```python
 In [7]: for info in interfaces_info:
    ....:     print config_interface(info)
    ....:
@@ -85,8 +85,8 @@ TypeError: config_interface() takes exactly 3 arguments (1 given)
 И вот в такой ситуации, очень пригодится распаковка аргументов.
 Нам достаточно только добавить ```*``` перед передачей списка, как аргумента, и всё получится:```python
 In [8]: for info in interfaces_info:
-   ....:     print config_interface(*info)
-   ....:
+  ....:     print config_interface(*info)
+  ....:
 ['interface Fa0/1', 'no shutdown', 'ip address 10.0.1.1 255.255.255.0']
 ['interface Fa0/2', 'no shutdown', 'ip address 10.0.2.1 255.255.255.0']
 ['interface Fa0/3', 'no shutdown', 'ip address 10.0.3.1 255.255.255.0']
@@ -168,7 +168,7 @@ TypeError: coercing to Unicode: need string or buffer, dict found
 И на стадии открытия файла, возникает ошибка, так как мы передали словарь.
 
 Но, если мы добавим ```**``` перед передачей словаря функции, то функция нормально отработает:
-```
+```python
 In [12]: for d in cfg:
     ...:     print config_to_list(**d)
     ...:
