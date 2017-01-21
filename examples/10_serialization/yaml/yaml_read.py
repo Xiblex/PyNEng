@@ -7,7 +7,7 @@ print templates
 
 """
 Example:
-
+$ python yaml_read.py
 [{'BS': 1550,
   'IT': 791,
   'id': 11,

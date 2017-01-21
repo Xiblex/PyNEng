@@ -23,6 +23,7 @@ with open('sw_templates.yaml') as f:
 """
 Example:
 
+$ python yaml_write.py
 access: [switchport mode access, switchport access vlan, switchport nonegotiate, spanning-tree
     portfast, spanning-tree bpduguard enable]
 trunk: [switchport trunk encapsulation dot1q, switchport mode trunk, switchport trunk

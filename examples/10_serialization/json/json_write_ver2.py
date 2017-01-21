@@ -24,7 +24,7 @@ with open('sw_templates.json') as f:
 
 """
 Example:
-
+$ python2 json_write_ver2.py
 {
   "access": [
     "switchport mode access",

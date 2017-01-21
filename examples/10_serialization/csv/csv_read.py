@@ -7,7 +7,7 @@ with open('sw_data.csv') as f:
 
 """
 Example:
-
+$ python csv_read.py
 ['hostname', 'vendor', 'model', 'location']
 ['sw1', 'Cisco', '3750', 'London']
 ['sw2', 'Cisco', '3850', 'Liverpool']

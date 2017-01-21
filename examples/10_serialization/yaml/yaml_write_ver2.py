@@ -22,7 +22,7 @@ with open('sw_templates.yaml') as f:
 
 """
 Example:
-
+$ python yaml_write_ver2.py
 access:
 - switchport mode access
 - switchport access vlan

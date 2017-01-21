@@ -73,13 +73,13 @@ headers = ['hostname', 'ios', 'image', 'uptime']
 import yaml
 
 
-access_dict = { 'FastEthernet0/12':'10',
-                'FastEthernet0/14':'11',
-                'FastEthernet0/16':'17',
-                'FastEthernet0/17':'150' }
+access_dict = { 'FastEthernet0/12':10,
+                'FastEthernet0/14':11,
+                'FastEthernet0/16':17,
+                'FastEthernet0/17':150 }
 
-trunk_dict = { 'FastEthernet0/1':['10','20','30'],
-               'FastEthernet0/2':['11','30'],
+trunk_dict = { 'FastEthernet0/1':[10,20,30],
+               'FastEthernet0/2':[11,30],
                'FastEthernet0/4':['17'] }
 
 
@@ -87,7 +87,9 @@ def generate_access_config(access, psecurity=False):
     """
     access - словарь access-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':'10','FastEthernet0/14':'11','FastEthernet0/16':'17'}
+        { 'FastEthernet0/12':10,
+          'FastEthernet0/14':11,
+          'FastEthernet0/16':17}
     psecurity - контролирует нужна ли настройка Port Security. По умолчанию значение False
         - если значение True, то настройка выполняется с добавлением шаблона port_security
         - если значение False, то настройка не выполняется
@@ -100,7 +102,9 @@ def generate_trunk_config(trunk):
     """
     trunk - словарь trunk-портов,
     для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/1':['10','20'], 'FastEthernet0/2':['11','30'], 'FastEthernet0/4':['17'] }
+        { 'FastEthernet0/1':[10,20],
+          'FastEthernet0/2':[11,30],
+          'FastEthernet0/4':[17] }
 
     Возвращает список всех команд, которые были сгенерированы на основе шаблона
     """
@@ -131,7 +135,8 @@ def generate_alias_config(filename):
     """
     pass
 
-def generate_switch_config(access=True, psecurity=False, trunk=True, ospf=True, mngmt=True, alias=False):
+def generate_switch_config(access=True, psecurity=False, trunk=True,
+                           ospf=True, mngmt=True, alias=False):
     """
     Аргументы контролирует какие настройки надо выполнить.
     По умолчанию, будет настроено все, кроме psecurity и alias.

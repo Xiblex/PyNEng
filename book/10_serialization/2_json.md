@@ -1,6 +1,6 @@
 ##Работа с файлами в формате JSON
 
-JSON (JavaScript Object Notation) - это текстовый формат для хранения и обмена данными.
+__JSON (JavaScript Object Notation)__ - это текстовый формат для хранения и обмена данными.
 
 [JSON](https://ru.wikipedia.org/wiki/JSON) по синтаксису очень похож на словари в Python. И достаточно удобен для восприятия.
 
@@ -54,8 +54,9 @@ switchport trunk native vlan 999
 switchport trunk allowed vlan
 ```
 
-В итоге мы получили словарь. Обратите внимание, что при чтении из файла в формате JSON мы получили unicode.
+В итоге мы получили словарь. Обратите внимание, что при чтении из файла в формате JSON мы получили строки в unicode.
 
+> Мы не будем рассматривать работу с Unicode. Но, вы можете почитать это [Unicode HowTo](https://docs.python.org/2/howto/unicode.html).
 
 ###Запись
 

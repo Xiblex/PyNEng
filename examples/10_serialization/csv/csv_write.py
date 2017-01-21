@@ -18,6 +18,7 @@ with open('sw_data_new.csv') as f:
 """
 Example:
 
+$ python csv_write.py
 hostname,vendor,model,location
 sw1,Cisco,3750,"London, Best str"
 sw2,Cisco,3850,"Liverpool, Better str"

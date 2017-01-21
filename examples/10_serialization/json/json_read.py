@@ -10,7 +10,7 @@ for section, commands in templates.items():
 
 """
 Example:
-
+$ python json_read.py
 {u'access': [u'switchport mode access', u'switchport access vlan', u'switchport nonegotiate', u'spanning-tree portfast', u'spanning-tree bpduguard enable'], u'trunk': [u'switchport trunk encapsulation dot1q', u'switchport mode trunk', u'switchport trunk native vlan 999', u'switchport trunk allowed vlan']}
 
 access
