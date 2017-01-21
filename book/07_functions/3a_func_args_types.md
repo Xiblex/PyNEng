@@ -9,30 +9,48 @@
 
 Но, при этом, сначала должны идти позиционные аргументы, а только потом - ключевые.
 
+> Код функций, которые используются в этом разделе, можно скопировать из файла func_args_types.py
+
 Посмотрим на разные способы передачи аргументов, на примере функции:
 ```python
-In [7]: def cfg_to_list(cfg_file, delete_exclamation):
-   ....:     result = []
-   ....:     with open( cfg_file ) as f:
-   ....:         for line in f:
-   ....:             if delete_exclamation and line.startswith('!'):
-   ....:                 pass
-   ....:             else:
-   ....:                 result.append(line.rstrip())
-   ....:     return result
-   ....:
+In [1]: def cfg_to_list(cfg_file, delete_exclamation):
+  ....:     result = []
+  ....:     with open( cfg_file ) as f:
+  ....:         for line in f:
+  ....:             if delete_exclamation and line.startswith('!'):
+  ....:                 pass
+  ....:             else:
+  ....:                 result.append(line.rstrip())
+  ....:     return result
+  ....:
 ```
 
 ### Позиционные аргументы
 
 Позиционные аргументы, при вызове функции, надо передать в правильном порядке (поэтому они и называются позиционные)
 
+```python
+In [2]: cfg_to_list('r1.txt', False)
+Out[2]:
+['!',
+ 'service timestamps debug datetime msec localtime show-timezone year',
+ 'service timestamps log datetime msec localtime show-timezone year',
+ 'service password-encryption',
+ 'service sequence-numbers',
+ '!',
+ 'no ip domain lookup',
+ '!',
+ '',
+ '',
+ 'ip ssh version 2',
+ '!']
+```
 
 Если мы, при вызове поменяем аргументы местами, скорее всего, возникнет ошибка, в зависимости о конкретной функции.
 
 В нашем случае, получается такой результат:
 ```python
-In [8]: cfg_to_list(False, 'r1.txt')
+In [3]: cfg_to_list(False, 'r1.txt')
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
 <ipython-input-18-e6da7e2657eb> in <module>()
@@ -48,6 +66,7 @@ TypeError                                 Traceback (most recent call last)
 TypeError: coercing to Unicode: need string or buffer, bool found
 ```
 
+
 ### Ключевые аргументы
 __Ключевые аргументы__:
 * передаются с указанием именем аргумента
@@ -55,8 +74,8 @@ __Ключевые аргументы__:
 
 Если мы теперь передадим оба аргумента, как ключевые, то мы можем передавать их в любом порядке:
 ```python
-In [9]: cfg_to_list(delete_exclamation=False, cfg_file='r1.txt')
-Out[9]:
+In [4]: cfg_to_list(delete_exclamation=False, cfg_file='r1.txt')
+Out[4]:
 ['!',
  'service timestamps debug datetime msec localtime show-timezone year',
  'service timestamps log datetime msec localtime show-timezone year',
@@ -73,7 +92,7 @@ __Но, обратите внимание, что всегда сначала д
 
 Если мы сделаем наоборот, возникнет ошибка:
 ```python
-In [10]: cfg_to_list(delete_exclamation=False, 'r1.txt')
+In [5]: cfg_to_list(delete_exclamation=False, 'r1.txt')
   File "<ipython-input-19-5efdee7ce6dd>", line 1
     cfg_to_list(delete_exclamation=False, 'r1.txt')
 SyntaxError: non-keyword arg after keyword arg
@@ -82,8 +101,8 @@ SyntaxError: non-keyword arg after keyword arg
 
 Но в такой комбинации можно:
 ```python
-In [11]: cfg_to_list('r1.txt', delete_exclamation=True)
-Out[11]:
+In [6]: cfg_to_list('r1.txt', delete_exclamation=True)
+Out[6]:
 ['service timestamps debug datetime msec localtime show-timezone year',
  'service timestamps log datetime msec localtime show-timezone year',
  'service password-encryption',

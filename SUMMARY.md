@@ -64,6 +64,8 @@
         * [Типы параметров](book/07_functions/3a_func_params_types.md)
         * [Типы аргументов](book/07_functions/3a_func_args_types.md)
         * [Аргументы переменной длинны](book/07_functions/3b_func_args_var.md)
+        * [Распаковка аргументов](book/07_functions/3b_func_unpacking_args.md)
+        * [Пример использования](book/07_functions/4_func_unpacking_and_var_args_example.md)
     * [Упражнения](exercises/07_functions/07_exercises.md)
 * [8. Модули](book/08_modules/README.md)
     * [Импорт модуля](book/08_modules/1_import.md)
