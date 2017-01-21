@@ -52,7 +52,7 @@ print '\n'.join(generate_access_cfg(sw1_fast_int))
 * ```import sw_int_templates``` - мы импортируем всё из файла
  * пример использования одного из шаблонов: ```sw_int_templates.access_template```
 * ```from sw_data import sw1_fast_int``` - из модуля sw_data мы импортируем только sw1_fast_int
- * пр таком импорте, мы можем напрямую обращаться к имени sw1_fast_int
+ * при таком импорте, мы можем напрямую обращаться к имени sw1_fast_int
 
 Вывод мы получаем такой:
 ```
@@ -131,7 +131,7 @@ print lines_cfg
 
 
 Обратите внимание, что из файла можно импортировать несколько объектов:
-```
+```python
 from sw_cfg_templates import basic_cfg, lines_cfg
 ```
 
@@ -195,7 +195,7 @@ line vty 0 4
 
 
 Так получилось из-за строки print в файле generate_sw_int_cfg.py:
-```
+```python
 print '\n'.join(generate_access_cfg(sw1_fast_int))
 ```
 
@@ -239,12 +239,12 @@ if __name__ == "__main__":
 Таким образом, условие ```if __name__ == "__main__"``` проверяет был ли файл запущен напрямую.
 
 Измените в файле generate_sw_cfg.py строку:
-```
+```python
 from generate_sw_int_cfg import generate_access_cfg
 ```
 
 на строку:
-```
+```python
 from generate_sw_int_cfg2 import generate_access_cfg
 ```
 

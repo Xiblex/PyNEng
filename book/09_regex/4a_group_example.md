@@ -1,8 +1,9 @@
 ### Разбор вывода команды show ip dhcp snooping с помощью именованных групп
+
 Рассмотрим еще один пример использования именованных групп.
 
 У нас есть файл dhcp_snooping.txt с выводом команды show ip dhcp snooping binding: 
-```python
+```
 MacAddress          IpAddress        Lease(sec)  Type           VLAN  Interface
 ------------------  ---------------  ----------  -------------  ----  --------------------
 00:09:BB:3D:D6:58   10.1.10.2        86250       dhcp-snooping   10    FastEthernet0/1
@@ -16,12 +17,12 @@ Total number of bindings: 4
 
 Но, для начала, попробуем разобрать одну строку:
 ```python
-In [18]: line = '00:09:BB:3D:D6:58  10.1.10.2 86250   dhcp-snooping   10  FastEthernet0/1'
+In [1]: line = '00:09:BB:3D:D6:58  10.1.10.2 86250   dhcp-snooping   10  FastEthernet0/1'
 ```
 
 В регулярном выражении, именованные группы используются для тех частей вывода, которые мы хотим позже использовать:
 ```python
-In [22]: match = re.search(r'(?P<mac>.+?) +(?P<ip>.*?) +(\d+) +([\w-]+) +(?P<vlan>\d+) +(?P<int>.*$)', line)
+In [2]: match = re.search(r'(?P<mac>.+?) +(?P<ip>.*?) +(\d+) +([\w-]+) +(?P<vlan>\d+) +(?P<int>.*$)', line)
 ```
 
 Комментарии к регулярному выражению:
@@ -40,8 +41,8 @@ In [22]: match = re.search(r'(?P<mac>.+?) +(?P<ip>.*?) +(\d+) +([\w-]+) +(?P<vla
 
 В результате мы получим такой словарь:
 ```python
-In [23]: match.groupdict()
-Out[23]: 
+In [3]: match.groupdict()
+Out[3]: 
 {'int': 'FastEthernet0/1',
  'ip': '10.1.10.2',
  'mac': '00:09:BB:3D:D6:58',
@@ -72,8 +73,8 @@ for num, comp in enumerate(result, 1):
 ```
 
 Вывод результата:
-```python
-natasha$ python parse_dhcp_snooping.py
+```
+$ python parse_dhcp_snooping.py
 К коммутатору подключено 4 устройства
 Параметры устройства 1:
 	int:	FastEthernet0/1
