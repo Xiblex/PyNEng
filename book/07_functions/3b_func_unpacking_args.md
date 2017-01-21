@@ -83,7 +83,8 @@ TypeError: config_interface() takes exactly 3 arguments (1 given)
 Ошибка вполне логичная, наша функция ожидает три аргумента, а мы ей передаем 1 аргумент - список.
 
 И вот в такой ситуации, очень пригодится распаковка аргументов.
-Нам достаточно только добавить ```*``` перед передачей списка, как аргумента, и всё получится:```python
+Нам достаточно только добавить ```*``` перед передачей списка, как аргумента, и всё получится:
+```python
 In [8]: for info in interfaces_info:
   ....:     print config_interface(*info)
   ....:
@@ -139,7 +140,9 @@ Out[9]:
 И у нас есть список словарей, в которых указано имя файла и все аргументы:
 ```python
 In [10]: cfg = [dict(cfg_file='r1.txt', delete_excl=True, delete_empty=True, strip_end=True),
-   ....:        dict(cfg_file='r2.txt', delete_excl=False, delete_empty=True, strip_end=True),   ....:        dict(cfg_file='r3.txt', delete_excl=True, delete_empty=False, strip_end=True),   ....:        dict(cfg_file='r4.txt', delete_excl=True, delete_empty=True, strip_end=False)]
+   ....:        dict(cfg_file='r2.txt', delete_excl=False, delete_empty=True, strip_end=True),
+   ....:        dict(cfg_file='r3.txt', delete_excl=True, delete_empty=False, strip_end=True),
+   ....:        dict(cfg_file='r4.txt', delete_excl=True, delete_empty=True, strip_end=False)]
 ```
 
 Если мы будем передавать словарь функции config_to_list, то мы получим ошибку:
