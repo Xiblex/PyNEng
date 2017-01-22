@@ -2,7 +2,7 @@
 '''
 Задание 12.3
 
-Создать функцию send_commands.
+Создать функцию send_commands (для подключения по SSH используется netmiko).
 
 Функция ожидает аргументы:
 * devices_list - список словарей с параметрами подключения к устройствам, которым надо передать команды один из аргументов с командами:
@@ -37,9 +37,15 @@ commands = [ 'logging 10.255.255.1',
              'no logging console' ]
 command = "sh ip int br"
 
-
 def send_show_command(device_list, show_command):
+    pass
 
 def send_config_commands(device_list, config_commands, output=True):
+    pass
+
+def send_commands_from_file(device_list, filename):
+    pass
 
 def send_commands(device_list, config=[], show='', filename=''):
+    pass
+
