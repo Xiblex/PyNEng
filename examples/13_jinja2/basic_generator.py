@@ -25,7 +25,7 @@ print template.render( liverpool )
 """
 Examples:
 
-natasha$ python generator.py
+$ python generator.py
 
 hostname Liverpool
 !

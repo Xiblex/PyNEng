@@ -56,6 +56,12 @@ router ospf 10
 """)
 ```
 
+> Эти строки меняют кодировку по умолчанию:
+> ```
+> reload(sys)
+> sys.setdefaultencoding('utf-8')
+> ```
+
 
 Файл routers_info.yml
 ```yaml
@@ -115,7 +121,7 @@ $ python router_config_generator.py
 
 В результате получатся три конфигурационных файла:
 
-{% codetabs name="Liverpool_r1.txt", type="py" -%}
+{% codetabs name="Liverpool_r1.txt", type="text" -%}
 hostname Liverpool
 !
 interface Loopback10

@@ -4,7 +4,6 @@
 > **Note** Для того чтобы разобраться с Jinja2, лучше использовать предыдущие примеры. Этот вариант показан для того, чтобы показать, в каком виде предыдущий пример, скорее всего, встретится в реальной жизни. И как, в таком случае, обрабатывать вводные данные и шаблон.
 
 
-
 Термин "программный интерфейс" относится к способу работы Jinja с вводными данными и шаблоном, для генерации итоговых файлов. 
 
 
@@ -22,13 +21,6 @@
 
 Подробнее о программном интерфейсе Jinja2 можно почитать на странице [Jinja2](xgu.ru/wiki/Jinja2).
 
-
-Кроме изменения шаблона и собственно скрипта, переделаем также формат вводных данных:
-* данные записаны в файле просто в виде строк, через запятую
- * для того чтобы не надо было описывать их в синтаксисе объектов Python  и не надо было писать кавычки и так далее
-* при обработке данных из файла, мы превратим их в списки, а затем обработаем списки
-* для этого воспользуемся примером генерации словарей из списков, который рассматривался в разделе "Словари"
-* обратите внимание, что тут используется несколько приемов, которые мы изучали ранее и, чтобы понять скрипт, может потребоваться пересмотреть предыдущие темы
 
 Переделанный пример предыдущего скрипта, шаблона и файла с данными (все файлы находятся в каталоге 2_example):
 
@@ -74,12 +66,28 @@ router ospf 10
  !
 ```
 
-Файл с данными routers_info.csv
+Файл с данными routers_info.yml
 ```
-id,name,to_name,IT,BS,to_id
-11,Liverpool,LONDON,791,1550,1
-12,Bristol,LONDON,793,1510,1
-14,Coventry,Manchester,892,1650,2
+- id: 11
+  name: Liverpool
+  to_name: LONDON
+  IT: 791
+  BS: 1550
+  to_id: 1
+
+- id: 12
+  name: Bristol
+  to_name: LONDON
+  IT: 793
+  BS: 1510
+  to_id: 1
+
+- id: 14
+  name: Coventry
+  to_name: Manchester
+  IT: 892
+  BS: 1650
+  to_id: 2
 ```
 
 
@@ -87,7 +95,7 @@ id,name,to_name,IT,BS,to_id
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader
-import csv
+import yaml
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -95,14 +103,12 @@ sys.setdefaultencoding('utf-8')
 env = Environment(loader = FileSystemLoader('templates'))
 template = env.get_template('router_template.txt')
 
-with open('routers_info.csv') as f:
-    routers = csv.DictReader(f)
+routers = yaml.load(open('routers_info.yml'))
 
-    for router in routers:
-        r1_conf = router['name']+'_r1.txt'
-        with open(r1_conf,'w') as f:
-            f.write(template.render( router ))
-
+for router in routers:
+    r1_conf = router['name']+'_r1.txt'
+    with open(r1_conf,'w') as f:
+        f.write(template.render( router ))
 ```
 
 
@@ -124,42 +130,7 @@ env = Environment(loader = FileSystemLoader(curr_dir))
 ```
 
 
-Метод __get_template()__ используется для того, чтобы получить шаблон. В скобках указывается имя файла.
-
-Затем мы открываем файл с данными (routers_info.csv).
+Метод __```get_template()```__ используется для того, чтобы получить шаблон. В скобках указывается имя файла.
 
 Последняя часть осталась неизменной.
 
-Теперь попробуем изменить скрипт таким образом, чтобы он был унифицирован:
-* файл с шаблоном и файл с информацией о маршрутизаторах, будут передаваться как аргументы
-* каталог с шаблонами будет определяться автоматически, из пути к шаблону
-
-Итоговый скрипт:
-```python
-# -*- coding: utf-8 -*-
-from jinja2 import Environment, FileSystemLoader
-import csv
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-TEMPLATE_DIR, template = sys.argv[1].split('/')
-routers_info = sys.argv[2]
-
-env = Environment(loader = FileSystemLoader(TEMPLATE_DIR))
-template = env.get_template(template)
-
-routers = csv.DictReader(open(routers_info))
-
-for router in routers:
-    r1_conf = router['name']+'_r1.txt'
-    with open(r1_conf,'w') as f:
-        f.write(template.render( router ))
-```
-
-Запускать скрипт мы будем так:
-```
-$ python final_router_config_generator.py templates/router_template.txt routers_info.csv
-```
-
-В дальнейшем, в практических примерах, мы будем использовать такой вариант.

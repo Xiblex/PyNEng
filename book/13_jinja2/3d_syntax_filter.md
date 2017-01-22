@@ -111,6 +111,8 @@ router ospf 1
 dictsort(value, case_sensitive=False, by='key')
 ```
 
+> После того, как dictsort отсортировал словарь, он возвращает список кортежей, а не словарь.
+
 Пример шаблона templates/filter_dictsort.txt с использованием фильтра dictsort:
 ```
 {% for intf, params in trunks | dictsort %}
