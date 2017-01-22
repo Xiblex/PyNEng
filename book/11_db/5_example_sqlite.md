@@ -226,7 +226,7 @@ Inserting DHCP Snooping data
  * значение параметра
 * делать нормальный вывод данных по запросу
 
-get_data_ver1.py
+Файл get_data_ver1.py:
 ```python
 # -*- coding: utf-8 -*-
 import sqlite3
