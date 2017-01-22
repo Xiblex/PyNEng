@@ -62,14 +62,14 @@ routers:
 
 Замерим время выполнения скрипта с помощью утилиты time (вывод самого скрипта не показан), а затем сравним какое время выполнения будет с использованием модуля threading:
 ```
-nata: $ time python netmiko_function.py "sh ip int br"
+$ time python netmiko_function.py "sh ip int br"
 ...
 real    0m6.189s
 user    0m0.336s
 sys     0m0.080s
 ```
 
-Теперь посмотрим как будет выглядеть код с использованием модуля threading (файл netmiko_function_threading.py):
+Теперь посмотрим как будет выглядеть код с использованием модуля threading (файл netmiko_threading.py):
 ```python
 from netmiko import ConnectHandler
 import sys
@@ -103,7 +103,8 @@ conn_threads(connect_ssh, devices['routers'], COMMAND)
 
 Прежде чем мы разберемся с кодом, посмотрим на время выполнения кода:
 ```
-nata: $ time python netmiko_function_threading.py "sh ip int br"
+$ time python netmiko_function_threading.py "sh ip int br"
+
 ...
 real    0m2.229s
 user    0m0.408s
@@ -114,13 +115,13 @@ sys     0m0.068s
 Но, надо учесть, что такая ситуация не будет повторяться при большом количестве подключений.
 
 Разберемся с кодом функции conn_threads:
-* threading.Thread - класс, который создает поток
+* ```threading.Thread``` - класс, который создает поток
  * для инициации потока, мы передаем вызываемый объект - функцию и её аргументы
-* th.start() - стартует поток
-* threads.append(th) - добавляет объект потока в список
-* th.join() - этот метод ожидает пока поток завершит работу
+* ```th.start()``` - стартует поток
+* ```threads.append(th)``` - добавляет объект потока в список
+* ```th.join()``` - этот метод ожидает пока поток завершит работу
  * таким образом мы ожидаем пока все потоки завершатся и только потом завершаем основную программу
- * по умолчанию, join ждет завершения работы потока бесконечно. Но, можно ограничить время ожидания передав join время в секундах. В таком случае, join завершится после указанного количества секунд.
+ * по умолчанию, ```join``` ждет завершения работы потока бесконечно. Но, можно ограничить время ожидания передав ```join``` время в секундах. В таком случае, ```join``` завершится после указанного количества секунд.
 
 
 ### Получение данных из потоков
@@ -129,10 +130,13 @@ sys     0m0.068s
 
 Для этого мы будем использовать очередь. Мы будем передавать её как аргумент в функцию, которая выполняет подключение по SSH, а затем, внутри функции складывать в очередь полученные данные.
 
+> Очередь это структура данных, которая должна быть вам знакома по работе с сетевым оборудованием.
+
 В Python есть модуль Queue, который позволяет создавать разные типы очередей.
 
 Пример использования потоков с получением данных (файл netmiko_threading_data.py):
 ```python
+# -*- coding: utf-8 -*-
 from netmiko import ConnectHandler
 import sys
 import yaml
@@ -143,10 +147,8 @@ COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
 def connect_ssh(device_dict, command, queue):
-
     ssh = ConnectHandler(**device_dict)
     ssh.enable()
-
     result = ssh.send_command(command)
     print "Connection to device %s" % device_dict['ip']
 
@@ -156,9 +158,11 @@ def connect_ssh(device_dict, command, queue):
 
 def conn_threads(function, devices, command):
     threads = []
+    #Создаем очередь
     q = Queue()
 
     for device in devices:
+        # Передаем очередь как аргумент, функции
         th = threading.Thread(target = function, args = (device, command, q))
         th.start()
         threads.append(th)

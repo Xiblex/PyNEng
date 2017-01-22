@@ -34,7 +34,7 @@ for IP in DEVICES_IP:
 
 """
 Example:
-
+$ python 3_paramiko.py
 Username: cisco
 Password:
 Enter enable secret:

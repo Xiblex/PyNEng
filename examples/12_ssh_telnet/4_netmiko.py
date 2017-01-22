@@ -26,7 +26,7 @@ for IP in DEVICES_IP:
 
 """
 Examples:
-
+$ python 4_netmiko.py
 Username: cisco
 Password:
 Enter enable password:

@@ -46,16 +46,16 @@ for IP in DEVICES_IP:
 Первая особенность, которая бросается в глаза - в конце отправляемых команд, надо добавлять символ перевода строки.
 
 В остальном, telnetlib очень похож на pexpect:
-* t = telnetlib.Telnet(ip) - класс Telnet представляет соединение к серверу.
+* ```t = telnetlib.Telnet(ip)``` - класс Telnet представляет соединение к серверу.
  * мы передали ему только IP-адрес, но можно было передать и порт, к которому нужно подключаться
-* read_until - похож на метод expect в модуле pexpect. Мы указываем до какой строки следует считывать вывод
-* write - передать строку
-* read_very_eager - считать всё, что получается
+* ```read_until``` - похож на метод ```expect``` в модуле pexpect. Мы указываем до какой строки следует считывать вывод
+* ```write``` - передать строку
+* ```read_very_eager``` - считать всё, что получается
 
 
 Попробуем запустить скрипт:
 ```
-natasha@nattaur: $ python 2_telnetlib.py "sh ip int br"
+$ python 2_telnetlib.py "sh ip int br"
 Username: nata
 Password:
 Enter enable secret:
