@@ -41,9 +41,14 @@ vars_dict = yaml.load( open( VARS_FILE ) )
 print template.render( vars_dict )
 ```
 
-> В строке ```Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True)```
-> ```trim_blocks=True``` - удаляет первую пустую строку после блока конструкции, если установлено в True (по умолчанию False)
-> Также можно добавлять параметр ```lstrip_blocks=True``` - если установлено в True, пробелы и табы в начале строки удаляются (по умолчанию False).
+В строке
+```
+env = Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True)
+```
+
+Параметр ```trim_blocks=True``` - удаляет первую пустую строку после блока конструкции, если установлено в True (по умолчанию False).
+
+Также можно добавлять параметр ```lstrip_blocks=True``` - если установлено в True, пробелы и табы в начале строки удаляются (по умолчанию False).
 
 
 Соответственно, для того, чтобы посмотреть на результат, нам нужно вызвать скрипт и передать ему два аргумента:
