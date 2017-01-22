@@ -16,7 +16,7 @@ db_exists = os.path.exists(db_filename)
 with sqlite3.connect(db_filename) as conn:
     if not db_exists:
         print 'Creating schema...'
-        with open(schema_filename, 'rt') as f:
+        with open(schema_filename, 'r') as f:
             schema = f.read()
         conn.executescript(schema)
         print 'Done'

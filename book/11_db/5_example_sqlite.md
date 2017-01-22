@@ -1,5 +1,5 @@
 ## Пример использования SQLite
-В разделе [Регулярые выражения](../09_regex/) был пример разбора вывода команды show ip dhcp snooping binding. На выходе, мы получили информацию о параметрах подключенных устройств (interface, IP, MAC, VLAN).
+В разделе [Регулярные выражения](../09_regex/) был пример разбора вывода команды show ip dhcp snooping binding. На выходе, мы получили информацию о параметрах подключенных устройств (interface, IP, MAC, VLAN).
 
 Результат хороший, но в таком варианте мы можем посмотреть только все подключенные устройства к коммутатору. Если же нам нужно узнать на основании одного из параметров, другие, то в таком виде это не очень удобно.
 
@@ -25,43 +25,59 @@ create table dhcp (
 
 Теперь попробуем создать файл БД, подключиться к базе данных и создать таблицу.
 
-Файл create_sqlite3_ver1.py:
+Файл create_sqlite_ver1.py:
 ```python
 import sqlite3
 
 with sqlite3.connect('dhcp_snooping.db') as conn:
     print 'Creating schema...'
-    with open('dhcp_snooping_schema.sql', 'rt') as f:
+    with open('dhcp_snooping_schema.sql', 'r') as f:
         schema = f.read()
         conn.executescript(schema)
     print "Done"
 ```
 
 Комментарии к файлу:
-* используем менеджер контекста ```with ... as```
+* используем менеджер контекста ```with```
 * при выполнении строки ```with sqlite3.connect('dhcp_snooping.db') as conn```:
  * создается файл dhcp_snooping.db, если его нет
  * создается объект Connection
 * в БД создается таблица, на основании команд, которые указаны в файле dhcp_snooping_schema.sql:
- * открываем файл 'dhcp_snooping_schema.sql'
+ * открываем файл dhcp_snooping_schema.sql
  * ```schema = f.read()``` - считываем весь файл как одну строку
- * ```conn.executescript(schema)``` - метод executescript позволяет выполнять несколько команд SQL, которые прописаны в файле (в данном случае команда одна)
+ * ```conn.executescript(schema)``` - метод executescript позволяет выполнять команды SQL, которые прописаны в файле
+
+Выполняем скрипт:
+```
+$ python create_sqlite_ver1.py
+Creating schema...
+Done
+```
 
 В результате должен быть создан файл СУБД и таблица dhcp.
 
 Проверить, что таблица создалась, мы можем с помощью утилиты sqlite3, которая позволяет выполнять запросы прямо в командной строке.
 
-Выведем список созданных таблиц:
+Выведем список созданных таблиц (запрос такого вида позволяет проверить какие таблицы созданы в DB):
 ```
-nata:$ sqlite3 dhcp_snooping.db "SELECT name FROM sqlite_master WHERE type='table'"
+$ sqlite3 dhcp_snooping.db "SELECT name FROM sqlite_master WHERE type='table'"
 dhcp
 ```
 
 Пока что в нашей таблице ничего нет, поэтому, остановимся на этом.
 
-Теперь нам нужно записать информацию, которую мы получили из вывода 'sh ip dhcp snooping binding' в таблицу.
+Теперь нам нужно записать информацию, которую мы получили из вывода команды sh ip dhcp snooping binding в таблицу (файл dhcp_snooping.txt):
+```
+MacAddress          IpAddress        Lease(sec)  Type           VLAN  Interface
+------------------  ---------------  ----------  -------------  ----  --------------------
+00:09:BB:3D:D6:58   10.1.10.2        86250       dhcp-snooping   10    FastEthernet0/1
+00:04:A3:3E:5B:69   10.1.5.2         63951       dhcp-snooping   5     FastEthernet0/10
+00:05:B3:7E:9B:60   10.1.5.4         63253       dhcp-snooping   5     FastEthernet0/9
+00:09:BC:3F:A6:50   10.1.10.6        76260       dhcp-snooping   10    FastEthernet0/3
+Total number of bindings: 4
+```
 
-Дополняем наш скрипт create_sqlite3_ver1.py таким образом, чтобы он и парсил команду (переносим сюда регулярные выражения) и добавлял записи из файла dhcp_snooping.txt в БД:
+Создаем вторую версию скрипта, на основе предыдущей, create_sqlite3_ver2.py таким образом, чтобы он и парсил команду (переносим сюда регулярные выражения) и добавлял записи из файла dhcp_snooping.txt в БД:
 ```python
 import sqlite3
 import re
@@ -76,17 +92,17 @@ with open('dhcp_snooping.txt') as data:
 
 with sqlite3.connect('dhcp_snooping.db') as conn:
     print 'Creating schema...'
-    with open('dhcp_snooping_schema.sql', 'rt') as f:
+    with open('dhcp_snooping_schema.sql', 'r') as f:
         schema = f.read()
         conn.executescript(schema)
     print "Done"
 
     print 'Inserting DHCP Snooping data'
 
-    for val in result:
+    for row in result:
         query = """insert into dhcp (mac, ip, vlan, interface)
         values (?, ?, ?, ?)""" 
-        conn.execute(query, val)
+        conn.execute(query, row)
 ```
 
 
@@ -94,15 +110,15 @@ with sqlite3.connect('dhcp_snooping.db') as conn:
 
 
 Комментарии к скрипту:
-* в регулярном выражении, которое проходится по выводу команды sh ip dhcp snooping binding,  используются не именованные группы, как в примере раздела "Регулярные выражения"
+* в регулярном выражении, которое проходится по выводу команды sh ip dhcp snooping binding,  используются не именованные группы, как в примере раздела [Регулярные выражения](../09_regex/4a_group_example.md)
  * группы созданы только для тех элементов, которые нас интересуют
-* result - это список, в котором хранится результат обработки команды
+* result - это список, в котором хранится результат обработки вывода команды
  * но теперь тут не словари, а кортежи с результатами
  * это нужно для того, чтобы их можно было сразу передавать на запись в БД
 * Перебираем в полученном списке кортежей, элементы
 * В этом скрипте мы используем еще один вариант записи в БД
- * строка query описывает запрос. Но, вместо значений мы указываем знаки вопроса
- * затем методу execute, мы передаем строку запроса и кортеж val, где находятся значения
+ * строка query описывает запрос. Но, вместо значений мы указываем знаки вопроса. Такой вариант записи запроса, позволяет динамически подставлять значение полей
+ * затем, методу execute, мы передаем строку запроса и кортеж row, где находятся значения
 
 
 
@@ -122,10 +138,18 @@ with sqlite3.connect('dhcp_snooping.db') as conn:
 > Метод executemany сам загружает данные, перебирая их внутри самой библиотеки sqlite3.
 Такой вариант не всегда хорош, так как, в случае возникновении проблемы, не запишутся все записи.
 
+Выполняем скрипт:
+```
+$ python create_sqlite_ver2.py
+Creating schema...
+Done
+Inserting DHCP Snooping data
+```
+
 
 Проверим, что данные записались:
 ```
-nata:~$ sqlite3 dhcp_snooping.db "select * from dhcp"
+$ sqlite3 dhcp_snooping.db "select * from dhcp"
 00:09:BB:3D:D6:58|10.1.10.2|10|FastEthernet0/1
 00:04:A3:3E:5B:69|10.1.5.2|5|FastEthernet0/10
 00:05:B3:7E:9B:60|10.1.5.4|5|FastEthernet0/9
@@ -135,15 +159,16 @@ nata:~$ sqlite3 dhcp_snooping.db "select * from dhcp"
 
 Теперь попробуем запросить по определенному параметру:
 ```
-nata:~$ sqlite3 dhcp_snooping.db "select * from dhcp where ip = '10.1.5.2'"
+$ sqlite3 dhcp_snooping.db "select * from dhcp where ip = '10.1.5.2'"
 00:04:A3:3E:5B:69|10.1.5.2|5|FastEthernet0/10
 ```
 
 То есть, теперь на основании одного параметра, мы можем получать остальные.
 
-Переделаем наш скрипт таким образом, чтобы была проверка файла на существование. Если файл БД есть, то не надо создавать таблицу, считаем, что она уже создана.
+Переделаем наш скрипт таким образом, чтобы в нём была проверка на наличие файла dhcp_snooping.db.
+Если файл БД есть, то не надо создавать таблицу, считаем, что она уже создана.
 
-Файл create_sqlite_db_ver2.py:
+Файл create_sqlite_ver3.py:
 ```python
 import os
 import sqlite3
@@ -163,7 +188,7 @@ db_exists = os.path.exists(db_filename)
 with sqlite3.connect(db_filename) as conn:
     if not db_exists:
         print 'Creating schema...'
-        with open(schema_filename, 'rt') as f:
+        with open(schema_filename, 'r') as f:
             schema = f.read()
         conn.executescript(schema)
         print 'Done'
@@ -177,18 +202,19 @@ with sqlite3.connect(db_filename) as conn:
         print 'Database exists, assume dhcp table does, too.'
 ```
 
-Теперь у нас есть проверка наличия файла БД, и файл БД будет создаваться только, если его нет.
+Теперь у нас есть проверка наличия файла БД, и файл dhcp_snooping.db будет создаваться только в том случае, если его нет.
+Данные также записываются только в том случае, если не создан файл dhcp_snooping.db.
 
 Проверим. В случае если файл уже есть:
 ```
-nata:$ python create_sqlite_db_ver2.py 
+$ python create_sqlite_ver3.py 
 Database exists, assume dhcp table does, too.
 ```
 
 Если файла нет (предварительно его удаляем):
 ```
-nata:$ rm dhcp_snooping.db
-nata:$ python create_sqlite_db_ver2.py 
+$ rm dhcp_snooping.db
+$ python create_sqlite_ver3.py
 Creating schema...
 Done
 Inserting DHCP Snooping data
@@ -249,11 +275,11 @@ else:
 * сначала проверяем количество параметров, которые ввел пользователь
  * если параметры не переданы, то отображаем все содержимое БД
    * в проверке длинна sys.argv равно 1, из-за того, что имя скрипта тоже находится в этом списке
-   * затем обрабатываем все результаты с помощью метода fetchall() и выводим их таблицей
+   * затем обрабатываем все результаты с помощью метода ```fetchall()``` и выводим их таблицей
  * если было передано 2 параметра (3 вместе с именем скрипта):
    * проверяем правильное ли было введено имя ключа (параметра)
      * если правильно, то подключаемся к БД:
-       * conn.row_factory = sqlite3.Row - позволяет далее обращаться к данным в колонках, по имени колонки
+       * ```conn.row_factory = sqlite3.Row``` - позволяет далее обращаться к данным в колонках, по имени колонки
        * выбираем из БД те строки, в которых ключ равен указанному значению и выводим их
     * если имя параметра было указано неправильно, выводим сообщение об ошибке
  * если был передан только один параметр, выводим сообщение об ошибке
@@ -262,20 +288,20 @@ else:
 
 Сначала вызовем скрипт без параметров (должно быть показано содержание БД):
 ```
-nata:$ python get_data_ver1.py 
+$ python get_data_ver1.py
 
 В таблице dhcp такие записи:
 ----------------------------------------------------------------------
-00:09:BB:3D:D6:58  10.1.10.2         10    FastEthernet0/1     
-00:04:A3:3E:5B:69  10.1.5.2          5     FastEthernet0/10    
-00:05:B3:7E:9B:60  10.1.5.4          5     FastEthernet0/9     
-00:07:BC:3F:A6:50  10.1.10.6         10    FastEthernet0/3     
-00:09:BC:3F:A6:50  192.168.100.100   1     FastEthernet0/7     
+00:09:BB:3D:D6:58  10.1.10.2         10    FastEthernet0/1
+00:04:A3:3E:5B:69  10.1.5.2          5     FastEthernet0/10
+00:05:B3:7E:9B:60  10.1.5.4          5     FastEthernet0/9
+00:09:BC:3F:A6:50  10.1.10.6         10    FastEthernet0/3
+00:19:B4:5F:56:50  192.168.100.100   1     FastEthernet0/7
 ```
 
 Показать параметры хоста с IP 10.1.10.2:
 ```
-nata:$ python get_data_ver1.py ip 10.1.10.2
+$ python get_data_ver1.py ip 10.1.10.2
 
 Detailed information for host(s) with ip 10.1.10.2
 ----------------------------------------
@@ -287,7 +313,7 @@ interface   : FastEthernet0/1
 
 Показать хосты в VLAN 10:
 ```
-nata:$ python get_data_ver1.py vlan 10
+$ python get_data_ver1.py vlan 10
 
 Detailed information for host(s) with vlan 10
 ----------------------------------------
@@ -305,15 +331,16 @@ interface   : FastEthernet0/3
 
 Сначала зададим неправильно название параметра:
 ```
-nata:$ python get_data_ver1.py vln 10
+$ python get_data_ver1.py vln 10
 Данный параметр не поддерживается.
 Допустимые значения параметров: mac, ip, vlan, interface
 ```
 
 Указываем имя параметра без значения параметра:
 ```
-nata:$ python get_data_ver1.py vlan
+$ python get_data_ver1.py vlan
 Введите, пожалуйста, два параметра
 ```
 
-На этом мы завершаем работу с этим примером в данном разделе. Но ниже, в разделе с практическими примерами, мы будем дальше развивать этот скрипт.
+На этом мы завершаем работу с этим примером в данном разделе.
+В упражнениях к этому разделу, мы будем дальше развивать этот скрипт.
