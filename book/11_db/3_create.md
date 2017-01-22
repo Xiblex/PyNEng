@@ -1,6 +1,6 @@
 ### CREATE
 Для начала, создадим таблицу switch, в которой будет хранится информация о коммутаторах:
-```
+```sql
 sqlite> CREATE table switch (
    ...>     mac          text primary key,
    ...>     hostname     text,
@@ -10,7 +10,7 @@ sqlite> CREATE table switch (
 ```
 
 Аналогично можно было создать таблицу и таким образом:
-```
+```sql
 sqlite> create table switch (mac text primary key, hostname text, model text, location text);
 ```
 
@@ -23,7 +23,7 @@ sqlite> create table switch (mac text primary key, hostname text, model text, lo
 В нашем примере это вполне логично, так как MAC-адрес у коммутаторов должен быть уникальным.
 
 На данный момент записей в таблице нет, есть только ее определение. Просмотреть определение можно такой командой:
-```
+```sql
 sqlite> .schema switch
 CREATE TABLE switch (
 mac          text primary key,

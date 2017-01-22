@@ -4,7 +4,7 @@
 Например, предположим, что sw1 был заменен с модели 3750 на модель 3850. Соответственно, изменилось не только поле модель, но и поле MAC-адрес.
 
 Внесем изменения и проверим результат:
-```
+```sql
 sqlite> UPDATE switch set model = 'Cisco 3850' where hostname = 'sw1';
 sqlite> UPDATE switch set mac = '0000.DDDD.DDDD' where hostname = 'sw1';
 

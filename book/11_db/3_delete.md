@@ -1,5 +1,5 @@
 ### DELETE
 DELETE используется для удаления записей. Например:
-```python
+```sql
 sqlite> DELETE from switch where hostname = 'sw4';
 ```
