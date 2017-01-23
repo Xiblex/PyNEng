@@ -1,3 +1,4 @@
+{% raw %}
 ## Синтаксис шаблонов Jinja2
 
 До сих пор, в примерах шаблонов Jinja2 использовалась только подстановка переменных.
@@ -61,3 +62,4 @@ env = Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True)
 ```
 $ python cfg_gen.py templates/variables.txt data_files/vars.yml
 ```
+{% endraw %}

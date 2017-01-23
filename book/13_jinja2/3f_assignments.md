@@ -1,3 +1,4 @@
+{% raw %}
 ## set
 
 Внутри шаблона можно присваивать значения переменным.
@@ -76,3 +77,5 @@ $ python cfg_gen.py templates/set.txt data_files/set.yml
             switchport trunk allowed vlan remove 10
 
 ```
+
+{% endraw %}

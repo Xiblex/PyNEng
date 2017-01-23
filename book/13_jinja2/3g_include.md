@@ -1,3 +1,4 @@
+{% raw %}
 ## include
 
 Выражение include позволяет добавить один шаблон в другой.
@@ -132,3 +133,4 @@ logging 10.1.1.1
 
 Таким образом, благодаря include, мы использовали шаблон templates/ospf.txt и в шаблоне templates/switch.txt, и в шаблоне templates/router.txt, вместо того, чтобы повторять одно и то же дважды.
 
+{% endraw %}
