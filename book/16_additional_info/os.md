@@ -45,7 +45,7 @@ Out[7]: ['cover3.png', 'dir2', 'dir3', 'README.txt', 'test']
 ```
 
 А с помощью проверок ```os.path.isdir``` и ```os.path.isfile```, можно получить отдельно список файлов и список каталогов:
-```
+```python
 In [8]: dirs = [ d for d in os.listdir('.') if os.path.isdir(d)]
 
 In [9]: dirs
@@ -59,7 +59,7 @@ Out[11]: ['cover3.png', 'README.txt']
 ```
 
 Также в модуле есть отдельные методы для работы с путями:
-```
+```python
 In [12]: os.path.basename(file)
 Out[12]: 'README.md'
 

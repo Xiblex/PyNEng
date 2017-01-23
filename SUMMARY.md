@@ -159,7 +159,6 @@
     * [IPython как управляющая консоль](book/16_additional_info/ipython_as_mngmt_console.md)
     * [Модуль subprocess](book/16_additional_info/subprocess.md)
     * [Модуль os](book/16_additional_info/os.md)
-    * [Модуль sys](book/16_additional_info/sys.md)
     * [Модуль argparse](book/16_additional_info/argparse.md)
     * [Модуль ipaddress](book/16_additional_info/ipaddress.md)
     * [Системы контроля версий](book/16_additional_info/version_control.md)
