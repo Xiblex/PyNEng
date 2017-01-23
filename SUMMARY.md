@@ -160,6 +160,8 @@
     * [Модуль subprocess](book/16_additional_info/subprocess.md)
     * [Модуль os](book/16_additional_info/os.md)
     * [Модуль sys](book/16_additional_info/sys.md)
+    * [Модуль argparse](book/16_additional_info/argparse.md)
+    * [Модуль ipaddress](book/16_additional_info/ipaddress.md)
     * [Системы контроля версий](book/16_additional_info/version_control.md)
     * [Основы OOP](book/16_additional_info/oop_basics.md)
 * [Полезные ссылки](resources/README.md)
