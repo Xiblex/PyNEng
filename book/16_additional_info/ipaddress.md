@@ -10,12 +10,12 @@ $ pip install ipaddress
 Для работы с модулем ipaddress, нужно, чтобы строки, в которых мы описываем IP-адрес, были в формате unicode.
 
 Для этого, мы, либо конвертируем строки в unicode:
-```
+```python
 ipaddress.ip_address(u'1.2.3.4')
 ```
 
 или так
-```
+```python
 ipaddress.ip_address(unicode('1.2.3.4'))
 ```
 
@@ -243,3 +243,26 @@ In [39]: int1.netmask
 Out[39]: IPv4Address(u'255.255.255.0')
 ```
 
+### Пример использования модуля
+
+Так как в модуль встроены проверки корректности адресов, можно ими пользоваться, например, чтобы проверить является ли адрес адресом сети или хоста:
+```python
+In [40]: IP1 = u'10.0.1.1/24'
+
+In [41]: IP2 = u'10.0.1.0/24'
+
+In [42]: def check_if_ip_is_network(ip_address):
+   ....:     try:
+   ....:         ipaddress.ip_network(ip_address)
+   ....:         return True
+   ....:     except ValueError:
+   ....:         return False
+   ....:
+
+In [43]: check_if_ip_is_network(IP1)
+Out[43]: False
+
+In [44]: check_if_ip_is_network(IP2)
+Out[44]: True
+
+```
