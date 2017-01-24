@@ -2,7 +2,7 @@
 
 * [Введение](README.md)
 * [Как учиться по этому курсу](howto.md)
-* [Расписание занятий](schedule.md)
+* [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
 * [1. Подготовка к работе](book/01_intro/README.md)
     * [ОС и редактор](book/01_intro/os_and_editor.md)
