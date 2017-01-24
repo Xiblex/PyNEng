@@ -27,8 +27,8 @@
 
 ### Дополнительная информация
 * IPython как управлящая консоль
-* запуск команд Linux из Python (subprocess)
-* полезные модули (os, sys)
+* ~~запуск команд Linux из Python (subprocess)~~
+* ~~полезные модули (os, ipaddress)~~
 * системы контроля версий
 * OOP basics
 * iterator, generator
