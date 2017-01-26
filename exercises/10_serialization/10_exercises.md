@@ -80,7 +80,7 @@ access_dict = { 'FastEthernet0/12':10,
 
 trunk_dict = { 'FastEthernet0/1':[10,20,30],
                'FastEthernet0/2':[11,30],
-               'FastEthernet0/4':['17'] }
+               'FastEthernet0/4':[17] }
 
 
 def generate_access_config(access, psecurity=False):
