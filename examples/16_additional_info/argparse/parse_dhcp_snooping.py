@@ -29,16 +29,6 @@ def get(args):
         print "Showing %s content..." % args.db_file
 
 
-def show_subparser_help(subparser_name):
-    """
-    Function returns help message for subparser
-    """
-    subparsers_actions = [
-        action for action in parser._actions
-        if isinstance(action, argparse._SubParsersAction)]
-    return subparsers_actions[0].choices[subparser_name].format_help()
-
-
 parser = argparse.ArgumentParser()
 subparsers = parser.add_subparsers(title='subcommands',
                                    description='valid subcommands',
@@ -46,8 +36,8 @@ subparsers = parser.add_subparsers(title='subcommands',
 
 
 create_parser = subparsers.add_parser('create_db', help='create new db')
-create_parser.add_argument('-n', dest='name', default=DFLT_DB_NAME,
-                           help='db filename')
+create_parser.add_argument('-n', metavar='db-filename', dest='name',
+                           default=DFLT_DB_NAME, help='db filename')
 create_parser.add_argument('-s', dest='schema', default=DFLT_DB_SCHEMA,
                            help='db schema filename')
 create_parser.set_defaults( func=create )

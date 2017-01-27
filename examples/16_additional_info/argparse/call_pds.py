@@ -1,6 +1,5 @@
-from parse_dhcp_snooping import parser, get
+from parse_dhcp_snooping import parser
 
-args = parser.parse_args(['get', '-k', 'vlan', '-v', '10'])
-print args
+args = parser.parse_args()
+args.func(args)
 
-get(args)
