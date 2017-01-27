@@ -267,19 +267,21 @@ now_string = now.__str__()
 
 В этом задании выложен файл parse_dhcp_snooping.py.
 
-В файле parse_dhcp_snooping.py нельзя ничего менять.
-
 В файле созданы несколько функций и описаны аргументы командной строки,
 которые принимает файл.
 
-Параметры заготовлены для выполнения всех действий, которые,
+> В файле parse_dhcp_snooping.py нельзя ничего менять.
+
+Есть поддержка аргументов для выполнения всех действий, которые,
 в предыдущих заданиях, выполнялись в файлах create_db.py, add_data.py и get_data.py.
 
 В файле parse_dhcp_snooping.py есть такая строка:
+```python
 import parse_dhcp_snooping_functions as pds
+```
 
 И задача этого задания в том, чтобы создать все необходимые функции,
-в файле parse_dhcp_snooping_functions.py.
+в файле parse_dhcp_snooping_functions.py на основе информации в файле parse_dhcp_snooping.py.
 
 Из файла parse_dhcp_snooping.py, необходимо определить:
 * какие функции должны быть в файле parse_dhcp_snooping_functions.py
