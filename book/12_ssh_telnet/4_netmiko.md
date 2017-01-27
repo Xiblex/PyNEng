@@ -56,7 +56,7 @@ for IP in DEVICES_IP:
 
 Так выглядит результат выполнения скрипта:
 ```
-$ python 4_netmiko.py
+$ python 4_netmiko.py "sh ip int br"
 Username: cisco
 Password:
 Enter enable password:

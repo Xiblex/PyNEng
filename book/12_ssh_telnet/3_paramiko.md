@@ -68,7 +68,7 @@ for IP in DEVICES_IP:
 
 Так выглядит результат выполнения скрипта:
 ```
-$ python 3_paramiko.py
+$ python 3_paramiko.py "sh ip int br"
 Username: cisco
 Password:
 Enter enable secret:
