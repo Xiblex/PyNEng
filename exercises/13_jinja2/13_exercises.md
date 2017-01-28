@@ -1,4 +1,4 @@
-# Упражнения
+# Задания
 
 Все задания и вспомогательные файлы можно скачать [тут](https://github.com/natenka/PyNEng/blob/master/exercises.zip) (так будет удобнее их выполнять).
 
@@ -9,3 +9,127 @@
 > Сначала, можно выполнить задания 5.1, 5.2, 5.3. А затем 5.2a, 5.2b, 5.3a.
 
 > Однако, если задания с буквами получается сделать сразу, можно делать их по порядку.
+
+### Задание 13.1
+
+Переделать скрипт cfg_gen.py в функцию generate_cfg_from_template.
+
+Функция ожидает два аргумента:
+* путь к шаблону
+* файл с переменными в формате YAML
+
+Функция должна возвращать конфигурацию, которая была сгенерирована.
+
+Проверить работу функции на шаблоне templates/for.txt и данных data_files/for.yml.
+
+```python
+from jinja2 import Environment, FileSystemLoader
+import yaml
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+TEMPLATE_DIR, template = sys.argv[1].split('/')
+VARS_FILE = sys.argv[2]
+
+env = Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True)
+template = env.get_template(template)
+
+vars_dict = yaml.load( open( VARS_FILE ) )
+
+print template.render( vars_dict )
+```
+
+### Задание 13.1a
+
+Переделать функцию generate_cfg_from_template:
+* добавить поддержку использования шаблона, который находится в текущем каталоге
+
+Для проверки, скопируйте один из шаблонов из каталога templates,
+в текущий каталог скрипта.
+
+Можно проверить на тех же шаблоне и данных, что и в прошлом задании:
+* шаблоне templates/for.txt (но скопировать его в текущий каталог) и данных data_files/for.yml
+
+
+### Задание 13.1b
+
+Дополнить функцию generate_cfg_from_template из задания 13.1 или 13.1a:
+* добавить поддержку аргументов окружения (Environment)
+
+Функция generate_cfg_from_template должна принимать любые аргументы,
+которые принимает класс Environment и просто передавать их ему.
+
+Проверить функциональность на аргументах:
+* trim_blocks
+* lstrip_blocks
+
+
+### Задание 13.1c
+
+Дополнить функцию generate_cfg_from_template из задания 13.1, 13.1a или 13.1b:
+* добавить поддержку разных форматов для файла с данными
+
+Должны поддерживаться такие форматы:
+* YAML
+* JSON
+* словарь Python
+
+Сделать для каждого формата свой параметр функции.
+Например:
+* YAML - yaml_file
+* JSON - json_file
+* словарь Python - py_dict
+
+Проверить работу функции на шаблоне templates/for.txt и данных:
+* data_files/for.yml
+* data_files/for.json
+* словаре data_dict
+
+```python
+data_dict = {'vlans': {
+                        10: 'Marketing',
+                        20: 'Voice',
+                        30: 'Management'},
+             'ospf': [{'network': '10.0.1.0 0.0.0.255', 'area': 0},
+                      {'network': '10.0.2.0 0.0.0.255', 'area': 2},
+                      {'network': '10.1.1.0 0.0.0.255', 'area': 0}],
+             'id': 3,
+             'name': 'R3'}
+```
+
+
+### Задание 13.1d
+
+Переделать функцию generate_cfg_from_template из задания 13.1, 13.1a, 13.1b или 13.1c:
+* сделать автоматическое распознавание разных форматов для файла с данными
+* для передачи разных типов данных, должен использоваться один и тот же параметр data
+
+Должны поддерживаться такие форматы:
+* YAML - файлы с расширением yml или yaml
+* JSON - файлы с расширением json
+* словарь Python
+
+Если не получилось определить тип данных, вывести сообщение error_message (перенести текст сообщения в тело функции), завершить работу функции и вернуть ```None```.
+
+Проверить работу функции на шаблоне templates/for.txt и данных:
+* data_files/for.yml
+* data_files/for.json
+* словаре data_dict
+
+```python
+error_message = """
+Не получилось определить формат данных.
+Поддерживаются файлы с расширением .json, .yml, .yaml и словари Python
+"""
+
+data_dict = {'vlans': {
+                        10: 'Marketing',
+                        20: 'Voice',
+                        30: 'Management'},
+             'ospf': [{'network': '10.0.1.0 0.0.0.255', 'area': 0},
+                      {'network': '10.0.2.0 0.0.0.255', 'area': 2},
+                      {'network': '10.1.1.0 0.0.0.255', 'area': 0}],
+             'id': 3,
+             'name': 'R3'}
+```
