@@ -70,7 +70,6 @@
 * [8. Модули](book/08_modules/README.md)
     * [Импорт модуля](book/08_modules/1_import.md)
     * [Создание своих модулей](book/08_modules/2_create.md)
-    * [Пути поиска модулей](book/08_modules/3_search.md)
     * [Задания](exercises/08_modules/08_exercises.md)
 * [9. Регулярные выражения](book/09_regex/README.md)
     * [Модуль re](book/09_regex/1_re.md)
