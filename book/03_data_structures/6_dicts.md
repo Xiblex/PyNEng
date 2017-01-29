@@ -1,5 +1,5 @@
 ## Словарь (Dictionary)
-Словари -- это изменяемый, неупорядоченный тип данных 
+Словари - это изменяемый, неупорядоченный тип данных 
 (к слову, в модуле [collections](https://docs.python.org/2/library/collections.html) доступны упорядоченные объекты, внешне идентичные словарям [OrderedDict](https://docs.python.org/2/library/collections.html#collections.OrderedDict)).
 
 Словарь (ассоциативный массив, хеш-таблица):

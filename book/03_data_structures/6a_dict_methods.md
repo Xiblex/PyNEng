@@ -16,7 +16,7 @@ Out[3]: {}
 
 Метод __copy()__ позволяет создать полную копию словаря. 
 
-Для начала проверим что будет есть сделать так:
+Если указать, что один словарь равен другому:
 ```python
 In [4]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
@@ -34,7 +34,8 @@ In [9]: london2['vendor']
 Out[9]: 'Juniper'
 ```
 
-В таком случае london2 это всего лишь еще одно имя, которое ссылается на словарь. И когда мы меняем словарь london, так как london2 по сути это тот же объект, получаем изменный словарь london2.
+В этом случае london2 это еще одно имя, которое ссылается на словарь.
+И, при изменениях словаря london, меняется и словарь london2, так как это ссылки на один и тот же объект.
 
 Поэтому, если нужно сделать копию словаря, надо использовать метод copy():
 ```python
@@ -56,7 +57,7 @@ Out[15]: 'Cisco'
 
 ####```get()```
 
-Если при обращении к словарю указывается ключ, которого нет в словаре, мы получаем ошибку:
+Если при обращении к словарю указывается ключ, которого нет в словаре, возникает ошибка:
 ```python
 In [16]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
@@ -69,18 +70,22 @@ KeyError                                  Traceback (most recent call last)
 KeyError: 'IOS'
 ```
 
-Метод __get()__ позволяет запросить значение, но если его нет, вместо ошибки возвращается указанное значение (по умолчанию возвращается None):
+Метод __get()__ запрашивает ключ и, если его нет, вместо ошибки возвращает ```None```.
 ```python
 In [18]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
 In [19]: print london.get('IOS')
 None
+```
 
+Метод get() позволяет указывать другое значение, вместо ```None```:
+```python
 In [20]: print london.get('IOS', 'Ooops')
 Ooops
 ```
 
 ####```keys(), values(), items()```
+
 Методы __keys()__, __values()__, __items()__:
 ```python
 In [24]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
@@ -95,6 +100,7 @@ In [27]: london.items()
 Out[27]: [('vendor', 'Cisco'), ('name', 'London1'), ('location', 'London Str')]
 ```
 
+####```del```
 Удалить ключ и значение:
 ```python
 In [28]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
