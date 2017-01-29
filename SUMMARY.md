@@ -163,7 +163,6 @@
     * [Модуль argparse](book/16_additional_info/argparse.md)
     * [Модуль ipaddress](book/16_additional_info/ipaddress.md)
     * [Системы контроля версий](book/16_additional_info/version_control.md)
-    * [Основы OOP](book/16_additional_info/oop_basics.md)
 * [Полезные ссылки](resources/README.md)
     * [Материалы по темам курса](resources/1_course_additional_info.md)
     * [Продолжение обучения](resources/2_next_steps.md)
