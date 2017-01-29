@@ -27,12 +27,12 @@ In [1]: cfg_lines = ['!',
    ...:  '!']
 ```
 
-Теперь открываем файл r2.txt в режиме для записи:
+Открытие файла r2.txt в режиме для записи:
 ```python
 In [2]: f = open('r2.txt', 'w')
 ```
 
-Превращаем список команд в одну большую строку с помощью ```join```:
+Преобразуем список команд в одну большую строку с помощью ```join```:
 ```python
 In [3]: cfg_lines_as_string = '\n'.join(cfg_lines)
 
@@ -40,22 +40,22 @@ In [4]: cfg_lines_as_string
 Out[4]: '!\nservice timestamps debug datetime msec localtime show-timezone year\nservice timestamps log datetime msec localtime show-timezone year\nservice password-encryption\nservice sequence-numbers\n!\nno ip domain lookup\n!\nip ssh version 2\n!'
 ```
 
-Теперь записываем строку в файл:
+Запись строки в файл:
 ```python
 In [5]: f.write(cfg_lines_as_string)
 ```
 
-И добавляем ещё одну строку вручную:
+Аналогично можно добавить строку вручную:
 ```python
 In [6]: f.write('\nhostname r2')
 ```
 
-Теперь нам нужно закрыть файл:
+После завершения работы с файлом, его необходимо закрыть:
 ```python
 In [7]: f.close()
 ```
 
-И, так как ipython поддерживает команду cat, мы можем легко посмотреть содержимое файла:
+Так как ipython поддерживает команду cat, можно легко посмотреть содержимое файла:
 ```python
 In [8]: cat r2.txt
 !
@@ -75,8 +75,19 @@ hostname r2
 
 Метод ```writelines()``` ожидает список строк, как аргумент.
 
-Попробуем записать список cfg_lines в файл:
+Запись списка строк cfg_lines в файл:
 ```python
+In [1]: cfg_lines = ['!',
+   ...:  'service timestamps debug datetime msec localtime show-timezone year',
+   ...:  'service timestamps log datetime msec localtime show-timezone year',
+   ...:  'service password-encryption',
+   ...:  'service sequence-numbers',
+   ...:  '!',
+   ...:  'no ip domain lookup',
+   ...:  '!',
+   ...:  'ip ssh version 2',
+   ...:  '!']
+
 In [9]: f = open('r2.txt', 'w')
 
 In [10]: f.writelines(cfg_lines)
@@ -87,7 +98,7 @@ In [12]: cat r2.txt
 !service timestamps debug datetime msec localtime show-timezone yearservice timestamps log datetime msec localtime show-timezone yearservice password-encryptionservice sequence-numbers!no ip domain lookup!ip ssh version 2!
 ```
 
-Посмотрите, что получилось в результате - все строки из списка, записались в одну строку файла, так как в конце строк не было символа ```\n```.
+В результате, все строки из списка, записались в одну строку файла, так как в конце строк не было символа ```\n```.
 
 Добавить перевод строки можно по-разному.
 Например, можно просто обработать список в цикле:
