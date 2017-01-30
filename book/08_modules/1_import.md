@@ -1,14 +1,14 @@
 ## Импорт модуля
 
-Есть несколько способов импорта модуля:
+В Python есть несколько способов импорта модуля:
 * ```import module```
 * ```import module as```
 * ```from module import object```
 * ```from module import *```
 
-Попробуем в iPython проверить все варианты.
 
 ### ```import module```
+
 Вариант __import module__:
 ```python
 In [1]: dir()
@@ -33,19 +33,18 @@ Out[3]:
  'quit']
 ```
 
-После импорта модуля os, он появился в выводе dir(), то есть, в нашем именном пространстве.
-Если мы хотим использовать какой-то объект из модуля os, мы вызываем его так:
+После импорта, модуль os появился в выводе dir(). Это значит, что он теперь в текущем именном пространстве.
+
+Чтобы вызвать какую-то функцию или метод из модуля os, надо указать ```os.``` и затем имя объекта:
 ```python
 In [4]: os.getlogin()
 Out[4]: 'natasha'
 ```
 
-То есть, мы должны указать имя модуля, а затем через точку метод, функцию или другой объект.
-
 Этот способ импорта хорош тем, что объекты модуля не попадают в именное пространство текущей программы.
-То есть, если мы создадим функцию с именем getlogin(), то мы не перебьем аналогичную функцию модуля os.
+То есть, если создать функцию с именем getlogin(), она не будет конфиликтовать с аналогичной функцией модуля os.
 
-> Если в имени модуля содержится точка, стандартным способом модуль не получится импортировать.
+> Если в имени файла содержится точка, стандартный способ импортированися не будет работать.
 > Для таких случаев, используется [другой способ](http://stackoverflow.com/questions/1828127/how-to-reference-python-package-when-filename-contains-a-period/1828249#1828249).
 
 
@@ -53,25 +52,10 @@ Out[4]: 'natasha'
 
 Конструкция __import module as__ позволяет импортировать модуль под другим именем (как правило, более коротким):
 ```python
-In [1]: import sys as s
+In [1]: import subprocess as sp
 
-In [2]: s.path
-Out[2]: 
-['',
- '/usr/local/bin',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload',
- '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC',
- '/Library/Python/2.7/site-packages',
- '/Library/Python/2.7/site-packages/IPython/extensions',
- '/Users/natasha/.ipython']
+In [2]: sp.check_output('ping -c 2 -n  8.8.8.8', shell=True)
+Out[2]: 'PING 8.8.8.8 (8.8.8.8): 56 data bytes\n64 bytes from 8.8.8.8: icmp_seq=0 ttl=48 time=49.880 ms\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=48 time=46.875 ms\n\n--- 8.8.8.8 ping statistics ---\n2 packets transmitted, 2 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 46.875/48.377/49.880/1.503 ms\n'
 ```
 
 
@@ -82,7 +66,7 @@ Out[2]:
 In [1]: from os import getlogin, getcwd
 ```
 
-Теперь эти функции доступны в нашем именном пространстве:
+Теперь эти функции доступны в текущем именном пространстве:
 ```python
 In [2]: dir()
 Out[2]: 
@@ -96,7 +80,7 @@ Out[2]:
  'quit']
 ```
 
-Попробуем их использовать:
+Их можно вызывать без имени модуля:
 ```python
 In [3]: getlogin()
 Out[3]: 'natasha'
@@ -129,8 +113,8 @@ Out[3]: 218
 
 В модуле os очень много объектов, поэтому вывод сокращен. В конце указана длина списка имен текущего именного пространства.
 
-Но, такой вариант импорта, лучше не использовать.
-Так как, при таком импорте, вы не поймете по коду, что какая-то функция взята из модуля os, например.
+Такой вариант импорта лучше не использовать.
+При таком импорте, по коду по коду не понятно, что какая-то функция взята из модуля os, например.
 Это заметно усложняет понимание кода.
 
 

@@ -1,5 +1,4 @@
 ## Специальные символы
-Пока что мы рассматривали самый простой вариант шаблона - строку.
 
 Полностью возможности регулярных выражений проявляются при использовании специальных символов.
 
@@ -28,4 +27,39 @@
 * ```\w``` - любая буква или цифра
 * ```\W``` - все, кроме букв и цифр
 
+Несколько примеров использования специальных символов:
+```
+In [1]: import re
 
+In [2]: line = "FastEthernet0/1            10.0.12.1       YES manual up                    up"
+
+In [3]: print re.findall('.0', line)
+['t0', '10', '.0']
+
+In [4]: print re.findall('^F', line)
+['F']
+
+In [5]: print re.findall('^.a', line)
+['Fa']
+
+In [6]: print re.findall('up$', line)
+['up']
+
+In [7]: print re.findall('up', line)
+['up', 'up']
+
+In [8]: print re.findall('[Ff]ast', line)
+['Fast']
+
+In [9]: print re.findall('[Ff]ast[Ee]thernet', line)
+['FastEthernet']
+
+In [10]: print re.findall('[^a-zA-Z ]', line)
+['0', '/', '1', '1', '0', '.', '0', '.', '1', '2', '.', '1']
+
+In [11]: print re.findall('up|down', line)
+['up', 'up']
+
+In [12]: print re.findall('(\S+)\s+(\S+)\s+\w+\s+\w+\s+(up|down|administratively down)\s+(up|down)', line)
+[('FastEthernet0/1', '10.0.12.1', 'up', 'up')]
+```
