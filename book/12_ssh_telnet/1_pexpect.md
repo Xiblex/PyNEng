@@ -1,14 +1,14 @@
 ## Модуль pexpect
 
-Для начала, модуль pexpect нужно установить:
-```
-pip install pexpect
-```
-
 Модуль pexpect позволяет автоматизировать интерактивные подключения, такие как:
 * telnet
 * ssh
 * ftp
+
+Для начала, модуль pexpect нужно установить:
+```
+pip install pexpect
+```
 
 > Pexpect это реализация expect на Python.
 
