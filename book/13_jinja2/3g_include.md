@@ -3,9 +3,8 @@
 
 Выражение include позволяет добавить один шаблон в другой.
 
-В итоге, те переменные, которые мы передаем как данные, должны передавать все нужные данные и для основного шаблона, и для того, который мы добавили.
+Переменные, которые передаются как данные, должны содержать все данные и для основного шаблона, и для того, который добавлен через include.
 
-Посмотрим на пример использования include.
 
 Шаблон templates/vlans.txt:
 ```
@@ -36,14 +35,14 @@ router bgp {{ bgp.local_as }}
 {% endfor %}
 ```
 
-Теперь создадим шаблон templates/switch.txt, который будет использовать созданные шаблоны ospf и vlans:
+Шаблон templates/switch.txt использует созданные шаблоны ospf и vlans:
 ```
 {% include 'vlans.txt' %}
 
 {% include 'ospf.txt' %}
 ```
 
-И создадим файл с данными, для генерации конфигурации (data_files/switch.yml):
+Файл с данными, для генерации конфигурации (data_files/switch.yml):
 ```json
 vlans:
   10: Marketing
@@ -58,7 +57,7 @@ ospf:
     area: 0
 ```
 
-Результат генерации конфгурации будет таким (мы по-прежнему используем скрипт cfg_gen.py):
+Результат выполнения скрипта:
 ```
 $ python cfg_gen.py templates/switch.txt data_files/switch.yml
 vlan 10
@@ -78,7 +77,8 @@ router ospf 1
 Итоговая конфигурация получилась такой, как-будто строки из шаблонов ospf.txt и vlans.txt, находились в шаблоне switch.txt.
 
 
-Теперь сделаем шаблон templates/router.txt:
+
+Шаблон templates/router.txt:
 ```
 {% include 'ospf.txt' %}
 
@@ -131,6 +131,6 @@ router bgp 100
 logging 10.1.1.1
 ```
 
-Таким образом, благодаря include, мы использовали шаблон templates/ospf.txt и в шаблоне templates/switch.txt, и в шаблоне templates/router.txt, вместо того, чтобы повторять одно и то же дважды.
+Благодаря include, шаблон templates/ospf.txt используется и в шаблоне templates/switch.txt, и в шаблоне templates/router.txt, вместо того, чтобы повторять одно и то же дважды.
 
 {% endraw %}
