@@ -26,14 +26,14 @@ Playbook 5_ios_config_backup.yml:
         provider: "{{ cli }}"
 ```
 
-Теперь, каждый раз, когда мы запускаем playbook (даже если не нужно вносить изменения в конфигурацию), в каталог backup будет копироваться текущая конфигурация:
+Теперь, каждый раз, когда выполняется playbook (даже если не нужно вносить изменения в конфигурацию), в каталог backup будет копироваться текущая конфигурация:
 ```
 $ ansible-playbook 5_ios_config_backup.yml -v
 ```
 ![6d_ios_config_backup](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6d_ios_config_backup.png)
 
 
-В каталоге backup файлы такого вида (при каждом запуске playbook они перезаписываются):
+В каталоге backup теперь находятся файлы такого вида (при каждом запуске playbook они перезаписываются):
 ```
 192.168.100.1_config.2016-12-10@10:42:34
 192.168.100.2_config.2016-12-10@10:42:34

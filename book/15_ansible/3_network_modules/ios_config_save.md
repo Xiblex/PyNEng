@@ -15,9 +15,9 @@ $ ansible-playbook 4_ios_config_save.yml
 
 ![6c_ios_config_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6c_ios_config_save.png)
 
-Но, мы можем самостоятельно сделать сохранение, используя модуль ios_command (а позже мы посмотрим как сделать это же, с помощью параметра after).
+Но, можно самостоятельно сделать сохранение, используя модуль ios_command.
 
-На основе playbook 2_ios_config_parents_basic.yml сделаем playbook с сохранением конфигурации 4_ios_config_save.yml:
+Playbook 4_ios_config_save.yml:
 ```yml
 ---
 
@@ -47,7 +47,9 @@ $ ansible-playbook 4_ios_config_save.yml
       when: cfg.changed
 ```
 
-Если мы снова изменим в конфигурации маршрутизатора 192.168.100.1 строку transport input all на transport input ssh, запуск playbook будет выглядеть так:
+> Надо внести изменения на маршрутизаторе 192.168.100.1. Например, изменить строку transport input all на transport input ssh.
+
+Выполнение playbook:
 ```
 $ ansible-playbook 4_ios_config_save.yml
 ```
