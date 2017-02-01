@@ -7,19 +7,19 @@
 $ pip install ipaddress
 ```
 
-Для работы с модулем ipaddress, нужно, чтобы строки, в которых мы описываем IP-адрес, были в формате unicode.
+Для работы с модулем ipaddress, нужно, чтобы строки, в которых описывается IP-адрес, были в формате unicode.
 
-Для этого, мы, либо конвертируем строки в unicode:
+Для этого, надо либо конвертировать строки в unicode (если адрес задается вручную):
 ```python
 ipaddress.ip_address(u'1.2.3.4')
 ```
 
-или так
+или так:
 ```python
 ipaddress.ip_address(unicode('1.2.3.4'))
 ```
 
-либо импортируем unicode_literals таким образом:
+либо импортировать unicode_literals таким образом:
 ```python
 from __future__ import unicode_literals
 ```
@@ -31,13 +31,11 @@ from __future__ import unicode_literals
 > Такое особенности связаны с тем, что модуль ipaddress создавался для Python3. А в нём все строки unicode.
 
 
-Посмотрим, что мы можем делать с помощью модуля.
-
 ### ```ipaddress.ip_address()```
 
 Функция ```ipaddress.ip_address()``` позволяет создавать объект IPv4Address или IPv6Address, соответственно.
 
-Создадим IPv4 адрес:
+IPv4 адрес:
 ```python
 In [1]: import ipaddress
 
@@ -109,7 +107,7 @@ Out[19]: IPv4Address(u'10.0.0.252')
 
 Функция ```ipaddress.ip_network()``` позволяет создать объект, который описывает сеть (IPv4 или IPv6).
 
-Попробуем создать сеть IPv4:
+Сеть IPv4:
 ```python
 In [20]: subnet1 = ipaddress.ip_network(u'80.0.1.0/28')
 ```
@@ -214,7 +212,7 @@ In [33]: subnet1[5]
 Out[33]: IPv4Address(u'80.0.1.5')
 ```
 
-А таким образом можно проверять находится ли IP-адрес в сети:
+Таким образом можно проверять находится ли IP-адрес в сети:
 ```python
 In [34]: ip1 = ipaddress.ip_address(u'80.0.1.3')
 
