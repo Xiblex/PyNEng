@@ -49,39 +49,39 @@
 <text text-anchor="middle" x="143.437" y="-256.483" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/0</text>
 <text text-anchor="middle" x="119.644" y="-220.945" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/2</text>
 </g>
-<!-- sw1 -->
-<g id="node6" class="node"><title>sw1</title>
-<polygon fill="#006699" stroke="#006699" points="277.039,-96 194.246,-96 194.246,-24 277.039,-24 277.039,-96"/>
-<text text-anchor="middle" x="235.642" y="-55.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="white">sw1</text>
+<!-- SW1 -->
+<g id="node6" class="node"><title>SW1</title>
+<polygon fill="#006699" stroke="#006699" points="279.981,-96 191.304,-96 191.304,-24 279.981,-24 279.981,-96"/>
+<text text-anchor="middle" x="235.642" y="-55.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="white">SW1</text>
 </g>
-<!-- sw1&#45;&#45;R1 -->
-<g id="edge1" class="edge"><title>sw1&#45;&#45;R1</title>
+<!-- SW1&#45;&#45;R1 -->
+<g id="edge1" class="edge"><title>SW1&#45;&#45;R1</title>
 <path fill="none" stroke="green" stroke-dasharray="5,2" d="M235.642,-96.0316C235.642,-111.666 235.642,-130.053 235.642,-145.717"/>
 <text text-anchor="middle" x="286.051" y="-116.8" font-family="Courier,monospace" font-size="14.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
 <text text-anchor="middle" x="214.639" y="-134.517" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/0</text>
 <text text-anchor="middle" x="214.639" y="-98.8316" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/1</text>
 </g>
-<!-- sw1&#45;&#45;R2 -->
-<g id="edge4" class="edge"><title>sw1&#45;&#45;R2</title>
-<path fill="none" stroke="green" stroke-dasharray="5,2" d="M277.368,-80.3883C296.253,-89.738 318.566,-101.604 337.642,-114 347.027,-120.099 366.071,-135.201 383.656,-149.527"/>
+<!-- SW1&#45;&#45;R2 -->
+<g id="edge4" class="edge"><title>SW1&#45;&#45;R2</title>
+<path fill="none" stroke="green" stroke-dasharray="5,2" d="M279.872,-81.6328C298.204,-90.7799 319.403,-102.148 337.642,-114 347.027,-120.099 366.071,-135.201 383.656,-149.527"/>
 <text text-anchor="middle" x="407.051" y="-116.8" font-family="Courier,monospace" font-size="14.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
 <text text-anchor="middle" x="362.653" y="-138.327" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/0</text>
-<text text-anchor="middle" x="298.372" y="-69.1883" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/2</text>
+<text text-anchor="middle" x="300.876" y="-70.4328" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/2</text>
 </g>
-<!-- sw1&#45;&#45;R3 -->
-<g id="edge6" class="edge"><title>sw1&#45;&#45;R3</title>
-<path fill="none" stroke="green" stroke-dasharray="5,2" d="M194.149,-72.998C172.436,-81.2571 147.066,-94.3538 130.826,-114 123.426,-122.953 118.878,-134.613 116.084,-145.691"/>
+<!-- SW1&#45;&#45;R3 -->
+<g id="edge6" class="edge"><title>SW1&#45;&#45;R3</title>
+<path fill="none" stroke="green" stroke-dasharray="5,2" d="M191.263,-74.1165C170.221,-82.4223 146.351,-95.2182 130.826,-114 123.426,-122.953 118.878,-134.613 116.084,-145.691"/>
 <text text-anchor="middle" x="182.051" y="-116.8" font-family="Courier,monospace" font-size="14.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
 <text text-anchor="middle" x="95.0804" y="-134.491" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/0</text>
-<text text-anchor="middle" x="173.146" y="-61.798" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/3</text>
+<text text-anchor="middle" x="170.26" y="-62.9165" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/3</text>
 </g>
-<!-- sw2 -->
-<g id="node7" class="node"><title>sw2</title>
-<polygon fill="#006699" stroke="#006699" points="525.039,-96 442.246,-96 442.246,-24 525.039,-24 525.039,-96"/>
-<text text-anchor="middle" x="483.642" y="-55.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="white">sw2</text>
+<!-- SW2 -->
+<g id="node7" class="node"><title>SW2</title>
+<polygon fill="#006699" stroke="#006699" points="527.981,-96 439.304,-96 439.304,-24 527.981,-24 527.981,-96"/>
+<text text-anchor="middle" x="483.642" y="-55.8" font-family="Helvetica,sans-Serif" font-size="14.00" fill="white">SW2</text>
 </g>
-<!-- sw2&#45;&#45;R2 -->
-<g id="edge2" class="edge"><title>sw2&#45;&#45;R2</title>
+<!-- SW2&#45;&#45;R2 -->
+<g id="edge2" class="edge"><title>SW2&#45;&#45;R2</title>
 <path fill="none" stroke="green" stroke-dasharray="5,2" d="M474.441,-96.3173C471.078,-106.808 466.806,-118.128 461.642,-128 458.49,-134.027 454.666,-140.091 450.648,-145.855"/>
 <text text-anchor="middle" x="518.051" y="-116.8" font-family="Courier,monospace" font-size="14.00" fill="white"> &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</text>
 <text text-anchor="middle" x="429.644" y="-134.655" font-family="Courier,monospace" font-size="14.00" fill="white">Fa0/1</text>
