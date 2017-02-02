@@ -30,3 +30,63 @@
 * Эти функции, в свою очередь, возвращают список со строками готовой конфигурации
 которую надо записать в файл result.txt в виде стандартного конфига (то есть, строк)
 
+### Задание 8.2
+
+Создать функцию parse_cdp_neighbors, которая обрабатывает
+вывод команды show cdp neighbors.
+
+Функция ожидает, как аргумент, вывод команды одной строкой.
+
+Функция должна возвращать словарь, который описывает соединения между устройствами.
+
+Например, если как аргумент был передан такой вывод:
+```
+R4>show cdp neighbors
+
+Device ID    Local Intrfce   Holdtme     Capability       Platform    Port ID
+R5           Fa 0/1          122           R S I           2811       Fa 0/1
+R6           Fa 0/2          143           R S I           2811       Fa 0/0
+```
+
+Функция должна вернуть такой словарь:
+```python
+{('R4', 'Fa0/1'): ('R5', 'Fa0/1'),
+('R4', 'Fa0/2'): ('R6', 'Fa0/0')}
+```
+
+Проверить работу функции на содержимом файла sw1_sh_cdp_neighbors.txt
+
+
+### Задание 8.2a
+
+С помощью функции parse_cdp_neighbors из задания 8.2
+и функции draw_topology из файла draw_network_graph.py,
+сгенерировать топологию, которая соответствует выводу
+команды sh cdp neighbor в файле sw1_sh_cdp_neighbors.txt
+
+Не копировать код функций parse_cdp_neighbors и draw_topology.
+
+В итоге, должен быть сгенерировано изображение топологии.
+Результат должен выглядеть так же, как схема в файле task_8_2a_topology.svg
+![task_8_2a_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/08_modules/task_8_2a_topology.png)
+
+
+
+### Задание 8.2b
+
+С помощью функции parse_cdp_neighbors из задания 8.2
+и функции draw_topology из файла draw_network_graph.py,
+сгенерировать топологию, которая соответствует выводу
+команды sh cdp neighbor из файлов:
+* sh_cdp_n_sw1.txt
+* sh_cdp_n_r1.txt
+* sh_cdp_n_r2.txt
+* sh_cdp_n_r3.txt
+
+
+Не копировать код функций parse_cdp_neighbors и draw_topology.
+
+В итоге, должен быть сгенерировано изображение топологии.
+Результат должен выглядеть так же, как схема в файле task_8_2b_topology.svg
+
+![task_8_2b_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/08_modules/task_8_2b_topology.png)
