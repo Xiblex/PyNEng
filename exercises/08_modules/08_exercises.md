@@ -68,6 +68,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 В итоге, должен быть сгенерировано изображение топологии.
 Результат должен выглядеть так же, как схема в файле task_8_2a_topology.svg
+
 ![task_8_2a_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/08_modules/task_8_2a_topology.png)
 
 
