@@ -33,11 +33,4 @@
 * [Платный курс на Udemy](https://www.udemy.com/python-programming-for-network-engineers/)
 * [Платный курс на GNS3](http://academy.gns3.com/p/python-programming-for-real-life-networking-use)
 * [Платный курс от ehacking academy](http://academy.ehacking.net/p/network-automation-python-engineers)
-
-## Курсы на Cisco DevNet
-
-На сайте learninglabs.cisco.com вы можете найти множество бесплатных курсов по темам программирование + сети:
-* [Главная страница DevNet Learning Labs](https://learninglabs.cisco.com/)
-* [Курс разбитые по трекам](https://learninglabs.cisco.com/tracks)
-* [Курсы разбитые по модулям](https://learninglabs.cisco.com/modules)
-* [Лабораторные по темам](https://learninglabs.cisco.com/labs)
+* [Курсы на Cisco DevNet (бесплатные)](https://learninglabs.cisco.com/)
