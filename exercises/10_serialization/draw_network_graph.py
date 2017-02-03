@@ -16,7 +16,7 @@ styles = {
         'label': 'Network Map',
         'fontsize': '16',
         'fontcolor': 'white',
-        'bgcolor': '#333333',
+        'bgcolor': '#3F3F3F',
         'rankdir': 'BT',
     },
     'nodes': {
@@ -78,5 +78,5 @@ def draw_topology(topology_dict, out_filename='img/topology', style_dict=styles)
         graph.edge(head, tail, headlabel=h_label, taillabel=t_label, label=" "*12)
 
     graph = apply_styles(graph, style_dict)
-    filename = graph.render(filename='img/topology')
+    filename = graph.render(filename=out_filename)
     print "Topology saved in", filename
