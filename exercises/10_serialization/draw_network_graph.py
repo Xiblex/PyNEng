@@ -55,7 +55,7 @@ def draw_topology(topology_dict):
     '''
     topology_dict - словарь с описанием топологии
 
-    Этот словарь
+    Пример словаря topology_dict:
         {('R4', 'Fa0/1'): ('R5', 'Fa0/1'),
          ('R4', 'Fa0/2'): ('R6', 'Fa0/0')}
 
