@@ -5,6 +5,7 @@
 
 * [The Hitchhiker’s Guide to Python!](http://docs.python-guide.org/en/latest/)
 * [Best Python Resources](https://www.fullstackpython.com/best-python-resources.html)
+* [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)
 
 ### Python + network
 
@@ -19,8 +20,8 @@
 * [Scapy](https://github.com/secdev/scapy)
 * [CiscoConfParse](https://github.com/mpenning/ciscoconfparse)
 * [NAPALM](https://github.com/napalm-automation/napalm)
-* [Twisted](https://github.com/twisted/twisted)
 * [Requests](https://github.com/kennethreitz/requests)
 * [NetworkX](https://github.com/networkx/networkx)
+* [Twisted](https://github.com/twisted/twisted)
 * [AutoNetKit](https://github.com/sk2/autonetkit)
 

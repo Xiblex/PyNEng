@@ -152,3 +152,108 @@ sw2 = generate_switch_config(psecurity=True, alias=True)
 sw3 = generate_switch_config(ospf=False)
 
 ```
+
+
+### Задание 10.3
+
+Создать функцию parse_sh_cdp_neighbors, которая обрабатывает
+вывод команды show cdp neighbors.
+
+Функция ожидает, как аргумент, вывод команды одной строкой.
+
+Функция должна возвращать словарь, который описывает соединения между устройствами.
+
+Например, если как аргумент был передан такой вывод:
+```
+R4>show cdp neighbors
+
+Device ID    Local Intrfce   Holdtme     Capability       Platform    Port ID
+R5           Fa 0/1          122           R S I           2811       Fa 0/1
+R6           Fa 0/2          143           R S I           2811       Fa 0/0
+```
+
+Функция должна вернуть такой словарь:
+```python
+{'R4': {'Fa0/1': {'R5': 'Fa0/1'},
+        'Fa0/2': {'R6': 'Fa0/0'}}}
+```
+
+Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
+
+### Задание 10.3a
+
+С помощью функции parse_sh_cdp_neighbors из задания 10.3,
+обработать вывод команды sh cdp neighbor из файлов:
+* sh_cdp_n_sw1.txt
+* sh_cdp_n_r1.txt
+* sh_cdp_n_r2.txt
+* sh_cdp_n_r3.txt
+* sh_cdp_n_r4.txt
+* sh_cdp_n_r5.txt
+* sh_cdp_n_r6.txt
+
+Объединить все словари, которые возвращает функция parse_sh_cdp_neighbors,
+в один словарь topology и записать его содержимое в файл topology.yaml.
+
+Структура словаря topology должна быть такой:
+```python
+{'R4': {'Fa0/1': {'R5': 'Fa0/1'},
+        'Fa0/2': {'R6': 'Fa0/0'}},
+ 'R5': {'Fa0/1': {'R4': 'Fa0/1'}},
+ 'R6': {'Fa0/0': {'R4': 'Fa0/2'}}}
+```
+
+Не копировать код функции parse_sh_cdp_neighbors
+
+
+### Задание 10.3b
+
+Переделать функциональность скрипта из задания 10.3a,
+в функцию generate_topology_from_cdp.
+
+Функция generate_topology_from_cdp должна быть создана с параметрами:
+* list_of_files - список файлов из которых надо считать вывод команды sh cdp neighbor
+* save_to_file - этот параметр управляет тем, будет ли записан в файл, итоговый словарь
+ * значение по умолчанию - True
+* topology_filename - имя файла, в который сохранится топология.
+ * по умолчанию, должно использоваться имя topology.yaml.
+ * топология сохраняется только, если аргумент save_to_file указан равным True
+
+Функция возвращает словарь, который описывает топологию.
+Словарь должен быть в том же формате, что и в задании 10.3a.
+
+Проверить работу функции generate_topology_from_cdp на файлах:
+* sh_cdp_n_sw1.txt
+* sh_cdp_n_r1.txt
+* sh_cdp_n_r2.txt
+* sh_cdp_n_r3.txt
+* sh_cdp_n_r4.txt
+* sh_cdp_n_r5.txt
+* sh_cdp_n_r6.txt
+
+Записать полученный словарь в файл topology.yaml.
+
+Не копировать код функции parse_sh_cdp_neighbors
+
+
+### Задание 10.3c
+
+С помощью функции draw_topology из файла draw_network_graph.py
+сгенерировать топологию, которая соответствует описанию в файле topology.yaml
+
+Обратите внимание на то, какой формат данных ожидает функция draw_topology.
+Описание топологии из файла topology.yaml нужно преобразовать соответствующим образом,
+чтобы использовать функцию draw_topology.
+
+Можно создать любые вспомогательные функции, которые могут понадобиться.
+
+В итоге, должно быть сгенерировано изображение топологии.
+Результат должен выглядеть так же, как схема в файле task_10_3c_topology.svg
+
+Не копировать код функции draw_topology.
+
+> Для выполнения этого задания, должен быть установлен graphviz:
+> ```pip install graphviz```
+
+![task_10_3c_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/10_serialization/task_10_3c_topology.png)
+
