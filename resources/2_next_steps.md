@@ -1,11 +1,16 @@
 ## Продолжение обучения
 
-### Python general
+### Python без привязки к сетевому оборудованию
 Если вам интересно развивать свои знания по Python в целом, ниже несколько полезных ссылок.
 
 * [The Hitchhiker’s Guide to Python!](http://docs.python-guide.org/en/latest/)
-* [Best Python Resources](https://www.fullstackpython.com/best-python-resources.html)
+* [Best Python Resources](https://www.fullstackpython.com/best-python-resources.html) - подборка ссылок на хорошие ресурсы по Python
 * [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/)
+* [Problem Solving with Algorithms and Data Structures using Python](http://interactivepython.org/runestone/static/pythonds/index.html) - отличная книга по структурам данных и алгоритмам. Много примеров и домашних заданий.
+ * [на русском](http://aliev.me/runestone/)
+
+Онлайн курсы:
+* [MITx - 6.00.1x Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9)
 
 ### Python + network
 

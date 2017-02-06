@@ -1,12 +1,31 @@
 # Материалы по темам курса
 
-Тут собраны ссылки по темам курса. Большая часть из них пересекаются с темами курса, но есть и дополнения. В любом случае, даже те, которые пересекаются полезно почитать.
+Тут собраны ссылки по темам курса.
+Большая часть из них пересекаются с темами курса, но есть и дополнения.
+В любом случае, даже те, которые пересекаются полезно почитать.
+
+Как правило, информацию тяжело усвоить с первого раза.
+Особенно, новую информацию.
+
+Если делать практические задания и пометки, в ходе изучения,
+то усвоится намного больше информации, чем, если просто читать курс.
+Но, скорее всего, в каком-то виде, надо будет читать о той же информации несколько раз.
 
 
-## Модули
+## Основы Python
+
+Книги по Python:
+* [A Byte of Python](https://www.gitbook.com/book/swaroopch/byte-of-python/details)
+ * [эта же книга на русском](http://wombat.org.ua/AByteOfPython/toc.html)
+* [Python 101](https://leanpub.com/python_101)
+* [Learn Python the Hard Way](https://learnpythonthehardway.org/book/)
 
 
 ## Регулярные выражения
+
+Статьи:
+* [Parse Cisco IOS configurations using RegEx](https://codingnetworker.com/2016/05/parse-cisco-ios-configurations-regex/)
+* [Using Python to generate Cisco configs](https://notalwaysthenetwork.com/2014/04/01/using-python-to-generate-cisco-configs/)
 
 Сайт для проверки регулярных выражений:
 * [regex101](https://regex101.com/)
@@ -26,6 +45,11 @@
 
 ## Telnet, SSH
 
+Статьи:
+* [Netmiko Library](https://pynet.twb-tech.com/blog/automation/netmiko.html)
+* [Automate SSH connections with netmiko](https://codingnetworker.com/2016/03/automate-ssh-connections-with-netmiko/)
+* [Network Automation Using Python: BGP Configuration](http://www.networkcomputing.com/networking/network-automation-using-python-bgp-configuration/1423704194)
+
 Документация:
 * [Telnetlib](https://docs.python.org/2/library/telnetlib.html)
 * [Pexpect](https://pexpect.readthedocs.io/en/stable/)
@@ -35,6 +59,7 @@
 * [multiprocessing](https://docs.python.org/2/library/multiprocessing.html)
 
 ## Jinja2
+
 Статьи:
 * [Network Configuration Templates Using Jinja2. Matt Oswalt](https://keepingitclassless.net/2014/03/network-config-templates-jinja2/)
 * [Python And Jinja2 Tutorial. Jeremy Schulman](http://packetpushers.net/python-jinja2-tutorial/)
@@ -71,7 +96,7 @@
 * [AUTOMATING YOUR NETWORK](https://www.ansible.com/webinars-training/automating-your-network)
  * [Репозиторий с примерами из вебинара](https://github.com/privateip/Ansible-Webinar-Mar2016)
 
-### General links:
+### Ansible без привязки к сетевому оборудованию
 
 Очень хорошая серия видео, с транскриптом и хорошими ссылками:
 - https://sysadmincasts.com/episodes/43-19-minutes-with-ansible-part-1-4
@@ -85,8 +110,19 @@
 
 ### Ansible for network devices
 
+> Обращайте внимание на время написания статьи. В Ansible существенно изменились модули для работы с сетевым оборудованием. И в статьях могут быть ещё старые примеры.
+
+Network Config Templating using Ansible (Kirk Byers):
+- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template.html
+- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template-p2.html
+- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template-p3.html
+
+Статьи:
+- http://jedelman.com/home/ansible-for-networking/
+- http://jedelman.com/home/network-automation-with-ansible-dynamically-configuring-interface-descriptions/
+- http://www.packetgeek.net/2015/08/using-ansible-to-push-cisco-ios-configurations/
+
 Очень хорошая серия статей. Постепенно повышается уровень сложности:
-(один из примеров playbook (и модулей), который мы использовали, из этих статей)
 - http://networkop.github.io/blog/2015/06/24/ansible-intro/
 - http://networkop.github.io/blog/2015/07/03/parser-modules/
 - http://networkop.github.io/blog/2015/07/10/test-verification/
@@ -96,16 +132,3 @@
 - http://networkop.github.io/blog/2015/09/03/automating-bgp-config/
 - http://networkop.github.io/blog/2015/11/13/automating-flexvpn-config/
 
-
-Network Config Templating using Ansible (Kirk Byers):
-- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template.html
-- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template-p2.html
-- https://pynet.twb-tech.com/blog/ansible/ansible-cfg-template-p3.html
-
-Полезные ссылки
-- http://jedelman.com/home/ansible-for-networking/
-- http://jedelman.com/home/network-automation-with-ansible-dynamically-configuring-interface-descriptions/
-- http://www.packetgeek.net/2015/08/using-ansible-to-push-cisco-ios-configurations/
-
-ntc-ansible:
-- https://github.com/networktocode/ntc-ansible (пока что возможны проблемы при работе с Ansible 2.x)
