@@ -1,6 +1,7 @@
 # Summary
 
 * [Введение](README.md)
+* [О курсе](about.md)
 * [Как учиться по этому курсу](howto.md)
 * [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
