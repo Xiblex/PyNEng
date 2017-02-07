@@ -167,6 +167,7 @@ In [14]: def test():
 In [15]: dir()
 Out[15]: 
  ...
+ 'a',
  'exit',
  'get_ipython',
  'i',
