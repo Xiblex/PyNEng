@@ -19,6 +19,7 @@
 | 5 | [Сериализация данных](https://natenka.gitbooks.io/pyneng/content/book/10_serialization/) | [Сериализация данных](https://natenka.gitbooks.io/pyneng/content/book/exercises/10_serialization/10_exercises.html) |
 | 6 | [Работа с базами данных](https://natenka.gitbooks.io/pyneng/content/book/11_db/) | [Базы данных](https://natenka.gitbooks.io/pyneng/content/book/exercises/11_db/11_exercises.html) |
 | 7 | [Подключение к оборудованию](https://natenka.gitbooks.io/pyneng/content/book/12_ssh_telnet/)| [Подключение к оборудованию](https://natenka.gitbooks.io/pyneng/content/book/exercises/12_ssh_telnet/12_exercises.html) |
-| 8 | [Шаблоны конфигураций с Jinja](https://natenka.gitbooks.io/pyneng/content/book/13_jinja2/)<br>[Обработка неструктурированного вывода команд с TextFSM](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/)| [Jinja2](https://natenka.gitbooks.io/pyneng/content/book/exercises/13_jinja2/13_exercises.html)<br>[TextFSM](https://natenka.gitbooks.io/pyneng/content/book/exercises/14_textfsm/14_exercises.html) |
-| 9 | [Ansible](https://natenka.gitbooks.io/pyneng/content/book/15_ansible/) | [Ansible](https://natenka.gitbooks.io/pyneng/content/book/exercises/15_ansible/15_exercises.html) |
+| 8 | [Шаблоны конфигураций с Jinja](https://natenka.gitbooks.io/pyneng/content/book/13_jinja2/)| [Jinja2](https://natenka.gitbooks.io/pyneng/content/book/exercises/13_jinja2/13_exercises.html) |
+| 9 | [Обработка неструктурированного вывода команд с TextFSM](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/)| [TextFSM](https://natenka.gitbooks.io/pyneng/content/book/exercises/14_textfsm/14_exercises.html) |
+| 10 | [Ansible](https://natenka.gitbooks.io/pyneng/content/book/15_ansible/) | [Ansible](https://natenka.gitbooks.io/pyneng/content/book/exercises/15_ansible/15_exercises.html) |
 
