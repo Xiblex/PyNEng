@@ -12,6 +12,10 @@
 Онлайн курсы:
 * [MITx - 6.00.1x Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9)
 
+Сайты с задачами:
+* [CodeEval](https://www.codeeval.com)
+* [HackerRank](https://www.hackerrank.com/)
+
 ### Python + network
 
 Лучше всего после курса попытаться применить полученные знания в работе. Этот вариант позволит лучше запомнить то, что вы уже выучили. Кроме того, таким образом знания расширить будет проще, так как у вас будет практическая задача, которую надо решить.
