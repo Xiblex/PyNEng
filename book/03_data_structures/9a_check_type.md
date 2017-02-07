@@ -3,6 +3,7 @@
 При преобразовании типов данных, могут возникнуть ошибки такого рода:
 ```python
 In [1]: int('a')
+------------------------------------------------------
 ValueError           Traceback (most recent call last)
 <ipython-input-42-b3c3f4515dd4> in <module>()
 ----> 1 int('a')
