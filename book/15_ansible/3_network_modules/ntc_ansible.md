@@ -153,10 +153,12 @@ Start
 ```
 $ ansible-playbook 2_ntc-ansible_save.yml
 ```
+{% endraw %}
 
 ![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7a_ntc_ansible_save.png)
+![Ansible playbook]({{ book.ansible_img_path }}7a_ntc_ansible_save.png)
 
-
+{% raw %}
 В результате, в каталоге all_facts повяляются соответствующие файлы для каждого маршрутизатора.
 Пример файла all_facts/192.168.100.1_sh_ip_int_br.json:
 ```
