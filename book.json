@@ -12,7 +12,7 @@
         "ga": {
             "token": "UA-87357288-2"
             }
-    }
+    },
     variables: {
       ansible_img_path: "https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/"
     }
