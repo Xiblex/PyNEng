@@ -22,7 +22,7 @@
           - service password-encryption
         provider: "{{ cli }}"
 ```
-
+{% endraw %}
 > Используется переменная cli, которая указана в файле group_vars/all.yml.
 
 Результат выполнения playbook:
@@ -30,7 +30,7 @@
 $ ansible-playbook 1_ios_config_lines.yml
 ```
 
-![6_ios_config_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6_ios_config_lines.png)
+![6_ios_config_lines]({{ book.ansible_img_path }}6_ios_config_lines.png)
 
 Ansible выполняет такие команды:
 * terminal length 0
@@ -47,10 +47,11 @@ Ansible выполняет такие команды:
 $ ansible-playbook 1_ios_config_lines.yml
 ```
 
-![6_ios_config_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6_ios_config_lines_2.png)
+![6_ios_config_lines]({{ book.ansible_img_path }}6_ios_config_lines_2.png)
 
 > **Caution** Обязательно пишите команды полностью, а не сокращенно. И обращайте внимание, что, для некоторых команд, IOS сам добавляет параметры. Если писать команду не в том виде, в котором она реально видна в конфигурационном файле, модуль не будет идемпотентен. Он будет всё время считать, что команды нет и вносить изменения каждый раз. 
 
+{% raw %}
 Параметр lines позволяет отправлять и несколько команд (playbook 1_ios_config_mult_lines.yml):
 ```
 ---
@@ -76,7 +77,7 @@ $ ansible-playbook 1_ios_config_lines.yml
 ```
 $ ansible-playbook 1_ios_config_mult_lines.yml
 ```
-
-![6_ios_config_mult_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6_ios_config_mult_lines.png)
-
 {% endraw %}
+
+![6_ios_config_mult_lines]({{ book.ansible_img_path }}6_ios_config_mult_lines.png)
+

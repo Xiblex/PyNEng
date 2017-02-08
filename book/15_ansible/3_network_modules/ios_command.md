@@ -42,10 +42,10 @@
 ```
 $ ansible-playbook 1_ios_command.yml
 ```
+{% endraw %}
+![ios_command]({{ book.ansible_img_path }}2_ios_command.png)
 
-![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/2_ios_command.png)
-
-
+{% raw %}
 > В отличии от использования модуля raw, playbook не указывает, что были выполнены изменения.
 
 
@@ -83,8 +83,8 @@ Playbook 2_ios_command.yml выполняет несколько команд и
 ```
 $ ansible-playbook 2_ios_command.yml
 ```
-
-![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/2a_ios_command.png)
+{% endraw %}
+![ios_command]({{ book.ansible_img_path }}2a_ios_command.png)
 
 Обе команды выполнились на всех устройствах.
 
@@ -107,7 +107,7 @@ $ ansible-playbook 2_ios_command.yml
 $ ansible-playbook 2_ios_command.yml
 ```
 
-![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/2_ios_command-fail.png)
+![ios_command]({{ book.ansible_img_path }}2_ios_command-fail.png)
 
 Ansible обнаружил ошибку и возвращает сообщение ошибки.
 В данном случае - 'Invalid input'.
@@ -116,5 +116,3 @@ Ansible обнаружил ошибку и возвращает сообщени
 * Ambiguous command
 * Incomplete command
 
-
-{% endraw %}

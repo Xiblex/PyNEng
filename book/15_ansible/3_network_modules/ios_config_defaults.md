@@ -62,7 +62,7 @@
 ```
 $ ansible-playbook 6_ios_config_defaults.yml
 ```
-
-![6e_ios_config_default](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6e_ios_config_defaults.png)
-
 {% endraw %}
+
+![6e_ios_config_default]({{ book.ansible_img_path }}6e_ios_config_defaults.png)
+

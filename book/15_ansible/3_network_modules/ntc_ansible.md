@@ -90,6 +90,7 @@ pip install ntc-ansible
 
     - debug: var=result
 ```
+{% endraw %}
 
 
 Результат выполнения playbook:
@@ -97,9 +98,10 @@ pip install ntc-ansible
 $ ansible-playbook 1_ntc-ansible.yml
 ```
 
-![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7_ntc_ansible.png)
+![Ansible playbook]({{ book.ansible_img_path }}7_ntc_ansible.png)
 
 
+{% raw %}
 В переменной response находится структурированный вывод в виде списка словарей.
 Ключи в словарях получены на основании переменных, которые описаны в шаблоне library/ntc-ansible/ntc-templates/templates/cisco_ios_show_ip_int_brief.template (единственное отличие - регистр):
 ```
@@ -155,10 +157,8 @@ $ ansible-playbook 2_ntc-ansible_save.yml
 ```
 {% endraw %}
 
-![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7a_ntc_ansible_save.png)
 ![Ansible playbook]({{ book.ansible_img_path }}7a_ntc_ansible_save.png)
 
-{% raw %}
 В результате, в каталоге all_facts повяляются соответствующие файлы для каждого маршрутизатора.
 Пример файла all_facts/192.168.100.1_sh_ip_int_br.json:
 ```
@@ -256,4 +256,3 @@ cisco_ios_show_aliases.template,  .*, cisco_ios, sh[[ow]] alia[[ses]]
 
 Синтаксис шаблонов и файла index описаны в разделе [TextFSM](../../14_textfsm/).
 
-{% endraw %}

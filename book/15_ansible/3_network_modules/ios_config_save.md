@@ -1,4 +1,3 @@
-{% raw %}
 ## save
 
 Параметр __save__ позволяет указать нужно ли сохранять текущую конфигурацию в стартовую. По умолчанию, значение параметра - __no__.
@@ -13,10 +12,11 @@
 $ ansible-playbook 4_ios_config_save.yml
 ```
 
-![6c_ios_config_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6c_ios_config_save.png)
+![6c_ios_config_save]({{ book.ansible_img_path }}6c_ios_config_save.png)
 
 Но, можно самостоятельно сделать сохранение, используя модуль ios_command.
 
+{% raw %}
 Playbook 4_ios_config_save.yml:
 ```yml
 ---
@@ -46,6 +46,7 @@ Playbook 4_ios_config_save.yml:
         provider: "{{ cli }}"
       when: cfg.changed
 ```
+{% endraw %}
 
 > Надо внести изменения на маршрутизаторе 192.168.100.1. Например, изменить строку transport input all на transport input ssh.
 
@@ -54,6 +55,5 @@ Playbook 4_ios_config_save.yml:
 $ ansible-playbook 4_ios_config_save.yml
 ```
 
-![6c_ios_config_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6c_ios_config_save_2.png)
+![6c_ios_config_save]({{ book.ansible_img_path }}6c_ios_config_save_2.png)
 
-{% endraw %}

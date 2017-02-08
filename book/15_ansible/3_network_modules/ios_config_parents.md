@@ -31,17 +31,19 @@ line vty 0 4
         provider: "{{ cli }}"
 
 ```
+{% endraw %}
 
 Запуск будет выполняться аналогично предыдущим playbook:
 ```
 $ ansible-playbook 2_ios_config_parents_basic.yml
 ```
 
-![6a_ios_config_parents_basic](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6a_ios_config_parents_basic.png)
+![6a_ios_config_parents_basic]({{ book.ansible_img_path }}6a_ios_config_parents_basic.png)
 
 
 Если команда находится в нескольких вложенных режимах, подрежимы указываются в списке parents.
 
+{% raw %}
 Например, необходимо выполнить такие команды:
 ```
 policy-map OUT_QOS

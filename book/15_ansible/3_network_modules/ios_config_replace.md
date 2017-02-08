@@ -43,12 +43,13 @@ ip access-list extended IN_to_OUT
           - deny   ip any any
         provider: "{{ cli }}"
 ```
+{% endraw %}
 
 Выполнение playbook:
 ```
 $ ansible-playbook 10_ios_config_replace_line.yml -v
 ```
-![6i_ios_config_replace_line](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6i_ios_config_replace_line.png)
+![6i_ios_config_replace_line]({{ book.ansible_img_path }}6i_ios_config_replace_line.png)
 
 
 После этого на маршрутизаторе такой ACL:
@@ -79,6 +80,7 @@ ip access-list extended IN_to_OUT
  permit icmp any any
 ```
 
+{% raw %}
 Playbook 10_ios_config_replace_block.yml:
 ```yml
 ---
@@ -104,12 +106,13 @@ Playbook 10_ios_config_replace_block.yml:
         replace: block
         provider: "{{ cli }}"
 ```
+{% endraw %}
 
 Выполнение playbook:
 ```
 $ ansible-playbook 10_ios_config_replace_block.yml -v
 ```
-![6i_ios_config_replace_block](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6i_ios_config_replace_block.png)
+![6i_ios_config_replace_block]({{ book.ansible_img_path }}6i_ios_config_replace_block.png)
 
 
 В результате на маршрутизаторе такой ACL:
@@ -122,4 +125,3 @@ ip access-list extended IN_to_OUT
  deny   ip any any
 ```
 
-{% endraw %}

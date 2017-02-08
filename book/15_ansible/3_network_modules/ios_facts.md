@@ -92,13 +92,14 @@ Ansible собирает такие факты:
         gather_subset: all
         provider: "{{ cli }}"
 ```
+{% endraw %}
 
 
 ```
 $ ansible-playbook 1_ios_facts.yml
 ```
 
-![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts.png)
+![5_ios_facts]({{ book.ansible_img_path }}5_ios_facts.png)
 
 
 
@@ -108,10 +109,11 @@ $ ansible-playbook 1_ios_facts.yml -v
 Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
 ```
 
-![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts_verbose.png)
+![5_ios_facts]({{ book.ansible_img_path }}5_ios_facts_verbose.png)
 
 После того, как Ansible собрал факты с устройства, все факты доступны как переменные в playbook, шаблонах и т.д.
 
+{% raw %}
 Например, можно отобразить содержимое факта с помощью debug (playbook 2_ios_facts_debug.yml):
 ```yml
 ---
@@ -134,13 +136,14 @@ Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
     - name: Show ansible_net_interfaces fact
       debug: var=ansible_net_interfaces['Ethernet0/0']
 ```
+{% endraw %}
 
 Результат выполнения playbook:
 ```
 $ ansible-playbook 2_ios_facts_debug.yml
 ```
 
-![5_ios_facts_debug](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts_debug.png)
+![5_ios_facts_debug]({{ book.ansible_img_path }}5_ios_facts_debug.png)
 
 ### Сохранение фактов
 
@@ -148,6 +151,7 @@ $ ansible-playbook 2_ios_facts_debug.yml
 Для того, чтобы лучше понять какая информация собирается об устройствах, в каком формате, скопируем полученную информацию в файл.
 
 Для этого будет использоваться модуль copy.
+{% raw %}
 
 Playbook 3_ios_facts.yml собирает всю информацию об устройствах и записывает в разные файлы (создайте каталог all_facts перед запуском playbook или раскомментируйте задачу Create all_facts dir и Ansible создаст каталог сам):
 ```
@@ -200,12 +204,13 @@ Playbook 3_ios_facts.yml собирает всю информацию об ус�
 Так как в пути dest используются имена устройств, будут сгенерированы уникальные файлы для каждого устройства.
 
 
+{% endraw %}
 Результат выполнения playbook:
 ```
 $ ansible-playbook 3_ios_facts.yml
 ```
 
-![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5a_ios_facts.png)
+![5a_ios_facts]({{ book.ansible_img_path }}5a_ios_facts.png)
 
 После этого, в каталоге all_facts находятся такие файлы:
 ```
@@ -243,7 +248,7 @@ $ ansible-playbook 3_ios_facts.yml
 $ ansible-playbook 3_ios_facts.yml
 ```
 
-![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5a_ios_facts_no_change.png)
+![5a_ios_facts]({{ book.ansible_img_path }}5a_ios_facts_no_change.png)
 
 ### Изменения с опцией --diff
 
@@ -255,8 +260,7 @@ $ ansible-playbook 3_ios_facts.yml
 $ ansible-playbook 3_ios_facts.yml --diff --limit=192.168.100.1
 ```
 
-![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5a_ios_facts_diff.png)
+![5a_ios_facts]({{ book.ansible_img_path }}5a_ios_facts_diff.png)
 
 В этом выводе видно не только то, что были внесены изменения, но то, на каком устройстве и какие именно изменения.
 
-{% endraw %}

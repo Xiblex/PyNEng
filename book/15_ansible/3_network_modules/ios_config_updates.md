@@ -25,6 +25,7 @@ Playbook 2_ios_config_parents_basic.yml:
         provider: "{{ cli }}"
 
 ```
+{% endraw %}
 
 > Для того, чтобы playbook что-то менял, нужно сначала отменить команды. Либо вручную, либо изменив playbook.
 > Например, на маршрутизаторе 192.168.100.1, вместо строки transport input ssh, вручную прописать строку transport input all.
@@ -34,7 +35,7 @@ Playbook 2_ios_config_parents_basic.yml:
 $ ansible-playbook 2_ios_config_parents_basic.yml -v
 ```
 
-![6a_ios_config_parents_basic](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6a_ios_config_parents_basic_verbose.png)
+![6a_ios_config_parents_basic]({{ book.ansible_img_path }}6a_ios_config_parents_basic_verbose.png)
 
 В выводе, в поле updates видно, какие именно команды Ansible отправил на устройство.
 Изменения были выполнены только на маршрутизаторе 192.168.100.1.
@@ -46,6 +47,7 @@ $ ansible-playbook 2_ios_config_parents_basic.yml -v
 В режиме verbose, информация видна обо всех устройствах.
 Но, было бы удобней, чтобы информация отображалась только для тех устройств, для которых произошли изменения.
 
+{% raw %}
 Новый playbook 3_ios_config_debug.yml на основе 2_ios_config_parents_basic.yml:
 ```
 ---
@@ -72,6 +74,7 @@ $ ansible-playbook 2_ios_config_parents_basic.yml -v
       when: cfg.changed
 
 ```
+{% endraw %}
 
 Изменения в playbook:
 * результат работы первой задачи сохраняется в переменную __cfg__.
@@ -85,15 +88,14 @@ $ ansible-playbook 2_ios_config_parents_basic.yml -v
 $ ansible-playbook 3_ios_config_debug.yml
 ```
 
-![6b_ios_config_debug_skipping](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6b_ios_config_debug_skipping.png)
+![6b_ios_config_debug_skipping]({{ book.ansible_img_path }}6b_ios_config_debug_skipping.png)
 
 Если внести изменения в конфигурацию маршрутизатора 192.168.100.1 (изменить transport input ssh на transport input all):
 ```
 $ ansible-playbook 3_ios_config_debug.yml
 ```
 
-![6b_ios_config_debug_update](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6b_ios_config_debug_update.png)
+![6b_ios_config_debug_update]({{ book.ansible_img_path }}6b_ios_config_debug_update.png)
 
 Теперь второе задание отображает информацию о том, какие именно изменения были внесены на маршрутизаторе.
 
-{% endraw %}

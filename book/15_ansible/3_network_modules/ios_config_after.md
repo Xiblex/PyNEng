@@ -40,16 +40,17 @@
 ```
 $ ansible-playbook 7_ios_config_after.yml -v
 ```
-![6f_ios_config_after.png](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after.png)
+{% endraw %}
+![6f_ios_config_after.png]({{ book.ansible_img_path }}6f_ios_config_after.png)
 
 
 Второй запуск playbook (изменений нет, поэтому команда no shutdown не выполняется):
 ```
 $ ansible-playbook 7_ios_config_after.yml -v
 ```
-![6f_ios_config_after_no_change](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after_no_change.png)
+![6f_ios_config_after_no_change]({{ book.ansible_img_path }}6f_ios_config_after_no_change.png)
 
-
+{% raw %}
 Рассмотрим ещё один пример использования after.
 
 С помощью after можно сохранять конфигурацию устройства (playbook 7_ios_config_after_save.yml):
@@ -75,12 +76,12 @@ $ ansible-playbook 7_ios_config_after.yml -v
           - write
         provider: "{{ cli }}"
 ```
+{% endraw %}
 
 Результат выполнения playbook (изменения только на маршрутизаторе 192.168.100.1):
 ```
 $ ansible-playbook 7_ios_config_after_save.yml -v
 ```
-![6f_ios_config_after_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after_save.png)
+![6f_ios_config_after_save]({{ book.ansible_img_path }}6f_ios_config_after_save.png)
 
 
-{% endraw %}

@@ -87,7 +87,7 @@ gathering = explicit
 $ ansible cisco-routers -m raw -a "sh ip int br"
 ```
 
-![host_key_checking](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/host_key_checking.png)
+![host_key_checking]({{ book.ansible_img_path }}host_key_checking.png)
 
 Добавляем в конфигурационный файл параметр host_key_checking:
 ```
@@ -106,7 +106,7 @@ host_key_checking=False
 $ ansible cisco-routers -m raw -a "sh ip int br"
 ```
 
-![host_key_checking2](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/host_key_checking2.png)
+![host_key_checking2]({{ book.ansible_img_path }}host_key_checking2.png)
 
 Обратите внимание на строки:
 ```
@@ -118,6 +118,6 @@ Ansible сам добавил ключи устройств в файл ~/.ssh/k
 
 
 > Другие параметры конфигурационного файла можно посмотреть в документации.
-> Пример конфигурационного файла в [репозитории Ansible](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
+> Пример конфигурационного файла в [репозитории Ansible]({{ book.ansible_img_path }}ansible.cfg).
 
 
