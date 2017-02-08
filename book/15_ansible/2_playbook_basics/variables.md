@@ -238,7 +238,11 @@ mgmnt_ip: 10.0.0.100
 > * в ролях, которые затем используются
 > * передача переменных при вызове playbook
 >
+{% if book.book_name == "ansible_neteng" %}
+> Но это будет рассматриваться в следующих разделах.
+{% else %}
 > Это рассматривается в курсе [Ansible для сетевых инженеров](https://www.gitbook.com/book/natenka/ansible-dlya-setevih-inzhenerov/details)
+{% endif %}
 
 
 Чаще всего, переменная с определенным именем только одна.
