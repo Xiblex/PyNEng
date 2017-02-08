@@ -118,6 +118,6 @@ Ansible сам добавил ключи устройств в файл ~/.ssh/k
 
 
 > Другие параметры конфигурационного файла можно посмотреть в документации.
-> Пример конфигурационного файла в [репозитории Ansible]({{ book.ansible_img_path }}ansible.cfg).
+> Пример конфигурационного файла в [репозитории Ansible](https://github.com/ansible/ansible/blob/devel/examples/ansible.cfg).
 
 
