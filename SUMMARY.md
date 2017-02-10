@@ -6,7 +6,6 @@
 * [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
 * [Благодарности](acknowledgments.md)
-* [Отзывы](testimonials.md)
 * [1. Подготовка к работе](book/01_intro/README.md)
     * [ОС и редактор](book/01_intro/os_and_editor.md)
     * [Система управления пакетами pip](book/01_intro/pip.md)
@@ -166,4 +165,4 @@
 * [Полезные ссылки](resources/README.md)
     * [Материалы по темам курса](resources/1_course_additional_info.md)
     * [Продолжение обучения](resources/2_next_steps.md)
-
+* [Отзывы](testimonials.md)
