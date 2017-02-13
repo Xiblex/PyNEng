@@ -20,8 +20,10 @@ iPython позволяет намного больше, чем стандарт�
   * по ней можно передвигаться
   * или посмотреть "волшебной" командой %history
 
-Установить iPython можно с помощью pip:
+Установить iPython можно с помощью pip (если виртуальная машина устанавливается с нуля):
 ```
+apt-get install python-pip python-dev 
+pip install —upgrade pip 
 pip install ipython
 ```
 
@@ -29,13 +31,14 @@ pip install ipython
 
 Если ставили через apt pip, то надо его удалить:
 ```
-sudo apt-get remove python-pip
+apt-get remove python-pip
 ```
 
 После этого заново переустановить pip и установить ipython таким образом:
 ```
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
+apt-get install python-dev
 pip install ipython
 ```
 
