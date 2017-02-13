@@ -4,8 +4,9 @@
 
 Кроме того, тут находятся все вспомогательные файлы (конфигурации и др), которые используются в заданиях.
 
-Скачать все упражнения одним архивом можно [тут](https://github.com/natenka/PyNEng/blob/master/exercises.zip)
+Все задания и вспомогательные файлы можно скачать одним архивом [zip](https://github.com/natenka/PyNEng/blob/master/exercises.zip) или [tar.gz](https://github.com/natenka/PyNEng/blob/master/exercises.tar.gz).
 
+Также для курса подготовлены две виртуальные машины на выбор: [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md)
 
 > Если в заданиях раздела есть задания с буквами (например, 5.2a), то можно выполнить сначала задания без букв, а затем с буквами. Задания с буквами, как правило, немного сложнее заданий без букв и развивают/усложняют идею в соответствующем задании без буквы.
 
