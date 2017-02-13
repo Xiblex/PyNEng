@@ -26,6 +26,17 @@
 Курс всегда будет оставаться бесплатным.
 Поэтому вам не нужно переживать, что он будет удален.
 
+### ОС, Python
+
+В курсе используются:
+* Debian Linux
+* Python 2.7
+
+> Позже курс будет переведен на Python 3.x.
+
+Для курса подготовлены две виртуальные машины на выбор: [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md).
+В них установлены все пакеты, которые используются в курсе.
+
 ### Примеры
 
 > Все примеры, которые используются в курсе, можно скачать одним архивом в [zip](https://github.com/natenka/PyNEng/blob/master/examples.zip) или [tar.gz](https://github.com/natenka/PyNEng/blob/master/examples.tar.gz).
