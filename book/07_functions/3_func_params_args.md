@@ -44,7 +44,7 @@ ip ssh version 2
 !
 ```
 
-Пример использования функцию delete_exclamation_from_cfg:
+Пример использования функции delete_exclamation_from_cfg:
 ```python
 In [3]: delete_exclamation_from_cfg('r1.txt', 'result.txt')
 ```
