@@ -26,12 +26,11 @@ export WORKON_HOME=~/venv
 WORKON_HOME - указывает расположение виртуальных окружений.
 А вторая строка - где находится скрипт, установленный с пакетом virtualenvwrapper):
 
-После этого нужно выполнить:
+Для того чтобы скрипт virtualenvwrapper.sh выполнился и можно было работать с виртуальными окружениями, надо перезапустить bash. Например, таким образом:
 ```
 exec bash
 ```
 
-Таким образом запустится новая сессия bash и выполнится скрипт virtualenvwrapper.sh.
 
 > Такой вариант может быть не всегда правильным. Подробнее в ответе на [stackoverflow](http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in).
 
