@@ -12,6 +12,9 @@
 Онлайн курсы:
 * [MITx - 6.00.1x Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9)
 
+Видео курсы:
+* [Python от Computer Science Center](https://www.youtube.com/playlist?list=PLlb7e2G7aSpTTNp7HBYzCBByaE1h54ruW)
+
 Сайты с задачами:
 * [CodeEval](https://www.codeeval.com)
 * [HackerRank](https://www.hackerrank.com/)
