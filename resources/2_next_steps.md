@@ -32,6 +32,7 @@
 * [Scapy](https://github.com/secdev/scapy)
 * [CiscoConfParse](https://github.com/mpenning/ciscoconfparse)
 * [NAPALM](https://github.com/napalm-automation/napalm)
+* [NOC Project](https://kb.nocproject.org/display/SITE/NOC)
 * [Requests](https://github.com/kennethreitz/requests)
 * [NetworkX](https://github.com/networkx/networkx)
 * [Twisted](https://github.com/twisted/twisted)
