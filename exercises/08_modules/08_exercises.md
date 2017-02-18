@@ -52,7 +52,12 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 ### Задание 8.2a
 
 > Для выполнения этого задания, должен быть установлен graphviz:
-> pip install graphviz
+
+> ```apt-get install graphviz```
+
+> И модуль python для работы с graphviz:
+
+> ```pip install graphviz```
 
 С помощью функции parse_cdp_neighbors из задания 8.2
 и функции draw_topology из файла draw_network_graph.py,
@@ -71,7 +76,12 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 ### Задание 8.2b
 
 > Для выполнения этого задания, должен быть установлен graphviz:
-> pip install graphviz
+
+> ```apt-get install graphviz```
+
+> И модуль python для работы с graphviz:
+
+> ```pip install graphviz```
 
 С помощью функции parse_cdp_neighbors из задания 8.2
 и функции draw_topology из файла draw_network_graph.py,

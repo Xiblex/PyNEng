@@ -19,6 +19,10 @@
 Результат должен выглядеть так же, как схема в файле task_8_2b_topology.svg
 
 > Для выполнения этого задания, должен быть установлен graphviz:
+> apt-get install graphviz
+
+> И модуль python для работы с graphviz:
 > pip install graphviz
+
 """
 
