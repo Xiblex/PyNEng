@@ -262,7 +262,7 @@ delayafterclose: 0.1
 delayafterterminate: 0.1
 ```
 
-Но, еслил передать в expect EOF, ошибки не будет.
+Но, если передать в expect EOF, ошибки не будет.
 
 ###Возможности pexpect.expect
 
