@@ -69,7 +69,7 @@ If you want to paste code into IPython, try the %paste and %cpaste magic functio
 
 Команды %paste и %cpaste работают немного по-разному.
 
-__%cpaste__ (после того как все строки скопированы, надо завершить работу команду набрав '--'):
+__%cpaste__ (после того как все строки скопированы, надо завершить работу команды набрав '--'):
 ```python
 In [9]: %cpaste
 Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
