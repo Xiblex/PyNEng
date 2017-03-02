@@ -78,6 +78,5 @@ spanning-tree portfast
 spanning-tree bpduguard enable
 ```
 
-> Если Вы знаете о том, что существует еще функция ```input()``` и запутались какая разница между __raw_input()__ и __input()__, посмотрите эту ссылку:
-http://stackoverflow.com/questions/4915361/whats-the-difference-between-raw-input-and-input-in-python3-x
+> Разница между функциями ```raw_input()``` и ```input()``` хорошо описана на [stackoverflow](http://stackoverflow.com/questions/4915361/whats-the-difference-between-raw-input-and-input-in-python3-x)
 
