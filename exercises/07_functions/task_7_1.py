@@ -15,6 +15,24 @@
 
 В конце строк в списке не должно быть символа перевода строки.
 
+Пример итогового списка:
+```python
+[
+'interface FastEthernet0/12',
+'switchport mode access',
+'switchport access vlan 10',
+'switchport nonegotiate',
+'spanning-tree portfast',
+'spanning-tree bpduguard enable',
+'interface FastEthernet0/17',
+'switchport mode access',
+'switchport access vlan 150',
+'switchport nonegotiate',
+'spanning-tree portfast',
+'spanning-tree bpduguard enable',
+...]
+```
+
 Проверить работу функции на примере словаря access_dict.
 '''
 
