@@ -22,7 +22,7 @@ ospf_route = "O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0
 
 ###Задание 3.2
 
-Преобразовать строку MAC с формата XXXX:XXXX:XXXX в XXXX.XXXX.XXXX.
+Преобразовать строку MAC с формата XXXX:XXXX:XXXX в XXXX.XXXX.XXXX
 
 ```python
 MAC = "AAAA:BBBB:CCCC"
