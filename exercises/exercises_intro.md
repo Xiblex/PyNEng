@@ -1,12 +1,12 @@
 Все задания и вспомогательные файлы можно скачать одним архивом [zip](https://github.com/natenka/PyNEng/blob/master/exercises.zip) или [tar.gz](https://github.com/natenka/PyNEng/blob/master/exercises.tar.gz).
 
-> **Caution** Также для курса подготовлены две виртуальные машины на выбор: [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md). В них установлены все пакеты, которые используются в курсе.
+Также для курса подготовлены две виртуальные машины на выбор: [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md). В них установлены все пакеты, которые используются в курсе.
 
 <br>
 
-> Присоединяйтесь к команде [PyNEng в slack](https://pyneng-slack.herokuapp.com/)
+> Обсудить задания, варианты решений и получить подсказки можно в [команде PyNEng](https://pyneng-slack.herokuapp.com/) в slack.
 
-> Там можно обсудить курс/книжку "Python для сетевых инженеров", задания по курсу, получить ответы на вопросы, а также пообщаться на темы python/автоматизация/программирование для сетевиков.
+> Там же можно пообщаться на темы python/автоматизация/программирование для сетевиков.
 
 <br>
 
