@@ -11,7 +11,7 @@
 - generate_mngmt_config - генерирует конфигурацию менеджмент настроек, на основе словаря mngmt из файла templates.yaml
 - generate_alias_config - генерирует конфигурацию alias, на основе словаря alias из файла templates.yaml
 - generate_switch_config - генерирует конфигурацию коммутатора, в зависимости от переданных параметров,
-                           использует для этого оставильные функции
+                           использует для этого остальные функции
 '''
 import yaml
 
@@ -82,7 +82,7 @@ def generate_alias_config(filename):
 def generate_switch_config(access=True, psecurity=False, trunk=True,
                            ospf=True, mngmt=True, alias=False):
     """
-    Аргументы контролирует какие настройки надо выполнить.
+    Аргументы контролируют какие настройки надо выполнить.
     По умолчанию, будет настроено все, кроме psecurity и alias.
 
     Возвращает список всех команд, которые были сгенерированы на основе шаблона

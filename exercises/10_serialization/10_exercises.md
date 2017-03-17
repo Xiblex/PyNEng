@@ -58,8 +58,9 @@ headers = ['hostname', 'ios', 'image', 'uptime']
 * generate_access_config - генерирует конфигурацию для access-портов, на основе словарей access и psecurity из файла sw_templates.yaml
 * generate_trunk_config - генерирует конфигурацию для trunk-портов, на основе словаря trunk из файла sw_templates.yaml на основе словаря trunk из файла sw_templates.yaml
 * generate_mngmt_config - генерирует конфигурацию менеджмент настроек, на основе словаря mngmt из файла templates.yaml
+* generate_ospf_config - генерирует конфигурацию ospf, на основе словаря ospf из файла templates.yaml
 * generate_alias_config - генерирует конфигурацию alias, на основе словаря alias из файла templates.yaml
-* generate_switch_config - генерирует конфигурацию коммутатора, в зависимости от переданных параметров, использует для этого оставильные функции
+* generate_switch_config - генерирует конфигурацию коммутатора, в зависимости от переданных параметров, использует для этого остальные функции
 
 ```python
 import yaml
@@ -130,7 +131,7 @@ def generate_alias_config(filename):
 def generate_switch_config(access=True, psecurity=False, trunk=True,
                            ospf=True, mngmt=True, alias=False):
     """
-    Аргументы контролирует какие настройки надо выполнить.
+    Аргументы контролируют какие настройки надо выполнить.
     По умолчанию, будет настроено все, кроме psecurity и alias.
 
     Возвращает список всех команд, которые были сгенерированы на основе шаблона
