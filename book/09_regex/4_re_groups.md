@@ -12,7 +12,7 @@
 Пример использования групп:
 ```python
 In [8]: line = "FastEthernet0/1            10.0.12.1       YES manual up                    up"
-In [9]: match = re.search('(\S+?)\s+([\w\.]+?)\s+.*', line)
+In [9]: match = re.search('(\S+)\s+([\w\.]+)\s+.*', line)
 ```
 
 В данном примере указаны две группы:
@@ -51,7 +51,7 @@ Out[13]: ('FastEthernet0/1', '10.0.12.1')
 ```python
 In [14]: line = "FastEthernet0/1            10.0.12.1       YES manual up                    up"
 
-In [15]: match = re.search('(?P<intf>\S+?)\s+(?P<address>[\w\.]+?)\s+.*', line)
+In [15]: match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+', line)
 ```
 
 Теперь к этим группам можно обращаться по имени:
@@ -71,8 +71,12 @@ Out[17]: {'address': '10.0.12.1', 'intf': 'FastEthernet0/1'}
 
 И, в таком случае, можно добавить группы в регулярное выражение и полагаться на их имя, а не на порядок:
 ```python
-In [18]: match = re.search('(?P<intf>\S+?)\s+(?P<address>[\w\.]+?)\s+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
+In [18]:  match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+[\w\s]+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
 
 In [19]: match.groupdict()
-Out[19]: {'address': 'manual', 'intf': 'YES', 'protocol': 'up', 'status': 'up'}
+Out[19]:
+{'address': '10.0.12.1',
+ 'intf': 'FastEthernet0/1',
+ 'protocol': 'up',
+ 'status': 'up'}
 ```
