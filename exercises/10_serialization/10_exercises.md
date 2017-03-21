@@ -56,7 +56,7 @@ headers = ['hostname', 'ios', 'image', 'uptime']
 
 Создать функции:
 * generate_access_config - генерирует конфигурацию для access-портов, на основе словарей access и psecurity из файла sw_templates.yaml
-* generate_trunk_config - генерирует конфигурацию для trunk-портов, на основе словаря trunk из файла sw_templates.yaml на основе словаря trunk из файла sw_templates.yaml
+* generate_trunk_config - генерирует конфигурацию для trunk-портов, на основе словаря trunk из файла sw_templates.yaml
 * generate_mngmt_config - генерирует конфигурацию менеджмент настроек, на основе словаря mngmt из файла templates.yaml
 * generate_ospf_config - генерирует конфигурацию ospf, на основе словаря ospf из файла templates.yaml
 * generate_alias_config - генерирует конфигурацию alias, на основе словаря alias из файла templates.yaml
