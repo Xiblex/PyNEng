@@ -169,7 +169,7 @@ def send_commands(device_list, config=[], show='', filename=''):
 Дополнить функцию send_commands таким образом, чтобы перед подключением к устройствам по SSH,
 выполнялась проверка доступности устройства pingом (можно вызвать команду ping в ОС).
 
-> Как выполнять команды ОС, описано в разделе [subprocess](https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/subprocess.html). Там же есть пример функции с отправкой ping.
+> Как выполнять команды ОС, описано в разделе [subprocess](https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/useful_modules/subprocess.html). Там же есть пример функции с отправкой ping.
 
 Если устройство доступно, можно выполнять подключение.
 Если не доступно, вывести сообщение о том, что устройство с определенным IP-адресом недоступно

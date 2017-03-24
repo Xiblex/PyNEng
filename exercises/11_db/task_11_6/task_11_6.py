@@ -34,7 +34,8 @@ import parse_dhcp_snooping_functions as pds
 
 В принципе, вам не нужно разбираться с модулем argparse,
 чтобы выполнить это задание.
-Но, вы можете почитать о нем в разделе "Дополнительная информация".
+Но, вы можете почитать о нем в разделе "Дополнительная информация":
+https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/useful_modules/argparse.html
 
 Для того, чтобы вам было проще начать, попробуйте создать необходимые функции в файле
 parse_dhcp_snooping_functions.py и, например, просто выведите аргументы функций, используя print.
