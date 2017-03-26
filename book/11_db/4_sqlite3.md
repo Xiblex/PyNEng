@@ -395,7 +395,7 @@ con.close()
 
 Результат выполнения будет таким:
 ```
-$ python2 create_sw_inventory_ver1.py
+$ python create_sw_inventory_ver1.py
 (u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
 (u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
 (u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
@@ -448,6 +448,7 @@ Python позволяет использовать объект Connection, ка
 
 Пример использования соединения с базой, как менеджера контекстов (create_sw_inventory_ver2.py): 
 ```python
+# -*- coding: utf-8 -*-
 import sqlite3
 
 data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
@@ -455,14 +456,153 @@ data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
         ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
         ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')]
 
-with sqlite3.connect('sw_inventory3.db') as con:
 
-    con.execute("create table switch (mac text primary key, hostname text, model text, location text)")
+con = sqlite3.connect('sw_inventory3.db')
+con.execute("create table switch (mac text primary key, hostname text, model text, location text)")
 
-    query = "INSERT into switch values (?, ?, ?, ?)"
-    con.executemany(query, data)
+try:
+    with con:
+        query = "INSERT into switch values (?, ?, ?, ?)"
+        con.executemany(query, data)
+except sqlite3.IntegrityError as e:
+    print "Error occured: ", e
 
-    for row in con.execute("select * from switch"):
-        print row
+for row in con.execute("select * from switch"):
+    print row
 ```
+
+Обратите внимание, что хотя транзакция будет откатываться, при возникновении исключения, само исключение всё равно надо перехватывать. 
+
+Для проверки этого функционала, попробуем записать в таблицу данные, в которых MAC-адрес повторяется (файл create_sw_inventory_ver3.py):
+```python
+# -*- coding: utf-8 -*-
+import sqlite3
+
+data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
+        ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str'),
+        ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
+        ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')]
+
+con = sqlite3.connect('sw_inventory3.db')
+con.execute("create table switch (mac text primary key, hostname text, model text, location text)")
+
+try:
+    with con:
+        query = "INSERT into switch values (?, ?, ?, ?)"
+        con.executemany(query, data)
+except sqlite3.IntegrityError as e:
+    print "Error occured: ", e
+
+for row in con.execute("select * from switch"):
+    print row
+
+print '-'*30
+
+#MAC-адрес sw7 совпадает с MAC-адресом существующего коммутатора - sw3
+data2 = [('0055.AAAA.CCCC', 'sw5', 'Cisco 3750', 'London, Green Str'),
+         ('0066.BBBB.CCCC', 'sw6', 'Cisco 3780', 'London, Green Str'),
+         ('0000.AAAA.DDDD', 'sw7', 'Cisco 2960', 'London, Green Str'),
+         ('0088.AAAA.CCCC', 'sw8', 'Cisco 3750', 'London, Green Str')]
+
+try:
+    with con:
+        query = "INSERT into switch values (?, ?, ?, ?)"
+        con.executemany(query, data2)
+except sqlite3.IntegrityError as e:
+    print "Error occured: ", e
+
+for row in con.execute("select * from switch"):
+    print row
+```
+
+Первая часть скрипта осталась неизменной.
+После, аналогичным образом записываются данные, но в списке data2 у коммутатора sw7 MAC-адрес совпадает с уже существующим коммутатором sw3.
+
+Результат выполнения скрипта:
+```
+$ python create_sw_inventory_ver3.py
+(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
+(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
+------------------------------
+Error occured:  UNIQUE constraint failed: switch.mac
+(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
+(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
+```
+
+Обратите внимание, что содержимое таблицы switch до и после второго добавления информации - одинаково.
+Это значит, что не записалась ни одна строка из списка data2.
+
+Так получилось из-за того, что используется метод executemany и
+в пределах одной транзакции мы пытаемся записать все 4 строки.
+Если возникает ошибка с одной из них - откатываются все изменения.
+
+Иногда, это именно то поведение, которое нужно.
+Если же надо чтобы игнорировались только строки с ошибками, надо использовать метод execute и записывать каждую строку отдельно.
+
+Файл create_sw_inventory_ver4.py:
+```python
+# -*- coding: utf-8 -*-
+import sqlite3
+
+data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
+        ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str'),
+        ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
+        ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')]
+
+con = sqlite3.connect('sw_inventory3.db')
+con.execute("create table switch (mac text primary key, hostname text, model text, location text)")
+
+try:
+    with con:
+        query = "INSERT into switch values (?, ?, ?, ?)"
+        con.executemany(query, data)
+except sqlite3.IntegrityError as e:
+    print "Error occured: ", e
+
+for row in con.execute("select * from switch"):
+    print row
+
+print '-'*30
+
+#MAC-адрес sw7 совпадает с MAC-адресом существующего коммутатора - sw3
+data2 = [('0055.AAAA.CCCC', 'sw5', 'Cisco 3750', 'London, Green Str'),
+         ('0066.BBBB.CCCC', 'sw6', 'Cisco 3780', 'London, Green Str'),
+         ('0000.AAAA.DDDD', 'sw7', 'Cisco 2960', 'London, Green Str'),
+         ('0088.AAAA.CCCC', 'sw8', 'Cisco 3750', 'London, Green Str')]
+
+for row in data2:
+    try:
+        with con:
+            query = "INSERT into switch values (?, ?, ?, ?)"
+            con.execute(query, row)
+    except sqlite3.IntegrityError as e:
+        print "Error occured: ", e
+
+for row in con.execute("select * from switch"):
+    print row
+```
+
+Теперь результат выполнения будет таким (пропущен только sw7):
+```
+$ python create_sw_inventory_ver4.py
+(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
+(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
+------------------------------
+Error occured:  UNIQUE constraint failed: switch.mac
+(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
+(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
+(u'0055.AAAA.CCCC', u'sw5', u'Cisco 3750', u'London, Green Str')
+(u'0066.BBBB.CCCC', u'sw6', u'Cisco 3780', u'London, Green Str')
+(u'0088.AAAA.CCCC', u'sw8', u'Cisco 3750', u'London, Green Str')
+```
+
+Блок с менеджером контекста повторяется, поэтому конечно же можно сделать функцию, в которой будет находиться подобный блок кода.
 
