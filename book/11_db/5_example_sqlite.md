@@ -121,24 +121,6 @@ with sqlite3.connect('dhcp_snooping.db') as conn:
  * строка query описывает запрос. Но, вместо значений указываются знаки вопроса. Такой вариант записи запроса, позволяет динамически подставлять значение полей
  * затем методу execute передается строка запроса и кортеж row, где находятся значения
 
-
-
-> Эту часть в скрипте
-```python
-    for val in result:
-        query = """insert into dhcp (mac, ip, vlan, interface)
-        values (?, ?, ?, ?)""" 
-        conn.execute(query, val)
-```
-можно было бы заменить таким образом:
-```python
-    query = """insert into dhcp (mac, ip, vlan, interface) values (?, ?, ?, ?)"""
-    conn.executemany(query, result)
-```
-
-> Метод executemany сам загружает данные, перебирая их внутри самой библиотеки sqlite3.
-Такой вариант не всегда хорош, так как, в случае возникновении проблемы, не запишутся все записи.
-
 Выполняем скрипт:
 ```
 $ python create_sqlite_ver2.py
@@ -191,14 +173,15 @@ with sqlite3.connect(db_filename) as conn:
             schema = f.read()
         conn.executescript(schema)
         print 'Done'
-
-        print 'Inserting DHCP Snooping data'
-        for val in result:
-            query = """insert into dhcp (mac, ip, vlan, interface)
-            values (?, ?, ?, ?)"""
-            conn.execute(query, val)
     else:
         print 'Database exists, assume dhcp table does, too.'
+
+    print 'Inserting DHCP Snooping data'
+    for val in result:
+        query = """insert into dhcp (mac, ip, vlan, interface)
+        values (?, ?, ?, ?)"""
+        conn.execute(query, val)
+
 ```
 
 Теперь есть проверка наличия файла БД, и файл dhcp_snooping.db будет создаваться только в том случае, если его нет.
@@ -241,27 +224,27 @@ keys.remove(key)
 with sqlite3.connect(db_filename) as conn:
     #Позволяет далее обращаться к данным в колонках, по имени колонки
     conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    cursor.execute("select * from dhcp where %s = ?" % key, (value,))
 
     print "\nDetailed information for host(s) with", key, value
     print '-' * 40
-    for row in cursor.fetchall():
+
+    query = "select * from dhcp where {} = ?".format( key )
+    result = conn.execute(query, (value,))
+
+    for row in result:
         for k in keys:
-            print "%-12s: %s" % (k, row[k])
+            print "{:12}: {}".format(k, row[k])
         print '-' * 40
 ```
 
 Комментарии к скрипту:
 * из аргументов, которые передали скрипту, считываются параметры key, value 
- * из списка keys, удаляется выбранный ключ. Таким образом в списке остаются только те параметры, , которые нужно вывести
+ * из списка keys, удаляется выбранный ключ. Таким образом в списке остаются только те параметры, которые нужно вывести
 * подключаемся к БД
  * ```conn.row_factory = sqlite3.Row``` - позволяет далее обращаться к данным в колонках, по имени колонки
 * из БД выбираются те строки, в которых ключ равен указанному значению
- * ```cursor.execute("select * from dhcp where %s = ?" % key, (value,))```
   * в SQL значения можно подставлять через знак вопроса, но нельзя подставлять имя столбца. Поэтому, имя столбца подставляется через форматирование строк, а значение - штатным средством SQL.
-    * Обратите внимание на ```(value,)``` таким образом передается кортеж с одним элементом
+  * Обратите внимание на ```(value,)``` таким образом передается кортеж с одним элементом
 * Полученная информацию выводится на стандартный поток вывода:
  * перебираем полученные результаты и выводим только те поля, названия которых находятся в списке keys
 
@@ -295,9 +278,53 @@ interface   : FastEthernet0/3
 ----------------------------------------
 ```
 
+Вторая версия скрипта для получения данных, с небольшими улучшениями:
+* Вместо форматирования строк, используется словарь, в котором описаны запросы, соответствующие каждому ключу.
+* Выполняется проверка ключа, который был выбран
+* Для получения заголовков всех столбцов, который соответствуют запросу, используется метод description
+
+Файл get_data_ver2.py:
+```python
+# -*- coding: utf-8 -*-
+import sqlite3
+import sys
+
+db_filename = 'dhcp_snooping.db'
+
+query_dict = {'vlan': "select * from dhcp where vlan = ?",
+              'mac': "select * from dhcp where mac = ?",
+              'ip': "select * from dhcp where ip = ?",
+              'interface': "select * from dhcp where interface = ?"}
+
+
+key, value = sys.argv[1:]
+keys = query_dict.keys()
+
+if not key in keys:
+    print "Enter key from {}".format(','.join(keys))
+else:
+
+    with sqlite3.connect(db_filename) as conn:
+        conn.row_factory = sqlite3.Row
+
+        print "\nDetailed information for host(s) with", key, value
+        print '-' * 40
+
+        query = query_dict[key]
+        result = conn.execute(query, (value,))
+        # метод description позволяет получить заголовки полученных столбцов.
+        # В нем будут находиться только те столбцы, который соответствуют запросу.
+        all_rows = [r[0] for r in result.description]
+
+        for row in result:
+            for row_name in all_rows:
+                print "{:12}: {}".format(row_name, row[row_name])
+            print '-' * 40
+```
+
+
 В этом скрипте есть несколько недостатков:
 * не проверяется количество аргументов, которые передаются скрипту
-* не проверяется правильность аргументов
 * хотелось бы собирать информацию с разных коммутаторов. А для этого надо добавить поле, которое указывает на каком коммутаторе была найдена запись
 
 
