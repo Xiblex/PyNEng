@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 '''
-Это копия примера из раздела
+Это копия скрипта get_data_ver1.py из раздела
 '''
 
 import sqlite3
@@ -17,13 +17,14 @@ keys.remove(key)
 with sqlite3.connect(db_filename) as conn:
     #Позволяет далее обращаться к данным в колонках, по имени колонки
     conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    cursor.execute("select * from dhcp where %s = ?" % key, (value,))
 
     print "\nDetailed information for host(s) with", key, value
     print '-' * 40
-    for row in cursor.fetchall():
+
+    query = "select * from dhcp where {} = ?".format( key )
+    result = conn.execute(query, (value,))
+
+    for row in result:
         for k in keys:
-            print "%-12s: %s" % (k, row[k])
+            print "{:12}: {}".format(k, row[k])
         print '-' * 40
