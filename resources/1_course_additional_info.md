@@ -26,6 +26,10 @@
 Сайт для проверки регулярных выражений:
 * [regex101](https://regex101.com/)
 
+### Базы данных
+
+Более подробное описание возможностей SQLite:
+* [SQLite tutorial](http://www.sqlitetutorial.net/)
 
 ### Telnet, SSH
 

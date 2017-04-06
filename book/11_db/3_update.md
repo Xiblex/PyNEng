@@ -22,3 +22,13 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 0000.BBBB.CCCC  sw5         Cisco 3850  London, Green Str  10.255.0.5  255         MNGMT      
 ```
 
+Обновление нескольких полей:
+```
+sqlite> UPDATE switch set mac = '0000.EEEE.EEEE', model = 'Cisco 3750' where hostname = 'sw1';
+
+sqlite> select * from switch;
+mac             hostname    model       location           mngmt_ip    mngmt_vid   mngmt_vname
+--------------  ----------  ----------  -----------------  ----------  ----------  -----------
+0000.EEEE.EEEE  sw1         Cisco 3750  London, Green Str  10.255.0.1  255         MNGMT
+0000.BBBB.CCCC  sw5         Cisco 3850  London, Green Str  10.255.0.5  255         MNGMT
+```
