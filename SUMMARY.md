@@ -96,6 +96,7 @@
         * [WHERE](book/11_db/3_where.md)
         * [ALTER](book/11_db/3_alter.md)
         * [UPDATE](book/11_db/3_update.md)
+        * [REPLACE](book/11_db/3_replace.md)
         * [DELETE](book/11_db/3_delete.md)
         * [ORDER BY](book/11_db/3_order_by.md)
     * [Модуль sqlite3](book/11_db/4_sqlite3.md)
