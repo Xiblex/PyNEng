@@ -502,6 +502,167 @@ Network    Mask      Distance    Metric  NextHop
 10.5.35.0  /24            110        20  ['10.0.13.3']
 ```
 
+### show etherchannel summary
+
+TextFSM удобно использовать для разбора вывода, который отображается столбцами или для обработки вывода, который находится в разных строках.
+Менее удобными получаются шаблоны, когда надо получить несколько однотипных элементов из одной строки.
+
+Пример вывода команды show etherchannel summary (файл output/sh_etherchannel_summary.txt):
+```
+sw1# sh etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 2
+Number of aggregators:           2
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SU)         LACP      Fa0/1(P)   Fa0/2(P)   Fa0/3(P)
+3      Po3(SU)          -        Fa0/11(P)   Fa0/12(P)   Fa0/13(P)   Fa0/14(P)
+```
+
+В данном случае, нужно получить имя и номер port-channel и список всех портов в нем.
+Сложность тут в том, что порты находятся в одной строке - в TextFSM нельзя указывать одну и ту же переменную несколько раз в одной и той же строке
+
+Первая версия шаблона выглядит так:
+```
+Value CHANNEL (\S+)
+Value List MEMBERS (\w+\d+\/\d+)
+
+Start
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +${MEMBERS}\( -> Record
+```
+
+В шаблоне две переменные:
+* CHANNEL - имя и номер агрегированного порта
+* MEMBERS - список портов, которые входят в агрегированный порт. Для этой переменной указан тип - List
+
+Результат получился такой:
+```
+CHANNEL    MEMBERS
+---------  ----------
+Po1        ['Fa0/1']
+Po3        ['Fa0/11']
+```
+
+В вывод попал только первый порт.
+А нужно чтобы попали все порты.
+В данном случае, надо продолжить обработку строки после совпадения.
+То есть, использовать действие Continue и описать следующее выражение.
+
+Единственная строка, которая есть в шаблоне, описывает первый порт.
+Надо добавить строку, которая описывает следующий порт.
+
+Следующая версия шаблона:
+```
+Value CHANNEL (\S+)
+Value List MEMBERS (\w+\d+\/\d+)
+
+Start
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +\S+ +${MEMBERS}\( -> Record
+```
+
+Вторая строка описывает такое же выражение, но переменная MEMBERS смещается на следующий порт.
+
+Результат:
+```
+CHANNEL    MEMBERS
+---------  --------------------
+Po1        ['Fa0/1', 'Fa0/2']
+Po3        ['Fa0/11', 'Fa0/12']
+```
+
+Аналогично надо дописать в шаблон строки, которые описывают третий и четвертый порт.
+Но, так как в выводе может быть переменное количество портов, надо перенести правило Record на отдельную строку, чтобы оно не было привязано к конкретному количеству портов в строке.
+
+Итоговый шаблон (файл templates/sh_etherchannel_summary.txt):
+```
+Value CHANNEL (\S+)
+Value List MEMBERS (\w+\d+\/\d+)
+
+Start
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +\S+ +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +(\S+ +){2} +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +(\S+ +){3} +${MEMBERS}\( -> Continue
+```
+
+Результат обработки:
+```
+CHANNEL    MEMBERS
+---------  ----------------------------------------
+Po1        ['Fa0/1', 'Fa0/2', 'Fa0/3']
+Po3        ['Fa0/11', 'Fa0/12', 'Fa0/13', 'Fa0/14']
+```
+
+Теперь все порты попали в вывод.
+
+> Шаблон предполагает, что в одной строке будет максимум четыре порта. Если портов может быть больше, надо добавить соответствующие строки в шаблон.
+
+Возможен ещё один вариант вывода команды sh etherchannel summary (файл output/sh_etherchannel_summary2.txt):
+```
+sw1# sh etherchannel summary
+Flags:  D - down        P - bundled in port-channel
+        I - stand-alone s - suspended
+        H - Hot-standby (LACP only)
+        R - Layer3      S - Layer2
+        U - in use      f - failed to allocate aggregator
+
+        M - not in use, minimum links not met
+        u - unsuitable for bundling
+        w - waiting to be aggregated
+        d - default port
+
+
+Number of channel-groups in use: 2
+Number of aggregators:           2
+
+Group  Port-channel  Protocol    Ports
+------+-------------+-----------+-----------------------------------------------
+1      Po1(SU)         LACP      Fa0/1(P)   Fa0/2(P)   Fa0/3(P)
+3      Po3(SU)          -        Fa0/11(P)   Fa0/12(P)   Fa0/13(P)   Fa0/14(P)
+                                 Fa0/15(P)   Fa0/16(P)
+```
+
+В таком выводе появляется новый вариант строки - строки, в которых находятся только порты.
+
+Для того чтобы шаблон обрабатывал и этот вариант, надо его модифицировать (файл templates/sh_etherchannel_summary2.txt):
+```
+Value CHANNEL (\S+)
+Value List MEMBERS (\w+\d+\/\d+)
+
+Start
+  ^\d+.* -> Continue.Record
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +\S+ +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +(\S+ +){2} +${MEMBERS}\( -> Continue
+  ^\d+ +${CHANNEL}\(\S+ +[\w-]+ +[\w ]+ +(\S+ +){3} +${MEMBERS}\( -> Continue
+  ^ +${MEMBERS} -> Continue
+  ^ +\S+ +${MEMBERS} -> Continue
+  ^ +(\S+ +){2} +${MEMBERS} -> Continue
+  ^ +(\S+ +){3} +${MEMBERS} -> Continue
+```
+
+Результат будет таким:
+```
+CHANNEL    MEMBERS
+---------  ------------------------------------------------------------
+Po1        ['Fa0/1', 'Fa0/2', 'Fa0/3']
+Po3        ['Fa0/11', 'Fa0/12', 'Fa0/13', 'Fa0/14', 'Fa0/15', 'Fa0/16']
+```
+
+
+
 На этом мы заканчиваем разбираться с шаблонами TextFSM.
 
 Примеры шаблонов для Cisco и другого оборудования можно посмотреть в проекте [ntc-ansible](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates).
