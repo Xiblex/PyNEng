@@ -109,7 +109,7 @@
     * [Paramiko](book/12_ssh_telnet/3_paramiko.md)
     * [Netmiko](book/12_ssh_telnet/4_netmiko.md)
         * [Возможности netmiko](book/12_ssh_telnet/4a_netmiko_details.md)
-    * [Одновременное поключение к нескольким устройствам](book/12_ssh_telnet/5_simultaneous_connections.md)
+    * [Одновременное подключение к нескольким устройствам](book/12_ssh_telnet/5_simultaneous_connections.md)
         * [Модуль threading](book/12_ssh_telnet/5a_threading.md)
         * [Модуль multiprocessing](book/12_ssh_telnet/5b_multiprocessing.md)
     * [Задания](exercises/12_ssh_telnet/12_exercises.md)
