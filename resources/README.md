@@ -20,6 +20,8 @@
 * [Packet Pushers Show 270: Design & Build 9: Automation With Python And Netmiko](http://packetpushers.net/podcast/podcasts/show-270-design-build-9-automation-python-netmiko/)
 * [PQ Show 99: Netmiko & NAPALM For Network Automation](http://packetpushers.net/podcast/podcasts/pq-show-99-netmiko-napalm-network-automation/)
 * [Network automation tools with Jason Edelman on Sofware Gone Wild](http://blog.ipspace.net/2014/10/network-automation-tools-with-jason.html)
+* [Packet Pushers Show 332: Don’t Believe The Programming Hype](http://packetpushers.net/podcast/podcasts/show-332-dont-believe-programming-hype/) - отличный подкаст об автоматизации, программировании, скриптинге и как всё это относится к сетевым инженерам.
+* [Packet Pushers Show 333: Automation & Orchestration In Networking](http://packetpushers.net/podcast/podcasts/show-333-orchestration-vs-automation/)
 
 
 ## Блоги (python + network)
@@ -38,7 +40,7 @@
 
 Бесплатные курсы:
 * [Бесплатный email курс от Kirk Byers](https://pynet.twb-tech.com/email-signup.html)
-* [Курсы на Cisco DevNet (бесплатные)](https://learninglabs.cisco.com/)
+* [Курсы на Cisco DevNet](https://learninglabs.cisco.com/)
 
 Платные курсы
 * [Python for Network Engineers (курс от Kirk Byers)](https://pynet.twb-tech.com/class.html)
@@ -48,3 +50,5 @@
 * [Python Programming For Network Engineers (Udemy)](https://www.udemy.com/python-programming-for-network-engineers/)
 * [Python Network Programming - Part 1: Build 7 Python Apps (GNS3 Academy)](http://academy.gns3.com/p/python-programming-for-real-life-networking-use)
 * [Network Automation using Python for Engineers (ehacking academy)](http://academy.ehacking.net/p/network-automation-python-engineers)
+* [Network automation webinars (Ivan Pepelnjak)](http://www.ipspace.net/Roadmap/Network_Automation_webinars)
+

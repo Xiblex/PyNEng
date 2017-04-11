@@ -171,6 +171,8 @@
         * [Функция map](book/16_additional_info/useful_functions/map.md)
         * [Функция filter](book/16_additional_info/useful_functions/filter.md)
         * [Функции any и all](book/16_additional_info/useful_functions/all_any.md)
+    * [Соглашение об именах](book/16_additional_info/naming_conventions/README.md)
+        * [Подчеркивание в именах](book/16_additional_info/naming_conventions/underscore_names.md)
 * [Полезные ссылки](resources/README.md)
     * [Материалы по темам курса](resources/1_course_additional_info.md)
     * [Продолжение обучения](resources/2_next_steps.md)
