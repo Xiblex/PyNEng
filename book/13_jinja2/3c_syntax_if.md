@@ -29,9 +29,9 @@ vlan {{ vlan }}
 router ospf 1
  router-id 10.0.0.{{ id }}
  auto-cost reference-bandwidth 10000
-{% for networks in ospf %}
+ {% for networks in ospf %}
  network {{ networks.network }} area {{ networks.area }}
-{% endfor %}
+ {% endfor %}
 {% endif %}
 ```
 
@@ -115,13 +115,13 @@ router ospf 1
 ```
 {% for intf, params in trunks.iteritems() %}
 interface {{ intf }}
-{% if params.action == 'add' %}
+ {% if params.action == 'add' %}
  switchport trunk allowed vlan add {{ params.vlans }}
-{% elif params.action == 'delete' %}
-  switchport trunk allowed vlan remove {{ params.vlans }}
-{% else %}
-  switchport trunk allowed vlan {{ params.vlans }}
-{% endif %}
+ {% elif params.action == 'delete' %}
+ switchport trunk allowed vlan remove {{ params.vlans }}
+ {% else %}
+ switchport trunk allowed vlan {{ params.vlans }}
+ {% endif %}
 {% endfor %}
 ```
 
@@ -145,13 +145,13 @@ trunks:
 ```
 {% for intf in trunks %}
 interface {{ intf }}
-{% if trunks[intf]['action'] == 'add' %}
+ {% if trunks[intf]['action'] == 'add' %}
  switchport trunk allowed vlan add {{ trunks[intf]['vlans'] }}
-{% elif trunks[intf]['action'] == 'delete' %}
-  switchport trunk allowed vlan remove {{ trunks[intf]['vlans'] }}
-{% else %}
-  switchport trunk allowed vlan {{ trunks[intf]['vlans'] }}
-{% endif %}
+ {% elif trunks[intf]['action'] == 'delete' %}
+ switchport trunk allowed vlan remove {{ trunks[intf]['vlans'] }}
+ {% else %}
+ switchport trunk allowed vlan {{ trunks[intf]['vlans'] }}
+ {% endif %}
 {% endfor %}
 ```
 
@@ -161,9 +161,9 @@ $ python cfg_gen.py templates/if_vlans.txt data_files/if_vlans.yml
 interface Fa0/1
  switchport trunk allowed vlan add 10,20
 interface Fa0/3
-  switchport trunk allowed vlan remove 10
+ switchport trunk allowed vlan remove 10
 interface Fa0/2
-  switchport trunk allowed vlan 10,30
+ switchport trunk allowed vlan 10,30
 ```
 
 

@@ -60,24 +60,24 @@ router ospf 1
 Шаблон templates/test_iterable.txt (сделаны отступы, чтобы былы понятней ответвления):
 ```
 {% for intf, params in trunks | dictsort %}
-  interface {{ intf }}
-  {% if params.vlans is iterable %}
-    {% if params.action == 'add' %}
-      switchport trunk allowed vlan add {{ params.vlans | join(',') }}
-    {% elif params.action == 'delete' %}
-      switchport trunk allowed vlan remove {{ params.vlans | join(',') }}
-    {% else %}
-      switchport trunk allowed vlan {{ params.vlans | join(',') }}
-    {% endif %}
-  {% else %}
-    {% if params.action == 'add' %}
-      switchport trunk allowed vlan add {{ params.vlans }}
-    {% elif params.action == 'delete' %}
-      switchport trunk allowed vlan remove {{ params.vlans }}
-    {% else %}
-      switchport trunk allowed vlan {{ params.vlans }}
-    {% endif %}
-  {% endif %}
+interface {{ intf }}
+ {% if params.vlans is iterable %}
+   {% if params.action == 'add' %}
+ switchport trunk allowed vlan add {{ params.vlans | join(',') }}
+   {% elif params.action == 'delete' %}
+ switchport trunk allowed vlan remove {{ params.vlans | join(',') }}
+   {% else %}
+ switchport trunk allowed vlan {{ params.vlans | join(',') }}
+   {% endif %}
+ {% else %}
+   {% if params.action == 'add' %}
+ switchport trunk allowed vlan add {{ params.vlans }}
+   {% elif params.action == 'delete' %}
+ switchport trunk allowed vlan remove {{ params.vlans }}
+   {% else %}
+ switchport trunk allowed vlan {{ params.vlans }}
+   {% endif %}
+ {% endif %}
 {% endfor %}
 ```
 
@@ -107,12 +107,12 @@ trunks:
 Результат выполнения:
 ```
 $ python cfg_gen.py templates/test_iterable.txt data_files/test_iterable.yml
-  interface Fa0/1
-            switchport trunk allowed vlan add 10,20
-        interface Fa0/2
-            switchport trunk allowed vlan 10,30
-        interface Fa0/3
-            switchport trunk allowed vlan remove 10
+interface Fa0/1
+ switchport trunk allowed vlan add 10,20
+interface Fa0/2
+ switchport trunk allowed vlan 10,30
+interface Fa0/3
+ switchport trunk allowed vlan remove 10
 ```
 
 > Такие отступы получились из-за того, что в шаблоне используются отступы, но не установлено lstrip_blocks=True (он удалет пробелы и табы в начале строки).

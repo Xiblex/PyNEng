@@ -24,9 +24,9 @@ Jinja поддерживает большое количество встрое�
 ```
 router ospf 1
  auto-cost reference-bandwidth {{ ref_bw | default(10000) }}
-{% for networks in ospf %}
+ {% for networks in ospf %}
  network {{ networks.network }} area {{ networks.area }}
-{% endfor %}
+ {% endfor %}
 ```
 
 Если переменная ref_bw определена в словаре, будет подставлено её значение.
@@ -117,13 +117,13 @@ dictsort(value, case_sensitive=False, by='key')
 ```
 {% for intf, params in trunks | dictsort %}
 interface {{ intf }}
-{% if params.action == 'add' %}
-  switchport trunk allowed vlan add {{ params.vlans }}
-{% elif params.action == 'delete' %}
-  switchport trunk allowed vlan remove {{ params.vlans }}
-{% else %}
-  switchport trunk allowed vlan {{ params.vlans }}
-{% endif %}
+ {% if params.action == 'add' %}
+ switchport trunk allowed vlan add {{ params.vlans }}
+ {% elif params.action == 'delete' %}
+ switchport trunk allowed vlan remove {{ params.vlans }}
+ {% else %}
+ switchport trunk allowed vlan {{ params.vlans }}
+ {% endif %}
 {% endfor %}
 ```
 
@@ -147,11 +147,11 @@ trunks:
 ```
 $ python cfg_gen.py templates/filter_dictsort.txt data_files/filter_dictsort.yml
 interface Fa0/1
-  switchport trunk allowed vlan add 10,20
+ switchport trunk allowed vlan add 10,20
 interface Fa0/2
-  switchport trunk allowed vlan 10,30
+ switchport trunk allowed vlan 10,30
 interface Fa0/3
-  switchport trunk allowed vlan remove 10
+ switchport trunk allowed vlan remove 10
 ```
 
 
@@ -165,13 +165,13 @@ interface Fa0/3
 ```
 {% for intf, params in trunks | dictsort %}
 interface {{ intf }}
-{% if params.action == 'add' %}
-  switchport trunk allowed vlan add {{ params.vlans | join(',') }}
-{% elif params.action == 'delete' %}
-  switchport trunk allowed vlan remove {{ params.vlans | join(',') }}
-{% else %}
-  switchport trunk allowed vlan {{ params.vlans | join(',') }}
-{% endif %}
+ {% if params.action == 'add' %}
+ switchport trunk allowed vlan add {{ params.vlans | join(',') }}
+ {% elif params.action == 'delete' %}
+ switchport trunk allowed vlan remove {{ params.vlans | join(',') }}
+ {% else %}
+ switchport trunk allowed vlan {{ params.vlans | join(',') }}
+ {% endif %}
 {% endfor %}
 ```
 
@@ -198,11 +198,10 @@ trunks:
 ```
 $ python cfg_gen.py templates/filter_join.txt data_files/filter_join.yml
 interface Fa0/1
-  switchport trunk allowed vlan add 10,20
+ switchport trunk allowed vlan add 10,20
 interface Fa0/2
-  switchport trunk allowed vlan 10,30
+ switchport trunk allowed vlan 10,30
 interface Fa0/3
-  switchport trunk allowed vlan remove 10
-
+ switchport trunk allowed vlan remove 10
 ```
 {% endraw %}

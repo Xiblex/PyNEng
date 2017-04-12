@@ -11,34 +11,34 @@
 Пример шаблона templates/set.txt, в котором выражение set используется чтобы задать более короткие имена параметрам:
 ```
 {% for intf, params in trunks | dictsort %}
-  {% set vlans = params.vlans %}
-  {% set action = params.action %}
+ {% set vlans = params.vlans %}
+ {% set action = params.action %}
 
-  interface {{ intf }}
-  {% if vlans is iterable %}
-    {% if action == 'add' %}
-      switchport trunk allowed vlan add {{ vlans | join(',') }}
-    {% elif action == 'delete' %}
-      switchport trunk allowed vlan remove {{ vlans | join(',') }}
-    {% else %}
-      switchport trunk allowed vlan {{ vlans | join(',') }}
-    {% endif %}
+interface {{ intf }}
+ {% if vlans is iterable %}
+  {% if action == 'add' %}
+ switchport trunk allowed vlan add {{ vlans | join(',') }}
+  {% elif action == 'delete' %}
+ switchport trunk allowed vlan remove {{ vlans | join(',') }}
   {% else %}
-    {% if action == 'add' %}
-      switchport trunk allowed vlan add {{ vlans }}
-    {% elif action == 'delete' %}
-      switchport trunk allowed vlan remove {{ vlans }}
-    {% else %}
-      switchport trunk allowed vlan {{ vlans }}
-    {% endif %}
+ switchport trunk allowed vlan {{ vlans | join(',') }}
   {% endif %}
+ {% else %}
+  {% if action == 'add' %}
+ switchport trunk allowed vlan add {{ vlans }}
+  {% elif action == 'delete' %}
+ switchport trunk allowed vlan remove {{ vlans }}
+  {% else %}
+ switchport trunk allowed vlan {{ vlans }}
+  {% endif %}
+ {% endif %}
 {% endfor %}
 ```
 
 Обратите внимание на вторую и третюю строки:
 ```
-  {% set vlans = params.vlans %}
-  {% set action = params.action %}
+ {% set vlans = params.vlans %}
+ {% set action = params.action %}
 ```
 
 Таким образом созданы новые переменные и дальше используются уже эти новые значения.
@@ -67,14 +67,14 @@ trunks:
 ```
 $ python cfg_gen.py templates/set.txt data_files/set.yml
 
-  interface Fa0/1
-            switchport trunk allowed vlan add 10,20
+interface Fa0/1
+ switchport trunk allowed vlan add 10,20
 
-  interface Fa0/2
-            switchport trunk allowed vlan 10,30
+interface Fa0/2
+ switchport trunk allowed vlan 10,30
 
-  interface Fa0/3
-            switchport trunk allowed vlan remove 10
+interface Fa0/3
+ switchport trunk allowed vlan remove 10
 
 ```
 

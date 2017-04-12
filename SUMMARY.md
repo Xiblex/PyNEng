@@ -117,6 +117,7 @@
     * [Пример использования Jinja](book/13_jinja2/1_example.md)
     * [Пример использования Jinja с корректным использованием программного интерфейса](book/13_jinja2/2_example.md)
     * [Синтаксис шаблонов Jinja2](book/13_jinja2/3_template_syntax.md)
+        * [Контроль символов whitespace](book/13_jinja2/3_whitespace_control.md)
         * [Переменные](book/13_jinja2/3a_syntax_variables.md)
         * [for](book/13_jinja2/3b_syntax_for.md)
         * [if/elif/else](book/13_jinja2/3c_syntax_if.md)

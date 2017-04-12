@@ -117,9 +117,9 @@ router ospf 1
 ```
 {% block ospf %}
 {{ super() }}
-{% for networks in ospf %}
+ {% for networks in ospf %}
  network {{ networks.network }} area {{ networks.area }}
-{% endfor %}
+ {% endfor %}
 {% endblock %}
 ```
 

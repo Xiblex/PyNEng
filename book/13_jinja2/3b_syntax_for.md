@@ -26,9 +26,9 @@ vlan {{ vlan }}
 router ospf 1
  router-id 10.0.0.{{ id }}
  auto-cost reference-bandwidth 10000
-{% for networks in ospf %}
+ {% for networks in ospf %}
  network {{ networks.network }} area {{ networks.area }}
-{% endfor %}
+ {% endfor %}
 ```
 
 Файл data_files/for.yml с переменными:
