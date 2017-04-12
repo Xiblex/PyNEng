@@ -57,7 +57,7 @@ router ospf 1
 
 Благодаря таким проверкам, можно делать ответвления в шаблоне, которые будут учитывать тип переменной.
 
-Шаблон templates/test_iterable.txt (сделаны отступы, чтобы былы понятней ответвления):
+Шаблон templates/test_iterable.txt (сделаны отступы, чтобы были понятней ответвления):
 ```
 {% for intf, params in trunks | dictsort %}
 interface {{ intf }}

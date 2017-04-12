@@ -15,7 +15,12 @@ router bgp {{ bgp.local_as }}
  {% endfor %}
 ```
 
-Если скрипт cfg_gen.py запускается без флагов trim_blocks, lstrip_blocks, вывод будет таким:
+Если скрипт cfg_gen.py запускается без флагов trim_blocks, lstrip_blocks:
+```
+env = Environment(loader = FileSystemLoader(TEMPLATE_DIR))
+```
+
+Вывод будет таким:
 ```
 $ python cfg_gen.py templates/env_flags.txt data_files/router.yml
 router bgp 100
@@ -56,7 +61,7 @@ router bgp 100
 Но это не влияет на следующие строки.
 Поэтому строки с ```neighbor ... update-source``` отображаются с одним пробелом.
 
-Параметр ```lstrip_blocks``` контролирует то, будут ли удаляться пробелы и табы от начала строки до начала блока.
+Параметр ```lstrip_blocks``` контролирует то, будут ли удаляться пробелы и табы от начала строки до начала блока (до открывающейся фигурной скобки).
 
 Если добавить аргумент ```lstrip_blocks=True``` таким образом:
 ```
@@ -224,7 +229,7 @@ router bgp 100
  neighbor 10.0.0.3 update-source lo100
 ```
 
-Попробуйте добавить минус в выражений описывающих блок и посмотреть на результат:
+Попробуйте добавить минус в конце выражений описывающих блок и посмотреть на результат:
 ```
 router bgp {{ bgp.local_as }}
  {% for ibgp in bgp.ibgp_neighbors %}

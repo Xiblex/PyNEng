@@ -53,5 +53,7 @@ print template.render( vars_dict )
 $ python cfg_gen.py templates/variables.txt data_files/vars.yml
 ```
 
+> Параметры trim_blocks и lstrip_blocks описываны в следующем подразделе.
+
 
 {% endraw %}

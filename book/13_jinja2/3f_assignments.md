@@ -35,7 +35,7 @@ interface {{ intf }}
 {% endfor %}
 ```
 
-Обратите внимание на вторую и третюю строки:
+Обратите внимание на вторую и третью строки:
 ```
  {% set vlans = params.vlans %}
  {% set action = params.action %}
