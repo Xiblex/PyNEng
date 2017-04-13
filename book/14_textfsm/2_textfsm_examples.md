@@ -328,7 +328,7 @@ SW1           R2           10.2.2.2    Cisco 2911            GigabitEthernet1/0/
 
 Шаблон для вывода команды show ip interface brief (файл templates/sh_ip_int_br.template):
 ```
-Value INT (\S+)
+Value INTF (\S+)
 Value ADDR (\S+)
 Value STATUS (up|down|administratively down)
 Value PROTO (up|down)
