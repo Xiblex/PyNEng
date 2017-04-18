@@ -16,7 +16,7 @@ Playbook описываются в формате YAML.
 {% if book.book_name == "ansible_neteng" %}
 > Синтаксис YAML описан в [разделе YAML курса "Python для сетевых инженеров"](https://natenka.gitbooks.io/pyneng/content/book/10_serialization/3_yaml.html) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
 {% else %}
-> Синтаксис YAML описан в [разделе YAML](../10_serialization/3_yaml.md) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
+> Синтаксис YAML описан в [разделе YAML](../../10_serialization/3_yaml.md) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
 {% endif %}
 
 ### Пример синтаксиса playbook
@@ -78,7 +78,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 
 > **Note** Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, использовалась команда ansible. А для playbook - ansible-playbook.
 
-Для того, чтобы убедится, что команды, которые указаны в задачах, выполнились на устройствах, запустите playbook с опцией -v (вывод сокращен):
+Для того, чтобы убедиться, что команды, которые указаны в задачах, выполнились на устройствах, запустите playbook с опцией -v (вывод сокращен):
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml -v
 ```
@@ -114,7 +114,7 @@ to retry, use: --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_
 ```
 
 Если, при выполнении playbook, на каком-то устройстве возникла ошибка, Ansible создает специальный файл, который называется точно так же как playbook, но расширение меняется на retry.
-(Если вы выполняете задания параллельно, то этот файл должен появится у вас)
+(Если вы выполняете задания параллельно, то этот файл должен появиться у вас)
 
 В этом файле хранится имя или адрес устройства на котором возникла ошибка.
 Так выглядит файл 1_show_commands_with_raw.retry сейчас:
@@ -142,7 +142,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml --limit @1_show_commands_with_ra
 Параметр --limit очень полезная вещь.
 Он позволяет ограничивать, для каких хостов или групп будет выполняться playbook, при этом, не меняя сам playbook.
 
-Например, таким образом playbook запустить только для маршрутизатора 192.168.100.1:
+Например, таким образом playbook можно запустить только для маршрутизатора 192.168.100.1:
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml --limit 192.168.100.1
 ```
@@ -155,7 +155,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml --limit 192.168.100.1
 
 Но, есть исключения из такого поведения.
 Например, модуль raw всегда вносит изменения.
-Поэтому в выполнении playbook выше, всегда отоброжалось состояние changed.
+Поэтому в выполнении playbook выше, всегда отображалось состояние changed.
 
 Но, если, например, в задаче указано, что на сервер Linux надо установить пакет httpd, то он будет установлен только в том случае, если его нет.
 То есть, действие не будет повторяться снова и снова, при каждом запуске.

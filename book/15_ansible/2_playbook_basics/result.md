@@ -35,11 +35,11 @@ ansible-playbook 1_show_commands_with_raw.yml -vvv
 ### register
 
 Параметр __register__ сохраняет результат выполнения модуля в переменную.
-Затем эта переменная может использоваться в шаблонах, в принятии решений о ходе сценария или для отображении вывода.
+Затем эта переменная может использоваться в шаблонах, в принятии решений о ходе сценария или для отображения вывода.
 
 Попробуем сохранить результат выполнения команды.
 
-В playbook 2_register_vars.yml, с помощью register, вывод команды sh ip int br сохранен в перменную sh_ip_int_br_result:
+В playbook 2_register_vars.yml, с помощью register, вывод команды sh ip int br сохранен в переменную sh_ip_int_br_result:
 ```
 ---
 
@@ -83,9 +83,9 @@ ansible-playbook 1_show_commands_with_raw.yml -vvv
 ```
 
 Обратите внимание, что выводится не всё содержимое переменной sh_ip_int_br_result, а только содержимое stdout_lines.
-В sh_ip_int_br_result.stdout_lines находится список строк, поэтому вывод будут структурированн.
+В sh_ip_int_br_result.stdout_lines находится список строк, поэтому вывод будут структурирован.
 
-Результат запуска playbook будет выглядит так:
+Результат запуска playbook выглядит так:
 ```
 $ ansible-playbook 2_register_vars.yml
 ```

@@ -46,7 +46,7 @@ $ ansible-playbook 1_ios_command.yml
 ![ios_command]({{ book.ansible_img_path }}2_ios_command.png)
 
 {% raw %}
-> В отличии от использования модуля raw, playbook не указывает, что были выполнены изменения.
+> В отличие от использования модуля raw, playbook не указывает, что были выполнены изменения.
 
 
 ### Выполнение нескольких команд
