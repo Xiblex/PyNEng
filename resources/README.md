@@ -40,6 +40,7 @@
 
 Бесплатные курсы:
 * [Бесплатный email курс от Kirk Byers](https://pynet.twb-tech.com/email-signup.html)
+* [Network Programmability and Network Automation using GNS3 and Python](http://academy.gns3.com/p/python-programming-for-network-engineers)
 * [Курсы на Cisco DevNet](https://learninglabs.cisco.com/)
 
 Платные курсы
