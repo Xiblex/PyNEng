@@ -32,7 +32,7 @@ Out[30]: 'Tunnel 0'
 ```python
 In [31]: string1 = string1.upper()
 
-In [32]: print string1
+In [32]: print(string1)
 FASTETHERNET
 ```
 
@@ -101,7 +101,7 @@ Out[46]: 'GigabitEthernet0/1'
 ```python
 In [47]: string1 = '\n\tinterface FastEthernet0/1\n'
 
-In [48]: print string1
+In [48]: print(string1)
 
 	interface FastEthernet0/1
 
@@ -137,12 +137,12 @@ In [53]: string1 = ' switchport trunk allowed vlan 10,20,30,100-200\n'
 
 In [54]: commands = string1.strip().split()
 
-In [55]: print commands
+In [55]: print(commands)
 ['switchport', 'trunk', 'allowed', 'vlan', '10,20,30,100-200']
 
 In [56]: vlans = commands[-1].split(',')
 
-In [57]: print vlans
+In [57]: print(vlans)
 ['10', '20', '30', '100-200']
 ```
 

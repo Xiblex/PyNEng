@@ -54,3 +54,4 @@ Out[18]:
  'model': None,
  'vendor': None}
 ```
+

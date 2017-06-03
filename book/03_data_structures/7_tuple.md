@@ -10,7 +10,7 @@
 ```python
 In [1]: tuple1 = tuple()
 
-In [2]: print tuple1
+In [2]: print(tuple1)
 ()
 ```
 
@@ -45,3 +45,4 @@ TypeError                                 Traceback (most recent call last)
 
 TypeError: 'tuple' object does not support item assignment
 ```
+

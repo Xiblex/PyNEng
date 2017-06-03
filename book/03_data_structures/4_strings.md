@@ -23,7 +23,7 @@ In [11]: tunnel = """
 In [12]: tunnel
 Out[12]: '\ninterface Tunnel0\n ip address 10.10.10.1 255.255.255.0\n ip mtu 1416\n ip ospf hello-interval 5\n tunnel source FastEthernet1/0\n tunnel protection ipsec profile DMVPN\n'
 
-In [13]: print tunnel
+In [13]: print(tunnel)
 
 interface Tunnel0
  ip address 10.10.10.1 255.255.255.0

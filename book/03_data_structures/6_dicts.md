@@ -47,7 +47,7 @@ Out[3]: 'London Str'
 ```python
 In [4]: london['vendor'] = 'Cisco'
 
-In [5]: print london
+In [5]: print(london)
 {'vendor': 'Cisco', 'name': 'London1', 'location': 'London Str'}
 ```
 

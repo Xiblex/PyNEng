@@ -12,7 +12,7 @@ In [1]: vlans = [10, 20, 30, 50]
 ```python
 In [2]: list1 = list('router')
 
-In [3]: print list1
+In [3]: print(list1)
 ['r', 'o', 'u', 't', 'e', 'r']
 ```
 

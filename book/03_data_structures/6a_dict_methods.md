@@ -74,15 +74,48 @@ KeyError: 'IOS'
 ```python
 In [18]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
-In [19]: print london.get('IOS')
+In [19]: print(london.get('IOS'))
 None
 ```
 
 Метод get() позволяет указывать другое значение, вместо ```None```:
 ```python
-In [20]: print london.get('IOS', 'Ooops')
+In [20]: print(london.get('IOS', 'Ooops'))
 Ooops
 ```
+
+####```setdefault()```
+
+Метод __setdefault()__ ищет ключ и, если его нет, вместо ошибки, создает ключ со значением ```None```.
+```python
+In [21]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
+
+In [22]: IOS = london.setdefault('IOS')
+
+In [23]: print(IOS)
+None
+
+In [24]: london
+Out[24]: {'IOS': None, 'location': 'London Str', 'name': 'London1', 'vendor': 'Cisco'}
+```
+
+
+Второй аргумент позволяет указать, какое значение должно соответствовать ключу:
+```python
+In [25]: Model = london.setdefault('Model', 'Cisco3580')
+
+In [26]: print(Model)
+Cisco3580
+
+In [27]: london
+Out[27]:
+{'IOS': None,
+ 'Model': 'Cisco3580',
+ 'location': 'London Str',
+ 'name': 'London1',
+ 'vendor': 'Cisco'}
+```
+
 
 ####```keys(), values(), items()```
 
@@ -91,22 +124,58 @@ Ooops
 In [24]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
 In [25]: london.keys()
-Out[25]: ['vendor', 'name', 'location']
+Out[25]: dict_keys(['name', 'location', 'vendor'])
 
 In [26]: london.values()
-Out[26]: ['Cisco', 'London1', 'London Str']
+Out[26]: dict_values(['London1', 'London Str', 'Cisco'])
 
 In [27]: london.items()
-Out[27]: [('vendor', 'Cisco'), ('name', 'London1'), ('location', 'London Str')]
+Out[27]: dict_items([('name', 'London1'), ('location', 'London Str'), ('vendor', 'Cisco')])
+
+```
+
+Все три метода возвращают специальные объекты view, которые отображают ключи, значения и пары ключ-значение словаря, соответственно.
+
+Очень важная особенность view заключается в том, что они меняются, вместе с изменением словаря. И фактически они лишь дают способ посмотреть на соответствующие объекты, но не создают их копию.
+
+На примере метода keys():
+```python
+In [28]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
+
+In [29]: keys = london.keys()
+
+In [30]: print(keys)
+dict_keys(['name', 'location', 'vendor'])
+```
+
+Сейчас переменной keys соответствует view dict_keys в котором три ключа: name, locationa и vendor.
+
+Но, если мы добавим в словарь еще одну пару ключ-значение, объект keys тоже поменяется:
+
+```python
+In [31]: london['ip'] = '10.1.1.1'
+
+In [32]: keys
+Out[32]: dict_keys(['name', 'location', 'vendor', 'ip'])
+```
+
+Если нужно получить обычный список ключей, который не будет меняться с изменениями словаря, достаточно конвертировать view в список:
+```python
+In [33]: list_keys = list(london.keys())
+
+In [34]: list_keys
+Out[34]: ['name', 'location', 'vendor', 'ip']
+
 ```
 
 ####```del```
 Удалить ключ и значение:
 ```python
-In [28]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
+In [35]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
-In [29]: del(london['name'])
+In [36]: del(london['name'])
 
-In [30]: london
-Out[30]: {'location': 'London Str', 'vendor': 'Cisco'}
+In [37]: london
+Out[37]: {'location': 'London Str', 'vendor': 'Cisco'}
 ```
+
