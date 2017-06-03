@@ -5,9 +5,9 @@
 
 > Ввод от пользователя может понадобиться, например, для того, чтобы ввести пароль.
 
-Для получения информации от пользователя используется функция ```raw_input()```:
+Для получения информации от пользователя используется функция ```input()```:
 ```python
-In [1]: print raw_input('Твой любимый протокол маршрутизации? ')
+In [1]: print(input('Твой любимый протокол маршрутизации? '))
 Твой любимый протокол маршрутизации? OSPF
 OSPF
 ```
@@ -15,57 +15,57 @@ OSPF
 В данном случае, информация просто тут же выводится пользователю, но кроме этого, информация, которую ввел пользователь может быть сохранена в какую-то переменную.
 И может использоваться далее в скрипте.
 ```python
-In [2]: protocol = raw_input('Твой любимый протокол маршрутизации? ')
+In [2]: protocol = input('Твой любимый протокол маршрутизации? ')
 Твой любимый протокол маршрутизации? OSPF
 
-In [3]: print protocol
+In [3]: print(protocol)
 OSPF
 ```
 
 В скобках обычно пишется какой-то вопрос, который уточняет, какую информацию нужно ввести.
 
 Текст в скобках, в принципе, писать не обязательно.
-И можно сделать такой же вывод с помощью оператора __print__:
+И можно сделать такой же вывод с помощью функции __print__:
 ```python
-In [4]: print 'Твой любимый протокол маршрутизации?'
+In [4]: print('Твой любимый протокол маршрутизации?')
 Твой любимый протокол маршрутизации?
 
-In [5]: protocol = raw_input()
+In [5]: protocol = input()
 OSPF
 
-In [6]: print protocol
+In [6]: print(protocol)
 OSPF
 ```
 
-Но, как правило, нагляднее писать текст в самой функции ```raw_print()```.
+Но, как правило, нагляднее писать текст в самой функции ```input()```.
 
-Запрашивание информации из скрипта (файл access_template_raw_input.py):
+Запрашивание информации из скрипта (файл access_template_input.py):
 ```python
 
-interface = raw_input('Enter interface type and number: ')
-vlan = int(raw_input('Enter VLAN number: '))
+interface = input('Enter interface type and number: ')
+vlan = int(input('Enter VLAN number: '))
 
 access_template = ['switchport mode access',
-                   'switchport access vlan %d',
+                   'switchport access vlan {}',
                    'switchport nonegotiate',
                    'spanning-tree portfast',
                    'spanning-tree bpduguard enable']
 
-print '\n' + '-' * 30
-print 'interface %s' % interface
-print '\n'.join(access_template) % vlan
+print('\n' + '-' * 30)
+print('interface {}'.format(interface))
+print('\n'.join(access_template).format(vlan))
 ```
 
 В первых двух строках, запрашивается информация у пользователя.
-Функция ```raw_input()```, как и argv возвращает данные в виде строк.
+Функция ```input()```, как и argv возвращает данные в виде строк.
 Поэтому, параметр vlan преобразуем в число.
 
-Еще появилась строка ```print '\n' + '-' * 30```.
+Еще появилась строка ```print('\n' + '-' * 30)```.
 Она используется просто для того, чтобы отделить запрос информации от вывода.
 
 Выполняем скрипт:
 ```
-$ python access_template_raw_input.py
+$ python access_template_input.py
 Enter interface type and number: Gi0/3
 Enter VLAN number: 55
 
@@ -78,5 +78,4 @@ spanning-tree portfast
 spanning-tree bpduguard enable
 ```
 
-> Разница между функциями ```raw_input()``` и ```input()``` хорошо описана на [stackoverflow](http://stackoverflow.com/questions/4915361/whats-the-difference-between-raw-input-and-input-in-python3-x)
 
