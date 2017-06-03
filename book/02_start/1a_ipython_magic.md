@@ -12,7 +12,7 @@ In [1]: a = 10
 In [2]: b = 5
 
 In [3]: if a > b:
-   ...:     print "A is bigger"
+   ...:     print("A is bigger")
    ...:
 A is bigger
 
@@ -20,7 +20,7 @@ In [4]: %history
 a = 10
 b = 5
 if a > b:
-    print "A is bigger"
+    print("A is bigger")
 %history
 ```
 
@@ -37,9 +37,9 @@ In [1]: a = 10
 In [2]: b = 5
 
 In [3]: if a > b:
-   ...:     print "A is bigger"
+   ...:     print("A is bigger")
    ...: else:
-   ...:     print "A is less or equal"
+   ...:     print("A is less or equal")
    ...:
 A is bigger
 
@@ -47,15 +47,15 @@ In [4]: %hist
 a = 10
 b = 5
 if a > b:
-    print "A is bigger"
+    print("A is bigger")
 else:
-    print "A is less or equal"
+    print("A is less or equal")
 %hist
 
 In [5]: if a > b:
-   ...:         print "A is bigger"
+   ...:         print("A is bigger")
    ...:     else:
-   ...:             print "A is less or equal"
+   ...:             print("A is less or equal")
    ...:
   File "<ipython-input-8-4d18ff094f5c>", line 3
     else:
@@ -74,9 +74,9 @@ __%cpaste__ (после того как все строки скопирован
 In [9]: %cpaste
 Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
 :if a > b:
-:    print "A is bigger"
+:    print("A is bigger")
 :else:
-:    print "A is less or equal"
+:    print("A is less or equal")
 :--
 A is bigger
 ```
@@ -85,9 +85,9 @@ __%paste__ (требует установленного Tkinter):
 ```python
 In [10]: %paste
 if a > b:
-    print "A is bigger"
+    print("A is bigger")
 else:
-    print "A is less or equal"
+    print("A is less or equal")
 
 ## -- End pasted text --
 A is bigger
@@ -144,3 +144,4 @@ _oh              : Output history
 %hist 1/2-8      : Command history containing lines 2-8 of session 1.
 %hist 1/ ~2/     : Command history of session 1 and 2 sessions before current.
 ```
+

@@ -10,13 +10,19 @@ a = 10
 b = 5
 
 if a > b:
-    print "A больше B"
-    print "Тут можно выполнить ещё что-то"
+    print("A больше B")
+    print(a - b)
 else:
-    print "B больше или равно A"
-    print "Продолжаем тут же"
+    print("B больше или равно A")
+    print(b - a)
 
-print "The End"
+print("The End")
+
+def open_file(filename):
+    print("Reading file", filename)
+    with open(filename) as f:
+        return f.read()
+        print("Done")
 ```
 
 > Обратите внимание, что тут код показан для демонстрации синтаксиса. В следующих разделах рассматриваются [типы данных](../book/03_data_structures/) Python и [создание скриптов](../04_basic_scripts/).
