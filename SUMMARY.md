@@ -28,7 +28,6 @@
     * [Словарь \(Dictionary\)](book/03_data_structures/6_dicts.md)
         * [Полезные методы для работы со словарями](book/03_data_structures/6a_dict_methods.md)
         * [Варианты создания словаря](book/03_data_structures/6b_create_dict.md)
-            * [Словарь из двух списков \(advanced\)](book/03_data_structures/6c_create_dict_adv.md)
     * [Кортеж \(Tuple\)](book/03_data_structures/7_tuple.md)
     * [Множество \(Set\)](book/03_data_structures/8_set.md)
         * [Полезные методы для работы с множествами](book/03_data_structures/8a_set_methods.md)
