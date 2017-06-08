@@ -9,7 +9,7 @@
 In [1]: list1 = ['str1', 'str2', 'str3']
 
 In [2]: for position, string in enumerate(list1):
-   ...:     print position, string
+   ...:     print(position, string)
    ...:     
 0 str1
 1 str2
@@ -21,7 +21,7 @@ In [2]: for position, string in enumerate(list1):
 In [1]: list1 = ['str1', 'str2', 'str3']
 
 In [2]: for position, string in enumerate(list1, 100):
-   ...:     print position, string
+   ...:     print(position, string)
    ...:     
 100 str1
 101 str2
@@ -55,7 +55,8 @@ config = sys.argv[1]
 
 with open(config, 'r') as file:
     for (i, command) in enumerate(file, 1):
-        print 'action %04d cli command "%s"' % (i, command.rstrip())
+        print('action {:04} cli command "{}"'.format( i, command.rstrip() ))
+
 ```
 
 В данном примере команды считываются из файла, а затем к каждой строке добавляется приставка, которая нужна для EEM.
@@ -113,7 +114,7 @@ In [1]: list1 = ['en\n',
 Повторяем цикл из файла:
 ```python
 In [2]: for (i, command) in enumerate(list1, 1):
-   ...:     print 'action %04d cli command "%s"' % (i, command.rstrip())
+   ...:     print('action {:04} cli command "{}"'.format(i, command.rstrip()))
    ...:     
 action 0001 cli command "en"
 action 0002 cli command "conf t"

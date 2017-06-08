@@ -9,9 +9,9 @@
 Пример цикла for с else (блок else выполняется после завершения цикла for):
 ```python
 In [1]: for num in range(5):
-   ....:     print num
+   ....:     print(num)
    ....: else:
-   ....:     print "Числа закончились"
+   ....:     print("Числа закончились")
    ....:     
 0
 1
@@ -27,9 +27,9 @@ In [2]: for num in range(5):
    ....:     if num == 3:
    ....:         break
    ....:     else:
-   ....:         print num
+   ....:         print(num)
    ....: else:
-   ....:     print "Числа закончились"
+   ....:     print("Числа закончились")
    ....:     
 0
 1
@@ -42,9 +42,9 @@ In [3]: for num in range(5):
    ....:     if num == 3:
    ....:         continue
    ....:     else:
-   ....:         print num
+   ....:         print(num)
    ....: else:
-   ....:     print "Числа закончились"
+   ....:     print("Числа закончились")
    ....:     
 0
 1
@@ -62,10 +62,10 @@ In [3]: for num in range(5):
 ```python
 In [4]: i = 0
 In [5]: while i < 5:
-   ....:     print i
+   ....:     print(i)
    ....:     i += 1
    ....: else:
-   ....:     print "Конец"
+   ....:     print("Конец")
    ....:     
 0
 1
@@ -83,10 +83,10 @@ In [7]: while i < 5:
    ....:     if i == 3:
    ....:         break
    ....:     else:
-   ....:         print i
+   ....:         print(i)
    ....:         i += 1
    ....: else:
-   ....:     print "Конец"
+   ....:     print("Конец")
    ....:     
 0
 1

@@ -14,12 +14,12 @@
 ```python
 In [1]: a = 9
 
-In [2]: if a == 0:
-   ...:     print 'a равно 0'
+In [2]: if a == 10:
+   ...:     print('a равно 10')
    ...: elif a < 10:
-   ...:     print 'a меньше 10'
+   ...:     print('a меньше 10')
    ...: else:
-   ...:     print 'a больше 10'
+   ...:     print('a больше 10')
    ...:     
 a меньше 10
 ```
@@ -62,7 +62,7 @@ Out[11]: False
 In [12]: list_to_test = [1, 2, 3]
 
 In [13]: if list_to_test:
-   ....:     print "В списке есть объекты"
+   ....:     print("В списке есть объекты")
    ....:
 В списке есть объекты
 ```
@@ -70,7 +70,7 @@ In [13]: if list_to_test:
 Тот же результат можно было бы получить таким образом:
 ```python
 In [14]: if len(list_to_test) != 0:
-   ....:     print "В списке есть объекты"
+   ....:     print("В списке есть объекты")
    ....:
 В списке есть объекты
 ```
@@ -219,14 +219,10 @@ Out[31]: {}
 
 Важная особенность работы оператора ```or``` - операнды, которые находятся после истинного, не вычисляются:
 ```python
-In [32]: def print_str(string):
-   ....:     print string
-   ....:
+In [33]: '' or sorted([44,1,67])
+Out[33]: [1, 44, 67]
 
-In [33]: '' or print_str('test string')
-test string
-
-In [34]: '' or 'string1' or print_str('test string')
+In [34]: '' or 'string1' or sorted([44,1,67])
 Out[34]: 'string1'
 ```
 
@@ -237,15 +233,15 @@ Out[34]: 'string1'
 ```python
 # -*- coding: utf-8 -*-
 
-username = raw_input('Введите имя пользователя: ' )
-password = raw_input('Введите пароль: ' )
+username = input('Введите имя пользователя: ' )
+password = input('Введите пароль: ' )
 
 if len(password) < 8:
-    print 'Пароль слишком короткий'
+    print('Пароль слишком короткий')
 elif username in password:
-    print 'Пароль содержит имя пользователя'
+    print('Пароль содержит имя пользователя')
 else:
-    print 'Пароль для пользователя %s установлен' % username
+    print('Пароль для пользователя {} установлен'.format( username ))
 ```
 
 Проверка скрипта:

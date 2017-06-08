@@ -12,11 +12,11 @@
 ```python
 In [1]: 2/0
 -----------------------------------------------------
-ZeroDivisionError: integer division or modulo by zero
+ZeroDivisionError: division by zero
 
 In [2]: 'test' + 2
 -----------------------------------------------------
-TypeError: cannot concatenate 'str' and 'int' objects
+TypeError: must be str, not int
 ```
 
 В данном случае, возникло два исключения: __ZeroDivisionError__ и __TypeError__.
@@ -35,7 +35,7 @@ Python позволяет работать с исключениями. Их м�
 In [3]: try:
    ...:     2/0
    ...: except ZeroDivisionError:
-   ...:     print "You can't divide by zero"
+   ...:     print("You can't divide by zero")
    ...:     
 You can't divide by zero
 ```
@@ -50,11 +50,11 @@ You can't divide by zero
 Обратите внимание, что строка 'Cool!' в блоке try не выводится:
 ```python
 In [4]: try:
-   ...:     print "Let's divide some numbers"
+   ...:     print("Let's divide some numbers")
    ...:     2/0
-   ...:     print 'Cool!'
+   ...:     print('Cool!')
    ...: except ZeroDivisionError:
-   ...:     print "You can't divide by zero"
+   ...:     print("You can't divide by zero")
    ...:     
 Let's divide some numbers
 You can't divide by zero
@@ -67,13 +67,13 @@ You can't divide by zero
 # -*- coding: utf-8 -*-
 
 try:
-    a = raw_input("Введите первое число: ")
-    b = raw_input("Введите второе число: ")
-    print "Результат: ", int(a)/int(b)
+    a = input("Введите первое число: ")
+    b = input("Введите второе число: ")
+    print("Результат: ", int(a)/int(b))
 except ValueError:
-    print "Пожалуйста, вводите только числа"
+    print("Пожалуйста, вводите только числа")
 except ZeroDivisionError:
-    print "На ноль делить нельзя"
+    print("На ноль делить нельзя")
 ```
 
 Примеры выполнения скрипта:
@@ -103,11 +103,12 @@ $ python divide.py
 # -*- coding: utf-8 -*-
 
 try:
-    a = raw_input("Введите первое число: ")
-    b = raw_input("Введите второе число: ")
-    print "Результат: ", int(a)/int(b)
+    a = input("Введите первое число: ")
+    b = input("Введите второе число: ")
+    print("Результат: ", int(a)/int(b))
 except (ValueError, ZeroDivisionError):
-    print "Что-то пошло не так..."
+    print("Что-то пошло не так...")
+
 ```
 
 Проверка:
@@ -137,13 +138,13 @@ $ python divide_ver2.py
 # -*- coding: utf-8 -*-
 
 try:
-    a = raw_input("Введите первое число: ")
-    b = raw_input("Введите второе число: ")
+    a = input("Введите первое число: ")
+    b = input("Введите второе число: ")
     result = int(a)/int(b)
 except (ValueError, ZeroDivisionError):
-    print "Что-то пошло не так..."
+    print("Что-то пошло не так...")
 else:
-    print "Результат в квадрате: ", result**2
+    print("Результат в квадрате: ", result**2)
 ```
 
 Пример выполнения:
@@ -169,15 +170,16 @@ $ python divide_ver3.py
 # -*- coding: utf-8 -*-
 
 try:
-    a = raw_input("Введите первое число: ")
-    b = raw_input("Введите второе число: ")
+    a = input("Введите первое число: ")
+    b = input("Введите второе число: ")
     result = int(a)/int(b)
 except (ValueError, ZeroDivisionError):
-    print "Что-то пошло не так..."
+    print("Что-то пошло не так...")
 else:
-    print "Результат в квадрате: ", result**2
+    print("Результат в квадрате: ", result**2)
 finally:
-    print "Вот и сказочке конец, а кто слушал - молодец."
+    print("Вот и сказочке конец, а кто слушал - молодец.")
+
 ```
 
 Проверка:

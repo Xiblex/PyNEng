@@ -7,10 +7,10 @@ In [7]: commands = ['switchport mode access', 'spanning-tree portfast', 'spannin
 In [8]: fast_int = ['0/1','0/3','0/4','0/7','0/9','0/10','0/11']
 
 In [9]: for intf in fast_int:
-   ...:     print 'interface FastEthernet ' + intf
+   ...:     print('interface FastEthernet {}'.format(intf))
    ...:     for command in commands:
-   ...:         print ' %s' % command
-   ...:         
+   ...:         print(' {}'.format(command))
+   ...:
 interface FastEthernet 0/1
  switchport mode access
  spanning-tree portfast

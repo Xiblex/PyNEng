@@ -13,7 +13,7 @@ __Оператор break__ позволяет досрочно прервать 
 ```python
 In [1]: for num in range(10):
    ...:     if num < 7:
-   ...:         print num
+   ...:         print(num)
    ...:     else:
    ...:         break
    ...:     
@@ -33,7 +33,7 @@ In [3]: while i < 10:
    ...:     if i == 5:
    ...:         break
    ...:     else:
-   ...:         print i
+   ...:         print(i)
    ...:         i += 1
    ...:         
 0
@@ -47,18 +47,18 @@ In [3]: while i < 10:
 ```python
 # -*- coding: utf-8 -*-
 
-username = raw_input('Введите имя пользователя: ' )
-password = raw_input('Введите пароль: ' )
+username = input('Введите имя пользователя: ' )
+password = input('Введите пароль: ' )
 
 while True:
     if len(password) < 8:
-        print 'Пароль слишком короткий\n'
-        password = raw_input('Введите пароль еще раз: ' )
+        print('Пароль слишком короткий\n')
+        password = input('Введите пароль еще раз: ' )
     elif username in password:
-        print 'Пароль содержит имя пользователя\n'
-        password = raw_input('Введите пароль еще раз: ' )
+        print('Пароль содержит имя пользователя\n')
+        password = input('Введите пароль еще раз: ' )
     else:
-        print 'Пароль для пользователя %s установлен' % username
+        print('Пароль для пользователя {} установлен'.format( username ))
         break
 ```
 
@@ -71,7 +71,7 @@ In [4]: for num in range(5):
    ...:     if num == 3:
    ...:         continue
    ...:     else:
-   ...:         print num
+   ...:         print(num)
    ...:         
 0
 1
@@ -85,11 +85,11 @@ In [5]: i = 0
 In [6]: while i < 6:
    ....:     i += 1
    ....:     if i == 3:
-   ....:         print "Пропускаем 3"
+   ....:         print("Пропускаем 3")
    ....:         continue
-   ....:         print "Это никто не увидит"
+   ....:         print("Это никто не увидит"
    ....:     else:
-   ....:         print "Текущее значение: ", i
+   ....:         print("Текущее значение: ", i)
    ....:         
 Текущее значение:  1
 Текущее значение:  2
@@ -111,7 +111,7 @@ In [6]: for num in range(5):
    ....:     if num < 3:
    ....:         pass
    ....:     else:
-   ....:         print num
+   ....:         print(num)
    ....:         
 3
 4
