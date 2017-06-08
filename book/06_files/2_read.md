@@ -58,7 +58,7 @@ Out[6]: 'service timestamps debug datetime msec localtime show-timezone year\n'
 In [7]: f = open('r1.txt')
 
 In [8]: for line in f:
-   ...:     print line
+   ...:     print(line)
    ...:
 !
 
@@ -155,7 +155,7 @@ Out[14]:
 ```python
 In [15]: f = open('r1.txt')
 
-In [16]: print f.read()
+In [16]: print(f.read())
 !
 service timestamps debug datetime msec localtime show-timezone year
 service timestamps log datetime msec localtime show-timezone year
@@ -170,7 +170,7 @@ ip ssh version 2
 
 Если вызывать ещё раз метод ```read```, возвращается пустая строка:
 ```python
-In [17]: print f.read()
+In [17]: print(f.read())
 ```
 
 Но, с помощью метода ```seek```, можно перейти в начало файла (0 означает начало файла):
@@ -180,7 +180,7 @@ In [18]: f.seek(0)
 
 После того, как, с помощью ```seek```, курсор был переведен в начало файла, можно опять считывать содержимое:
 ```python
-In [19]: print f.read()
+In [19]: print(f.read())
 !
 service timestamps debug datetime msec localtime show-timezone year
 service timestamps log datetime msec localtime show-timezone year

@@ -6,7 +6,7 @@
 ```python
 In [1]: with open('r1.txt', 'r') as f:
   ....:     for line in f:
-  ....:         print line
+  ....:         print(line)
   ....:
 !
 
@@ -34,7 +34,7 @@ ip ssh version 2
 Обратите внимание на то, как считываются строки файла:
 ```python
 for line in f:
-    print line
+    print(line)
 ```
 
 Когда с файлом нужно работать построчно, лучше использовать такой вариант.
@@ -45,7 +45,7 @@ for line in f:
 ```python
 In [2]: with open('r1.txt', 'r') as f:
   ....:     for line in f:
-  ....:         print line.rstrip()
+  ....:         print(line.rstrip())
   ....:
 !
 service timestamps debug datetime msec localtime show-timezone year
@@ -67,7 +67,7 @@ Out[3]: True
 И, конечно же, с конструкцией ```with``` можно использовать не только такой построчный вариант считывания, все методы, которые рассматривались до этого, также работают:
 ```python
 In [4]: with open('r1.txt', 'r') as f:
-  ....:     print f.read()
+  ....:     print(f.read())
   ....:
 !
 service timestamps debug datetime msec localtime show-timezone year

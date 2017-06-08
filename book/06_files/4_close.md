@@ -21,7 +21,7 @@ In [1]: f = open('r1.txt', 'r')
 
 Теперь можно считать содержимое:
 ```python
-In [2]: print f.read()
+In [2]: print(f.read())
 !
 service timestamps debug datetime msec localtime show-timezone year
 service timestamps log datetime msec localtime show-timezone year
@@ -51,11 +51,11 @@ Out[5]: True
 
 Если попробовать прочитать файл, возникнет исключение:
 ```python
-In [6]: print f.read()
+In [6]: print(f.read())
 ------------------------------------------------------------------
 ValueError                       Traceback (most recent call last)
 <ipython-input-53-2c962247edc5> in <module>()
-----> 1 print f.read()
+----> 1 print(f.read()
 
 ValueError: I/O operation on closed file
 ```
@@ -84,7 +84,7 @@ IOError: [Errno 2] No such file or directory: 'r3.txt'
 In [8]: try:
   ....:     f = open('r3.txt', 'r')
   ....: except IOError:
-  ....:     print 'No such file'
+  ....:     print('No such file')
   ....:
 No such file
 ```
@@ -93,9 +93,9 @@ No such file
 ```python
 In [9]: try:
   ....:     f = open('r1.txt', 'r')
-  ....:     print f.read()
+  ....:     print(f.read())
   ....: except IOError:
-  ....:     print 'No such file'
+  ....:     print('No such file')
   ....: finally:
   ....:     f.close()
   ....:
