@@ -67,9 +67,10 @@ ip ssh version 2
 In [5]: delete_exclamation_from_cfg('r1.txt')
 ---------------------------------------------------------------------------
 TypeError                                 Traceback (most recent call last)
-<ipython-input-7-66ae381f1c4f> in <module>()
+<ipython-input-12-66ae381f1c4f> in <module>()
 ----> 1 delete_exclamation_from_cfg('r1.txt')
 
-TypeError: delete_exclamation_from_cfg() takes exactly 2 arguments (1 given)
+TypeError: delete_exclamation_from_cfg() missing 1 required positional argument: 'out_cfg'
+
 ```
 
