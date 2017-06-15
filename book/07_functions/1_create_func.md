@@ -17,7 +17,7 @@
 In [1]: def open_file( filename ):
    ...:     """Documentation string"""
    ...:     with open(filename) as f:
-   ...:         print f.read()
+   ...:         print(f.read())
    ...:
 ```
 
@@ -83,7 +83,7 @@ router ospf 1
  network 10.0.2.0 0.0.0.255 area 2
  network 10.1.1.0 0.0.0.255 area 0
 
-In [6]: print result
+In [6]: print(result)
 None
 ```
 
@@ -101,7 +101,7 @@ In [7]: def open_file( filename ):
 
 In [8]: result = open_file('r1.txt')
 
-In [9]: print result
+In [9]: print(result)
 !
 service timestamps debug datetime msec localtime show-timezone year
 service timestamps log datetime msec localtime show-timezone year
@@ -125,10 +125,10 @@ ip ssh version 2
 То есть, в функции ниже, строка "Done" не будет выводиться, так как она стоит после return:
 ```python
 In [10]: def open_file( filename ):
-    ...:     print "Reading file", filename
+    ...:     print("Reading file", filename)
     ...:     with open(filename) as f:
     ...:         return f.read()
-    ...:         print "Done"
+    ...:         print("Done")
     ...:
 
 In [11]: result = open_file('r1.txt')

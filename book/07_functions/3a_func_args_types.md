@@ -47,24 +47,6 @@ Out[2]:
 
 Если при вызове функции поменять аргументы местами, скорее всего, возникнет ошибка, в зависимости от конкретной функции.
 
-В случае с функцией cfg_to_list, получится такой результат:
-```python
-In [3]: cfg_to_list(False, 'r1.txt')
----------------------------------------------------------------------------
-TypeError                                 Traceback (most recent call last)
-<ipython-input-18-e6da7e2657eb> in <module>()
-----> 1 cfg_to_list(False, 'r1.txt')
-
-<ipython-input-15-21a013e5e92c> in cfg_to_list(cfg_file, delete_exclamation)
-      1 def cfg_to_list(cfg_file, delete_exclamation):
-      2     result = []
-----> 3     with open( cfg_file ) as f:
-      4         for line in f:
-      5             if delete_exclamation and line.startswith('!'):
-
-TypeError: coercing to Unicode: need string or buffer, bool found
-```
-
 
 ### Ключевые аргументы
 __Ключевые аргументы__:
@@ -92,9 +74,10 @@ __Но, обратите внимание, что всегда сначала д
 Если сделать наоборот, возникнет ошибка:
 ```python
 In [5]: cfg_to_list(delete_exclamation=False, 'r1.txt')
-  File "<ipython-input-19-5efdee7ce6dd>", line 1
+  File "<ipython-input-3-8f3a3aa16a22>", line 1
     cfg_to_list(delete_exclamation=False, 'r1.txt')
-SyntaxError: non-keyword arg after keyword arg
+                                         ^
+SyntaxError: positional argument follows keyword argument
 
 ```
 

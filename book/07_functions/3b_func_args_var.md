@@ -15,7 +15,7 @@
 Пример функции:
 ```python
 In [1]: def sum_arg(a,*args):
-  ....:     print a, args
+  ....:     print(a, args)
   ....:     return a + sum(args)
   ....: 
 ```
@@ -46,7 +46,7 @@ Out[4]: 1
 Можно создать и такую функцию:
 ```python
 In [5]: def sum_arg(*args):
-  ....:     print arg
+  ....:     print(arg)
   ....:     return sum(arg)
   ....: 
 
@@ -68,7 +68,7 @@ Out[7]: 0
 Пример функции:
 ```python
 In [8]: def sum_arg(a,**kwargs):
-  ....:     print a, kwargs
+  ....:     print(a, kwargs)
   ....:     return a + sum(kwargs.values())
   ....: 
 ```
@@ -99,8 +99,9 @@ In [11]: sum_arg(10,b=10,c=20,d=30)
 Out[11]: 70
 
 In [12]: sum_arg(b=10,c=20,d=30,10)
-  File "<ipython-input-6-71c121dc2cf7>", line 1
+  File "<ipython-input-14-71c121dc2cf7>", line 1
     sum_arg(b=10,c=20,d=30,10)
-SyntaxError: non-keyword arg after keyword arg
+                          ^
+SyntaxError: positional argument follows keyword argument
 ```
 
