@@ -19,7 +19,7 @@ Outbound Interface:     FastEthernet0/0
 ```python
 with open('ospf.txt', 'r') as f:
     for line in f:
-        print line
+        print(line)
 ```
 
 ###Задание 6.2

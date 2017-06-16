@@ -33,7 +33,7 @@ re_table = textfsm.TextFSM(f)
 header = re_table.header
 result = re_table.ParseText(output)
 
-print tabulate(result, headers=header)
+print(tabulate(result, headers=header))
 
 ```
 
@@ -100,6 +100,7 @@ print tabulate(result, headers=header)
 
 Пример из раздела:
 ```python
+
 import textfsm.clitable as clitable
 
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
@@ -107,8 +108,8 @@ cli_table = clitable.CliTable('index', 'templates')
 attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
 cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
 
-print "CLI Table output:\n", cli_table
-print "Formatted Table:\n", cli_table.FormattedTable()
+print("CLI Table output:\n", cli_table)
+print("Formatted Table:\n", cli_table.FormattedTable())
 
 data_rows = []
 
@@ -122,9 +123,10 @@ header = []
 for name in cli_table.header:
     header.append(name)
 
-print header
+print(header)
 for row in data_rows:
-    print row
+    print(row)
+
 ```
 
 ### Задание 14.4a
@@ -187,6 +189,7 @@ for row in data_rows:
 
 Пример из раздела multiprocessing:
 ```python
+
 import multiprocessing
 from netmiko import ConnectHandler
 import sys
@@ -201,7 +204,7 @@ def connect_ssh(device_dict, command, queue):
     ssh.enable()
     result = ssh.send_command(command)
 
-    print "Connection to device %s" % device_dict['ip']
+    print("Connection to device {}".format( device_dict['ip'])
     queue.put({device_dict['ip']: result})
 
 
@@ -223,5 +226,7 @@ def conn_processes(function, devices, command):
 
     return results
 
-print( conn_processes(connect_ssh, devices['routers'], COMMAND) )
+print(conn_processes(connect_ssh, devices['routers'], COMMAND))
+
 ```
+
