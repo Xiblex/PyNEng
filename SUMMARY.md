@@ -158,7 +158,7 @@
         * [ntc_ansible](book/15_ansible/3_network_modules/ntc_ansible.md)
     * [Подробнее об Ansible](book/15_ansible/ansible_more.md)
     * [Задания](exercises/15_ansible/15_exercises.md)
-* [Дополнительная информация](book/16_additional_info/README.md)
+* [16. Дополнительная информация](book/16_additional_info/README.md)
     * [Полезные модули](book/16_additional_info/useful_modules/README.md)
         * [Модуль subprocess](book/16_additional_info/useful_modules/subprocess.md)
         * [Модуль os](book/16_additional_info/useful_modules/os.md)
