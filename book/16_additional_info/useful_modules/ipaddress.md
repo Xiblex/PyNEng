@@ -7,30 +7,6 @@
 $ pip install ipaddress
 ```
 
-Для работы с модулем ipaddress, нужно, чтобы строки, в которых описывается IP-адрес, были в формате unicode.
-
-Для этого, надо либо конвертировать строки в unicode (если адрес задается вручную):
-```python
-ipaddress.ip_address(u'1.2.3.4')
-```
-
-или так:
-```python
-ipaddress.ip_address(unicode('1.2.3.4'))
-```
-
-либо импортировать unicode_literals таким образом:
-```python
-from __future__ import unicode_literals
-```
-
-> [Подробнее](http://python-future.org/unicode_literals.html) о нюансах использования unicode_literals в Python2
-
-В последнем случае, все строки будут unicode.
-
-> Такое особенности связаны с тем, что модуль ipaddress создавался для Python3. А в нём все строки unicode.
-
-
 ### ```ipaddress.ip_address()```
 
 Функция ```ipaddress.ip_address()``` позволяет создавать объект IPv4Address или IPv6Address, соответственно.
@@ -39,12 +15,12 @@ IPv4 адрес:
 ```python
 In [1]: import ipaddress
 
-In [2]: ipv4 = ipaddress.ip_address(u'10.0.1.1')
+In [2]: ipv4 = ipaddress.ip_address('10.0.1.1')
 
 In [3]: ipv4
-Out[3]: IPv4Address(u'10.0.1.1')
+Out[3]: IPv4Address('10.0.1.1')
 
-In [4]: print ipv4
+In [4]: print(ipv4)
 10.0.1.1
 ```
 
@@ -74,9 +50,9 @@ Out[9]: True
 
 С полученными объектами, можно выполнять различные операции:
 ```python
-In [10]: ip1 = ipaddress.ip_address(u'10.0.1.1')
+In [10]: ip1 = ipaddress.ip_address('10.0.1.1')
 
-In [11]: ip2 = ipaddress.ip_address(u'10.0.2.1')
+In [11]: ip2 = ipaddress.ip_address('10.0.2.1')
 
 In [12]: ip1 > ip2
 Out[12]: False
@@ -97,10 +73,10 @@ In [17]: int(ip1)
 Out[17]: 167772417
 
 In [18]: ip1 + 5
-Out[18]: IPv4Address(u'10.0.1.6')
+Out[18]: IPv4Address('10.0.1.6')
 
 In [19]: ip1 - 5
-Out[19]: IPv4Address(u'10.0.0.252')
+Out[19]: IPv4Address('10.0.0.252')
 ```
 
 ### ```ipaddress.ip_network()```
@@ -109,19 +85,19 @@ Out[19]: IPv4Address(u'10.0.0.252')
 
 Сеть IPv4:
 ```python
-In [20]: subnet1 = ipaddress.ip_network(u'80.0.1.0/28')
+In [20]: subnet1 = ipaddress.ip_network('80.0.1.0/28')
 ```
 
 Как и у адреса, у сети есть различные атрибуты и методы:
 ```python
 In [21]: subnet1.broadcast_address
-Out[21]: IPv4Address(u'80.0.1.15')
+Out[21]: IPv4Address('80.0.1.15')
 
 In [22]: subnet1.with_netmask
-Out[22]: u'80.0.1.0/255.255.255.240'
+Out[22]: '80.0.1.0/255.255.255.240'
 
 In [23]: subnet1.with_hostmask
-Out[23]: u'80.0.1.0/0.0.0.15'
+Out[23]: '80.0.1.0/0.0.0.15'
 
 In [24]: subnet1.prefixlen
 Out[24]: 28
@@ -134,56 +110,56 @@ Out[25]: 16
 ```python
 In [26]: list(subnet1.hosts())
 Out[26]:
-[IPv4Address(u'80.0.1.1'),
- IPv4Address(u'80.0.1.2'),
- IPv4Address(u'80.0.1.3'),
- IPv4Address(u'80.0.1.4'),
- IPv4Address(u'80.0.1.5'),
- IPv4Address(u'80.0.1.6'),
- IPv4Address(u'80.0.1.7'),
- IPv4Address(u'80.0.1.8'),
- IPv4Address(u'80.0.1.9'),
- IPv4Address(u'80.0.1.10'),
- IPv4Address(u'80.0.1.11'),
- IPv4Address(u'80.0.1.12'),
- IPv4Address(u'80.0.1.13'),
- IPv4Address(u'80.0.1.14')]
+[IPv4Address('80.0.1.1'),
+ IPv4Address('80.0.1.2'),
+ IPv4Address('80.0.1.3'),
+ IPv4Address('80.0.1.4'),
+ IPv4Address('80.0.1.5'),
+ IPv4Address('80.0.1.6'),
+ IPv4Address('80.0.1.7'),
+ IPv4Address('80.0.1.8'),
+ IPv4Address('80.0.1.9'),
+ IPv4Address('80.0.1.10'),
+ IPv4Address('80.0.1.11'),
+ IPv4Address('80.0.1.12'),
+ IPv4Address('80.0.1.13'),
+ IPv4Address('80.0.1.14')]
 ```
 
 Метод subnets позволяет разбивать на подсети.
 По умолчанию, он разбивает на две подсети:
 ```python
 In [27]: list(subnet1.subnets())
-Out[27]: [IPv4Network(u'80.0.1.0/29'), IPv4Network(u'80.0.1.8/29')]
+Out[27]: [IPv4Network('80.0.1.0/29'), IPv4Network(u'80.0.1.8/29')]
 ```
 
 Но, можно передать параметр prefixlen_diff, чтобы указать количество бит для подсетей:
 ```python
 In [28]: list(subnet1.subnets(prefixlen_diff=2))
 Out[28]:
-[IPv4Network(u'80.0.1.0/30'),
- IPv4Network(u'80.0.1.4/30'),
- IPv4Network(u'80.0.1.8/30'),
- IPv4Network(u'80.0.1.12/30')]
+[IPv4Network('80.0.1.0/30'),
+ IPv4Network('80.0.1.4/30'),
+ IPv4Network('80.0.1.8/30'),
+ IPv4Network('80.0.1.12/30')]
 ```
 
 Или, с помощью параметра new_prefix, просто указать какая маска должна быть у подсетей:
 ```python
 In [29]: list(subnet1.subnets(new_prefix=30))
 Out[29]:
-[IPv4Network(u'80.0.1.0/30'),
- IPv4Network(u'80.0.1.4/30'),
- IPv4Network(u'80.0.1.8/30'),
- IPv4Network(u'80.0.1.12/30')]
+[IPv4Network('80.0.1.0/30'),
+ IPv4Network('80.0.1.4/30'),
+ IPv4Network('80.0.1.8/30'),
+ IPv4Network('80.0.1.12/30')]
 
 In [30]: list(subnet1.subnets(new_prefix=29))
-Out[30]: [IPv4Network(u'80.0.1.0/29'), IPv4Network(u'80.0.1.8/29')]
+Out[30]: [IPv4Network('80.0.1.0/29'), IPv4Network(u'80.0.1.8/29')]
 ```
 
 По IP-адресам в сети можно проходится в цикле:
 ```python
 In [31]: for ip in subnet1:
-   ....:     print ip
+   ....:     print(ip)
    ....:
 80.0.1.0
 80.0.1.1
@@ -206,15 +182,15 @@ In [31]: for ip in subnet1:
 Или обращаться к конкретному адресу:
 ```python
 In [32]: subnet1[0]
-Out[32]: IPv4Address(u'80.0.1.0')
+Out[32]: IPv4Address('80.0.1.0')
 
 In [33]: subnet1[5]
-Out[33]: IPv4Address(u'80.0.1.5')
+Out[33]: IPv4Address('80.0.1.5')
 ```
 
 Таким образом можно проверять находится ли IP-адрес в сети:
 ```python
-In [34]: ip1 = ipaddress.ip_address(u'80.0.1.3')
+In [34]: ip1 = ipaddress.ip_address('80.0.1.3')
 
 In [35]: ip1 in subnet1
 Out[35]: True
@@ -226,28 +202,28 @@ Out[35]: True
 
 Попробуем создать интерфейс:
 ```python
-In [36]: int1 = ipaddress.ip_interface(u'10.0.1.1/24')
+In [36]: int1 = ipaddress.ip_interface('10.0.1.1/24')
 ```
 
 Используя методы объекта IPv4Interface, можно получать адрес, маску или сеть интерфеса:
 ```python
 In [37]: int1.ip
-Out[37]: IPv4Address(u'10.0.1.1')
+Out[37]: IPv4Address('10.0.1.1')
 
 In [38]: int1.network
-Out[38]: IPv4Network(u'10.0.1.0/24')
+Out[38]: IPv4Network('10.0.1.0/24')
 
 In [39]: int1.netmask
-Out[39]: IPv4Address(u'255.255.255.0')
+Out[39]: IPv4Address('255.255.255.0')
 ```
 
 ### Пример использования модуля
 
 Так как в модуль встроены проверки корректности адресов, можно ими пользоваться, например, чтобы проверить является ли адрес адресом сети или хоста:
 ```python
-In [40]: IP1 = u'10.0.1.1/24'
+In [40]: IP1 = '10.0.1.1/24'
 
-In [41]: IP2 = u'10.0.1.0/24'
+In [41]: IP2 = '10.0.1.0/24'
 
 In [42]: def check_if_ip_is_network(ip_address):
    ....:     try:
