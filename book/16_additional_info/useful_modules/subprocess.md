@@ -30,7 +30,7 @@ book.json           exercises.zip
 
 В переменной result теперь содержится код возврата (код 0 означает, что программа выполнилась успешно):
 ```python
-In [3]: print result
+In [3]: print(result)
 0
 ```
 
@@ -122,9 +122,10 @@ import subprocess
 reply = subprocess.call(['ping', '-c', '3', '-n', '8.8.8.8'])
 
 if reply == 0:
-    print "Alive"
+    print("Alive")
 else:
-    print "Unreachable"
+    print("Unreachable")
+
 ```
 
 Результат выполнения будет таким:
@@ -153,9 +154,10 @@ DNULL = open(os.devnull, 'w')
 reply = subprocess.call(['ping', '-c', '3', '-n', '8.8.8.8'], stdout=DNULL)
 
 if reply == 0:
-    print "Alive"
+    print("Alive")
 else:
-    print "Unreachable"
+    print("Unreachable")
+
 ```
 
 Теперь результат выполнения будет таким:
@@ -178,11 +180,12 @@ import subprocess
 
 reply = subprocess.check_output(['ping', '-c', '3', '-n', '8.8.8.8'])
 
-print "Result:"
-print reply
+print("Result:")
+print(reply.decode('utf-8'))
+
 ```
 
-Результат выполнения (если убрать строку ```print reply```, на стандартный поток вывода ничего не будет выведено):
+Результат выполнения (если убрать строку ```print(reply)```, на стандартный поток вывода ничего не будет выведено):
 ```
 $ python subprocess_check_output.py
 Result:
@@ -199,13 +202,16 @@ round-trip min/avg/max/stddev = 49.785/52.696/57.231/3.250 ms
 Если выполнить команду, которая вызовет ошибку и, соответственно, код возрата будет не 0 (файл subprocess_check_output_catch_exception.py):
 ```python
 $ python subprocess_check_output_catch_exception.py
-ping: cannot resolve a: Unknown host
+ping: unknown host a
 Traceback (most recent call last):
   File "subprocess_check_output_catch_exception.py", line 3, in <module>
     reply = subprocess.check_output(['ping', '-c', '3', '-n', 'a'])
-  File "/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 573, in check_output
-    raise CalledProcessError(retcode, cmd, output=output)
-subprocess.CalledProcessError: Command '['ping', '-c', '3', '-n', 'a']' returned non-zero exit status 68
+  File "/usr/local/lib/python3.6/subprocess.py", line 336, in check_output
+    **kwargs).stdout
+  File "/usr/local/lib/python3.6/subprocess.py", line 418, in run
+    output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ping', '-c', '3', '-n', 'a']' returned non-zero exit status 2.
+
 ```
 
 Возникло исключение ```CalledProcessError``` и соответствующее сообщение об ошибке.
@@ -219,16 +225,18 @@ import subprocess
 try:
     reply = subprocess.check_output(['ping', '-c', '3', '-n', 'a'])
 except subprocess.CalledProcessError as e:
-    print "Error occurred"
-    print "Return code:", e.returncode
+    print("Error occurred")
+    print("Return code:", e.returncode)
+
 ```
 
 Результат выполнения:
 ```
 $ python subprocess_check_output_catch_exception.py
-ping: cannot resolve a: Unknown host
+ping: unknown host a
 Error occurred
-Return code: 68
+Return code: 2
+
 ```
 
 Теперь программа завершилась корректно и вывела сообщение об ошибке и код возврата.
@@ -254,21 +262,22 @@ def ping_ip(ip_address):
         try:
             output = subprocess.check_output(['ping', '-c', '3', '-n', ip_address],
                                              stderr=temp)
-            return 0, output
+            return 0, output.decode('utf-8')
         except subprocess.CalledProcessError as e:
             temp.seek(0)
-            return e.returncode, temp.read()
+            return e.returncode, temp.read().decode('utf-8')
 
-print ping_ip('8.8.8.8')
-print ping_ip('a')
+print(ping_ip('8.8.8.8'))
+print(ping_ip('a'))
+
 ```
 
 Результат выполнения будет таким:
 ```
 $ python subprocess_ping_function.py
-(0, 'PING 8.8.8.8 (8.8.8.8): 56 data bytes\n64 bytes from 8.8.8.8: icmp_seq=0 ttl=48 time=46.106 ms\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=48 time=46.114 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=48 time=47.390 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 46.106/46.537/47.390/0.603 ms\n')
+(0, 'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=53.0 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=57.5 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=54.1 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2004ms\nrtt min/avg/max/mdev = 53.060/54.906/57.546/1.934 ms\n')
+(2, 'ping: unknown host a\n')
 
-(68, 'ping: cannot resolve a: Unknown host\n')
 ```
 
 > В примере использованы идеи из [ответа на stackoverflow](http://stackoverflow.com/questions/30937829/how-to-get-both-return-code-and-output-from-subprocess-in-python/30937898#30937898)
@@ -285,4 +294,5 @@ $ python subprocess_ping_function.py
 > Это вынесено в задания к разделу.
 
 Это далеко не все возможности модуля subprocess.
-Подробнее о нём можно почитать в [документации](https://docs.python.org/2/library/subprocess.html) или [в статье PyMOTW](https://pymotw.com/2/subprocess/index.html)
+Подробнее о нём можно почитать в [документации](https://docs.python.org/3/library/subprocess.html) или [в статье PyMOTW](https://pymotw.com/3/subprocess/)
+

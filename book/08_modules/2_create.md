@@ -38,13 +38,14 @@ def generate_access_cfg(sw_dict):
         result.append('interface FastEthernet' + intf)
         for command in sw_int_templates.access_template:
             if command.endswith('access vlan'):
-                result.append(' %s %s' % (command, sw_dict['access'][intf]))
+                result.append(' {} {}'.format(command,
+                                              sw_dict['access'][intf]))
             else:
-                result.append(' %s' % command)
+                result.append(' {}'.format(command))
     return result
 
 
-print '\n'.join(generate_access_cfg(sw1_fast_int))
+print('\n'.join(generate_access_cfg(sw1_fast_int)))
 
 ```
 
@@ -113,9 +114,9 @@ from generate_sw_int_cfg import generate_access_cfg
 from sw_cfg_templates import basic_cfg, lines_cfg
 
 
-print basic_cfg
-print '\n'.join(generate_access_cfg(sw1_fast_int))
-print lines_cfg
+print(basic_cfg)
+print('\n'.join(generate_access_cfg(sw1_fast_int)))
+print(lines_cfg)
 ```
 
 В результате, должны отобразиться такие части конфигурации, по порядку:
@@ -187,7 +188,7 @@ line vty 0 4
 
 Так получилось из-за строки print в файле generate_sw_int_cfg.py:
 ```python
-print '\n'.join(generate_access_cfg(sw1_fast_int))
+print('\n'.join(generate_access_cfg(sw1_fast_int)))
 ```
 
 Когда скрипт импортирует какой-то модуль, всё, что находится в модуле, выполняется.
@@ -207,20 +208,20 @@ def generate_access_cfg(sw_dict):
         result.append('interface FastEthernet' + intf)
         for command in sw_int_templates.access_template:
             if command.endswith('access vlan'):
-                result.append(' %s %s' % (command, sw_dict['access'][intf]))
+                result.append(' {} {}'.format( command, sw_dict['access'][intf] ))
             else:
-                result.append(' %s' % command)
+                result.append(' {}'.format( command ))
     return result
 
 if __name__ == "__main__":
-    print '\n'.join(generate_access_cfg(sw1_fast_int))
+    print('\n'.join(generate_access_cfg(sw1_fast_int)))
 
 ```
 
 Обратите внимание на запись:
 ```python
 if __name__ == "__main__":
-    print '\n'.join(generate_access_cfg(sw1_fast_int))
+    print('\n'.join(generate_access_cfg(sw1_fast_int)))
 ```
 
 Переменная ```__name__``` это специальная переменная, которая выставляется равной ```"__main__"```, если файл запускается как основная программа.
@@ -279,3 +280,4 @@ line vty 0 4
 ```
 
 Теперь print из файла generate_sw_int_cfg2.py не выводится.
+

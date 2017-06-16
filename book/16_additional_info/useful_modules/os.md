@@ -3,7 +3,7 @@
 Модуль ```os``` позволяет работать с файловой системой, с окружением, управлять процессами.
 
 Мы рассмотрим лишь несколько полезных возможностей.
-За более полным описанием возможностей модуля, вы можете обратиться к [документации](https://docs.python.org/2/library/os.html) или [статье на сайте PyMOTW](https://pymotw.com/2/os/index.html).
+За более полным описанием возможностей модуля, вы можете обратиться к [документации](https://docs.python.org/3/library/os.html) или [статье на сайте PyMOTW](https://pymotw.com/3/os/).
 
 Модуль os позволяет создавать каталоги:
 ```python
@@ -21,11 +21,12 @@ total 0
 ```python
 In [4]: os.mkdir('test')
 ---------------------------------------------------------------------------
-OSError                                   Traceback (most recent call last)
+FileExistsError                           Traceback (most recent call last)
 <ipython-input-4-cbf3b897c095> in <module>()
 ----> 1 os.mkdir('test')
 
-OSError: [Errno 17] File exists: 'test'
+FileExistsError: [Errno 17] File exists: 'test'
+
 ```
 
 В таком случае, пригодится проверка ```os.path.exists```:

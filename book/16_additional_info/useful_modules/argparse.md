@@ -26,7 +26,7 @@ import subprocess
 from tempfile import TemporaryFile
 import argparse
 
-def ping_ip(ip_address, count=3):
+def ping_ip(ip_address, count):
     """
     Ping IP address and return tuple:
     On success: (return code = 0, command output)
@@ -36,10 +36,10 @@ def ping_ip(ip_address, count=3):
         try:
             output = subprocess.check_output(['ping', '-c', str(count), '-n', ip_address],
                                              stderr=temp)
-            return 0, output
+            return 0, output.decode('utf-8')
         except subprocess.CalledProcessError as e:
             temp.seek(0)
-            return e.returncode, temp.read()
+            return e.returncode, temp.read().decode('utf-8')
 
 
 parser = argparse.ArgumentParser(description='Ping script')
@@ -48,10 +48,11 @@ parser.add_argument('-a', action="store", dest="ip")
 parser.add_argument('-c', action="store", dest="count", default=2, type=int)
 
 args = parser.parse_args()
-print args
+print(args)
 
 rc, message = ping_ip( args.ip, args.count )
-print message
+print(message)
+
 ```
 
 Создание парсера:
@@ -111,13 +112,15 @@ Traceback (most recent call last):
     rc, message = ping_ip( args.ip, args.count )
   File "ping_function.py", line 16, in ping_ip
     stderr=temp)
-  File "/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 566, in check_output
-    process = Popen(stdout=PIPE, *popenargs, **kwargs)
-  File "/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 710, in __init__
-    errread, errwrite)
-  File "/usr/local/Cellar/python/2.7.11/Frameworks/Python.framework/Versions/2.7/lib/python2.7/subprocess.py", line 1335, in _execute_child
-    raise child_exception
-TypeError: execv() arg 2 must contain only strings
+  File "/usr/local/lib/python3.6/subprocess.py", line 336, in check_output
+    **kwargs).stdout
+  File "/usr/local/lib/python3.6/subprocess.py", line 403, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/local/lib/python3.6/subprocess.py", line 707, in __init__
+    restore_signals, start_new_session)
+  File "/usr/local/lib/python3.6/subprocess.py", line 1260, in _execute_child
+    restore_signals, start_new_session, preexec_fn)
+TypeError: expected str, bytes or os.PathLike object, not NoneType
 
 ```
 
@@ -138,7 +141,8 @@ parser.add_argument('-a', action="store", dest="ip", required=True)
 ```
 $ python ping_function.py
 usage: ping_function.py [-h] -a IP [-c COUNT]
-ping_function.py: error: argument -a is required
+ping_function.py: error: the following arguments are required: -a
+
 ```
 
 Теперь отображается понятное сообщение, что надо указать обязательный аргумент.
@@ -181,10 +185,10 @@ def ping_ip(ip_address, count=3):
         try:
             output = subprocess.check_output(['ping', '-c', str(count), '-n', ip_address],
                                              stderr=temp)
-            return 0, output
+            return 0, output.decode('utf-8')
         except subprocess.CalledProcessError as e:
             temp.seek(0)
-            return e.returncode, temp.read()
+            return e.returncode, temp.read().decode('utf-8')
 
 
 parser = argparse.ArgumentParser(description='Ping script')
@@ -194,10 +198,11 @@ parser.add_argument('-c', action="store", dest="count", default=2, type=int,
                     help="Number of packets")
 
 args = parser.parse_args()
-print args
+print(args)
 
 rc, message = ping_ip( args.host, args.count )
-print message
+print(message)
+
 ```
 
 Теперь, вместо указания опции ```-a```, можно просто передать IP-адрес.
@@ -241,7 +246,7 @@ optional arguments:
 
 Рассмотрим один из способов организации более сложной иерархии аргументов.
 
-> Этот пример покажет больше возможностей argparse, но они этим не ограничиваются, поэтому, если вы будете использовать argparse, обязательно посмотрите [документацию модуля](https://docs.python.org/2.7/library/argparse.html) или [статью на PyMOTW](https://pymotw.com/2/argparse/index.html).
+> Этот пример покажет больше возможностей argparse, но они этим не ограничиваются, поэтому, если вы будете использовать argparse, обязательно посмотрите [документацию модуля](https://docs.python.org/3/library/argparse.html) или [статью на PyMOTW](https://pymotw.com/3/argparse/).
 
 
 Файл parse_dhcp_snooping.py:
@@ -255,25 +260,26 @@ DFLT_DB_SCHEMA = 'dhcp_snooping_schema.sql'
 
 
 def create(args):
-    print "Creating DB %s with DB schema %s" % (args.name, args.schema)
+    print("Creating DB {} with DB schema {}".format((args.name, args.schema)))
 
 
 def add(args):
     if args.sw_true:
-        print "Adding switch data to database"
+        print("Adding switch data to database")
     else:
-        print "Reading info from file(s) \n%s" % ', '.join( args.filename )
-        print "\nAdding data to db %s" % args.db_file
+        print("Reading info from file(s) \n{}".format(', '.join(args.filename)))
+        print("\nAdding data to db {}".format(args.db_file))
 
 
 def get(args):
     if args.key and args.value:
-        print "Geting data from DB: %s" % args.db_file
-        print "Request data for host(s) with %s %s" % (args.key, args.value)
+        print("Geting data from DB: {}".format(args.db_file))
+        print("Request data for host(s) with {} {}".format((args.key, args.value)))
     elif args.key or args.value:
-        print "Please give two or zero args\n"
+        print("Please give two or zero args\n")
+        print(show_subparser_help('get'))
     else:
-        print "Showing %s content..." % args.db_file
+        print("Showing {} content...".format(args.db_file))
 
 
 parser = argparse.ArgumentParser()
@@ -348,7 +354,8 @@ create_parser.set_defaults( func=create )
 И, внутри функции, можно обращаться к нужным:
 ```python
 def create(args):
-    print "Creating DB %s with DB schema %s" % (args.name, args.schema)
+    print("Creating DB {} with DB schema {}".format((args.name, args.schema)))
+
 ```
 
 Если вызвать help для этого скрипта, вывод будет таким:
