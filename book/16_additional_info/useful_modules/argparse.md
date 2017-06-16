@@ -3,24 +3,23 @@
 argparse - это модуль для обработки аргументов командной строки.
 
 Примеры того, что позволяет делать модуль:
+
 * создавать аргументы и опции, с которыми может вызываться скрипт
 * указывать типы аргументов, значения по умолчанию
 * указывать какие действия соответствуют аргументам
 * выполнять вызов функции, при указании аргумента
 * отображать сообщения с подсказами по использованию скрипта
 
-> argparse не единственный модуль для обработки аргументов командной строки.
+> argparse не единственный модуль для обработки аргументов командной строки.  
 > И даже, не единственный такой модуль в стандартной библиотеке.
-
-> Мы будем рассматривать только argparse. Но, если вы столкнетесь с необходимостью использовать подобные модули, обязательно посмотрите и на те модули, которые не входят в стандартную библиотеку Python.
+>
+> Мы будем рассматривать только argparse. Но, если вы столкнетесь с необходимостью использовать подобные модули, обязательно посмотрите и на те модули, которые не входят в стандартную библиотеку Python.  
 > Например, на [click](http://click.pocoo.org/5/).
+>
+> [Очень хорошая статья](https://realpython.com/blog/python/comparing-python-command-line-parsing-libraries-argparse-docopt-click/), которая сравнивает разные модули обработки аргументов командной строки \(рассматриваются argparse, click и docopt\).
 
+Пример скрипта ping\_function.py:
 
-
-> [Очень хорошая статья](https://realpython.com/blog/python/comparing-python-command-line-parsing-libraries-argparse-docopt-click/), которая сравнивает разные модули обработки аргументов командной строки (рассматриваются argparse, click и docopt).
-
-
-Пример скрипта ping_function.py:
 ```python
 import subprocess
 from tempfile import TemporaryFile
@@ -32,6 +31,7 @@ def ping_ip(ip_address, count):
     On success: (return code = 0, command output)
     On failure: (return code, error output (stderr))
     """
+    
     with TemporaryFile() as temp:
         try:
             output = subprocess.check_output(['ping', '-c', str(count), '-n', ip_address],
@@ -52,27 +52,28 @@ print(args)
 
 rc, message = ping_ip( args.ip, args.count )
 print(message)
-
 ```
 
 Создание парсера:
-* ```parser = argparse.ArgumentParser(description='Ping script')```
+
+* `parser = argparse.ArgumentParser(description='Ping script')`
 
 Добавление аргументов:
-* ```parser.add_argument('-a', action="store", dest="ip")```
- * аргумент, который передается после опции ```-a```, сохранится в переменную ```ip```
-* ```parser.add_argument('-c', action="store", dest="count", default=2, type=int)```
- * аргумент, который передается после опции ```-c```, будет сохранен в переменную ```count```, но, прежде, будет конвертирован в число. Если аргумент не было указан, по умолчанию, будет значение 2
 
-Строка ```args = parser.parse_args()``` указывается, после того как определены все аргументы.
+* `parser.add_argument('-a', action="store", dest="ip")`
+  * аргумент, который передается после опции `-a`, сохранится в переменную `ip`
+* `parser.add_argument('-c', action="store", dest="count", default=2, type=int)`
+  * аргумент, который передается после опции `-c`, будет сохранен в переменную `count`, но, прежде, будет конвертирован в число. Если аргумент не было указан, по умолчанию, будет значение 2
 
-После её выполнения, в переменной ```args``` содержатся все аргументы, которые были переданы скрипту.
-К ним можно обращаться, используя синтаксис ```args.ip```.
+Строка `args = parser.parse_args()` указывается, после того как определены все аргументы.
 
+После её выполнения, в переменной `args` содержатся все аргументы, которые были переданы скрипту.  
+К ним можно обращаться, используя синтаксис `args.ip`.
 
 Попробуем вызвать скрипт с разными аргументами.
 
 Если переданы оба аргумента:
+
 ```
 $ python ping_function.py -a 8.8.8.8 -c 5
 Namespace(count=5, ip='8.8.8.8')
@@ -88,9 +89,10 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 round-trip min/avg/max/stddev = 48.673/49.228/50.040/0.610 ms
 ```
 
-> Namespace это объект, который возвращает метод parse_args()
+> Namespace это объект, который возвращает метод parse\_args\(\)
 
 Передаем только IP-адрес:
+
 ```
 $ python ping_function.py -a 8.8.8.8
 Namespace(count=2, ip='8.8.8.8')
@@ -104,6 +106,7 @@ round-trip min/avg/max/stddev = 48.563/49.090/49.616/0.526 ms
 ```
 
 Вызов скрипта без аргументов:
+
 ```
 $ python ping_function.py
 Namespace(count=2, ip=None)
@@ -121,34 +124,35 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.6/subprocess.py", line 1260, in _execute_child
     restore_signals, start_new_session, preexec_fn)
 TypeError: expected str, bytes or os.PathLike object, not NoneType
-
 ```
 
 Если бы функция была вызвана без аргументов, когда не используется argparse, возникла ошибка, что не все аргументы указаны.
 
-Но, из-за argparse, фактически аргумент передается, только он равен ```None```.
-Это видно в строке ```Namespace(count=2, ip=None)```.
+Но, из-за argparse, фактически аргумент передается, только он равен `None`.  
+Это видно в строке `Namespace(count=2, ip=None)`.
 
-В таком скрипте, очевидно, IP-адрес необходимо указывать всегда.
+В таком скрипте, очевидно, IP-адрес необходимо указывать всегда.  
 И в argparse можно указать, что аргумент является обязательным.
 
-Надо изменить опцию ```-a```: добавить в конце ```required=True```:
+Надо изменить опцию `-a`: добавить в конце `required=True`:
+
 ```python
 parser.add_argument('-a', action="store", dest="ip", required=True)
 ```
 
 Теперь, если вызвать скрипт без аргументов, вывод будет таким:
+
 ```
 $ python ping_function.py
 usage: ping_function.py [-h] -a IP [-c COUNT]
 ping_function.py: error: the following arguments are required: -a
-
 ```
 
-Теперь отображается понятное сообщение, что надо указать обязательный аргумент.
+Теперь отображается понятное сообщение, что надо указать обязательный аргумент.  
 И подсказка usage.
 
 Также, благодаря argparse, доступен help:
+
 ```
 $ python ping_function.py -h
 usage: ping_function.py [-h] -a IP [-c COUNT]
@@ -161,13 +165,13 @@ optional arguments:
   -c COUNT
 ```
 
-Обратите внимание, что в сообщении, все опции находятся в секции `optional arguments`.
-argparse сам определяет, что указаны опцию, так как они начинаются с ```-``` и в имени только одна буква.
-
+Обратите внимание, что в сообщении, все опции находятся в секции `optional arguments`.  
+argparse сам определяет, что указаны опцию, так как они начинаются с `-` и в имени только одна буква.
 
 Зададим IP-адрес, как позиционный аргумент.
 
-Файл ping_function_ver2.py:
+Файл ping\_function\_ver2.py:
+
 ```python
 import subprocess
 from tempfile import TemporaryFile
@@ -181,6 +185,7 @@ def ping_ip(ip_address, count=3):
     On success: (return code = 0, command output)
     On failure: (return code, error output (stderr))
     """
+    
     with TemporaryFile() as temp:
         try:
             output = subprocess.check_output(['ping', '-c', str(count), '-n', ip_address],
@@ -202,19 +207,18 @@ print(args)
 
 rc, message = ping_ip( args.host, args.count )
 print(message)
-
 ```
 
-Теперь, вместо указания опции ```-a```, можно просто передать IP-адрес.
-Он будет автоматически сохранен в переменной ```host```.
+Теперь, вместо указания опции `-a`, можно просто передать IP-адрес.  
+Он будет автоматически сохранен в переменной `host`.  
 И автоматически считается обязательным.
 
-То есть, теперь не нужно указывать ```required=True``` и ```dest="ip"```.
-
+То есть, теперь не нужно указывать `required=True` и `dest="ip"`.
 
 Кроме того, в скрипте указаны сообщения, которые будут выводиться, при вызове help.
 
 Теперь вызов скрипта выглядит так:
+
 ```
 $ python ping_function_ver2.py 8.8.8.8 -c 2
 Namespace(host='8.8.8.8', count=2)
@@ -228,6 +232,7 @@ round-trip min/avg/max/stddev = 49.203/50.484/51.764/1.280 ms
 ```
 
 А сообщение help так:
+
 ```
 $ python ping_function_ver2.py -h
 usage: ping_function_ver2.py [-h] [-c COUNT] host
@@ -248,8 +253,8 @@ optional arguments:
 
 > Этот пример покажет больше возможностей argparse, но они этим не ограничиваются, поэтому, если вы будете использовать argparse, обязательно посмотрите [документацию модуля](https://docs.python.org/3/library/argparse.html) или [статью на PyMOTW](https://pymotw.com/3/argparse/).
 
+Файл parse\_dhcp\_snooping.py:
 
-Файл parse_dhcp_snooping.py:
 ```python
 # -*- coding: utf-8 -*-
 import argparse
@@ -320,15 +325,15 @@ if __name__ == '__main__':
     args.func(args)
 ```
 
-Теперь создается не только парсер, как в прошлом примере, но и вложенные парсеры.
-Вложенные парсеры будут отображаться как команды.
+Теперь создается не только парсер, как в прошлом примере, но и вложенные парсеры.  
+Вложенные парсеры будут отображаться как команды.  
 Но, фактически, они будут использоваться как обязательные аргументы.
 
-С помощью вложенных парсеров, создается иерархия аргументов и опций.
+С помощью вложенных парсеров, создается иерархия аргументов и опций.  
 Аргументы, которые добавлены во вложенный парсер, будут доступны как аргументы этого парсера.
 
+Например, в этой части, создан вложенный парсер create\_db и к нему добавлена опция `-n`:
 
-Например, в этой части, создан вложенный парсер create_db и к нему добавлена опция ```-n```:
 ```python
 create_parser = subparsers.add_parser('create_db', help='create new db')
 create_parser.add_argument('-n', dest='name', default=DFLT_DB_NAME,
@@ -336,6 +341,7 @@ create_parser.add_argument('-n', dest='name', default=DFLT_DB_NAME,
 ```
 
 Синтаксис создания вложенных парсеров и добавления к ним аргументов, одинаков:
+
 ```python
 create_parser = subparsers.add_parser('create_db', help='create new db')
 create_parser.add_argument('-n', metavar='db-filename', dest='name',
@@ -345,20 +351,21 @@ create_parser.add_argument('-s', dest='schema', default=DFLT_DB_SCHEMA,
 create_parser.set_defaults( func=create )
 ```
 
-Метод ```add_argument``` добавляет аргумент.
+Метод `add_argument` добавляет аргумент.  
 Тут синтаксис точно такой же, как и без использования вложенных парсеров.
 
-В строке ``create_parser.set_defaults( func=create )``` указывается, что, при вызове парсера ```create_parser```, будет вызвана функция create.
+В строке \`\`create\_parser.set\_defaults\( func=create \)`указывается, что, при вызове парсера`create\_parser\`\`\`, будет вызвана функция create.
 
-Функция create получает как аргумент, все аргументы, которые были переданы.
+Функция create получает как аргумент, все аргументы, которые были переданы.  
 И, внутри функции, можно обращаться к нужным:
+
 ```python
 def create(args):
     print("Creating DB {} with DB schema {}".format((args.name, args.schema)))
-
 ```
 
 Если вызвать help для этого скрипта, вывод будет таким:
+
 ```
 $ python parse_dhcp_snooping.py -h
 usage: parse_dhcp_snooping.py [-h] {create_db,add,get} ...
@@ -376,11 +383,13 @@ subcommands:
 ```
 
 Обратите внимание, что каждый вложенный парсер, который создан в скрипте, отображается как команда в подсказке usage:
+
 ```
 usage: parse_dhcp_snooping.py [-h] {create_db,add,get} ...
 ```
 
 У каждого вложенного парсера теперь есть свой help:
+
 ```
 $ python parse_dhcp_snooping.py create_db -h
 usage: parse_dhcp_snooping.py create_db [-h] [-n db-filename] [-s SCHEMA]
@@ -393,10 +402,10 @@ optional arguments:
 
 Кроме вложенных парсеров, в этом примере также есть несколько новых возможностей argparse.
 
+#### `metavar`
 
-#### ```metavar```
+В парсере create\_parser используется новый аргумент - `metavar`:
 
-В парсере create_parser используется новый аргумент - ```metavar```:
 ```python
 create_parser.add_argument('-n', metavar='db-filename', dest='name',
                            default=DFLT_DB_NAME, help='db filename')
@@ -404,7 +413,8 @@ create_parser.add_argument('-s', dest='schema', default=DFLT_DB_SCHEMA,
                            help='db schema filename')
 ```
 
-Аргумент ```metavar``` позволяет указывать имя аргумента для вывода в сообщении usage и help:
+Аргумент `metavar` позволяет указывать имя аргумента для вывода в сообщении usage и help:
+
 ```
 $ python parse_dhcp_snooping.py create_db -h
 usage: parse_dhcp_snooping.py create_db [-h] [-n db-filename] [-s SCHEMA]
@@ -415,23 +425,26 @@ optional arguments:
   -s SCHEMA       db schema filename
 ```
 
-Посмотрите на разницу между опциями ```-n``` и ```-s```:
-* после опции ```-n```, и в usage, и в help, указывается имя, которое указано в параметре metavar
-* после опции ```-s``` указывается имя переменной, в которую сохраняется значение
+Посмотрите на разницу между опциями `-n` и `-s`:
 
-#### ```nargs```
+* после опции `-n`, и в usage, и в help, указывается имя, которое указано в параметре metavar
+* после опции `-s` указывается имя переменной, в которую сохраняется значение
 
-В парсере add_parser используется ```nargs```:
+#### `nargs`
+
+В парсере add\_parser используется `nargs`:
+
 ```python
 add_parser.add_argument('filename', nargs='+', help='file(s) to add to db')
 ```
 
-```nargs``` позволяет указать, что в этот аргумент должно попасть определенное количество элементов.
-В этом случае, все аргументы, которые были переданы скрипту, после имени аргумента ```filename```,
-попадут в список nargs.
+`nargs` позволяет указать, что в этот аргумент должно попасть определенное количество элементов.  
+В этом случае, все аргументы, которые были переданы скрипту, после имени аргумента `filename`,  
+попадут в список nargs.  
 Но должен быть передан хотя бы один аргумент.
 
 Сообщение help, в таком случае, выглядит так:
+
 ```
 $ python parse_dhcp_snooping.py add -h
 usage: parse_dhcp_snooping.py add [-h] [--db DB_FILE] [-s]
@@ -446,8 +459,9 @@ optional arguments:
   -s            add switch data if set, else add normal data
 ```
 
-Если передать несколько файлов, они попадут в список.
+Если передать несколько файлов, они попадут в список.  
 А, так как функция add, просто выводит имена файлов, вывод получится таким:
+
 ```
 $ python parse_dhcp_snooping.py add filename test1.txt test2.txt
 Reading info from file(s)
@@ -456,26 +470,28 @@ filename, test1.txt, test2.txt
 Adding data to db dhcp_snooping.db
 ```
 
-```nargs``` поддерживает такие значения:
-* ```N``` - должно быть указанное количество аргументов. Аргументы будут в списке (даже, если указан 1)
-* ```?``` - 0 или 1 аргумент
-* ```*``` - все аргументы попадут в список 
-* ```+``` - все аргумнеты попадут в список, но должен быть передан, хотя бы, один аргумент
+`nargs` поддерживает такие значения:
 
+* `N` - должно быть указанное количество аргументов. Аргументы будут в списке \(даже, если указан 1\)
+* `?` - 0 или 1 аргумент
+* `*` - все аргументы попадут в список 
+* `+` - все аргумнеты попадут в список, но должен быть передан, хотя бы, один аргумент
 
-#### ```choices```
+#### `choices`
 
-В парсере get_parser используется ```choices```:
+В парсере get\_parser используется `choices`:
+
 ```python
 get_parser.add_argument('-k', dest="key",
                         choices=['mac', 'ip', 'vlan', 'interface', 'switch'],
                         help='host key (parameter) to search')
 ```
 
-Для некоторых аргументов, важно, чтобы значение было выбрано только из орпределенных вариантов.
-Для таких случаев, можно указывать ```choices```.
+Для некоторых аргументов, важно, чтобы значение было выбрано только из орпределенных вариантов.  
+Для таких случаев, можно указывать `choices`.
 
 Для этого парсера, help выглядит так:
+
 ```
 $ python parse_dhcp_snooping.py get -h
 usage: parse_dhcp_snooping.py get [-h] [--db DB_FILE]
@@ -492,6 +508,7 @@ optional arguments:
 ```
 
 А, если выбрать неправильный вариант:
+
 ```
 $ python parse_dhcp_snooping.py get -k test
 usage: parse_dhcp_snooping.py get [-h] [--db DB_FILE]
@@ -500,12 +517,12 @@ usage: parse_dhcp_snooping.py get [-h] [--db DB_FILE]
 parse_dhcp_snooping.py get: error: argument -k: invalid choice: 'test' (choose from 'mac', 'ip', 'vlan', 'interface', 'switch')
 ```
 
-> В данном примере важно указать варианты на выбор, так как затем, на основании выбранного варианта, генерируется SQL-запрос. И, благодаря ```choices```, нет возможно указать какой-то параметр, кроме разрешенных.
-
+> В данном примере важно указать варианты на выбор, так как затем, на основании выбранного варианта, генерируется SQL-запрос. И, благодаря `choices`, нет возможно указать какой-то параметр, кроме разрешенных.
 
 #### Импорт парсера
 
-В файле parse_dhcp_snooping.py, последние две строки будут выполняться только в том случае, если скрипт был вызван как основной.
+В файле parse\_dhcp\_snooping.py, последние две строки будут выполняться только в том случае, если скрипт был вызван как основной.
+
 ```python
 if __name__ == '__main__':
     args = parser.parse_args()
@@ -514,7 +531,8 @@ if __name__ == '__main__':
 
 А значит, если импортировать файл, эти строки не будут вызваны.
 
-Попробуем импортировать парсер в другой файл (файл call_pds.py):
+Попробуем импортировать парсер в другой файл \(файл call\_pds.py\):
+
 ```python
 from parse_dhcp_snooping import parser
 
@@ -523,6 +541,7 @@ args.func(args)
 ```
 
 Вызов сообщения help:
+
 ```
 $ python call_pds.py -h
 usage: call_pds.py [-h] {create_db,add,get} ...
@@ -540,6 +559,7 @@ subcommands:
 ```
 
 Вызов аргумента:
+
 ```
 $ python call_pds.py add test.txt test2.txt
 Reading info from file(s)
@@ -554,7 +574,8 @@ Adding data to db dhcp_snooping.db
 
 И, последняя особенность argparse - возможность передавать аргументы вручную.
 
-Аргументы можно передать как список, при вызове метода ```parse_args()``` (файл call_pds2.py):
+Аргументы можно передать как список, при вызове метода `parse_args()` \(файл call\_pds2.py\):
+
 ```python
 from parse_dhcp_snooping import parser, get
 
@@ -562,9 +583,10 @@ args = parser.parse_args('add test.txt test2.txt'.split())
 args.func(args)
 ```
 
-> Необходимо использовать метод split(), так как метод ```parse_args```, ожидает список аргументов.
+> Необходимо использовать метод split\(\), так как метод `parse_args`, ожидает список аргументов.
 
 Результат будет таким, как если бы скрипт был вызван с аргументами:
+
 ```
 $ python call_pds2.py
 Reading info from file(s)
@@ -572,4 +594,6 @@ test.txt, test2.txt
 
 Adding data to db dhcp_snooping.db
 ```
+
+
 

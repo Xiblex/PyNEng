@@ -1,20 +1,21 @@
 ## Модуль subprocess
 
-Модуль subprocess позволяет создавать новые процессы.
+Модуль subprocess позволяет создавать новые процессы.  
 При этом, он может подключаться к [стандартным потокам ввода/вывода/ошибок](http://xgu.ru/wiki/stdin) и получать код возврата.
 
-
-С помощью subprocess, можно, например, выполнять любые команды Linux из скрипта.
+С помощью subprocess, можно, например, выполнять любые команды Linux из скрипта.  
 И, в зависимости от ситуации, получать вывод или только проверять, что команда выполнилась без ошибок.
 
-### Функция ```subprocess.call()```
+### Функция `subprocess.call()`
 
-Функция ```call()```:
+Функция `call()`:
+
 * позволяет выполнить команду
- * при этом, она ожидает завершения команды.
+  * при этом, она ожидает завершения команды.
 * функция возращает код возврата
 
-Пример выполнения команды ```ls```:
+Пример выполнения команды `ls`:
+
 ```python
 In [1]: import subprocess
 
@@ -28,13 +29,15 @@ book                exercises
 book.json           exercises.zip
 ```
 
-В переменной result теперь содержится код возврата (код 0 означает, что программа выполнилась успешно):
+В переменной result теперь содержится код возврата \(код 0 означает, что программа выполнилась успешно\):
+
 ```python
 In [3]: print(result)
 0
 ```
 
-Обратите внимание, что, если необходимо вызвать команду с аргументами, её нужно передавать таким образом (как список):
+Обратите внимание, что, если необходимо вызвать команду с аргументами, её нужно передавать таким образом \(как список\):
+
 ```
 In [4]: result = subprocess.call(['ls', '-ls'])
 total 3624
@@ -60,6 +63,7 @@ total 3624
 ```
 
 Все файлы, с расширением md:
+
 ```python
 In [5]: result = subprocess.call(['ls', '-ls', '*md'])
 ls: *md: No such file or directory
@@ -68,6 +72,7 @@ ls: *md: No such file or directory
 Возникла ошибка.
 
 Чтобы вызывать команды, в которых используются регулярные выражения, нужно добавлять параметр shell:
+
 ```python
 In [6]: result = subprocess.call(['ls', '-ls', '*md'], shell=True)
 LICENSE.md          course_presentations        faq.md
@@ -79,8 +84,9 @@ book                exercises
 book.json           exercises.zip
 ```
 
-Если устанавлен аргумент ```shell=True```, указанная команда выполняется через shell.
+Если устанавлен аргумент `shell=True`, указанная команда выполняется через shell.  
 В таком случае, команду можно указывать так:
+
 ```python
 In [7]: result = subprocess.call('ls -ls *md', shell=True)
  8 -rw-r--r--  1 nata  nata    372 Dec 10 21:34 LICENSE.md
@@ -93,8 +99,9 @@ In [7]: result = subprocess.call('ls -ls *md', shell=True)
 16 -rw-r--r--@ 1 nata  nata   6219 Jan 17 11:37 schedule.md
 ```
 
-Ещё одна особенность функции ```call()``` - она ожидает завершения выполнения команды.
+Ещё одна особенность функции `call()` - она ожидает завершения выполнения команды.  
 Если попробовать, например, запустить команду ping, то этот аспект будет заметен:
+
 ```python
 In [8]: reply = subprocess.call(['ping', '-c', '3', '-n', '8.8.8.8'])
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -109,14 +116,16 @@ round-trip min/avg/max/stddev = 49.243/49.713/50.029/0.339 ms
 
 Особенно, если попробовать пингануть какой-то недоступный IP-адрес.
 
-Функция ```call()``` подходит, если нужно:
+Функция `call()` подходит, если нужно:
+
 * подождать выполнения программы, прежде чем выполнять следующие шаги
 * нужно получить только код выполнения и не нужен вывод
 
-Ещё один аспект работы функции ```call()```, она выводит результат выполнения команды, на стандартный поток вывода.
+Ещё один аспект работы функции `call()`, она выводит результат выполнения команды, на стандартный поток вывода.
 
-Файл subprocess_call.py:
-```python
+Файл subprocess\_call.py:
+
+```py
 import subprocess
 
 reply = subprocess.call(['ping', '-c', '3', '-n', '8.8.8.8'])
@@ -125,10 +134,10 @@ if reply == 0:
     print("Alive")
 else:
     print("Unreachable")
-
 ```
 
 Результат выполнения будет таким:
+
 ```
 $ python subprocess_call.py
 PING 8.8.8.8 (8.8.8.8): 56 data bytes
@@ -144,8 +153,9 @@ Alive
 
 То есть, результат выполнения команды, выводится на стандартный поток вывода.
 
-Если нужно это отключить и не выводить результат выполнения, надо перенаправить stdout в devnull (файл subprocess_call_devnull.py):
-```python
+Если нужно это отключить и не выводить результат выполнения, надо перенаправить stdout в devnull \(файл subprocess\_call\_devnull.py\):
+
+```py
 import subprocess
 import os
 
@@ -157,35 +167,37 @@ if reply == 0:
     print("Alive")
 else:
     print("Unreachable")
-
 ```
 
 Теперь результат выполнения будет таким:
+
 ```
 $ python subprocess_call_devnull.py
 Alive
 ```
 
-### Функция ```subprocess.check_output()```
+### Функция `subprocess.check_output()`
 
-Функция ```check_output()```:
+Функция `check_output()`:
+
 * позволяет выполнить команду
- * при этом, она ожидает завершения команды.
-* если команда отработала корректно (код возврата 0), функция возращает результат выполнения команды
+  * при этом, она ожидает завершения команды.
+* если команда отработала корректно \(код возврата 0\), функция возращает результат выполнения команды
 * если возникла ошибка, при выполнении команды, функция генерирует исключение
 
-Пример использования функции ```check_output()``` (файл subprocess_check_output.py):
-```python
+Пример использования функции `check_output()` \(файл subprocess\_check\_output.py\):
+
+```py
 import subprocess
 
 reply = subprocess.check_output(['ping', '-c', '3', '-n', '8.8.8.8'])
 
 print("Result:")
 print(reply.decode('utf-8'))
-
 ```
 
-Результат выполнения (если убрать строку ```print(reply)```, на стандартный поток вывода ничего не будет выведено):
+Результат выполнения \(если убрать строку `print(reply)`, на стандартный поток вывода ничего не будет выведено\):
+
 ```
 $ python subprocess_check_output.py
 Result:
@@ -199,8 +211,9 @@ PING 8.8.8.8 (8.8.8.8): 56 data bytes
 round-trip min/avg/max/stddev = 49.785/52.696/57.231/3.250 ms
 ```
 
-Если выполнить команду, которая вызовет ошибку и, соответственно, код возрата будет не 0 (файл subprocess_check_output_catch_exception.py):
-```python
+Если выполнить команду, которая вызовет ошибку и, соответственно, код возрата будет не 0 \(файл subprocess\_check\_output\_catch\_exception.py\):
+
+```py
 $ python subprocess_check_output_catch_exception.py
 ping: unknown host a
 Traceback (most recent call last):
@@ -211,15 +224,15 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.6/subprocess.py", line 418, in run
     output=stdout, stderr=stderr)
 subprocess.CalledProcessError: Command '['ping', '-c', '3', '-n', 'a']' returned non-zero exit status 2.
-
 ```
 
-Возникло исключение ```CalledProcessError``` и соответствующее сообщение об ошибке.
+Возникло исключение `CalledProcessError` и соответствующее сообщение об ошибке.
 
-Функция ```check_output()``` всегда будет возвращать это исключение, когда код возврата не равен 0.
+Функция `check_output()` всегда будет возвращать это исключение, когда код возврата не равен 0.
 
-Это значит, что в скрипте можно написать выражение try/except, с помощью которого будет выполняться проверка корректно ли отработала команда (дополняем файл subprocess_check_output_catch_exception.py):
-```python
+Это значит, что в скрипте можно написать выражение try/except, с помощью которого будет выполняться проверка корректно ли отработала команда \(дополняем файл subprocess\_check\_output\_catch\_exception.py\):
+
+```py
 import subprocess
 
 try:
@@ -227,23 +240,23 @@ try:
 except subprocess.CalledProcessError as e:
     print("Error occurred")
     print("Return code:", e.returncode)
-
 ```
 
 Результат выполнения:
+
 ```
 $ python subprocess_check_output_catch_exception.py
 ping: unknown host a
 Error occurred
 Return code: 2
-
 ```
 
-Теперь программа завершилась корректно и вывела сообщение об ошибке и код возврата.
+Теперь программа завершилась корректно и вывела сообщение об ошибке и код возврата.  
 И, хотя сообщение об ошибке, не выводилось, оно попало на стандартный поток вывода.
 
 Попробуем собрать всё в финальную функцию и добавим перехват сообщения об ошибке:
-```python
+
+```py
 import subprocess
 from tempfile import TemporaryFile
 
@@ -267,22 +280,22 @@ def ping_ip(ip_address):
             temp.seek(0)
             return e.returncode, temp.read().decode('utf-8')
 
+
 print(ping_ip('8.8.8.8'))
 print(ping_ip('a'))
-
 ```
 
 Результат выполнения будет таким:
+
 ```
 $ python subprocess_ping_function.py
 (0, 'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=53.0 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=57.5 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=54.1 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2004ms\nrtt min/avg/max/mdev = 53.060/54.906/57.546/1.934 ms\n')
 (2, 'ping: unknown host a\n')
-
 ```
 
 > В примере использованы идеи из [ответа на stackoverflow](http://stackoverflow.com/questions/30937829/how-to-get-both-return-code-and-output-from-subprocess-in-python/30937898#30937898)
 
-Модуль tempfile входит в стандартную библиотеку Python и используется тут для того, чтобы сохранить сообщение об ошибке.
+Модуль tempfile входит в стандартную библиотеку Python и используется тут для того, чтобы сохранить сообщение об ошибке.  
 Функция TemporaryFile создает временный файл и удаляет его автоматически, после того, как файл закрывается.
 
 > Подробнее о модуле tempfile можно почитать на сайте [PyMOTW](https://pymotw.com/2/tempfile/).
@@ -293,6 +306,6 @@ $ python subprocess_ping_function.py
 
 > Это вынесено в задания к разделу.
 
-Это далеко не все возможности модуля subprocess.
+Это далеко не все возможности модуля subprocess.  
 Подробнее о нём можно почитать в [документации](https://docs.python.org/3/library/subprocess.html) или [в статье PyMOTW](https://pymotw.com/3/subprocess/)
 
