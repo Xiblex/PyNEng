@@ -67,12 +67,12 @@ with open('dhcp_snooping.txt') as data:
         if line[0].isdigit():
             result.append(regex.search(line).groupdict())
 
-print "К коммутатору подключено %d устройства" % len(result)
+print("К коммутатору подключено {} устройства".format(len(result)))
 
 for num, comp in enumerate(result, 1):
-    print "Параметры устройства %s:" % num
+    print("Параметры устройства {}:".format(num))
     for key in comp:
-        print "\t%s:\t%s" % (key,comp[key])
+        print("{:10}: {:10}".format(key,comp[key]))
 ```
 
 Результат выполнения:

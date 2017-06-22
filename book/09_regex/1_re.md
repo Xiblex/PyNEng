@@ -27,10 +27,10 @@ In [1]: import re
 
 In [2]: line = '00:09:BB:3D:D6:58   10.1.10.2    86250   dhcp-snooping   10    FastEthernet0/1'
 
-In [3]: print re.search('dhcp', line)
-<_sre.SRE_Match object at 0x10edeb9f0>
+In [3]: print(re.search('dhcp', line)))
+<_sre.SRE_Match object; span=(41, 45), match='dhcp'>
 
-In [4]: print re.search('dhcpd', line)
+In [4]: print(re.search('dhcpd', line)))
 None
 ```
 
@@ -42,9 +42,9 @@ None
 In [5]: match = re.search('dhcp', line)
 
 In [6]: match.span()
-Out[6]: (49, 53)
+Out[6]: (41, 45)
 
-In [7]: line[49:53]
+In [7]: line[41:45]
 Out[7]: 'dhcp'
 ```
 
@@ -75,7 +75,7 @@ In [20]: line2 = 'test dhcp, test2 dhcp2'
 
 In [21]: match = re.findall('dhcp', line2)
 
-In [22]: print match
+In [22]: print(match)
 ['dhcp', 'dhcp']
 ```
 
@@ -90,11 +90,11 @@ In [23]: line2 = 'test dhcp, test2 dhcp2'
 
 In [24]: match = re.finditer('dhcp', line2)
 
-In [25]: print match
+In [25]: print(match)
 <callable-iterator object at 0x10efd2cd0>
 
 In [26]: for i in match:
-   ....:     print i.span()
+   ....:     print(i.span())
    ....:     
 (5, 9)
 (17, 21)
@@ -115,7 +115,7 @@ In [30]: match = re.finditer('dhcp', line2)
 In [31]: for i in match:
    ....:     b = i.start()
    ....:     e = i.end()
-   ....:     print line2[b:e]
+   ....:     print(line2[b:e])
    ....:     
 dhcp
 dhcp
@@ -136,7 +136,7 @@ In [34]: match = regex.finditer(line2)
 In [35]: for i in match:
    ....:     b = i.start()
    ....:     e = i.end()
-   ....:     print line2[b:e]
+   ....:     print(line2[b:e])
    ....:     
 dhcp
 dhcp
