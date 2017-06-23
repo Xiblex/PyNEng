@@ -25,6 +25,14 @@
 
 Сайт для проверки регулярных выражений:
 * [regex101](https://regex101.com/)
+* [Визуализация регулярного выражения](https://regexper.com/)
+
+Руководства по использованию регулярных выражений:
+
+* [Regular Expression HOWTO](https://docs.python.org/3.6/howto/regex.html)
+* [Множество примеров использования регулярных выражений от основ до более сложных тем](http://www.rexegg.com/)
+* [Python 3 Module of the Week](https://pymotw.com/3/re/)
+
 
 ### Базы данных
 

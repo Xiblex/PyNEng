@@ -33,10 +33,31 @@ In [12]: match.group(2)
 Out[12]: '10.0.12.1'
 ```
 
+При необходимости, можно перечислить несколько номеров групп:
+```python
+In [13]: match.group(1, 2)
+Out[13]: ('FastEthernet0/1', '10.0.12.1')
+
+In [14]: match.group(2, 1, 2)
+Out[14]: ('10.0.12.1', 'FastEthernet0/1', '10.0.12.1')
+```
+
+Начиная с версии Python 3.6, к группам можно обращаться таким образом:
+```python
+In [15]: match[0]
+Out[15]: 'FastEthernet0/1            10.0.12.1       YES manual up                    up'
+
+In [16]: match[1]
+Out[16]: 'FastEthernet0/1'
+
+In [17]: match[2]
+Out[17]: '10.0.12.1'
+```
+
 Для вывода всех подстрок, которые соответствуют указанным группам, используется метод groups:
 ```python
-In [13]: match.groups()
-Out[13]: ('FastEthernet0/1', '10.0.12.1')
+In [18]: match.groups()
+Out[18]: ('FastEthernet0/1', '10.0.12.1')
 ```
 
 ### Именованные группы
@@ -49,34 +70,35 @@ Out[13]: ('FastEthernet0/1', '10.0.12.1')
 
 Синтаксис именованной группы __```(?P<name>regex)```__:
 ```python
-In [14]: line = "FastEthernet0/1            10.0.12.1       YES manual up                    up"
+In [19]: line = "FastEthernet0/1            10.0.12.1       YES manual up                    up"
 
-In [15]: match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+', line)
+In [20]: match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+', line)
 ```
 
 Теперь к этим группам можно обращаться по имени:
 ```python
-In [15]: match.group('intf')
-Out[15]: 'FastEthernet0/1'
+In [21]: match.group('intf')
+Out[21]: 'FastEthernet0/1'
 
-In [16]: match.group('address')
-Out[16]: '10.0.12.1'
+In [22]: match.group('address')
+Out[22]: '10.0.12.1'
 ```
 
 Также очень полезно то, что с помощью метода groupdict(), можно получить словарь, где ключи - имена групп, а значения - подстроки, которые им соответствуют:
 ```python
-In [17]: match.groupdict()
-Out[17]: {'address': '10.0.12.1', 'intf': 'FastEthernet0/1'}
+In [23]: match.groupdict()
+Out[23]: {'address': '10.0.12.1', 'intf': 'FastEthernet0/1'}
 ```
 
 И, в таком случае, можно добавить группы в регулярное выражение и полагаться на их имя, а не на порядок:
 ```python
-In [18]:  match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+[\w\s]+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
+In [24]:  match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+[\w\s]+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
 
-In [19]: match.groupdict()
-Out[19]:
+In [25]: match.groupdict()
+Out[25]:
 {'address': '10.0.12.1',
  'intf': 'FastEthernet0/1',
  'protocol': 'up',
  'status': 'up'}
 ```
+

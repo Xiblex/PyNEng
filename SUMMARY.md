@@ -78,6 +78,7 @@
     * [Жадность регулярных выражений](book/09_regex/3_greedy_re.md)
     * [Группировка выражений](book/09_regex/4_re_groups.md)
         * [Разбор вывода команды show ip dhcp snooping с помощью именованных групп](book/09_regex/4a_group_example.md)
+    * [Дополнительные возможности](book/09_regex/5_additional_capabilities.md)
     * [Задания](exercises/09_regex/09_exercises.md)
 * [10. Сериализация данных](book/10_serialization/README.md)
     * [CSV](book/10_serialization/1_csv.md)
