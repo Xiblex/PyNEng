@@ -8,7 +8,7 @@
 Например, строку ospf\_route надо разбить на элементы, по пробелам \(как в методе str.split\):
 
 ```python
-In [1]: ospf_route = 'O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
+In [1]: ospf_route = 'O     10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
 
 In [2]: re.split(' +', ospf_route)
 Out[2]:
@@ -79,7 +79,7 @@ Out[6]: ['O', '10.0.24.0/24', '110/41', '10.0.13.3', '3d18h', 'FastEthernet0/0']
 Заменим запятые, квадратные скобки и слово via на пробел в строке ospf\_route:
 
 ```python
-In [7]: ospf_route = 'O        10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
+In [7]: ospf_route = 'O    10.0.24.0/24 [110/41] via 10.0.13.3, 3d18h, FastEthernet0/0'
 
 In [8]: re.sub('(via|[,\[\]])', ' ', ospf_route)
 Out[8]: 'O        10.0.24.0/24  110/41    10.0.13.3  3d18h  FastEthernet0/0'
@@ -159,6 +159,7 @@ In [12]: m = re.search(' *\d+ +[a-f,0-9,\.]+ +\w+ +\S+', table)
 ```
 
 В результат попадет первая строка с MAC-адресом:
+
 ```python
 In [13]: m.group()
 Out[13]: ' 100    aabb.cc80.7000    DYNAMIC     Gi0/1'
