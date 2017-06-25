@@ -99,7 +99,7 @@ In [9]: mac_table = '''
    ...:  300    aabb.cc70.7000    DYNAMIC     Gi0/7
    ...: '''
 
-In [10]: print(re.sub(' *(\d+) +([a-f,0-9]+)\.([a-f,0-9]+)\.([a-f,0-9]+) +\w+ +(\S+)', r'\1 \2:\3:\4 \5', mac_table))
+In [10]: print(re.sub(' *(\d+) +([a-f0-9]+)\.([a-f0-9]+)\.([a-f0-9]+) +\w+ +(\S+)', r'\1 \2:\3:\4 \5', mac_table))
 
 100 aabb:cc10:7000 Gi0/1
 200 aabb:cc20:7000 Gi0/2
@@ -155,7 +155,7 @@ In [11]: table = '''
 В этом выражении описана строка с MAC-адресом:
 
 ```python
-In [12]: m = re.search(' *\d+ +[a-f,0-9,\.]+ +\w+ +\S+', table)
+In [12]: m = re.search(' *\d+ +[a-f0-9.]+ +\w+ +\S+', table)
 ```
 
 В результат попадет первая строка с MAC-адресом:
@@ -168,7 +168,7 @@ Out[13]: ' 100    aabb.cc80.7000    DYNAMIC     Gi0/1'
 Учитывая то, что по умолчанию регулярные выражения жадные, можно получить все соответствия таким образом:
 
 ```python
-In [14]: m = re.search('( *\d+ +[a-f,0-9,\.]+ +\w+ +\S+\n)+', table)
+In [14]: m = re.search('( *\d+ +[a-f0-9.]+ +\w+ +\S+\n)+', table)
 
 In [15]: print(m.group())
  100    aabb.cc10.7000    DYNAMIC     Gi0/1
@@ -187,7 +187,7 @@ In [15]: print(m.group())
 Это можно описать таким образом:
 
 ```python
-In [16]: m = re.search(' *\d+ +[a-f,0-9,\.]+ +\w+ +\S+.*', table)
+In [16]: m = re.search(' *\d+ +[a-f0-9.]+ +\w+ +\S+.*', table)
 
 In [17]: print(m.group())
  100    aabb.cc10.7000    DYNAMIC     Gi0/1
@@ -197,7 +197,7 @@ In [17]: print(m.group())
 Но, если добавить специальный флаг, re.DOTALL, точка будет включать и перевод строки и в результат попадут все соответствия:
 
 ```python
-In [18]: m = re.search(' *\d+ +[a-f,0-9,\.]+ +\w+ +\S+.*', table, re.DOTALL)
+In [18]: m = re.search(' *\d+ +[a-f0-9.]+ +\w+ +\S+.*', table, re.DOTALL)
 
 In [19]: print(m.group())
  100    aabb.cc10.7000    DYNAMIC     Gi0/1
