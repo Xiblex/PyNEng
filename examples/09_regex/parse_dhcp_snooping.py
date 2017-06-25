@@ -14,9 +14,9 @@ with open('dhcp_snooping.txt') as data:
 print("К коммутатору подключено {} устройства".format(len(result)))
 
 for num, comp in enumerate(result, 1):
-    print("Параметры устройства {}:".format(num))
+    print "Параметры устройства {}:".format(num)
     for key in comp:
-        print("{:10}: {:10}".format(key,comp[key]))
+        print "{:10}: {:10}".format(key,comp[key])
 
 
 """
