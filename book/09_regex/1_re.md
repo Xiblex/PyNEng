@@ -27,10 +27,10 @@ In [1]: import re
 
 In [2]: line = '00:09:BB:3D:D6:58   10.1.10.2    86250   dhcp-snooping   10    FastEthernet0/1'
 
-In [3]: print(re.search('dhcp', line)))
+In [3]: print(re.search('dhcp', line))
 <_sre.SRE_Match object; span=(41, 45), match='dhcp'>
 
-In [4]: print(re.search('dhcpd', line)))
+In [4]: print(re.search('dhcpd', line))
 None
 ```
 
