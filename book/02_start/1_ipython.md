@@ -23,7 +23,7 @@ iPython позволяет намного больше, чем стандарт�
 Установить iPython можно с помощью pip (если виртуальная машина устанавливается с нуля):
 ```
 apt-get install python-pip python-dev 
-pip install —upgrade pip 
+pip install --upgrade pip 
 pip install ipython
 ```
 
