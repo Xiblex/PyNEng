@@ -8,6 +8,8 @@
 
 В Python, в модуле sys есть очень простой и удобный способ для работы с аргументами - argv.
 
+> В Python существует несколько модулей для обработки аргументов командной строки. В одной из задач раздела [Базы данных](https://natenka.gitbooks.io/pyneng/content/book/11_db/) будет использоваться [модуль argparse](https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/useful_modules/argparse.html).
+
 Посмотрим на пример (файл access_template_argv.py):
 ```python
 from sys import argv
