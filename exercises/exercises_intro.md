@@ -1,6 +1,4 @@
-Все задания и вспомогательные файлы можно скачать одним архивом [zip](https://github.com/natenka/PyNEng/blob/master/exercises.zip) или [tar.gz](https://github.com/natenka/PyNEng/blob/master/exercises.tar.gz).
-
-Также для курса подготовлены две виртуальные машины на выбор: [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md). В них установлены все пакеты, которые используются в курсе.
+Все задания и вспомогательные файлы можно скачать в [репозитории](https://github.com/natenka/pyneng-examples-exercises/tree/python3).
 
 <br>
 
