@@ -209,12 +209,4 @@ In [19]: print(m.group())
  300    aabb.cc70.7000    DYNAMIC     Gi0/7
 ```
 
-### Дополнительные ресурсы
-
-* [Regular Expression HOWTO](https://docs.python.org/3.6/howto/regex.html)
-* [Множество примеров использования регулярных выражений от основ до более сложных тем](http://www.rexegg.com/)
-* [Визуализация регулярного выражения](https://regexper.com/)
-* [Python 3 Module of the Week](https://pymotw.com/3/re/)
-
-
 
