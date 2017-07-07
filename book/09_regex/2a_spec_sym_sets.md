@@ -25,7 +25,7 @@ Out[5]: '06:15:18'
 Выражение ```\d\d:\d\d:\d\d``` описывает 3 пары чисел разделенных двоеточиями.
 
 
-А теперь получим MAC-адрес из лог-сообщения:
+Получение MAC-адреса из лог-сообщения:
 ```python
 In [9]: log2 = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
 
