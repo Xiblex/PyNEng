@@ -21,14 +21,14 @@ sw4,Cisco,3650,London
 
 ###Чтение
 
-Пример использования модуля csv (файл csv_read.py):
+Пример чтения файла в формате CSV (файл csv_read.py):
 ```python
 import csv
 
 with open('sw_data.csv') as f:
     reader = csv.reader(f)
     for row in reader:
-        print row
+        print(row)
 ```
 
 Вывод будет таким:
@@ -43,6 +43,40 @@ $ python csv_read.py
 
 В первом списке находятся названия столбцов, а в остальных, соответствующие значения.
 
+Обратите внимание, что сам csv.reader возвращает итератор:
+```python
+In [1]: import csv
+
+In [2]: with open('sw_data.csv') as f:
+   ...:     reader = csv.reader(f)
+   ...:     print(reader)
+   ...:
+<_csv.reader object at 0x10385b050>
+```
+
+При необходимости, его можно превратить в список таким образом:
+```python
+In [3]: with open('sw_data.csv') as f:
+   ...:     reader = csv.reader(f)
+   ...:     print(list(reader))
+   ...:
+[['hostname', 'vendor', 'model', 'location'], ['sw1', 'Cisco', '3750', 'London'], ['sw2', 'Cisco', '3850', 'Liverpool'], ['sw3', 'Cisco', '3650', 'Liverpool'], ['sw4', 'Cisco', '3650', 'London']]
+```
+
+Чаще всего, заголовки столбцов удобней получить отдельным объектом.
+Это можно сделать таким образом (файл csv_read_headers.py):
+```py
+import csv
+
+with open('sw_data.csv') as f:
+    reader = csv.reader(f)
+    headers = next(reader)
+    print('Headers: ', headers)
+    for row in reader:
+        print(row)
+```
+
+
 Иногда в результате обработки, гораздо удобней получить словари, в которых ключи - это названия столбцов, а значения - значения столбцов.
 
 Для этого в модуле есть __DictReader__ (файл csv_read_dict.py):
@@ -52,37 +86,30 @@ import csv
 with open('sw_data.csv') as f:
     reader = csv.DictReader(f)
     for row in reader:
-        print row
+        print(row)
+        print(row['hostname'], row['model'])
+
 ```
 
 Вывод будет таким:
 ```
 $ python csv_read_dict.py
-{'model': '3750', 'hostname': 'sw1', 'vendor': 'Cisco', 'location': 'London'}
-{'model': '3850', 'hostname': 'sw2', 'vendor': 'Cisco', 'location': 'Liverpool'}
-{'model': '3650', 'hostname': 'sw3', 'vendor': 'Cisco', 'location': 'Liverpool'}
-{'model': '3650', 'hostname': 'sw4', 'vendor': 'Cisco', 'location': 'London'}
+OrderedDict([('hostname', 'sw1'), ('vendor', 'Cisco'), ('model', '3750'), ('location', 'London')])
+sw1 3750
+OrderedDict([('hostname', 'sw2'), ('vendor', 'Cisco'), ('model', '3850'), ('location', 'Liverpool')])
+sw2 3850
+OrderedDict([('hostname', 'sw3'), ('vendor', 'Cisco'), ('model', '3650'), ('location', 'Liverpool')])
+sw3 3650
+OrderedDict([('hostname', 'sw4'), ('vendor', 'Cisco'), ('model', '3650'), ('location', 'London')])
+sw4 3650
 ```
 
-Обратите внимание, что сам reader это итератор. Поэтому, если просто вывести reader, то вывод будет таким:
-```python
-In [1]: import csv
+DictReader создает не стандартные словари Python, а упорядоченные словари.
+Засчет этого порядок элементов соответствует порядку столбцов в CSV файле.
 
-In [2]: with open('sw_data.csv') as f:
-   ...:     reader = csv.reader(f)
-   ...:     print reader
-   ...:
-<_csv.reader object at 0x10385b050>
-```
+> До Python 3.6 возвращались обычные словари, а не упорядоченные.
 
-Но, если нужно все объекты передать куда-то дальше, его можно превратить в список таким образом:
-```python
-In [3]: with open('sw_data.csv') as f:
-   ...:     reader = csv.reader(f)
-   ...:     print list(reader)
-   ...:
-[['hostname', 'vendor', 'model', 'location'], ['sw1', 'Cisco', '3750', 'London'], ['sw2', 'Cisco', '3850', 'Liverpool'], ['sw3', 'Cisco', '3650', 'Liverpool'], ['sw4', 'Cisco', '3650', 'London']]
-```
+В остальном, с упорядоченными словарями можно работать используя те же методы, что и в обычных словарях.
 
 ###Запись
 
@@ -103,7 +130,7 @@ with open('sw_data_new.csv', 'w') as f:
         writer.writerow(row)
 
 with open('sw_data_new.csv') as f:
-    print f.read()
+    print(f.read())
 ```
 
 В примере выше, строки из списка сначала записываются в файл, а затем, содержимое файла выводится на стандартный поток вывода.
@@ -128,7 +155,7 @@ sw4,Cisco,3650,"London, Best str"
 Конечно, в этом случае, достаточно простой пример, но когда в строках больше значений, то кавычки позволяют указать где начинается и заканчивается значение.
 
 Модуль csv позволяет управлять этим.
-Для того, чтобы все строки записывались в файл csv с кавычками, надо изменить скрипт таким образом (файл csv_write_ver2.py):
+Для того, чтобы все строки записывались в файл csv с кавычками, надо изменить скрипт таким образом (файл csv_write_quoting.py):
 ```python
 import csv
 
@@ -144,12 +171,12 @@ with open('sw_data_new.csv', 'w') as f:
         writer.writerow(row)
 
 with open('sw_data_new.csv') as f:
-    print f.read()
+    print(f.read())
 ```
 
 Теперь вывод будет таким:
 ```
-$ python csv_write_ver2.py
+$ python csv_write_quoting.py
 "hostname","vendor","model","location"
 "sw1","Cisco","3750","London, Best str"
 "sw2","Cisco","3850","Liverpool, Better str"
@@ -158,6 +185,27 @@ $ python csv_write_ver2.py
 ```
 
 Теперь все значения с кавычками. И, так как номер модели задан как строка, в изначальном списке, тут он тоже в кавычках.
+
+Кроме метода writerow, поддерживается метод writerows.
+Ему можно передать любой итерируемый объект.
+
+Например, предыдущий пример можно записать таким образом (файл csv_writerows.py):
+```python
+import csv
+
+data = [['hostname', 'vendor', 'model', 'location'],
+        ['sw1', 'Cisco', '3750', 'London, Best str'],
+        ['sw2', 'Cisco', '3850', 'Liverpool, Better str'],
+        ['sw3', 'Cisco', '3650', 'Liverpool, Better str'],
+        ['sw4', 'Cisco', '3650', 'London, Best str']]
+
+with open('sw_data_new.csv', 'w') as f:
+    writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+    writer.writerows(data)
+
+with open('sw_data_new.csv') as f:
+    print(f.read())
+```
 
 ###Указание разделителя
 
@@ -179,5 +227,6 @@ import csv
 with open('sw_data2.csv') as f:
     reader = csv.reader(f, delimiter=';')
     for row in reader:
-        print row
+        print(row)
 ```
+

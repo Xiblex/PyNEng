@@ -1,8 +1,8 @@
-##Работа с файлами в формате JSON
+## Работа с файлами в формате JSON
 
 __JSON (JavaScript Object Notation)__ - это текстовый формат для хранения и обмена данными.
 
-[JSON](https://ru.wikipedia.org/wiki/JSON) по синтаксису очень похож на словари в Python. И достаточно удобен для восприятия.
+[JSON](https://ru.wikipedia.org/wiki/JSON) по синтаксису очень похож на Python. И достаточно удобен для восприятия.
 
 Как и в случае с CSV, в Python есть модуль, который позволяет легко записывать и читать данные в формате JSON.
 
@@ -28,35 +28,28 @@ __JSON (JavaScript Object Notation)__ - это текстовый формат �
 ```
 
 Для чтения, в модуле json есть два метода:
-* json.load() - метод считывает файл и возвращает объекты Python
+* json.load() - метод считывает файл в формате JSON и возвращает объекты Python
 * json.loads() - метод считывает строку в формате JSON и возвращает объекты Python
 
 #### json.load()
 
-Чтение файла в объект Python:
+Чтение файла в формате JSON в объект Python (файл json_read_load.py):
 ```python
-In [1]: import json
+import json
 
-In [2]: with open('sw_templates.json') as f:
-   ...:     templates = json.load(f)
-   ...:
+with open('sw_templates.json') as f:
+    templates = json.load(f)
 
-In [3]: templates
-Out[3]:
-{u'access': [u'switchport mode access',
-  u'switchport access vlan',
-  u'switchport nonegotiate',
-  u'spanning-tree portfast',
-  u'spanning-tree bpduguard enable'],
- u'trunk': [u'switchport trunk encapsulation dot1q',
-  u'switchport mode trunk',
-  u'switchport trunk native vlan 999',
-  u'switchport trunk allowed vlan']}
+for section, commands in templates.items():
+    print(section)
+    print('\n'.join(commands))
 
-In [4]: for section, commands in templates.items():
-   ...:     print section
-   ...:     print '\n'.join(commands)
-   ...:
+```
+
+Вывод будет таким:
+```python
+$ python json_read_load.py
+{'access': ['switchport mode access', 'switchport access vlan', 'switchport nonegotiate', 'spanning-tree portfast', 'spanning-tree bpduguard enable'], 'trunk': ['switchport trunk encapsulation dot1q', 'switchport mode trunk', 'switchport trunk native vlan 999', 'switchport trunk allowed vlan']}
 access
 switchport mode access
 switchport access vlan
@@ -68,33 +61,28 @@ switchport trunk encapsulation dot1q
 switchport mode trunk
 switchport trunk native vlan 999
 switchport trunk allowed vlan
+
 ```
-
-Результат чтения - словарь.
-Обратите внимание, что при чтении из файла в формате JSON, строки будут в unicode.
-
-> Мы не будем рассматривать работу с Unicode. Хороший документ о работе с unicode: [Unicode HowTo](https://docs.python.org/2/howto/unicode.html).
 
 #### json.loads()
 
-Считывание строки в формате JSON в объект Python:
+Считывание строки в формате JSON в объект Python (файл json_read_loads.py):
 ```python
-In [5]: with open('sw_templates.json') as f:
-   ...:     templates = json.loads(f.read())
-   ...:
+import json
 
-In [6]: templates
-Out[6]:
-{u'access': [u'switchport mode access',
-  u'switchport access vlan',
-  u'switchport nonegotiate',
-  u'spanning-tree portfast',
-  u'spanning-tree bpduguard enable'],
- u'trunk': [u'switchport trunk encapsulation dot1q',
-  u'switchport mode trunk',
-  u'switchport trunk native vlan 999',
-  u'switchport trunk allowed vlan']}
+with open('sw_templates.json') as f:
+    file_content = f.read()
+    templates = json.loads(file_content)
+
+print(templates)
+
+for section, commands in templates.items():
+    print(section)
+    print('\n'.join(commands))
+
 ```
+
+Результат будет аналогичен предыдущему выводу.
 
 ###Запись
 
@@ -104,48 +92,66 @@ Out[6]:
 * json.dump() - метод записывает объект Python в файл, в формате JSON
 * json.dumps() - метод возвращает строку в формате JSON
 
-#### json.dump()
-
-Запись объекта Python в файл:
-```python
-In [7]: trunk_template = ['switchport trunk encapsulation dot1q',
-   ...:                   'switchport mode trunk',
-   ...:                   'switchport trunk native vlan 999',
-   ...:                   'switchport trunk allowed vlan']
-   ...:
-   ...:
-   ...: access_template = ['switchport mode access',
-   ...:                    'switchport access vlan',
-   ...:                    'switchport nonegotiate',
-   ...:                    'spanning-tree portfast',
-   ...:                    'spanning-tree bpduguard enable']
-   ...:
-   ...: to_json = {'trunk':trunk_template, 'access':access_template}
-   ...:
-
-In [8]: with open('sw_templates.json', 'w') as f:
-   ...:     json.dump(to_json, f)
-   ...:
-
-In [9]: cat sw_templates.json
-{"access": ["switchport mode access", "switchport access vlan", "switchport nonegotiate", "spanning-tree portfast", "spanning-tree bpduguard enable"], "trunk": ["switchport trunk encapsulation dot1q", "switchport mode trunk", "switchport trunk native vlan 999", "switchport trunk allowed vlan"]}
-```
-
-Когда нужно записать информацию в формате JSON в файл, лучше использовать метод dump.
-
 #### json.dumps()
 
-Преобразование объекта в строку в формате JSON:
+Преобразование объекта в строку в формате JSON (json_write_dumps.py):
 ```python
-In [10]: with open('sw_templates.json', 'w') as f:
-    ...:     f.write(json.dumps( to_json ))
-    ...:
+import json
 
-In [11]: cat sw_templates.json
-{"access": ["switchport mode access", "switchport access vlan", "switchport nonegotiate", "spanning-tree portfast", "spanning-tree bpduguard enable"], "trunk": ["switchport trunk encapsulation dot1q", "switchport mode trunk", "switchport trunk native vlan 999", "switchport trunk allowed vlan"]}
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk native vlan 999',
+                  'switchport trunk allowed vlan']
+
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+to_json = {'trunk':trunk_template, 'access':access_template}
+
+with open('sw_templates.json', 'w') as f:
+    f.write(json.dumps(to_json))
+
+with open('sw_templates.json') as f:
+    print(f.read())
+
 ```
 
 Метод json.dumps() подходит для ситуаций, когда надо вернуть строку в формате JSON. 
+Например, чтобы передать ее API.
+
+#### json.dump()
+
+Запись объекта Python в файл в формате JSON (файл json_write_dump.py):
+```python
+import json
+
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk native vlan 999',
+                  'switchport trunk allowed vlan']
+
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+to_json = {'trunk':trunk_template, 'access':access_template}
+
+with open('sw_templates.json', 'w') as f:
+    json.dump(to_json, f)
+
+with open('sw_templates.json') as f:
+    print(f.read())
+
+```
+
+Когда нужно записать информацию в формате JSON в файл, лучше использовать метод dump.
 
 
 #### Дополнительные параметры методов записи
@@ -158,16 +164,34 @@ In [11]: cat sw_templates.json
 
 К счастью, модуль json позволяет управлять подобными вещами.
 
-Передав дополнительные параметры методу dump (или методу dumps), можно получить более удобный для чтение вывод (файл json_write_ver2.py):
+Передав дополнительные параметры методу dump (или методу dumps), можно получить более удобный для чтение вывод (файл json_write_indent.py):
 ```python
-In [13]: with open('sw_templates.json', 'w') as f:
-    ...:     json.dump(to_json, f, sort_keys=True, indent=2)
-    ...:
+import json
+
+
+trunk_template = ['switchport trunk encapsulation dot1q',
+                  'switchport mode trunk',
+                  'switchport trunk native vlan 999',
+                  'switchport trunk allowed vlan']
+
+access_template = ['switchport mode access',
+                   'switchport access vlan',
+                   'switchport nonegotiate',
+                   'spanning-tree portfast',
+                   'spanning-tree bpduguard enable']
+
+to_json = {'trunk':trunk_template, 'access':access_template}
+
+with open('sw_templates.json', 'w') as f:
+    json.dump(to_json, f, sort_keys=True, indent=2)
+
+with open('sw_templates.json') as f:
+    print(f.read())
+
 ```
 
 Теперь содержимое файла sw_templates.json выглядит так:
 ```
-In [14]: cat sw_templates.json
 {
   "access": [
     "switchport mode access",
@@ -187,43 +211,70 @@ In [14]: cat sw_templates.json
 
 
 #### Изменение типа данных
-Еще один важный аспект преобразования данных в формат json: данные не всегда будут того же типа, что исходные данные в Python.
 
-Такая ситуация уже возникала со строками - они были в формате unicode.
-Кроме того, при записи в JSON кортежей, они превращаются в списки.
+Еще один важный аспект преобразования данных в формат JSON: данные не всегда будут того же типа, что исходные данные в Python.
 
-Например:
+Например, кортежи, при записи в JSON, превращаются в списки:
 ```python
+In [1]: import json
 
-In [15]: import json
+In [2]: trunk_template = ('switchport trunk encapsulation dot1q',
+   ...:                   'switchport mode trunk',
+   ...:                   'switchport trunk native vlan 999',
+   ...:                   'switchport trunk allowed vlan')
 
-In [16]: trunk_template = ('switchport trunk encapsulation dot1q',
-    ...:                   'switchport mode trunk',
-    ...:                   'switchport trunk native vlan 999',
-    ...:                   'switchport trunk allowed vlan')
+In [3]: print(type(trunk_template))
+<class 'tuple'>
 
-In [17]: print type(trunk_template)
-<type 'tuple'>
+In [4]: with open('trunk_template.json', 'w') as f:
+   ...:     json.dump(trunk_template, f, sort_keys=True, indent=2)
+   ...:
 
-In [18]: with open('trunk_template.json', 'w') as f:
-    ...:     json.dump(trunk_template, f, sort_keys=True, indent=2)
-    ...:
-
-In [19]: cat trunk_template.json
+In [5]: cat trunk_template.json
 [
   "switchport trunk encapsulation dot1q",
   "switchport mode trunk",
   "switchport trunk native vlan 999",
   "switchport trunk allowed vlan"
 ]
-In [20]: templates = json.load(open('trunk_template.json'))
+In [6]: templates = json.load(open('trunk_template.json'))
 
-In [21]: type(templates)
-Out[21]: list
+In [7]: type(templates)
+Out[7]: list
 
-In [22]: print templates
-[u'switchport trunk encapsulation dot1q', u'switchport mode trunk', u'switchport trunk native vlan 999', u'switchport trunk allowed vlan']
+In [8]: print(templates)
+['switchport trunk encapsulation dot1q', 'switchport mode trunk', 'switchport trunk native vlan 999', 'switchport trunk allowed vlan']
+
 ```
+
+Так происходит из-за того, что в JSON используются другие типы данных и не для всех типов данных Python есть соответствия.
+
+Таблица конвертации данных Python в JSON:
+
+|  Python     | JSON  |
+|:-----------:|:-----:|
+|  dict       | object|
+| list, tuple | array |
+| str         | string|
+| int, float  | number|
+| True        | true  |
+| False       | false |
+| None        | null  |
+
+
+Таблица конвертации JSON в данные Python:
+
+| JSON  |  Python |
+|:-----:|:-------:|
+| object| dict
+| array | list
+| string| str
+| number (int) | int
+| number (real)| float
+| true  | True
+| false | False
+| null  | None
+
 
 #### Ограничение по типам данных
 

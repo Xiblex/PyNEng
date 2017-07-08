@@ -14,8 +14,6 @@ YAML более приятен для восприятия человеком, �
 Еще одна схожесть с Python: комментарии начинаются с символа # и продолжаются до конца строки.
 
 
-Пройдемся по тому как в YAML записываются различные форматы данных.
-
 ####Список
 
 Список может быть записан в одну строку:
@@ -135,16 +133,21 @@ pip install pyyaml
   to_name: Manchester
 ```
 
-Чтение из YAML выполняется очень просто:
+Чтение из YAML (файл yaml_read.py):
 ```python
-In [1]: import yaml
+import yaml
+import pprint
 
-In [2]: with open('info.yaml') as f:
-   ...:     templates = yaml.load(f)
-   ...:
+with open('info.yaml') as f:
+    templates = yaml.load(f)
 
-In [3]: templates
-Out[3]:
+pprint.pprint(templates)
+
+```
+
+Результат:
+```python
+$ python yaml_read.py
 [{'BS': 1550,
   'IT': 791,
   'id': 11,
@@ -163,6 +166,7 @@ Out[3]:
   'name': 'Coventry',
   'to_id': 2,
   'to_name': 'Manchester'}]
+
 ```
 
 Формат YAML очень удобен для хранения различных параметров.
@@ -180,7 +184,6 @@ trunk_template = ['switchport trunk encapsulation dot1q',
                   'switchport trunk native vlan 999',
                   'switchport trunk allowed vlan']
 
-
 access_template = ['switchport mode access',
                    'switchport access vlan',
                    'switchport nonegotiate',
@@ -190,7 +193,7 @@ access_template = ['switchport mode access',
 to_yaml = {'trunk':trunk_template, 'access':access_template}
 
 with open('sw_templates.yaml', 'w') as f:
-    f.write(yaml.dump(to_yaml))
+    yaml.dump(to_yaml, f)
 
 with open('sw_templates.yaml') as f:
     print f.read()
@@ -205,10 +208,10 @@ trunk: [switchport trunk encapsulation dot1q, switchport mode trunk, switchport 
     native vlan 999, switchport trunk allowed vlan]
 ```
 
-То есть, по умолчанию, список записался в одну строку.
+По умолчанию, список записался в одну строку.
 Это можно изменить.
 
-Для того, чтобы изменить формат записи, надо добавить параметр ```default_flow_style=False``` (файл yaml_write_ver2.py):
+Для того, чтобы изменить формат записи, надо добавить параметр ```default_flow_style=False``` (файл yaml_write_default_flow_style.py):
 ```python
 import yaml
 
@@ -227,7 +230,7 @@ access_template = ['switchport mode access',
 to_yaml = {'trunk':trunk_template, 'access':access_template}
 
 with open('sw_templates.yaml', 'w') as f:
-    f.write(yaml.dump(to_yaml, default_flow_style=False))
+    yaml.dump(to_yaml, f, default_flow_style=False)
 
 with open('sw_templates.yaml') as f:
     print f.read()
@@ -247,4 +250,5 @@ trunk:
 - switchport trunk native vlan 999
 - switchport trunk allowed vlan
 ```
+
 
