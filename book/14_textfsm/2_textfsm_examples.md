@@ -21,8 +21,7 @@ re_table = textfsm.TextFSM(f)
 header = re_table.header
 result = re_table.ParseText(output)
 
-print tabulate(result, headers=header)
-
+print(tabulate(result, headers=header))
 ```
 
 Пример запуска скрипта:
@@ -672,3 +671,4 @@ Po3        ['Fa0/11', 'Fa0/12', 'Fa0/13', 'Fa0/14', 'Fa0/15', 'Fa0/16']
 На этом мы заканчиваем разбираться с шаблонами TextFSM.
 
 Примеры шаблонов для Cisco и другого оборудования можно посмотреть в проекте [ntc-ansible](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates).
+

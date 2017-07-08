@@ -102,7 +102,7 @@ cli_table.LabelValueTable  cli_table.header           cli_table.separator
 
 Например, если вызвать ```print cli_table```, получим такой вывод:
 ```python
-In [7]: print cli_table
+In [7]: print(cli_table)
 Network, Mask, Distance, Metric, NextHop
 10.0.24.0, /24, 110, 20, ['10.0.12.2']
 10.0.34.0, /24, 110, 20, ['10.0.13.3']
@@ -114,7 +114,7 @@ Network, Mask, Distance, Metric, NextHop
 
 Метод FormattedTable позволяет получить вывод в виде таблицы:
 ```python
-In [8]: print cli_table.FormattedTable()
+In [8]: print(cli_table.FormattedTable())
  Network    Mask  Distance  Metric  NextHop
 ====================================================================
  10.0.24.0  /24   110       20      10.0.12.2
@@ -129,14 +129,7 @@ In [8]: print cli_table.FormattedTable()
 
 Чтобы получить из объекта cli_table структурированный вывод, например, список списков, надо обратиться к объекту таким образом:
 ```python
-In [9]: data_rows = []
-
-In [10]: for row in cli_table:
-   ....:     current_row = []
-   ....:     for value in row:
-   ....:         current_row.append(value)
-   ....:     data_rows.append(current_row)
-   ....:
+In [9]: data_rows = [list(row) for row in cli_table]
 
 In [11]: data_rows
 Out[11]:
@@ -151,14 +144,7 @@ Out[11]:
 
 Отдельно можно получить названия столбцов:
 ```python
-In [12]: cli_table.header.viewvalues()
-Out[12]: dict_values([])
-
-In [13]: header = []
-
-In [13]: for name in cli_table.header:
-   ....:     header.append(name)
-   ....:
+In [12]: header = list(cli_table.header)
 
 In [14]: header
 Out[14]: ['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
@@ -169,31 +155,26 @@ Out[14]: ['Network', 'Mask', 'Distance', 'Metric', 'NextHop']
 
 Соберем всё в один скрипт (файл textfsm_clitable.py):
 ```python
-import textfsm.clitable as clitable
+import clitable
 
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
+
 cli_table = clitable.CliTable('index', 'templates')
+
 attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
+
 cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
+print("CLI Table output:\n", cli_table)
 
-print "CLI Table output:\n", cli_table
-print "Formatted Table:\n", cli_table.FormattedTable()
+print("Formatted Table:\n", cli_table.FormattedTable())
 
-data_rows = []
+data_rows = [list(row) for row in cli_table]
+header = list(cli_table.header)
 
-for row in cli_table:
-    current_row = []
-    for value in row:
-        current_row.append(value)
-    data_rows.append(current_row)
-
-header = []
-for name in cli_table.header:
-    header.append(name)
-
-print header
+print(header)
 for row in data_rows:
-    print row
+    print(row)
+
 ```
 
 > В упражнениях к этому разделу будет задание, в котором надо объединить описанную процедуру в функцию. А также вариант с получением списка словарей.
