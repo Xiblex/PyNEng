@@ -8,12 +8,12 @@
 
 Например, надо получить MAC-адрес, VLAN и порты из такого лог-сообщения:
 ```python
-In [110]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
+In [1]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
 ```
 
 Регулярное выражение, которое описывает нужные подстроки:
 ```python
-In [114]: match = re.search('(([0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}).+vlan (\d+).+port (\S+).+port (\S+)', log)
+In [2]: match = re.search('(([0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}).+vlan (\d+).+port (\S+).+port (\S+)', log)
 ```
 
 Выражение состоит из таких частей:
@@ -27,8 +27,8 @@ In [114]: match = re.search('(([0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}).+vlan (\d+).+
 
 Метод groups вернет такой результат:
 ```python
-In [117]: match.groups()
-Out[117]: ('f03a.b216.7ad7', 'b216.', '10', 'Gi0/5', 'Gi0/15')
+In [3]: match.groups()
+Out[3]: ('f03a.b216.7ad7', 'b216.', '10', 'Gi0/5', 'Gi0/15')
 ```
 
 Второй элемент по сути лишний. Он попал в вывод из-за скобок в выражении ```([0-9a-fA-F]{4}\.){2}```.
@@ -38,13 +38,13 @@ Out[117]: ('f03a.b216.7ad7', 'b216.', '10', 'Gi0/5', 'Gi0/15')
 
 Теперь выражение выглядит так:
 ```python
-In [120]: match = re.search('((?:[0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}).+vlan (\d+).+port (\S+).+port (\S+)', log)
+In [4]: match = re.search('((?:[0-9a-fA-F]{4}\.){2}[0-9a-fA-F]{4}).+vlan (\d+).+port (\S+).+port (\S+)', log)
 ```
 
 И, соответственно, группы:
 ```python
-In [121]: match.groups()
-Out[121]: ('f03a.b216.7ad7', '10', 'Gi0/5', 'Gi0/15')
+In [5]: match.groups()
+Out[5]: ('f03a.b216.7ad7', '10', 'Gi0/5', 'Gi0/15')
 
 ```
 

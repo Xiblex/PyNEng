@@ -82,7 +82,7 @@
         * [Группировка выражений](book/09_regex/4_re_groups.md)
             * [Пример использования именованных групп](book/09_regex/4a_group_example.md)
         * [Группа без захвата](book/09_regex/4b_non-capturing_groups.md)
-        * [Повторение захваченного результата](book/09_regex/4c_repeat_captured_result.md)
+        * [Повторение захваченного результата](book/09_regex/4c_group_reference.md)
     * [Модуль re](book/09_regex/5_re.md)
         * [Дополнительные возможности](book/09_regex/5_additional_capabilities.md)
     * [Дополнительные материалы](book/09_regex/further_reading.md)
