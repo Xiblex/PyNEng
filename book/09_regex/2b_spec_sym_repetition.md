@@ -16,18 +16,18 @@
 
 Например, тут повторение относится к букве a:
 ```py
-In [45]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
+In [1]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
 
-In [46]: re.search('a+', line).group()
-Out[46]: 'aa'
+In [2]: re.search('a+', line).group()
+Out[2]: 'aa'
 ```
 
 А в этом выражении, повторяется строка 'a1':
 ```py
-In [47]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
+In [3]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
 
-In [48]: re.search('(a1)+', line).group()
-Out[48]: 'a1a1'
+In [4]: re.search('(a1)+', line).group()
+Out[4]: 'a1a1'
 
 ```
 
@@ -42,19 +42,19 @@ IP-адрес можно описать выражением ```\d+\.\d+\.\d+\.\
 
 Используя это выражение можно получить IP-адрес из строки sh_ip_int_br:
 ```python
-In [45]: sh_ip_int_br = 'Ethernet0/1    192.168.200.1   YES NVRAM  up          up'
+In [5]: sh_ip_int_br = 'Ethernet0/1    192.168.200.1   YES NVRAM  up          up'
 
-In [46]: re.search('\d+\.\d+\.\d+\.\d+', sh_ip_int_br).group()
-Out[46]: '192.168.200.1'
+In [6]: re.search('\d+\.\d+\.\d+\.\d+', sh_ip_int_br).group()
+Out[6]: '192.168.200.1'
 ```
 
 Еще один пример выражения: ```\d+\s+\S+``` - оно описывает строку, в которой идут цифры, пробел (whitespace), не whitespace символы, то есть все кроме пробела, таба и других whitespace символов.
 С его помощью можно получить VLAN и MAC-адрес из строки:
 ```py
-In [57]: line = '1500     aab1.a1a1.a5d3    FastEthernet0/1'
+In [7]: line = '1500     aab1.a1a1.a5d3    FastEthernet0/1'
 
-In [58]: re.search('\d+\s+\S+', line).group()
-Out[58]: '1500     aab1.a1a1.a5d3'
+In [8]: re.search('\d+\s+\S+', line).group()
+Out[8]: '1500     aab1.a1a1.a5d3'
 
 ```
 
@@ -67,18 +67,18 @@ Out[58]: '1500     aab1.a1a1.a5d3'
 
 Выражение ```ba*``` означает b, а затем ноль или более повтрений a:
 ```py
-In [38]: line = '100     a011.baaa.a5d3    FastEthernet0/1'
+In [9]: line = '100     a011.baaa.a5d3    FastEthernet0/1'
 
-In [39]: re.search('ba*', line).group()
-Out[39]: 'baaa'
+In [10]: re.search('ba*', line).group()
+Out[10]: 'baaa'
 ```
 
 Если в строке line до подстроки baaa встретится b, то совпадением будет b:
 ```py
-In [40]: line = '100     ab11.baaa.a5d3    FastEthernet0/1'
+In [11]: line = '100     ab11.baaa.a5d3    FastEthernet0/1'
 
-In [41]: re.search('ba*', line).group()
-Out[41]: 'b'
+In [12]: re.search('ba*', line).group()
+Out[12]: 'b'
 
 ```
 
@@ -87,27 +87,27 @@ Out[41]: 'b'
 
 Первый вариант на примере адреса без точки:
 ```python
-In [127]: email1 = 'user1@gmail.com'
+In [13]: email1 = 'user1@gmail.com'
 ```
 
 Этот адрес можно описать таким выражением ```\w+@\w+\.\w+```:
 ```python
-In [128]: re.search('\w+@\w+\.\w+', email1).group()
-Out[128]: 'user1@gmail.com'
+In [14]: re.search('\w+@\w+\.\w+', email1).group()
+Out[14]: 'user1@gmail.com'
 ```
 
 Но такое выражение не подходит email с точкой:
 ```python
-In [130]: email2 = 'user2.test@gmail.com'
+In [15]: email2 = 'user2.test@gmail.com'
 
-In [131]: re.search('\w+@\w+\.\w+', email2).group()
-Out[131]: 'test@gmail.com'
+In [16]: re.search('\w+@\w+\.\w+', email2).group()
+Out[16]: 'test@gmail.com'
 ```
 
 Регулярное выражение для адреса с точкой:
 ```python
-In [133]: re.search('\w+\.\w+@\w+\.\w+', email2).group()
-Out[133]: 'user2.test@gmail.com'
+In [17]: re.search('\w+\.\w+@\w+\.\w+', email2).group()
+Out[17]: 'user2.test@gmail.com'
 ```
 
 Чтобы описать оба варианта адресов, надо указать, что точка в адресе опциональна:
@@ -117,15 +117,15 @@ Out[133]: 'user2.test@gmail.com'
 
 Такое регулярное выражение описывает оба варианта:
 ```python
-In [136]: email1 = 'user1@gmail.com'
+In [18]: email1 = 'user1@gmail.com'
 
-In [137]: email2 = 'user2.test@gmail.com'
+In [19]: email2 = 'user2.test@gmail.com'
 
-In [138]: re.search('\w+\.*\w+@\w+\.\w+', email1).group()
-Out[138]: 'user1@gmail.com'
+In [20]: re.search('\w+\.*\w+@\w+\.\w+', email1).group()
+Out[20]: 'user1@gmail.com'
 
-In [139]: re.search('\w+\.*\w+@\w+\.\w+', email2).group()
-Out[139]: 'user2.test@gmail.com'
+In [21]: re.search('\w+\.*\w+@\w+\.\w+', email2).group()
+Out[21]: 'user2.test@gmail.com'
 ```
 
 ### ```?```
@@ -137,10 +137,10 @@ Out[139]: 'user2.test@gmail.com'
 Он обозначает ноль или одно повторение предыдущего выражения или символа.
 Теперь регулярное выражение выглядит так ```\w+\.?\w+@\w+\.\w+```:
 ```python
-In [163]: mail_log = ['Jun 18 14:10:35 client-ip=154.10.180.10 from=user1@gmail.com, size=551',
+In [22]: mail_log = ['Jun 18 14:10:35 client-ip=154.10.180.10 from=user1@gmail.com, size=551',
      ...:             'Jun 18 14:11:05 client-ip=150.10.180.10 from=user2.test@gmail.com, size=768']
 
-In [164]: for message in mail_log:
+In [23]: for message in mail_log:
      ...:     match = re.search('\w+\.?\w+@\w+\.\w+', message)
      ...:     if match:
      ...:         print("Found email: ", match.group())
@@ -151,38 +151,54 @@ Found email:  user2.test@gmail.com
 
 ### ```{n}```
 
-С помощью фигурных скобок можно указать сколько должно повторяться предшествующее выражение.
+С помощью фигурных скобок можно указать сколько раз должно повторяться предшествующее выражение.
 
-Например, изменим предыдущее выражение, и укажем, что должно быть ровно три цифры:
+Например, выражение ```\w{4}\.\w{4}\.\w{4}``` описывает 12 букв или цифр, которые разделены на три группы по четыре символа точками. Таким образом можно получить MAC-адрес:
 ```py
+In [24]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
 
-In [51]: line = '100     aab1.a1a1.a5d3    FastEthernet0/1'
-
-In [52]: re.search('[0-9]{3} +[a-f0-9.]+', line).group()
-Out[52]: '100     aab1.a1a1.a5d3'
+In [25]: re.search('\w{4}\.\w{4}\.\w{4}', line).group()
+Out[25]: 'aab1.a1a1.a5d3'
 
 ```
 
-Число три в фигурных скобках означает, что предыдущее выражение должно повторяться 3 раза. В данном случае, это значит, что должны идти подряд три цифры.
+В фигурных скобках можно указывать и диапазон повторений.
+Например, попробуем получить все номера VLAN'ов из строки mac_table:
+```python
+In [26]: mac_table = '''
+    ...: sw1#sh mac address-table
+    ...:           Mac Address Table
+    ...: -------------------------------------------
+    ...:
+    ...: Vlan    Mac Address       Type        Ports
+    ...: ----    -----------       --------    -----
+    ...:  100    a1b2.ac10.7000    DYNAMIC     Gi0/1
+    ...:  200    a0d4.cb20.7000    DYNAMIC     Gi0/2
+    ...:  300    acb4.cd30.7000    DYNAMIC     Gi0/3
+    ...: 1100    a2bb.ec40.7000    DYNAMIC     Gi0/4
+    ...:  500    aa4b.c550.7000    DYNAMIC     Gi0/5
+    ...: 1200    a1bb.1c60.7000    DYNAMIC     Gi0/6
+    ...: 1300    aa0b.cc70.7000    DYNAMIC     Gi0/7
+    ...: '''
+```
 
-Если изменить строку line и указать номер VLAN 1500, совпадением будет 500:
-```py
-In [53]: line = '1500     aab1.a1a1.a5d3    FastEthernet0/1'
-
-In [54]: re.search('[0-9]{3} +[a-f0-9.]+', line).group()
-Out[54]: '500     aab1.a1a1.a5d3'
+Так так search ищет только первое совпадение, в выражение ```\d{1,4}``` попадет номер VLAN:
+```python
+In [27]: for line in mac_table.split('\n'):
+    ...:     match = re.search('\d{1,4}', line)
+    ...:     if match:
+    ...:         print('VLAN: ', match.group())
+    ...:
+VLAN:  1
+VLAN:  100
+VLAN:  200
+VLAN:  300
+VLAN:  1100
+VLAN:  500
+VLAN:  1200
+VLAN:  1300
 
 ```
 
-Тут пригодится еще одна форма повторения.
-В фигурных скобках можно указать два числа через запятую.
-
-Например, выражение ```[0-9]{1,4}``` означает, что должны идти от одной до четырех цифр:
-```py
-In [55]: line = '1500     aab1.a1a1.a5d3    FastEthernet0/1'
-
-In [56]: re.search('[0-9]{1,4} +[a-f0-9.]+', line).group()
-Out[56]: '1500     aab1.a1a1.a5d3'
-
-```
+Выражение  ```\d{1,4}``` описывает от одной до четырех цифр.
 

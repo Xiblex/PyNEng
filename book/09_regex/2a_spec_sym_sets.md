@@ -15,10 +15,10 @@
 
 Например, получим время из строки лог-файла:
 ```python
-In [2]: log = '*Jul  7 06:15:18.695: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/3, changed state to down'
+In [1]: log = '*Jul  7 06:15:18.695: %LINEPROTO-5-UPDOWN: Line protocol on Interface Ethernet0/3, changed state to down'
 
-In [5]: re.search('\d\d:\d\d:\d\d', log).group()
-Out[5]: '06:15:18'
+In [2]: re.search('\d\d:\d\d:\d\d', log).group()
+Out[2]: '06:15:18'
 
 ```
 
@@ -27,10 +27,10 @@ Out[5]: '06:15:18'
 
 Получение MAC-адреса из лог-сообщения:
 ```python
-In [9]: log2 = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
+In [3]: log2 = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
 
-In [14]: re.search('\w\w\w\w\.\w\w\w\w\.\w\w\w\w', log2).group()
-Out[14]: 'f03a.b216.7ad7'
+In [4]: re.search('\w\w\w\w\.\w\w\w\w\.\w\w\w\w', log2).group()
+Out[4]: 'f03a.b216.7ad7'
 
 ```
 

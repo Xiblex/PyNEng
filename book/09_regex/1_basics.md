@@ -82,13 +82,13 @@ Out[11]: 'BW 10000'
 Особенно полезны регулярные выражения в получении определенных подстрок из строки.
 Например, необходимо получить VLAN, MAC и порты из вывода такого лог-сообщения:
 ```python
-In [8]: log2 = 'Oct  3 12:49:15.941: %SW_MATM-4-MACFLAP_NOTIF: Host f04d.a206.7fd6 in vlan 1 is flapping between port Gi0/5 and port Gi0/16'
+In [12]: log2 = 'Oct  3 12:49:15.941: %SW_MATM-4-MACFLAP_NOTIF: Host f04d.a206.7fd6 in vlan 1 is flapping between port Gi0/5 and port Gi0/16'
 ```
 
 Это можно сделать с помощью такого регулярного выражения:
-```
-In [25]: re.search('Host (\S+) in vlan (\d+) is flapping between port (\S+) and port (\S+)', log2).groups()
-Out[25]: ('f03a.b216.7ad7', '10', 'Gi0/5', 'Gi0/15')
+```python
+In [13]: re.search('Host (\S+) in vlan (\d+) is flapping between port (\S+) and port (\S+)', log2).groups()
+Out[13]: ('f03a.b216.7ad7', '10', 'Gi0/5', 'Gi0/15')
 ```
 
 Метод groups возвращает только те части исходной строки, которые попали в круглые скобки.
