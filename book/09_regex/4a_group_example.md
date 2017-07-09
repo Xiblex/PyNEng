@@ -1,10 +1,9 @@
 ### Разбор вывода команды show ip dhcp snooping с помощью именованных групп
 
 Рассмотрим еще один пример использования именованных групп.  
-В этом примере, задача в том, чтобы получить из вывода команды show ip dhcp snooping binding  
-поля: MAC-адрес, IP-адрес, VLAN и интерфейс.
+В этом примере, задача в том, чтобы получить из вывода команды show ip dhcp snooping binding поля: MAC-адрес, IP-адрес, VLAN и интерфейс.
 
-В файле dhcp\_snooping.txt находится вывод команды show ip dhcp snooping binding:
+В файле dhcp_snooping.txt находится вывод команды show ip dhcp snooping binding:
 
 ```
 MacAddress          IpAddress        Lease(sec)  Type           VLAN  Interface
@@ -51,9 +50,9 @@ Out[3]:
 ```
 
 Так как регулярное выражение отработало как нужно, можно создавать скрипт.  
-В скрипте, перебираются все строки файла dhcp\_snooping.txt и на стандартный поток вывода, выводится информация об устройствах.
+В скрипте, перебираются все строки файла dhcp_snooping.txt и на стандартный поток вывода, выводится информация об устройствах.
 
-Файл parse\_dhcp\_snooping.py:
+Файл parse_dhcp_snooping.py:
 
 ```python
 # -*- coding: utf-8 -*-
@@ -104,6 +103,5 @@ $ python parse_dhcp_snooping.py
     mac:    00:09:BC:3F:A6:50
     vlan:    10
 ```
-
 
 

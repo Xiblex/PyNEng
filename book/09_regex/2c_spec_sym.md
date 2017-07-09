@@ -17,19 +17,19 @@
 
 Например, с помощью выражения ```Interface.+Port ID.+``` можно описать строку с интерфейсами в выводе sh cdp neighbors detail:
 ```python
-In [15]: cdp = '''
-    ...: SW1#show cdp neighbors detail
-    ...: -------------------------
-    ...: Device ID: SW2
-    ...: Entry address(es):
-    ...:   IP address: 10.1.1.2
-    ...: Platform: cisco WS-C2960-8TC-L,  Capabilities: Switch IGMP
-    ...: Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEthernet0/1
-    ...: Holdtime : 164 sec
-    ...: '''
+In [1]: cdp = '''
+   ...: SW1#show cdp neighbors detail
+   ...: -------------------------
+   ...: Device ID: SW2
+   ...: Entry address(es):
+   ...:   IP address: 10.1.1.2
+   ...: Platform: cisco WS-C2960-8TC-L,  Capabilities: Switch IGMP
+   ...: Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEthernet0/1
+   ...: Holdtime : 164 sec
+   ...: '''
 
-In [16]: re.search('Interface.+Port ID.+', cdp).group()
-Out[16]: 'Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEthernet0/1'
+In [2]: re.search('Interface.+Port ID.+', cdp).group()
+Out[2]: 'Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEthernet0/1'
 ```
 
 В результат попала только одна строка, так как точка обозначает любой символ, кроме символа перевода строки.
@@ -40,18 +40,18 @@ Out[16]: 'Interface: GigabitEthernet1/0/16,  Port ID (outgoing port): GigabitEth
 
 Символ ```^``` означает начало строки. Выражению ```^\d+``` соответствует подстрока:
 ```python
-In [5]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [3]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [29]: re.search('^\d+', line).group()
-Out[29]: '100'
+In [4]: re.search('^\d+', line).group()
+Out[4]: '100'
 ```
 
 Символы с начала строки и до решетки (включая решетку):
 ```py
-In [34]: prompt = 'SW1#show cdp neighbors detail'
+In [5]: prompt = 'SW1#show cdp neighbors detail'
 
-In [35]: re.search('^.+#', prompt).group()
-Out[35]: 'SW1#'
+In [6]: re.search('^.+#', prompt).group()
+Out[6]: 'SW1#'
 ```
 
 ### ```$```
@@ -60,10 +60,10 @@ Out[35]: 'SW1#'
 
 Выражение ```\S+$``` описывает любые символы, кроме whitespace в конце строки:
 ```python
-In [9]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [7]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [38]: re.search('\S+$', line).group()
-Out[38]: 'FastEthernet0/1'
+In [8]: re.search('\S+$', line).group()
+Out[8]: 'FastEthernet0/1'
 ```
 
 ### ```[]```
@@ -71,13 +71,13 @@ Out[38]: 'FastEthernet0/1'
 Символы, которые перечислены в квадратных скобках, означают, что любой из этих символов будет совпадением.
 Таким образом можно описывать разные регистры:
 ```python
-In [11]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [9]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [12]: re.search('[Ff]ast', line).group()
-Out[12]: 'Fast'
+In [10]: re.search('[Ff]ast', line).group()
+Out[10]: 'Fast'
 
-In [13]: re.search('[Ff]ast[Ee]thernet', line).group()
-Out[13]: 'FastEthernet'
+In [11]: re.search('[Ff]ast[Ee]thernet', line).group()
+Out[11]: 'FastEthernet'
 
 ```
 
@@ -85,12 +85,12 @@ Out[13]: 'FastEthernet'
 Например, выражение ```^.+[>#]``` описывает символы с начала строки и до решетки или знака больше (включая их).
 С помощью такого выражения можно получить имя устройства:
 ```python
-In [39]: commands = ['SW1#show cdp neighbors detail',
+In [12]: commands = ['SW1#show cdp neighbors detail',
     ...:             'SW1>sh ip int br',
     ...:             'r1-london-core# sh ip route']
     ...:
 
-In [40]: for line in commands:
+In [13]: for line in commands:
     ...:     match = re.search('^.+[>#]', line)
     ...:     if match:
     ...:         print(match.group())
@@ -127,8 +127,8 @@ Out[18]: 'F'
 ```py
 In [19]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [49]: re.search('[a-f0-9]+\.[a-f0-9]+\.[a-f0-9]+', line).group()
-Out[49]: 'aa12.35fe.a5d3'
+In [20]: re.search('[a-f0-9]+\.[a-f0-9]+\.[a-f0-9]+', line).group()
+Out[20]: 'aa12.35fe.a5d3'
 
 ```
 
@@ -146,20 +146,20 @@ Out[49]: 'aa12.35fe.a5d3'
 
 Для строки line совпадением будет такая подстрока:
 ```py
-In [23]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [21]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [50]: re.search('[a-f0-9]+[./][a-f0-9]+', line).group()
-Out[50]: 'aa12.35fe'
+In [22]: re.search('[a-f0-9]+[./][a-f0-9]+', line).group()
+Out[22]: 'aa12.35fe'
 
 ```
 
 
 Если после открывающейся квадратной скобки, указан символ ```^```, совпадением будет любой символ, кроме указанных в скобках:
 ```python
-In [56]: line = 'FastEthernet0/0    15.0.15.1       YES manual up         up'
+In [23]: line = 'FastEthernet0/0    15.0.15.1       YES manual up         up'
 
-In [57]: re.search('[^a-zA-Z]+', line).group()
-Out[57]: '0/0    15.0.15.1       '
+In [24]: re.search('[^a-zA-Z]+', line).group()
+Out[24]: '0/0    15.0.15.1       '
 
 ```
 
@@ -169,10 +169,10 @@ Out[57]: '0/0    15.0.15.1       '
 
 Вертикальная черта работает как 'или':
 ```python
-In [27]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [25]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [28]: re.search('Fast|0/1', line).group()
-Out[28]: 'Fast'
+In [26]: re.search('Fast|0/1', line).group()
+Out[26]: 'Fast'
 ```
 
 Обратите внимание на то, как срабатывает ```|``` - Fast и 0/1 воспринимаются как целое выражение.
@@ -186,20 +186,20 @@ Out[28]: 'Fast'
 
 Например, выражение ```[0-9]([a-f]|[0-9])[0-9]``` описывает три символа: цифра, потом буква или цифра и цифра:
 ```python
-In [29]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
+In [27]: line = "100     aa12.35fe.a5d3    FastEthernet0/1"
 
-In [30]: re.search('[0-9]([a-f]|[0-9])[0-9]', line).group()
-Out[30]: '100'
+In [28]: re.search('[0-9]([a-f]|[0-9])[0-9]', line).group()
+Out[28]: '100'
 
 ```
 
 Скобки позволяют указывать какое выражение является одним целым.
 Это особенно полезно при использовании символов повторения:
 ```py
-In [68]: line = 'FastEthernet0/0    15.0.15.1       YES manual up         up'
+In [29]: line = 'FastEthernet0/0    15.0.15.1       YES manual up         up'
 
-In [70]: re.search('([0-9]+\.)+[0-9]+', line).group()
-Out[70]: '15.0.15.1'
+In [30]: re.search('([0-9]+\.)+[0-9]+', line).group()
+Out[30]: '15.0.15.1'
 ```
 
 
