@@ -129,7 +129,7 @@ Out[59]: 'Gi0/15'
 
 #### groups()
 
-Метод groups() возвращает кортеж со строками:
+Метод groups() возвращает кортеж со строками. В котором строки є это те подстроки, которые попали в соответствующие группы:
 ```python
 In [63]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
 
@@ -185,7 +185,7 @@ Out[86]: ('100', 'No match')
 
 #### groupdict()
 
-Метод groupdict возвращает словарь, в котором ключи - имена групп, а значения є соответствующие строки:
+Метод groupdict возвращает словарь, в котором ключи - имена групп, а значения - соответствующие строки:
 ```python
 In [63]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
 
@@ -233,6 +233,24 @@ In [110]: line[match.start(2):match.end(2)]
 Out[110]: 'aab1.a1a1.a5d3'
 ```
 
+Аналогично для именованных групп:
+```python
+In [63]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
+
+In [88]: match = re.search('Host (?P<mac>\S+) '
+    ...:                   'in vlan (?P<vlan>\d+) .* '
+    ...:                   'port (?P<int1>\S+) '
+    ...:                   'and port (?P<int2>\S+)',
+    ...:                   log)
+    ...:
+
+In [9]: match.start('mac')
+Out[9]: 52
+
+In [10]: match.end('mac')
+Out[10]: 66
+
+```
 
 ### span()
 
@@ -257,6 +275,25 @@ In [116]: match = re.search('(\d+) +([0-9a-f.]+) +(\S+)', line)
 
 In [117]: match.span(2)
 Out[117]: (9, 23)
+```
+
+Аналогично для именованных групп:
+```python
+In [63]: log = 'Jun  3 14:39:05.941: %SW_MATM-4-MACFLAP_NOTIF: Host f03a.b216.7ad7 in vlan 10 is flapping between port Gi0/5 and port Gi0/15'
+
+In [88]: match = re.search('Host (?P<mac>\S+) '
+    ...:                   'in vlan (?P<vlan>\d+) .* '
+    ...:                   'port (?P<int1>\S+) '
+    ...:                   'and port (?P<int2>\S+)',
+    ...:                   log)
+    ...:
+
+In [14]: match.span('mac')
+Out[14]: (52, 66)
+
+In [15]: match.span('vlan')
+Out[15]: (75, 77)
+
 ```
 
 
