@@ -74,6 +74,6 @@ print('Петля между портами {} в VLAN {}'.format(', '.join(port
 
 Результат:
 ```
- $ python re_match.py
+$ python re_match.py
 Петля между портами Gi0/19, Gi0/24, Gi0/16 в VLAN 10
 ```
