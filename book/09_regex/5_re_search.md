@@ -29,11 +29,11 @@
 
 Проверка регулярного выражения с одной строкой из log-файла:
 ```python
-In [2]: import re
+In [1]: import re
 
-In [3]: log = '%SW_MATM-4-MACFLAP_NOTIF: Host 01e2.4c18.0156 in vlan 10 is flapping between port Gi0/16 and port Gi0/24'
+In [2]: log = '%SW_MATM-4-MACFLAP_NOTIF: Host 01e2.4c18.0156 in vlan 10 is flapping between port Gi0/16 and port Gi0/24'
 
-In [4]: match = re.search('Host \S+ '
+In [3]: match = re.search('Host \S+ '
    ...:                   'in vlan (\d+) '
    ...:                   'is flapping between port '
    ...:                   '(\S+) and port (\S+)', log)
@@ -48,8 +48,8 @@ In [4]: match = re.search('Host \S+ '
 
 В итоге, в группы попали такие части строки:
 ```python
-In [5]: match.groups()
-Out[5]: ('10', 'Gi0/16', 'Gi0/24')
+In [4]: match.groups()
+Out[4]: ('10', 'Gi0/16', 'Gi0/24')
 ```
 
 В итоговом скрипте файл log.txt обрабатывается построчно и из каждой строки собирается информация о портах.
@@ -82,7 +82,7 @@ $ python re_search.py
 Петля между портами Gi0/19, Gi0/24, Gi0/16 в VLAN 10
 ```
 
-## Примеры использования re.search для обработки вывода show cdp neighbors detail
+### Обработка вывода show cdp neighbors detail
 
 Попробуем получить параметры устройств из вывода sh cdp neighbors detail.
 
@@ -164,7 +164,7 @@ pprint(parse_cdp('sh_cdp_neighbors_sw1.txt'))
 В итоге все собирается в словарь.
 
 Результат выглядит так:
-```
+```python
 $ python parse_sh_cdp_neighbors_detail_ver1.py
 {'R1': {'ios': '3800 Software (C3825-ADVENTERPRISEK9-M), Version 12.4(24)T1',
         'ip': '10.1.1.1',
@@ -214,7 +214,7 @@ pprint(parse_cdp('sh_cdp_neighbors_sw1.txt'))
 Пояснения к второму варианту:
 * в регулярном выражении описаны все варианты строк через знак или ```|```
 * без проверки строки, ищется совпадение
-* если совпадение найдено, проверяем метод lastgroup
+* если совпадение найдено, проверяется метод lastgroup
   * метод lastgroup возвращает имя последней именованной группы в регулярном выражении, для которой было найдено совпадение
   * если было найдено совпадение для группы device, в переменную device записывается значение, которое попало в эту группу
   * иначе в словарь записывается соответствие 'имя группы': соответствующее значение
