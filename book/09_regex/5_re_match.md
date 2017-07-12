@@ -32,7 +32,7 @@ None
 
 В данном случае, можно легко исправить выражение, чтобы функция match находила совпадение:
 ```python
-In [4]: match = re.match('.*Host \S+ '
+In [4]: match = re.match('\S+: Host \S+ '
    ...:                  'in vlan (\d+) '
    ...:                  'is flapping between port '
    ...:                  '(\S+) and port (\S+)', log)
@@ -40,7 +40,7 @@ In [4]: match = re.match('.*Host \S+ '
 
 ```
 
-Перед словом Host добавлено выражение ```.*```. Теперь совпадение будет найдено:
+Перед словом Host добавлено выражение ```\S+: ```. Теперь совпадение будет найдено:
 ```python
 In [11]: print(match)
 <_sre.SRE_Match object; span=(0, 104), match='%SW_MATM-4-MACFLAP_NOTIF: Host 01e2.4c18.0156 in >
@@ -49,11 +49,11 @@ In [12]: match.groups()
 Out[12]: ('10', 'Gi0/16', 'Gi0/24')
 ```
 
-Пример аналогичен тому, который использовался в функции search, с небольшими изменениями (файл re_match.py):
+Пример аналогичен тому, который использовался в функции search, с небольшими изменениями (файл parse_log_match.py):
 ```python
 import re
 
-regex = ('.*Host \S+ '
+regex = ('\S+: Host \S+ '
          'in vlan (\d+) '
          'is flapping between port '
          '(\S+) and port (\S+)')
@@ -74,6 +74,7 @@ print('Петля между портами {} в VLAN {}'.format(', '.join(port
 
 Результат:
 ```
-$ python re_match.py
+$ python parse_log_match.py
 Петля между портами Gi0/19, Gi0/24, Gi0/16 в VLAN 10
 ```
+

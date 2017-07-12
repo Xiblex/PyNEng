@@ -8,9 +8,67 @@
 Например, sh ip int br, sh mac address-table и др.
 В этом случае, его можно применять ко всему выводу команды.
 
-Например, лог-файл, который разбирался с помощью search и match, можно разобрать и с помощью finditer.
+Пример вывода sh ip int br:
+```python
+In [8]: sh_ip_int_br = '''
+   ...: R1#show ip interface brief
+   ...: Interface             IP-Address      OK? Method Status           Protocol
+   ...: FastEthernet0/0       15.0.15.1       YES manual up               up
+   ...: FastEthernet0/1       10.0.12.1       YES manual up               up
+   ...: FastEthernet0/2       10.0.13.1       YES manual up               up
+   ...: FastEthernet0/3       unassigned      YES unset  up               up
+   ...: Loopback0             10.1.1.1        YES manual up               up
+   ...: Loopback100           100.0.0.1       YES manual up               up
+   ...: '''
+```
 
-В этом случае, вывод можно не перебирать построчно, а передать все содержимое файла: 
+Регулярное выражение для обработки вывода:
+```python
+In [9]: result = re.finditer('(\S+) +'
+   ...:                      '([\d.]+) +'
+   ...:                      '\w+ +\w+ +'
+   ...:                      '(up|down|administratively down) +'
+   ...:                      '(up|down)',
+   ...:                      sh_ip_int_br)
+   ...:
+```
+
+В переменной result находится итератор:
+```python
+In [12]: result
+Out[12]: <callable_iterator at 0xb583f46c>
+```
+
+В итераторе находятся объекты Match:
+```python
+In [16]: groups = []
+
+In [18]: for match in result:
+    ...:     print(match)
+    ...:     groups.append(match.groups())
+    ...:
+<_sre.SRE_Match object; span=(103, 171), match='FastEthernet0/0       15.0.15.1       YES manual >
+<_sre.SRE_Match object; span=(172, 240), match='FastEthernet0/1       10.0.12.1       YES manual >
+<_sre.SRE_Match object; span=(241, 309), match='FastEthernet0/2       10.0.13.1       YES manual >
+<_sre.SRE_Match object; span=(379, 447), match='Loopback0             10.1.1.1        YES manual >
+<_sre.SRE_Match object; span=(448, 516), match='Loopback100           100.0.0.1       YES manual >
+```
+
+Теперь в списке groups находятся кортежи со строками, которые попали в группы:
+```python
+In [19]: groups
+Out[19]:
+[('FastEthernet0/0', '15.0.15.1', 'up', 'up'),
+ ('FastEthernet0/1', '10.0.12.1', 'up', 'up'),
+ ('FastEthernet0/2', '10.0.13.1', 'up', 'up'),
+ ('Loopback0', '10.1.1.1', 'up', 'up'),
+ ('Loopback100', '100.0.0.1', 'up', 'up')]
+
+```
+
+Теперь разберем тот же лог-файл, который использовался в подразделах search и match.
+
+В этом случае, вывод можно не перебирать построчно, а передать все содержимое файла (файл parse_log_finditer.py): 
 ```python
 import re
 
@@ -22,8 +80,7 @@ regex = ('Host \S+ '
 ports = set()
 
 with open('log.txt') as f:
-    match = re.finditer(regex, f.read())
-    for m in match:
+    for m in re.finditer(regex, f.read()):
         vlan = m.group(1)
         ports.add(m.group(2))
         ports.add(m.group(3))
@@ -35,7 +92,7 @@ print('Петля между портами {} в VLAN {}'.format(', '.join(port
 
 Вывод будет таким же:
 ```
-$ python re_finditer.py
+$ python parse_log_finditer.py
 Петля между портами Gi0/19, Gi0/24, Gi0/16 в VLAN 10
 ```
 
