@@ -25,7 +25,7 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 0070.A7AA.C5CC  sw7         Cisco 3650  London, Green Str
 ```
 
-Аналогисным образом можно изменить и номер VLAN:
+Аналогичным образом можно изменить и номер VLAN:
 ```sql
 sqlite> UPDATE switch set mngmt_vid = 255 WHERE hostname = 'sw1';
 sqlite> SELECT * from switch;

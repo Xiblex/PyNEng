@@ -195,15 +195,15 @@ In [4]: cursor.execute('select * from switch')
 Out[4]: <sqlite3.Cursor at 0x104eda810>
 
 In [5]: cursor.fetchone()
-Out[5]: (u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+Out[5]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
 ```
 
 Обратите внимание, что хотя запрос SQL подразумевает, что запрашивалось всё содержимое таблицы, метод fetchone вернул только одну строку.
 
 Если повторно вызвать метод, он вернет следующую строку:
 ```python
-In [6]: print cursor.fetchone()
-(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+In [6]: print(cursor.fetchone())
+('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
 ```
 
 Аналогичным образом метод будет возвращать следующие строки.
@@ -217,18 +217,19 @@ Out[7]: <sqlite3.Cursor at 0x104eda810>
 In [8]: while True:
    ...:     next_row = cursor.fetchone()
    ...:     if next_row:
-   ...:         print next_row
+   ...:         print(next_row)
    ...:     else:
    ...:         break
    ...:
-(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
-(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
-(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
-(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')
+('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
+('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str')
+('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')
+
 ```
 
 #### Метод fetchmany
@@ -243,7 +244,7 @@ cursor.fetchmany([size=cursor.arraysize])
 С помощью параметра size, можно указывать какое количество строк возвращается.
 По умолчанию, параметр size равен значению cursor.arraysize:
 ```python
-In [9]: print cursor.arraysize
+In [9]: print(cursor.arraysize)
 1
 ```
 
@@ -253,24 +254,24 @@ In [9]: print cursor.arraysize
 In [10]: cursor.execute('select * from switch')
 Out[10]: <sqlite3.Cursor at 0x104eda810>
 
-In [11]: while True:
-    ...:     three_rows = cursor.fetchmany(3)
-    ...:     if three_rows:
-    ...:         print three_rows
-    ...:         print
-    ...:     else:
-    ...:         break
+In [43]: from pprint import pprint
+
+In [46]: while True:
+    ...:     ...:     three_rows = cursor.fetchmany(3)
+    ...:     ...:     if three_rows:
+    ...:     ...:         pprint(three_rows)
+    ...:     ...:     else:
+    ...:     ...:         break
     ...:
-[(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str'),
- (u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
- (u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')]
+[('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
+ ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str'),
+ ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str')]
+[('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str')]
+[('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')]
 
-[(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str')]
-
-[(u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')]
 ```
 
 Метод выдает нужное количество строк, а если строк осталось меньше чем параметр size, то оставшиеся строки.
@@ -284,14 +285,15 @@ Out[12]: <sqlite3.Cursor at 0x104eda810>
 
 In [13]: cursor.fetchall()
 Out[13]:
-[(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str'),
- (u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str'),
- (u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str'),
- (u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')]
+[('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
+ ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str'),
+ ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
+ ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')]
+
 ```
 
 Важный аспект работы метода - он возвращает все оставшиеся строки.
@@ -301,20 +303,21 @@ Out[13]:
 In [14]: cursor.execute('select * from switch')
 Out[14]: <sqlite3.Cursor at 0x104eda810>
 
-In [15]: cursor.fetchone()
-Out[15]: (u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
+In [50]: cursor.fetchone()
+Out[50]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
 
-In [16]: cursor.fetchone()
-Out[16]: (u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
+In [51]: cursor.fetchone()
+Out[51]: ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
 
-In [17]: cursor.fetchall()
-Out[17]:
-[(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str'),
- (u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str'),
- (u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')]
+In [52]: cursor.fetchall()
+Out[52]:
+[('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
+ ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str'),
+ ('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')]
+
 ```
 
 Метод fetchmany, в этом аспекте, работает аналогично.
@@ -329,33 +332,35 @@ Out[17]:
 ```python
 In [18]: result = cursor.execute('select * from switch')
 
-In [19]: for row in result:
-    ...:     print row
+In [54]: for row in result:
+    ...:     print(row)
     ...:
-(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
-(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
-(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
-(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')
+('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
+('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str')
+('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')
+
 ```
 
 
 И, конечно же, аналогичный вариант отработает и без присваивания переменной:
 ```python
-In [20]: for row in cursor.execute('select * from switch'):
-    ...:     print row
+In [55]: for row in cursor.execute('select * from switch'):
+    ...:     print(row)
     ...:
-(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
-(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
-(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
-(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0001', u'sw5', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0002', u'sw6', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0003', u'sw7', u'Cisco 3750', u'London, Green Str')
-(u'0000.1111.0004', u'sw8', u'Cisco 3750', u'London, Green Str')
+('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
+('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str')
+('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0002', 'sw6', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0003', 'sw7', 'Cisco 3750', 'London, Green Str')
+('0000.1111.0004', 'sw8', 'Cisco 3750', 'London, Green Str')
+
 ```
 
 ### Использование модуля sqlite3
@@ -381,25 +386,27 @@ data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
 
 con = sqlite3.connect('sw_inventory2.db')
 
-con.execute("create table switch (mac text primary key, hostname text, model text, location text)")
+con.execute("create table switch "
+            "(mac text primary key, hostname text, model text, location text)")
 
 query = "INSERT into switch values (?, ?, ?, ?)"
 con.executemany(query, data)
 con.commit()
 
 for row in con.execute("select * from switch"):
-    print row
+    print(row)
 
 con.close()
+
 ```
 
 Результат выполнения будет таким:
 ```
 $ python create_sw_inventory_ver1.py
-(u'0000.AAAA.CCCC', u'sw1', u'Cisco 3750', u'London, Green Str')
-(u'0000.BBBB.CCCC', u'sw2', u'Cisco 3780', u'London, Green Str')
-(u'0000.AAAA.DDDD', u'sw3', u'Cisco 2960', u'London, Green Str')
-(u'0011.AAAA.CCCC', u'sw4', u'Cisco 3750', u'London, Green Str')
+('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
+('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str')
+('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')
 ```
 
 #### Обработка исключений
@@ -428,7 +435,7 @@ IntegrityError: UNIQUE constraint failed: switch.mac
 In [25]: try:
     ...:     con.execute(query)
     ...: except sqlite3.IntegrityError as e:
-    ...:     print "Error occured: ", e
+    ...:     print("Error occured: ", e)
     ...:
 Error occured:  UNIQUE constraint failed: switch.mac
 ```
@@ -442,6 +449,7 @@ Error occured:  UNIQUE constraint failed: switch.mac
 
 Python позволяет использовать объект Connection, как менеджер контекста.
 В таком случае, не нужно явно делать commit и закрывать соединение.
+
 При этом:
 * при возникновении исключения, транзакция автоматически откатывается
 * если исключения не было, автоматически выполняется commit
