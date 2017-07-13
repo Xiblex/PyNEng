@@ -152,11 +152,11 @@ mac             hostname    model       location
 
 Особенно удобно использовать этот метод при создании таблиц:
 ```python
-In [14]: connection = sqlite3.connect('new_db.db')
+In [13]: connection = sqlite3.connect('new_db.db')
 
-In [15]: cursor = connection.cursor()
+In [14]: cursor = connection.cursor()
 
-In [16]: cursor.executescript("""
+In [15]: cursor.executescript("""
     ...:     create table switches(
     ...:         hostname     text primary key,
     ...:         location     text
@@ -170,7 +170,7 @@ In [16]: cursor.executescript("""
     ...:         switch       text not null references switches(hostname)
     ...:     );
     ...: """)
-Out[16]: <sqlite3.Cursor at 0x10efd67a0>
+Out[15]: <sqlite3.Cursor at 0x10efd67a0>
 ```
 
 ### Получение результатов запроса
@@ -185,24 +185,24 @@ Out[16]: <sqlite3.Cursor at 0x10efd67a0>
 
 Пример получения информации из базы данных sw_inventory.db:
 ```python
-In [1]: import sqlite3
+In [16]: import sqlite3
 
-In [2]: connection = sqlite3.connect('sw_inventory.db')
+In [17]: connection = sqlite3.connect('sw_inventory.db')
 
-In [3]: cursor = connection.cursor()
+In [18]: cursor = connection.cursor()
 
-In [4]: cursor.execute('select * from switch')
-Out[4]: <sqlite3.Cursor at 0x104eda810>
+In [19]: cursor.execute('select * from switch')
+Out[19]: <sqlite3.Cursor at 0x104eda810>
 
-In [5]: cursor.fetchone()
-Out[5]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+In [20]: cursor.fetchone()
+Out[20]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
 ```
 
 Обратите внимание, что хотя запрос SQL подразумевает, что запрашивалось всё содержимое таблицы, метод fetchone вернул только одну строку.
 
 Если повторно вызвать метод, он вернет следующую строку:
 ```python
-In [6]: print(cursor.fetchone())
+In [21]: print(cursor.fetchone())
 ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
 ```
 
@@ -211,10 +211,10 @@ In [6]: print(cursor.fetchone())
 
 Засчет этого, метод можно использовать в цикле, например, так:
 ```python
-In [7]: cursor.execute('select * from switch')
-Out[7]: <sqlite3.Cursor at 0x104eda810>
+In [22]: cursor.execute('select * from switch')
+Out[22]: <sqlite3.Cursor at 0x104eda810>
 
-In [8]: while True:
+In [23]: while True:
    ...:     next_row = cursor.fetchone()
    ...:     if next_row:
    ...:         print(next_row)
@@ -244,19 +244,19 @@ cursor.fetchmany([size=cursor.arraysize])
 С помощью параметра size, можно указывать какое количество строк возвращается.
 По умолчанию, параметр size равен значению cursor.arraysize:
 ```python
-In [9]: print(cursor.arraysize)
+In [24]: print(cursor.arraysize)
 1
 ```
 
 Например, таким образом можно возвращать по три строки из запроса:
 ```python
 
-In [10]: cursor.execute('select * from switch')
-Out[10]: <sqlite3.Cursor at 0x104eda810>
+In [25]: cursor.execute('select * from switch')
+Out[25]: <sqlite3.Cursor at 0x104eda810>
 
-In [43]: from pprint import pprint
+In [26]: from pprint import pprint
 
-In [46]: while True:
+In [27]: while True:
     ...:     ...:     three_rows = cursor.fetchmany(3)
     ...:     ...:     if three_rows:
     ...:     ...:         pprint(three_rows)
@@ -280,11 +280,11 @@ In [46]: while True:
 
 Метод fetchall возвращает все строки в виде списка:
 ```python
-In [12]: cursor.execute('select * from switch')
-Out[12]: <sqlite3.Cursor at 0x104eda810>
+In [28]: cursor.execute('select * from switch')
+Out[28]: <sqlite3.Cursor at 0x104eda810>
 
-In [13]: cursor.fetchall()
-Out[13]:
+In [29]: cursor.fetchall()
+Out[29]:
 [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
  ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str'),
  ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
@@ -300,17 +300,17 @@ Out[13]:
 
 То есть, если до метода fetchall, использовался, например, метод fetchone, то метод fetchall вернет оставшиеся строки запроса:
 ```python
-In [14]: cursor.execute('select * from switch')
-Out[14]: <sqlite3.Cursor at 0x104eda810>
+In [30]: cursor.execute('select * from switch')
+Out[30]: <sqlite3.Cursor at 0x104eda810>
 
-In [50]: cursor.fetchone()
-Out[50]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
+In [31]: cursor.fetchone()
+Out[31]: ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
 
-In [51]: cursor.fetchone()
-Out[51]: ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
+In [32]: cursor.fetchone()
+Out[32]: ('0000.BBBB.CCCC', 'sw2', 'Cisco 3780', 'London, Green Str')
 
-In [52]: cursor.fetchall()
-Out[52]:
+In [33]: cursor.fetchall()
+Out[33]:
 [('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
  ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str'),
  ('0000.1111.0001', 'sw5', 'Cisco 3750', 'London, Green Str'),
@@ -330,9 +330,9 @@ Out[52]:
 При использовании методов execute, возвращается курсор.
 А, так как курсор можно использовать как итератор, можно использовать его, например, в цикле for:
 ```python
-In [18]: result = cursor.execute('select * from switch')
+In [34]: result = cursor.execute('select * from switch')
 
-In [54]: for row in result:
+In [35]: for row in result:
     ...:     print(row)
     ...:
 ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
@@ -349,7 +349,7 @@ In [54]: for row in result:
 
 И, конечно же, аналогичный вариант отработает и без присваивания переменной:
 ```python
-In [55]: for row in cursor.execute('select * from switch'):
+In [36]: for row in cursor.execute('select * from switch'):
     ...:     print(row)
     ...:
 ('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str')
@@ -417,11 +417,11 @@ $ python create_sw_inventory_ver1.py
 В таблице switch поле mac должно быть уникальным.
 И, если попытаться записать пересекающийся MAC-адрес, возникнет ошибка:
 ```python
-In [22]: con = sqlite3.connect('sw_inventory2.db')
+In [37]: con = sqlite3.connect('sw_inventory2.db')
 
-In [23]: query = "INSERT into switch values ('0000.AAAA.DDDD', 'sw7', 'Cisco 2960', 'London, Green Str')"
+In [38]: query = "INSERT into switch values ('0000.AAAA.DDDD', 'sw7', 'Cisco 2960', 'London, Green Str')"
 
-In [24]: con.execute(query)
+In [39]: con.execute(query)
 ---------------------------------------------------------------------------
 IntegrityError                            Traceback (most recent call last)
 <ipython-input-56-ad34d83a8a84> in <module>()
@@ -432,7 +432,7 @@ IntegrityError: UNIQUE constraint failed: switch.mac
 
 Соответственно, можно перехватить исключение:
 ```python
-In [25]: try:
+In [40]: try:
     ...:     con.execute(query)
     ...: except sqlite3.IntegrityError as e:
     ...:     print("Error occured: ", e)
