@@ -118,6 +118,7 @@
         * [ORDER BY](book/11_db/3_order_by.md)
     * [Модуль sqlite3](book/11_db/4_sqlite3.md)
         * [Пример использования SQLite](book/11_db/5_example_sqlite.md)
+    * [Дополнительные материалы](book/11_db/further_reading.md)
     * [Задания](exercises/11_db/11_exercises.md)
 * [12. Подключение к оборудованию](book/12_ssh_telnet/README.md)
     * [Ввод пароля](book/12_ssh_telnet/0_password.md)
