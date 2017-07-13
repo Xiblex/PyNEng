@@ -52,5 +52,10 @@ interface FastEthernet0/16
  switchport access vlan 17
  spanning-tree portfast
  spanning-tree bpduguard enable
+interface FastEthernet0/17
+ switchport mode access
+ switchport access vlan 150
+ spanning-tree portfast
+ spanning-tree bpduguard enable
 ```
 
