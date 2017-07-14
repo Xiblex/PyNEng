@@ -120,7 +120,7 @@
         * [Выполнение команд SQL](book/11_db/4a_sqlite3_execute.md)
         * [Получение результатов запроса](book/11_db/4b_sqlite3_fetch.md)
         * [Cursor как итератор](book/11_db/4c_sqlite3_cursor_as_iterator.md)
-        * [Использование модуля sqlite3 без явного создания курсора](book/11_db/4d_sqlite3_connection_without_curs)
+        * [Использование модуля sqlite3 без явного создания курсора](book/11_db/4d_sqlite3_connection_without_cursor.md)
         * [Обработка исключений](book/11_db/4e_sqlit3_exception.md)
         * [Connection как менеджер контекста](book/11_db/4f_sqlit3_context_manager.md)
         * [Пример использования SQLite](book/11_db/5_example_sqlite.md)
