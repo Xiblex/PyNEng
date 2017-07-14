@@ -29,6 +29,6 @@ In [40]: try:
 Error occured:  UNIQUE constraint failed: switch.mac
 ```
 
-Обратите внимение, что надо перехватывать исключение sqlite3.IntegrityError, а не IntegrityError.
+Обратите внимание, что надо перехватывать исключение sqlite3.IntegrityError, а не IntegrityError.
 
 
