@@ -138,7 +138,6 @@ Inserting DHCP Snooping data
 Проверим, что данные записались:
 ```
 $ sqlite3 dhcp_snooping.db "select * from dhcp"
- $ sqlite3 dhcp_snooping.db "select * from dhcp"
 -- Loading resources from /home/vagrant/.sqliterc
 
 mac                ip          vlan        interface

@@ -47,7 +47,7 @@ mac             hostname    model       location
 ```
 .headers on
 .mode column
-``
+```
 
 > В следующих подразделах вывод команд показан с включенными .headers on и .mode column
 
