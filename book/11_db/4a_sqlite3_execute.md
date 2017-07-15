@@ -22,7 +22,7 @@ In [3]: cursor = connection.cursor()
 
 Создание таблицы switch с помощью метода execute:
 ```python
-In [4]: cursor.execute("create table switch (mac text primary key, hostname text, model text, location text)")
+In [4]: cursor.execute("create table switch (mac text not NULL primary key, hostname text, model text, location text)")
 Out[4]: <sqlite3.Cursor at 0x1085be880>
 ```
 
@@ -133,12 +133,12 @@ In [14]: cursor = connection.cursor()
 
 In [15]: cursor.executescript("""
     ...:     create table switches(
-    ...:         hostname     text primary key,
+    ...:         hostname     text not NULL primary key,
     ...:         location     text
     ...:     );
     ...:
     ...:     create table dhcp(
-    ...:         mac          text primary key,
+    ...:         mac          text not NULL primary key,
     ...:         ip           text,
     ...:         vlan         text,
     ...:         interface    text,
