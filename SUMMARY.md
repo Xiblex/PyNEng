@@ -116,6 +116,7 @@
         * [REPLACE](book/11_db/3_replace.md)
         * [DELETE](book/11_db/3_delete.md)
         * [ORDER BY](book/11_db/3_order_by.md)
+        * [AND, OR, NOT, IN](book/11_db/3_and_or_not_in.md)
     * [Модуль sqlite3](book/11_db/4_sqlite3.md)
         * [Выполнение команд SQL](book/11_db/4a_sqlite3_execute.md)
         * [Получение результатов запроса](book/11_db/4b_sqlite3_fetch.md)
