@@ -5,8 +5,8 @@
 Например:
 ```sql
 sqlite> SELECT * from switch;
-0000.AAAA.CCCC|sw1|Cisco 3750|London, Green Str
-0000.BBBB.CCCC|sw5|Cisco 3850|London, Green Str
+0010.A1AA.C1CC|sw1|Cisco 3750|London, Green Str
+0020.A2AA.C2CC|sw2|Cisco 3850|London, Green Str
 ```
 
 ```select *``` означает, что нужно вывести все поля таблицы.
@@ -18,8 +18,8 @@ sqlite> SELECT * from switch;
 sqlite> .headers ON
 sqlite> SELECT * from switch;
 mac|hostname|model|location
-0000.AAAA.CCCC|sw1|Cisco 3750|London, Green Str
-0000.BBBB.CCCC|sw5|Cisco 3850|London, Green Str
+0010.A1AA.C1CC|sw1|Cisco 3750|London, Green Str
+0020.A2AA.C2CC|sw2|Cisco 3850|London, Green Str
 ```
 
 Теперь отобразились заголовки, но в целом, отображение не очень приятное.
@@ -30,10 +30,11 @@ mac|hostname|model|location
 ```sql
 sqlite> .mode column
 sqlite> SELECT * from switch;
-mac             hostname    model       location         
+mac             hostname    model       location
 --------------  ----------  ----------  -----------------
-0000.AAAA.CCCC  sw1         Cisco 3750  London, Green Str
-0000.BBBB.CCCC  sw5         Cisco 3850  London, Green Str
+0010.A1AA.C1CC  sw1         Cisco 3750  London, Green Str
+0020.A2AA.C2CC  sw2         Cisco 3850  London, Green Str
+
 ```
 
 При желании, можно выставить и ширину колонок.
@@ -42,9 +43,11 @@ mac             hostname    model       location
 
 Если нужно сделать так, чтобы эти параметры использовались по умолчанию, добавьте их в файл ```.sqliterc``` в домашнем каталоге пользователя, под которым вы работаете.
 
-Например, чтобы вывод заголовков столбцов и вывоб столбцами использовались по умолчанию, файл .sqliterc должен выглядеть так:
+Например, чтобы вывод заголовков столбцов и вывод столбцами использовались по умолчанию, файл .sqliterc должен выглядеть так:
 ```
 .headers on
 .mode column
 ```
+
+> В следующих подразделах вывод команд показан с включенными .headers on и .mode column
 
