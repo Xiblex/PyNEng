@@ -59,6 +59,5 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 0030.A3AA.C1CC  sw3         Cisco 3850  London, Green Str  10.255.1.3  255
 0020.A2AA.C2CC  sw2         Cisco 3850  London, Green Str  10.255.1.2  255
 0010.D1DD.E1EE  sw1         Cisco 3850  London, Green Str  10.255.1.1  255
-
 ```
 
