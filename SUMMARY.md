@@ -203,3 +203,4 @@
     * [Материалы по темам курса](resources/1_course_additional_info.md)
     * [Продолжение обучения](resources/2_next_steps.md)
 * [Отзывы](testimonials.md)
+* [Словарь терминов](GLOSSARY.md)
