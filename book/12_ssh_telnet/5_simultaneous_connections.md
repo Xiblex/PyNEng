@@ -52,7 +52,7 @@ start_time = datetime.now()
 #Тут выполняются действия
 time.sleep(5)
 
-print datetime.now() - start_time
+print(datetime.now() - start_time)
 ```
 
 Результат выполнения:
@@ -107,3 +107,4 @@ GIL не дает нескольким потокам исполнять одн�
 * Коротко о GIL, threads, processes:
  * http://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python
  * http://stackoverflow.com/questions/18114285/python-what-are-the-differences-between-the-threading-and-multiprocessing-modul
+

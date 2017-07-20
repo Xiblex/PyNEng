@@ -34,19 +34,23 @@ In [1]: import pexpect
 
 In [2]: output = pexpect.run('ls -ls')
 
-In [3]: print output
-total 368
-  8 -rw-r--r--   1 natasha  staff     372 Sep 26 08:36 LICENSE.md
-  8 -rw-r--r--   1 natasha  staff    3483 Sep 26 08:36 README.md
- 16 -rw-r--r--   1 natasha  staff    7098 Oct  5 11:41 SUMMARY.md
-  8 -rw-r--r--   1 natasha  staff      70 Sep 25 19:01 about.md
-  0 drwxr-xr-x  17 natasha  staff     578 Sep 25 19:05 book
-  8 -rw-r--r--   1 natasha  staff     239 Sep 27 06:32 book.json
-288 -rw-r--r--   1 natasha  staff  146490 Sep 27 09:11 cover.jpg
-  0 drwxr-xr-x   6 natasha  staff     204 Sep 25 19:01 exercises
- 24 -rw-r--r--   1 natasha  staff   10024 Sep 25 19:01 faq.md
-  0 drwxr-xr-x   3 natasha  staff     102 Sep 27 16:25 resources
-  8 -rw-r--r--   1 natasha  staff    3633 Sep 27 15:52 schedule.md
+In [3]: print(output)
+b'total 44\r\n4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py\r\n4 -rw-r--r-- 1 vagrant vagrant 3393 Jul 14 07:15 2_telnetlib.py\r\n4 -rw-r--r-- 1 vagrant vagrant 3452 Jul 14 07:15 3_paramiko.py\r\n4 -rw-r--r-- 1 vagrant vagrant 3127 Jul 14 07:15 4_netmiko.py\r\n4 -rw-r--r-- 1 vagrant vagrant  718 Jul 14 07:15 4_netmiko_telnet.py\r\n4 -rw-r--r-- 1 vagrant vagrant  300 Jul  8 15:31 devices.yaml\r\n4 -rw-r--r-- 1 vagrant vagrant  413 Jul 14 07:15 netmiko_function.py\r\n4 -rw-r--r-- 1 vagrant vagrant  876 Jul 14 07:15 netmiko_multiprocessing.py\r\n4 -rw-r--r-- 1 vagrant vagrant 1147 Jul 14 07:15 netmiko_threading_data_list.py\r\n4 -rw-r--r-- 1 vagrant vagrant 1121 Jul 14 07:15 netmiko_threading_data.py\r\n4 -rw-r--r-- 1 vagrant vagrant  671 Jul 14 07:15 netmiko_threading.py\r\n'
+
+In [4]: print(output.decode('utf-8'))
+total 44
+4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py
+4 -rw-r--r-- 1 vagrant vagrant 3393 Jul 14 07:15 2_telnetlib.py
+4 -rw-r--r-- 1 vagrant vagrant 3452 Jul 14 07:15 3_paramiko.py
+4 -rw-r--r-- 1 vagrant vagrant 3127 Jul 14 07:15 4_netmiko.py
+4 -rw-r--r-- 1 vagrant vagrant  718 Jul 14 07:15 4_netmiko_telnet.py
+4 -rw-r--r-- 1 vagrant vagrant  300 Jul  8 15:31 devices.yaml
+4 -rw-r--r-- 1 vagrant vagrant  413 Jul 14 07:15 netmiko_function.py
+4 -rw-r--r-- 1 vagrant vagrant  876 Jul 14 07:15 netmiko_multiprocessing.py
+4 -rw-r--r-- 1 vagrant vagrant 1147 Jul 14 07:15 netmiko_threading_data_list.py
+4 -rw-r--r-- 1 vagrant vagrant 1121 Jul 14 07:15 netmiko_threading_data.py
+4 -rw-r--r-- 1 vagrant vagrant  671 Jul 14 07:15 netmiko_threading.py
+
 ```
 
 ### ```pexpect.spawn```
@@ -58,7 +62,7 @@ total 368
 t = pexpect.spawn('ssh user@10.1.1.1')
 
 t.expect('Password:')
-t.sendline("userpass")
+t.sendline('userpass')
 t.expect('>')
 ```
 
@@ -76,15 +80,15 @@ import getpass
 import sys
 
 COMMAND = sys.argv[1]
-USER = raw_input("Username: ")
+USER = input("Username: ")
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print "Connection to device %s" % IP
-    t = pexpect.spawn('ssh %s@%s' % (USER, IP))
+    print("Connection to device {}".format( IP ))
+    t = pexpect.spawn('ssh {}@{}'.format( USER, IP ))
 
     t.expect('Password:')
     t.sendline(PASSWORD)
@@ -102,7 +106,7 @@ for IP in DEVICES_IP:
     t.sendline(COMMAND)
 
     t.expect('#')
-    print t.before
+    print(t.before.decode('utf-8'))
 
 ```
 
@@ -177,13 +181,17 @@ Pexpect не интерпретирует специальные символы 
 ```python
 In [1]: import pexpect
 
-In [2]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
+In [2]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep pexpect"')
 
 In [3]: p.expect(pexpect.EOF)
 Out[3]: 0
 
-In [4]: print p.before
- 16 -rw-r--r--   1 natasha  staff    7156 Oct  5 13:05 SUMMARY.md
+In [4]: print(p.before)
+b'4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py\r\n'
+
+In [5]: print(p.before.decode('utf-8'))
+4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py
+
 ```
 
 #### pexpect.EOF
@@ -234,20 +242,19 @@ EOF                                       Traceback (most recent call last)
      50
      51     def timeout(self, err=None):
 
-EOF: End Of File (EOF). Empty string style platform.
-<pexpect.pty_spawn.spawn object at 0x107100b10>
+EOF: End Of File (EOF). Exception style platform.
+<pexpect.pty_spawn.spawn object at 0xb4f7366c>
 command: /bin/bash
-args: ['/bin/bash', '-c', 'ls -ls | grep SUMMARY']
-searcher: None
-buffer (last 100 chars): ''
-before (last 100 chars): ' 16 -rw-r--r--   1 natasha  staff    7156 Oct  5 13:05 SUMMARY.md\r\n'
+args: ['/bin/bash', '-c', 'ls -ls | grep pexpect']
+buffer (last 100 chars): b''
+before (last 100 chars): b'4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py\r\n'
 after: <class 'pexpect.exceptions.EOF'>
 match: None
 match_index: None
 exitstatus: 0
 flag_eof: True
-pid: 85765
-child_fd: 7
+pid: 3189
+child_fd: 16
 closed: False
 timeout: 30
 delimiter: <class 'pexpect.exceptions.EOF'>
@@ -260,11 +267,14 @@ searchwindowsize: None
 delaybeforesend: 0.05
 delayafterclose: 0.1
 delayafterterminate: 0.1
+searcher: searcher_re:
+    0: re.compile("b'py3_convert'")
+
 ```
 
 Но, если передать в expect EOF, ошибки не будет.
 
-###Возможности pexpect.expect
+### Возможности pexpect.expect
 
 ```pexpect.expect``` в качестве шаблона может принимать не только строку.
 
@@ -279,10 +289,11 @@ delayafterterminate: 0.1
 
 Например:
 ```python
-In [7]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep SUMMARY"')
+In [7]: p = pexpect.spawn('/bin/bash -c "ls -ls | grep netmiko"')
 
-In [8]: p.expect(['nattaur', pexpect.TIMEOUT, pexpect.EOF])
+In [8]: p.expect(['py3_convert', pexpect.TIMEOUT, pexpect.EOF])
 Out[8]: 2
+
 ```
 
 Тут несколько важных моментов:
@@ -292,8 +303,3 @@ Out[8]: 2
  * в данном случае, номер 2, так как исключение EOF находится в списке под номером два
 * за счет такого формата, можно делать ответвления в программе, в зависимости от того с каким элементом было совпадение
 
-
-###Документация pexpect
-
-
-Документация модуля: [pexpect](https://pexpect.readthedocs.io/en/stable/index.html).

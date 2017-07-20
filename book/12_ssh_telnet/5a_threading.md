@@ -28,16 +28,17 @@ devices = yaml.load(open('devices.yaml'))
 
 def connect_ssh(device_dict, command):
 
-    print "Connection to device %s" % device_dict['ip']
+    print("Connection to device {}".format( device_dict['ip'] ))
 
     ssh = ConnectHandler(**device_dict)
     ssh.enable()
 
     result = ssh.send_command(command)
-    print result
+    print(result)
 
 for router in devices['routers']:
     connect_ssh(router, COMMAND)
+
 ```
 
 Файл devices.yaml с параметрами подключения к устройствам:
@@ -84,8 +85,8 @@ def connect_ssh(device_dict, command):
     ssh.enable()
     result = ssh.send_command(command)
 
-    print "Connection to device %s" % device_dict['ip']
-    print result
+    print("Connection to device {}".format( device_dict['ip'] ))
+    print(result)
 
 
 def conn_threads(function, devices, command):
@@ -131,9 +132,9 @@ sys     0m0.068s
 Чаще всего, для этого используется очередь.
 
 
-В Python есть модуль Queue, который позволяет создавать разные типы очередей.
+В Python есть модуль queue, который позволяет создавать разные типы очередей.
 
-> Очередь это структура данных, которая используется и в работе с сетевым оборудованием. Объект Queue.Queue() - это FIFO очередь.
+> Очередь это структура данных, которая используется и в работе с сетевым оборудованием. Объект queue.Queue() - это FIFO очередь.
 
 Очередь передается как аргумент в функцию connect_ssh, которая подключается к устройству по SSH. Результат выполнения команды добавляется в очередь.
 
@@ -144,7 +145,7 @@ from netmiko import ConnectHandler
 import sys
 import yaml
 import threading
-from Queue import Queue
+from queue import Queue
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
@@ -153,7 +154,7 @@ def connect_ssh(device_dict, command, queue):
     ssh = ConnectHandler(**device_dict)
     ssh.enable()
     result = ssh.send_command(command)
-    print "Connection to device %s" % device_dict['ip']
+    print("Connection to device {}".format( device_dict['ip'] ))
 
     #Добавляем словарь в очередь
     queue.put({ device_dict['ip']: result })
@@ -161,7 +162,6 @@ def connect_ssh(device_dict, command, queue):
 
 def conn_threads(function, devices, command):
     threads = []
-    #Создаем очередь
     q = Queue()
 
     for device in devices:
@@ -180,7 +180,7 @@ def conn_threads(function, devices, command):
 
     return results
 
-print conn_threads(connect_ssh, devices['routers'], COMMAND)
+print(conn_threads(connect_ssh, devices['routers'], COMMAND))
 ```
 
 Обратите внимание, что в функции connect_ssh добавился аргумент queue.
@@ -208,7 +208,7 @@ def connect_ssh(device_dict, command, queue):
     ssh = ConnectHandler(**device_dict)
     ssh.enable()
     result = ssh.send_command(command)
-    print "Connection to device %s" % device_dict['ip']
+    print("Connection to device {}".format( device_dict['ip'] ))
 
     #Добавляем словарь в список
     queue.append({ device_dict['ip']: result })
@@ -235,5 +235,7 @@ def conn_threads(function, devices, command):
 
     return q
 
-print conn_threads(connect_ssh, devices['routers'], COMMAND)
+print(conn_threads(connect_ssh, devices['routers'], COMMAND))
+
 ```
+

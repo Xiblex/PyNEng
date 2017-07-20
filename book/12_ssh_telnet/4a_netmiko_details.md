@@ -79,6 +79,7 @@ result = ssh.send_command("show ip int br")
 В большинстве случаев, достаточно будет указать только команду.
 
 ### ```send_config_set```
+
 Метод ```send_config_set``` позволяет отправить несколько команд конфигурационного режима.
 
 Пример использования:
@@ -97,6 +98,7 @@ result = ssh.send_config_set(commands)
  * в зависимости от типа устройства, выхода из конфигурационного режима может и не быть. Например, для IOS-XR выхода не будет, так как сначала надо закомитить изменения
 
 ### ```send_config_from_file```
+
 Метод ```send_config_from_file``` отправляет команды из указанного файла в конфигурационный режим.
 
 Пример использования:
@@ -148,14 +150,14 @@ import sys
 import time
 
 COMMAND = sys.argv[1]
-USER = raw_input("Username: ")
+USER = input("Username: ")
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print "Connection to device %s" % IP
+    print("Connection to device {}".format( IP ))
     DEVICE_PARAMS = {'device_type': 'cisco_ios_telnet',
                      'ip': IP,
                      'username':USER,
@@ -166,7 +168,8 @@ for IP in DEVICES_IP:
     ssh.enable()
 
     result = ssh.send_command(COMMAND)
-    print result
+    print(result)
+
 ```
 
 Аналогично работают и методы:
@@ -176,3 +179,4 @@ for IP in DEVICES_IP:
 * ```send_config_from_file()```
 * ```check_enable_mode()```
 * ```disconnect()```
+

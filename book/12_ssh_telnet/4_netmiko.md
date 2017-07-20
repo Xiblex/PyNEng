@@ -17,14 +17,14 @@ import sys
 
 
 COMMAND = sys.argv[1]
-USER = raw_input("Username: ")
+USER = input("Username: ")
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print "Connection to device %s" % IP
+    print("Connection to device {}".format( IP ))
     DEVICE_PARAMS = {'device_type': 'cisco_ios',
                      'ip': IP,
                      'username':USER,
@@ -33,9 +33,9 @@ for IP in DEVICES_IP:
 
     ssh = ConnectHandler(**DEVICE_PARAMS)
     ssh.enable()
-    
+
     result = ssh.send_command(COMMAND)
-    print result
+    print(result)
 ```
 
 Посмотрите насколько проще выглядит этот пример с netmiko.
@@ -98,3 +98,4 @@ FastEthernet0/1.70     10.3.70.1       YES manual up                    up
 В выводе нет никаких лишних приглашений, только вывод команды sh ip int br.
 
 Так как netmiko наиболее удобный модуль для подключения к сетевому оборудования, разберемся с ним подробней.
+

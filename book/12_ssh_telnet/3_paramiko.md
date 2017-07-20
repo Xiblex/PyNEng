@@ -16,18 +16,19 @@ import sys
 import time
 
 COMMAND = sys.argv[1]
-USER = raw_input("Username: ")
+USER = input("Username: ")
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print "Connection to device %s" % IP
+    print("Connection to device {}".format( IP ))
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
-    client.connect(hostname=IP, username=USER, password=PASSWORD, look_for_keys=False, allow_agent=False)
+    client.connect(hostname=IP, username=USER, password=PASSWORD,
+                   look_for_keys=False, allow_agent=False)
     ssh = client.invoke_shell()
 
     ssh.send("enable\n")
@@ -36,12 +37,13 @@ for IP in DEVICES_IP:
 
     ssh.send("terminal length 0\n")
     time.sleep(1)
-    print ssh.recv(1000)
+    print(ssh.recv(1000).decode('utf-8'))
 
     ssh.send(COMMAND + "\n")
     time.sleep(2)
-    result = ssh.recv(5000)
-    print result
+    result = ssh.recv(5000).decode('utf-8')
+    print(result)
+
 ```
 
 Комментарии к скрипту:
@@ -148,12 +150,8 @@ R3#
 
     ssh.send(COMMAND + "\n")
     time.sleep(3)
-    result = ssh.recv(5000)
-    print result
+    result = ssh.recv(5000).decode('utf-8')
+    print(result)
 ```
 
 
-###Документация Paramiko
-
-* Всё, что касается клиента: [Paramiko Client](http://docs.paramiko.org/en/2.0/api/client.html)
-* Всё, что касается соединения (в нашем примере, всё, что относится к переменной ssh): [Paramiko Channel](http://docs.paramiko.org/en/2.0/api/channel.html)

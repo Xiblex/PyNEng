@@ -137,6 +137,7 @@
     * [Одновременное подключение к нескольким устройствам](book/12_ssh_telnet/5_simultaneous_connections.md)
         * [Модуль threading](book/12_ssh_telnet/5a_threading.md)
         * [Модуль multiprocessing](book/12_ssh_telnet/5b_multiprocessing.md)
+    * [Дополнительные материалы](book/12_ssh_telnet/further_reading.md)
     * [Задания](exercises/12_ssh_telnet/12_exercises.md)
 * [13. Шаблоны конфигураций с Jinja](book/13_jinja2/README.md)
     * [Пример использования Jinja](book/13_jinja2/1_example.md)
