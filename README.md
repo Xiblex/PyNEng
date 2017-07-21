@@ -4,7 +4,8 @@
 
 <br>
 
-> Присоединяйтесь к команде [PyNEng в slack](https://pyneng-slack.herokuapp.com/)
+> Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
+> Все вопросы, предложения и замечания по книге также пишите в Slack
 
 <br>
 
