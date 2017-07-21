@@ -1,4 +1,4 @@
-## x comprehentions
+## List, dict, set comprehentions
 
 Python поддерживает специальные выражения, которые позволяют компактно создавать списки, словари и множества.
 
@@ -80,7 +80,7 @@ In [12]: print(only_digits)
 
 С помощью генератора списка также удобно получать элементы из вложенных словарей:
 ```python
-In [18]: london_co = {
+In [13]: london_co = {
     ...:     'r1' : {
     ...:     'hostname': 'london_r1',
     ...:     'location': '21 New Globe Walk',
@@ -107,11 +107,11 @@ In [18]: london_co = {
     ...:     }
     ...: }
 
-In [19]: [london_co[device]['IOS'] for device in london_co]
-Out[19]: ['15.4', '15.4', '3.6.XE']
+In [14]: [london_co[device]['IOS'] for device in london_co]
+Out[14]: ['15.4', '15.4', '3.6.XE']
 
-In [20]: [london_co[device]['IP'] for device in london_co]
-Out[20]: ['10.255.0.1', '10.255.0.2', '10.255.0.101']
+In [15]: [london_co[device]['IP'] for device in london_co]
+Out[15]: ['10.255.0.1', '10.255.0.2', '10.255.0.101']
 
 ```
 
@@ -127,43 +127,43 @@ Out[20]: ['10.255.0.1', '10.255.0.2', '10.255.0.101']
 
 Например, в списке vlans находятся несколько вложенных списков с вланами:
 ```python
-In [21]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
+In [16]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
 ```
 
 Из этого списка надо сформировать один плоский список с номерами VLAN.
 Первый вариант, с помощью циклов for:
 ```
-In [22]: result = []
+In [17]: result = []
 
-In [23]: for vlan_list in vlans:
+In [18]: for vlan_list in vlans:
     ...:     for vlan in vlan_list:
     ...:         result.append(vlan)
     ...:
 
-In [24]: print(result)
+In [19]: print(result)
 [10, 21, 35, 101, 115, 150, 111, 40, 50]
 
 ```
 
 Аналогичный вариант с генератором списков:
 ```python
-In [21]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
+In [20]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
 
-In [27]: result = [vlan for vlan_list in vlans for vlan in vlan_list]
+In [21]: result = [vlan for vlan_list in vlans for vlan in vlan_list]
 
-In [28]: print(result)
+In [22]: print(result)
 [10, 21, 35, 101, 115, 150, 111, 40, 50]
 ```
 
 Можно одновременно проходиться по двум последовательностям, используя zip:
 ```python
-In [46]: vlans = [100, 110, 150, 200]
+In [23]: vlans = [100, 110, 150, 200]
 
-In [47]: names = ['mngmt', 'voice', 'video', 'dmz']
+In [24]: names = ['mngmt', 'voice', 'video', 'dmz']
 
-In [48]: result = ['vlan {}\n name {}'.format(vlan, name) for vlan, name in zip(vlans, names)]
+In [25]: result = ['vlan {}\n name {}'.format(vlan, name) for vlan, name in zip(vlans, names)]
 
-In [49]: print('\n'.join(result))
+In [26]: print('\n'.join(result))
 vlan 100
  name mngmt
 vlan 110
@@ -181,21 +181,21 @@ vlan 200
 
 Например, такое выражение:
 ```python
-In [57]: d = {}
+In [27]: d = {}
 
-In [58]: for num in range(1,11):
+In [28]: for num in range(1,11):
     ...:     d[num] = num**2
     ...:
 
-In [59]: print(d)
+In [29]: print(d)
 {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
 ```
 
 Можно заменить генератором словаря:
 ```python
-In [60]: d = {num: num**2 for num in range(1,11)}
+In [30]: d = {num: num**2 for num in range(1,11)}
 
-In [61]: print(d)
+In [31]: print(d)
 {1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
 
 ```
@@ -203,7 +203,7 @@ In [61]: print(d)
 Еще один пример, в котором надо преобразовать существующий словарь и перевести все ключи в нижний регистр.
 Для начала, вариант решения без генератора словаря:
 ```python
-In [62]: r1 = {'IOS': '15.4',
+In [32]: r1 = {'IOS': '15.4',
     ...:   'IP': '10.255.0.1',
     ...:   'hostname': 'london_r1',
     ...:   'location': '21 New Globe Walk',
@@ -211,14 +211,14 @@ In [62]: r1 = {'IOS': '15.4',
     ...:   'vendor': 'Cisco'}
     ...:
 
-In [63]: lower_r1 = {}
+In [33]: lower_r1 = {}
 
-In [64]: for key, value in r1.items():
+In [34]: for key, value in r1.items():
     ...:     lower_r1[str.lower(key)] = value
     ...:
 
-In [66]: lower_r1
-Out[66]:
+In [35]: lower_r1
+Out[35]:
 {'hostname': 'london_r1',
  'ios': '15.4',
  'ip': '10.255.0.1',
@@ -230,7 +230,7 @@ Out[66]:
 
 Аналогичный вариант с помощью генератора словаря:
 ```python
-In [67]: r1 = {'IOS': '15.4',
+In [36]: r1 = {'IOS': '15.4',
     ...:   'IP': '10.255.0.1',
     ...:   'hostname': 'london_r1',
     ...:   'location': '21 New Globe Walk',
@@ -238,10 +238,10 @@ In [67]: r1 = {'IOS': '15.4',
     ...:   'vendor': 'Cisco'}
     ...:
 
-In [68]: lower_r1 = {str.lower(key): value for key, value in r1.items()}
+In [37]: lower_r1 = {str.lower(key): value for key, value in r1.items()}
 
-In [69]: lower_r1
-Out[69]:
+In [38]: lower_r1
+Out[38]:
 {'hostname': 'london_r1',
  'ios': '15.4',
  'ip': '10.255.0.1',
@@ -254,7 +254,7 @@ Out[69]:
 Как и list comprehentions, dict comprehentions можно делать вложенными.
 Попробуем аналогичным образом преобразовать ключи во вложенных словарях:
 ```python
-In [87]: london_co = {
+In [39]: london_co = {
     ...:     'r1' : {
     ...:     'hostname': 'london_r1',
     ...:     'location': '21 New Globe Walk',
@@ -281,16 +281,16 @@ In [87]: london_co = {
     ...:     }
     ...: }
 
-In [88]: lower_london_co = {}
+In [40]: lower_london_co = {}
 
-In [89]: for device, params in london_co.items():
+In [41]: for device, params in london_co.items():
     ...:     lower_london_co[device] = {}
     ...:     for key, value in params.items():
     ...:         lower_london_co[device][str.lower(key)] = value
     ...:
 
-In [90]: lower_london_co
-Out[90]:
+In [42]: lower_london_co
+Out[42]:
 {'r1': {'hostname': 'london_r1',
   'ios': '15.4',
   'ip': '10.255.0.1',
@@ -314,10 +314,10 @@ Out[90]:
 
 Аналогичное преобразование с dict comprehentions:
 ```python
-In [95]: result = {device: {str.lower(key):value for key, value in params.items()} for device, params in london_co.items()}
+In [43]: result = {device: {str.lower(key):value for key, value in params.items()} for device, params in london_co.items()}
 
-In [96]: result
-Out[96]:
+In [44]: result
+Out[44]:
 {'r1': {'hostname': 'london_r1',
   'ios': '15.4',
   'ip': '10.255.0.1',
@@ -341,4 +341,30 @@ Out[96]:
 
 ## Set comprehentions (генераторы множеств)
 
+Генераторы множеств, в целом аналогичны генераторам списков.
+
+Например, надо получить множество с уникальными номерами VLAN'ов:
+```python
+In [45]: vlans = [10, '30', 30, 10, '56']
+
+In [46]: unique_vlans = {int(vlan) for vlan in vlans}
+
+In [47]: unique_vlans
+Out[47]: {10, 30, 56}
+```
+
+Аналогичное решение, без использования set comprehentions:
+```python
+In [48]: vlans = [10, '30', 30, 10, '56']
+
+In [49]: unique_vlans = set()
+
+In [50]: for vlan in vlans:
+    ...:     unique_vlans.add(int(vlan))
+    ...:
+
+In [51]: unique_vlans
+Out[51]: {10, 30, 56}
+
+```
 

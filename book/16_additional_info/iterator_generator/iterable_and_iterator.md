@@ -73,7 +73,9 @@ StopIteration:
 
 После того как элементы закончились, возвращается исключение StopIteration.
 
-Именно такие действия выполяются, когда цикл for проходится по списку:
+> Для того чтобы итератор снова начал возвращать элементы, его надо заново создать.
+
+Аналогичные действия выполяются, когда цикл for проходится по списку:
 ```python
 In [9]: for item in lista:
    ...:     print(item)
@@ -111,23 +113,23 @@ ip ssh version 2
 
 Если открыть файл обычной функцией open, мы получим объект, который представляет файл:
 ```python
-In [19]: f = open('r1.txt')
+In [10]: f = open('r1.txt')
 ```
 
 Этот объект является итератором, что можно проверить вызвав метод ```__next__```:
 ```python
-In [20]: f.__next__()
-Out[20]: '!\n'
+In [11]: f.__next__()
+Out[11]: '!\n'
 
-In [21]: f.__next__()
-Out[21]: 'service timestamps debug datetime msec localtime show-timezone year\n'
+In [12]: f.__next__()
+Out[12]: 'service timestamps debug datetime msec localtime show-timezone year\n'
 
 ```
 
 
 Аналогичным образом можно перебирать строки в цикле for:
 ```python
-In [26]: for line in f:
+In [13]: for line in f:
     ...:     print(line.rstrip())
     ...:
 service timestamps log datetime msec localtime show-timezone year
@@ -146,7 +148,7 @@ ip ssh version 2
 
 Поэтому при работе с файлами, в Python, чаще всего, используется конструкция вида:
 ```python
-In [27]: with open('r1.txt') as f:
+In [14]: with open('r1.txt') as f:
     ...:     for line in f:
     ...:         print(line.rstrip())
     ...:
@@ -162,6 +164,108 @@ ip ssh version 2
 !
 ```
 
+### enumerate
+
+Иногда, при переборе объектов в цикле for, нужно не только получить сам объект, но и его порядковый номер.
+Это можно сделать, создав дополнительную переменную, которая будет расти на единицу с каждым прохождением цикла.
+Но, гораздо удобнее это делать с помощью итератора __```enumerate()```__.
+
+Базовый пример:
+```python
+In [15]: list1 = ['str1', 'str2', 'str3']
+
+In [16]: for position, string in enumerate(list1):
+    ...:     print(position, string)
+    ...:
+0 str1
+1 str2
+2 str3
+```
+
+```enumerate()``` умеет считать не только с нуля, но и с любого значение, которое ему указали после объекта:
+```python
+In [17]: list1 = ['str1', 'str2', 'str3']
+
+In [18]: for position, string in enumerate(list1, 100):
+    ...:     print(position, string)
+    ...:
+100 str1
+101 str2
+102 str3
+```
+
+Иногда нужно проверить, что сгенерировал итератор, как правило, на стадии написания скрипта.
+Если необходимо увидеть содержимое, которое сгенерирует итератор, полностью, можно воспользоваться функцией list:
+```python
+In [19]: list1 = ['str1', 'str2', 'str3']
+
+In [20]: list(enumerate(list1, 100))
+Out[20]: [(100, 'str1'), (101, 'str2'), (102, 'str3')]
+```
+
+#### Пример использования enumerate для EEM
+
+В этом примере используется Cisco [EEM](http://xgu.ru/wiki/EEM).
+Если в двух словах, то EEM позволяет выполнять какие-то действия (action) в ответ на событие (event).
+
+Выглядит applet EEM так:
+```python
+event manager applet Fa0/1_no_shut
+ event syslog pattern "Line protocol on Interface FastEthernet0/0, changed state to down"
+ action 1 cli command "enable"
+ action 2 cli command "conf t"
+ action 3 cli command "interface fa0/1"
+ action 4 cli command "no sh"
+```
+
+В EEM, в ситуации, когда действий выполнить нужно много, неудобно каждый раз набирать ```action x cli command```.
+Плюс, чаще всего, уже есть готовый кусок конфигурации, который должен выполнить EEM.
+
+С помощью простого скрипта Python, можно сгенерировать команды EEM, на основании существующего списка команд (файл enumerate_eem.py):
+```python
+import sys
+
+config = sys.argv[1]
+
+with open(config, 'r') as file:
+    for (i, command) in enumerate(file, 1):
+        print('action {:04} cli command "{}"'.format( i, command.rstrip() ))
+
+```
+
+В данном примере команды считываются из файла, а затем к каждой строке добавляется приставка, которая нужна для EEM.
+
+Файл с командами выглядит так (r1_config.txt):
+```python
+en
+conf t
+no int Gi0/0/0.300
+no int Gi0/0/0.301
+no int Gi0/0/0.302
+int range gi0/0/0-2
+ channel-group 1 mode active
+interface Port-channel1.300
+ encapsulation dot1Q 300
+ vrf forwarding Management
+ ip address 10.16.19.35 255.255.255.248
+```
+
+Вывод будет таким:
+```python
+$ python enumerate_eem.py r1_config.txt
+action 0001 cli command "en"
+action 0002 cli command "conf t"
+action 0003 cli command "no int Gi0/0/0.300"
+action 0004 cli command "no int Gi0/0/0.301"
+action 0005 cli command "no int Gi0/0/0.302"
+action 0006 cli command "int range gi0/0/0-2"
+action 0007 cli command " channel-group 1 mode active"
+action 0008 cli command "interface Port-channel1.300"
+action 0009 cli command " encapsulation dot1Q 300"
+action 0010 cli command " vrf forwarding Management"
+action 0011 cli command " ip address 10.16.19.35 255.255.255.248"
+```
+
 ### itertools
 
 В Python есть отдельный модуль itertools в котором находятся итераторы и средства работы с ними.
@@ -174,14 +278,14 @@ ip ssh version 2
 
 Пример count():
 ```python
-In [28]: import itertools
+In [21]: import itertools
 
-In [29]: count_nums = itertools.count(0,2)
+In [22]: count_nums = itertools.count(0,2)
 
-In [30]: count_nums
-Out[30]: count(0, 2)
+In [23]: count_nums
+Out[23]: count(0, 2)
 
-In [31]: for _ in range(10):
+In [24]: for _ in range(10):
     ...:     print(next(count_nums))
     ...:
 0
@@ -199,13 +303,13 @@ In [31]: for _ in range(10):
 
 Например, count может пригодиться в zip, чтобы сгенерировать номера элементов:
 ```python
-In [32]: nums = list(range(100, 201, 10))
+In [25]: nums = list(range(100, 201, 10))
 
-In [33]: nums
-Out[33]: [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
+In [26]: nums
+Out[26]: [100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200]
 
-In [34]: list(zip(itertools.count(), nums))
-Out[34]:
+In [27]: list(zip(itertools.count(), nums))
+Out[27]:
 [(0, 100),
  (1, 110),
  (2, 120),
@@ -221,9 +325,9 @@ Out[34]:
 
 Пример использования cycle():
 ```python
-In [37]: cycle_letters = itertools.cycle('ABCD')
+In [28]: cycle_letters = itertools.cycle('ABCD')
 
-In [38]: for _ in range(10):
+In [29]: for _ in range(10):
     ...:     print(next(cycle_letters))
     ...:
 A
@@ -242,19 +346,19 @@ B
 Функция islice создает итератор, который возвращает элементы итерируемого объекта.
 Она поддерживает такой же синтаксис, как и функция range:
 ```python
-In [58]: from itertools import islice
+In [30]: from itertools import islice
 
-In [59]: islice(range(100,200,5), 5)
-Out[59]: <itertools.islice at 0xb4f6c57c>
+In [31]: islice(range(100,200,5), 5)
+Out[31]: <itertools.islice at 0xb4f6c57c>
 
-In [60]: list(islice(range(100,200,5), 5))
-Out[60]: [100, 105, 110, 115, 120]
+In [32]: list(islice(range(100,200,5), 5))
+Out[32]: [100, 105, 110, 115, 120]
 
-In [61]: list(islice(range(100,200,5), 5, 10))
-Out[61]: [125, 130, 135, 140, 145]
+In [33]: list(islice(range(100,200,5), 5, 10))
+Out[33]: [125, 130, 135, 140, 145]
 
-In [62]: list(islice(range(100,200,5), 5, 10, 2))
-Out[62]: [125, 135, 145]
+In [34]: list(islice(range(100,200,5), 5, 10, 2))
+Out[34]: [125, 135, 145]
 
 ```
 
@@ -265,9 +369,9 @@ Out[62]: [125, 135, 145]
 
 Пример из документации модуля:
 ```python
-In [47]: from itertools import islice
+In [35]: from itertools import islice
 
-In [48]: def take(n, iterable):
+In [36]: def take(n, iterable):
     ...:     "Return first n items of the iterable as a list"
     ...:     return list(islice(iterable, n))
     ...:
@@ -275,15 +379,15 @@ In [48]: def take(n, iterable):
 
 Функция take возвращает указанное количество элементов из итерируемого объекта:
 ```python
-In [52]: a = [1,2,3,4,5,6,7,8]
+In [37]: a = [1,2,3,4,5,6,7,8]
 
-In [53]: b = range(100,200,5)
+In [38]: b = range(100,200,5)
 
-In [54]: take(5, a)
-Out[54]: [1, 2, 3, 4, 5]
+In [39]: take(5, a)
+Out[39]: [1, 2, 3, 4, 5]
 
-In [55]: take(5, b)
-Out[55]: [100, 105, 110, 115, 120]
+In [40]: take(5, b)
+Out[40]: [100, 105, 110, 115, 120]
 
 ```
 

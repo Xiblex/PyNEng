@@ -45,7 +45,6 @@
     * [for](book/05_control_structures/2_for.md)
         * [Вложенные for](book/05_control_structures/2a_for_in_for.md)
         * [Совмещение for и if](book/05_control_structures/2b_for_if.md)
-        * [Итератор enumerate](book/05_control_structures/2c_enumerate.md)
     * [while](book/05_control_structures/3_while.md)
     * [break, continue, pass](book/05_control_structures/4_break_continue_pass.md)
     * [for/else, while/else](book/05_control_structures/5_for_while_else.md)
