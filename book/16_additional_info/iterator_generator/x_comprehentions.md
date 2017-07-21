@@ -1,0 +1,344 @@
+## x comprehentions
+
+Python поддерживает специальные выражения, которые позволяют компактно создавать списки, словари и множества.
+
+На английском эти выражения называются, соответственно:
+
+* List comprehentions
+* Dict comprehentions
+* Set comprehentions
+
+К сожалению, официальный перевод на русский звучит как [абстракция списков или списковое включение](https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BA%D0%BE%D0%B2%D0%BE%D0%B5_%D0%B2%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5).
+Что не особо помогает понять суть объекта.
+
+В книге использовался перевод "генератор списка", что, к сожалению, тоже не удачный вариант, так как в Python есть отдельное понятие генератор и генераторные выражения.
+Но он лучше отображает суть выражения.
+
+Эти выражения не только позволяют более компактно создавать соответствующие объекты, но и создают их быстрее.
+И хотя поначалу они требуют определенной привычки использования и понимания, они очень часто используются.
+
+
+## List comprehentions (генераторы списков)
+
+Генератор списка это выражение вида:
+```python
+In [1]: vlans = ['vlan {}'.format(num) for num in range(10,16)]
+
+In [2]: print(vlans)
+['vlan 10', 'vlan 11', 'vlan 12', 'vlan 13', 'vlan 14', 'vlan 15']
+
+```
+
+В общем случае, это выражение, которое преобразует итерируемый объект в список.
+То есть, последовательность элементов преобразуется и добавляется в новый список.
+
+Выражению выше аналогичен такой цикл:
+```python
+In [3]: vlans = []
+
+In [4]: for num in range(10,16):
+   ...:     vlans.append('vlan {}'.format(num))
+   ...:
+
+In [5]: print(vlans)
+['vlan 10', 'vlan 11', 'vlan 12', 'vlan 13', 'vlan 14', 'vlan 15']
+```
+
+В list comprehentions можно использовать выражение if.
+Таким образом можно добавлять в список только некоторые объекты.
+
+Например, такой цикл отбирает те элементы, которые являются числами, конвертирует их и добавляет в итоговый список only_digits:
+```python
+In [6]: items = ['10', '20', 'a', '30', 'b', '40']
+
+In [7]: only_digits = []
+
+In [8]: for item in items:
+   ...:     if item.isdigit():
+   ...:         only_digits.append(int(item))
+   ...:
+
+In [9]: print(only_digits)
+[10, 20, 30, 40]
+
+```
+
+Аналогичный вариант в виде list comprehentions:
+```python
+In [10]: items = ['10', '20', 'a', '30', 'b', '40']
+
+In [11]: only_digits = [int(item) for item in items if item.isdigit()]
+
+In [12]: print(only_digits)
+[10, 20, 30, 40]
+
+```
+
+Конечно, далеко не все циклы можно переписать как генератор списка, но когда это можно сделать и при этом выражение не усложняется, лучше использовать генераторы списка.
+
+> В Python генераторы списка могут также заменить функции filter и map и считаются более понятными вариантами решения.
+
+С помощью генератора списка также удобно получать элементы из вложенных словарей:
+```python
+In [18]: london_co = {
+    ...:     'r1' : {
+    ...:     'hostname': 'london_r1',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '4451',
+    ...:     'IOS': '15.4',
+    ...:     'IP': '10.255.0.1'
+    ...:     },
+    ...:     'r2' : {
+    ...:     'hostname': 'london_r2',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '4451',
+    ...:     'IOS': '15.4',
+    ...:     'IP': '10.255.0.2'
+    ...:     },
+    ...:     'sw1' : {
+    ...:     'hostname': 'london_sw1',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '3850',
+    ...:     'IOS': '3.6.XE',
+    ...:     'IP': '10.255.0.101'
+    ...:     }
+    ...: }
+
+In [19]: [london_co[device]['IOS'] for device in london_co]
+Out[19]: ['15.4', '15.4', '3.6.XE']
+
+In [20]: [london_co[device]['IP'] for device in london_co]
+Out[20]: ['10.255.0.1', '10.255.0.2', '10.255.0.101']
+
+```
+
+На самом деле, синтаксис генератора списка выглядит так:
+```python
+[expression for item1 in iterable1 if condition1 
+            for item2 in iterable2 if condition2
+            ...
+            for itemN in iterableN if conditionN ]
+```
+
+Это значит можно использовать несколько for в выражении.
+
+Например, в списке vlans находятся несколько вложенных списков с вланами:
+```python
+In [21]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
+```
+
+Из этого списка надо сформировать один плоский список с номерами VLAN.
+Первый вариант, с помощью циклов for:
+```
+In [22]: result = []
+
+In [23]: for vlan_list in vlans:
+    ...:     for vlan in vlan_list:
+    ...:         result.append(vlan)
+    ...:
+
+In [24]: print(result)
+[10, 21, 35, 101, 115, 150, 111, 40, 50]
+
+```
+
+Аналогичный вариант с генератором списков:
+```python
+In [21]: vlans = [[10,21,35], [101, 115, 150], [111, 40, 50]]
+
+In [27]: result = [vlan for vlan_list in vlans for vlan in vlan_list]
+
+In [28]: print(result)
+[10, 21, 35, 101, 115, 150, 111, 40, 50]
+```
+
+Можно одновременно проходиться по двум последовательностям, используя zip:
+```python
+In [46]: vlans = [100, 110, 150, 200]
+
+In [47]: names = ['mngmt', 'voice', 'video', 'dmz']
+
+In [48]: result = ['vlan {}\n name {}'.format(vlan, name) for vlan, name in zip(vlans, names)]
+
+In [49]: print('\n'.join(result))
+vlan 100
+ name mngmt
+vlan 110
+ name voice
+vlan 150
+ name video
+vlan 200
+ name dmz
+
+```
+
+## Dict comprehentions (генераторы словарей)
+
+Генераторы словарей аналогичный генераторам списков, но они используются для создания словарей.
+
+Например, такое выражение:
+```python
+In [57]: d = {}
+
+In [58]: for num in range(1,11):
+    ...:     d[num] = num**2
+    ...:
+
+In [59]: print(d)
+{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
+```
+
+Можно заменить генератором словаря:
+```python
+In [60]: d = {num: num**2 for num in range(1,11)}
+
+In [61]: print(d)
+{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100}
+
+```
+
+Еще один пример, в котором надо преобразовать существующий словарь и перевести все ключи в нижний регистр.
+Для начала, вариант решения без генератора словаря:
+```python
+In [62]: r1 = {'IOS': '15.4',
+    ...:   'IP': '10.255.0.1',
+    ...:   'hostname': 'london_r1',
+    ...:   'location': '21 New Globe Walk',
+    ...:   'model': '4451',
+    ...:   'vendor': 'Cisco'}
+    ...:
+
+In [63]: lower_r1 = {}
+
+In [64]: for key, value in r1.items():
+    ...:     lower_r1[str.lower(key)] = value
+    ...:
+
+In [66]: lower_r1
+Out[66]:
+{'hostname': 'london_r1',
+ 'ios': '15.4',
+ 'ip': '10.255.0.1',
+ 'location': '21 New Globe Walk',
+ 'model': '4451',
+ 'vendor': 'Cisco'}
+
+```
+
+Аналогичный вариант с помощью генератора словаря:
+```python
+In [67]: r1 = {'IOS': '15.4',
+    ...:   'IP': '10.255.0.1',
+    ...:   'hostname': 'london_r1',
+    ...:   'location': '21 New Globe Walk',
+    ...:   'model': '4451',
+    ...:   'vendor': 'Cisco'}
+    ...:
+
+In [68]: lower_r1 = {str.lower(key): value for key, value in r1.items()}
+
+In [69]: lower_r1
+Out[69]:
+{'hostname': 'london_r1',
+ 'ios': '15.4',
+ 'ip': '10.255.0.1',
+ 'location': '21 New Globe Walk',
+ 'model': '4451',
+ 'vendor': 'Cisco'}
+
+```
+
+Как и list comprehentions, dict comprehentions можно делать вложенными.
+Попробуем аналогичным образом преобразовать ключи во вложенных словарях:
+```python
+In [87]: london_co = {
+    ...:     'r1' : {
+    ...:     'hostname': 'london_r1',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '4451',
+    ...:     'IOS': '15.4',
+    ...:     'IP': '10.255.0.1'
+    ...:     },
+    ...:     'r2' : {
+    ...:     'hostname': 'london_r2',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '4451',
+    ...:     'IOS': '15.4',
+    ...:     'IP': '10.255.0.2'
+    ...:     },
+    ...:     'sw1' : {
+    ...:     'hostname': 'london_sw1',
+    ...:     'location': '21 New Globe Walk',
+    ...:     'vendor': 'Cisco',
+    ...:     'model': '3850',
+    ...:     'IOS': '3.6.XE',
+    ...:     'IP': '10.255.0.101'
+    ...:     }
+    ...: }
+
+In [88]: lower_london_co = {}
+
+In [89]: for device, params in london_co.items():
+    ...:     lower_london_co[device] = {}
+    ...:     for key, value in params.items():
+    ...:         lower_london_co[device][str.lower(key)] = value
+    ...:
+
+In [90]: lower_london_co
+Out[90]:
+{'r1': {'hostname': 'london_r1',
+  'ios': '15.4',
+  'ip': '10.255.0.1',
+  'location': '21 New Globe Walk',
+  'model': '4451',
+  'vendor': 'Cisco'},
+ 'r2': {'hostname': 'london_r2',
+  'ios': '15.4',
+  'ip': '10.255.0.2',
+  'location': '21 New Globe Walk',
+  'model': '4451',
+  'vendor': 'Cisco'},
+ 'sw1': {'hostname': 'london_sw1',
+  'ios': '3.6.XE',
+  'ip': '10.255.0.101',
+  'location': '21 New Globe Walk',
+  'model': '3850',
+  'vendor': 'Cisco'}}
+
+```
+
+Аналогичное преобразование с dict comprehentions:
+```python
+In [95]: result = {device: {str.lower(key):value for key, value in params.items()} for device, params in london_co.items()}
+
+In [96]: result
+Out[96]:
+{'r1': {'hostname': 'london_r1',
+  'ios': '15.4',
+  'ip': '10.255.0.1',
+  'location': '21 New Globe Walk',
+  'model': '4451',
+  'vendor': 'Cisco'},
+ 'r2': {'hostname': 'london_r2',
+  'ios': '15.4',
+  'ip': '10.255.0.2',
+  'location': '21 New Globe Walk',
+  'model': '4451',
+  'vendor': 'Cisco'},
+ 'sw1': {'hostname': 'london_sw1',
+  'ios': '3.6.XE',
+  'ip': '10.255.0.101',
+  'location': '21 New Globe Walk',
+  'model': '3850',
+  'vendor': 'Cisco'}}
+
+```
+
+## Set comprehentions (генераторы множеств)
+
+

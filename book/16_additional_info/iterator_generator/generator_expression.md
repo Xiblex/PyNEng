@@ -1,0 +1,2 @@
+## generator expression (генераторное выражение)
+
