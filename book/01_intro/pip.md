@@ -15,6 +15,6 @@ pip 1.1 from /usr/lib/python2.7/dist-packages (python 2.7)
 
 Если команда выдала ошибку, значит pip не установлен. Установить его можно так:
 ```bash
-apt-get install python-pip
+sudo apt-get install python-pip
 ```
 
