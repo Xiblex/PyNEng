@@ -13,7 +13,7 @@ __virtualenv__ - это инструмент, который позволяет 
 
 Установка virtualenvwrapper с помощью pip:
 ```
-pip install virtualenvwrapper
+sudo pip install virtualenvwrapper
 ```
 
 После установки, в ```.bashrc``` нужно добавить несколько строк

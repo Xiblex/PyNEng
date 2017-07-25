@@ -22,24 +22,24 @@ iPython позволяет намного больше, чем стандарт�
 
 Установить iPython можно с помощью pip (если виртуальная машина устанавливается с нуля):
 ```
-apt-get install python-pip python-dev 
-pip install —upgrade pip 
-pip install ipython
+sudo apt-get install python-pip python-dev 
+sudo pip install —upgrade pip 
+sudo pip install ipython
 ```
 
 Если с установкой ipython возникают проблемы, после которых не работает pip, выполните такие действия:
 
 Если ставили через apt pip, то надо его удалить:
 ```
-apt-get remove python-pip
+sudo apt-get remove python-pip
 ```
 
 После этого заново переустановить pip и установить ipython таким образом:
 ```
 wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
-apt-get install python-dev
-pip install ipython
+sudo apt-get install python-dev
+sudo pip install ipython
 ```
 
 
