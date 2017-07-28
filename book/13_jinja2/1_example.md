@@ -9,11 +9,8 @@
 ```python
 # -*- coding: utf-8 -*-
 from jinja2 import Template
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
-template_r1 = Template(u"""
+template_r1 = Template("""
 hostname {{name}}
 !
 interface Loopback10
@@ -55,13 +52,6 @@ router ospf 10
 """)
 ```
 
-> Эти строки меняют кодировку по умолчанию ascii на utf-8:
-> ```
-> reload(sys)
-> sys.setdefaultencoding('utf-8')
-> ```
-
-
 Файл routers_info.yml
 ```yaml
 - id: 11
@@ -98,7 +88,7 @@ routers = yaml.load(open('routers_info.yml'))
 for router in routers:
     r1_conf = router['name']+'_r1.txt'
     with open(r1_conf,'w') as f:
-        f.write(template_r1.render( router ))
+        f.write(template_r1.render(router))
 ```
 
 Файл router_config_generator.py:

@@ -51,7 +51,7 @@ router ospf 10
 ```python
 from jinja2 import Template
 
-template = Template(u"""
+template = Template("""
 hostname {{name}}
 !
 interface Loopback255
@@ -70,7 +70,8 @@ router ospf 10
 
 liverpool = {'id':'11', 'name':'Liverpool', 'int':'Gi1/0/17', 'ip':'10.1.1.10'}
 
-print template.render( liverpool )
+print(template.render(liverpool))
+
 ```
 
 Комментарии к файлу basic_generator.py:

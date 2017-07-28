@@ -27,19 +27,18 @@
 from jinja2 import Environment, FileSystemLoader
 import yaml
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
 TEMPLATE_DIR, template = sys.argv[1].split('/')
 VARS_FILE = sys.argv[2]
 
-env = Environment(loader = FileSystemLoader(TEMPLATE_DIR),
+env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
                   trim_blocks=True, lstrip_blocks=True)
 template = env.get_template(template)
 
-vars_dict = yaml.load( open( VARS_FILE ) )
+vars_dict = yaml.load(open(VARS_FILE))
 
-print template.render( vars_dict )
+print(template.render(vars_dict))
+
 ```
 
 Для того, чтобы посмотреть на результат, нужно вызвать скрипт и передать ему два аргумента:
@@ -53,7 +52,7 @@ print template.render( vars_dict )
 $ python cfg_gen.py templates/variables.txt data_files/vars.yml
 ```
 
-> Параметры trim_blocks и lstrip_blocks описываны в следующем подразделе.
+> Параметры trim_blocks и lstrip_blocks описаны в следующем подразделе.
 
 
 {% endraw %}

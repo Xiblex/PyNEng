@@ -81,11 +81,8 @@ router ospf 10
 # -*- coding: utf-8 -*-
 from jinja2 import Environment, FileSystemLoader
 import yaml
-import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
 
-env = Environment(loader = FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('templates'))
 template = env.get_template('router_template.txt')
 
 routers = yaml.load(open('routers_info.yml'))
@@ -93,7 +90,8 @@ routers = yaml.load(open('routers_info.yml'))
 for router in routers:
     r1_conf = router['name']+'_r1.txt'
     with open(r1_conf,'w') as f:
-        f.write(template.render( router ))
+        f.write(template.render(router))
+
 ```
 
 
@@ -112,7 +110,7 @@ for router in routers:
 import os
 
 curr_dir = os.path.dirname(os.path.abspath(__file__))
-env = Environment(loader = FileSystemLoader(curr_dir))
+env = Environment(loader=FileSystemLoader(curr_dir))
 ```
 
 > Переменная ```__file__``` - это специальная переменная модуля, которая выставляется равной имени скрипта, который был запущен напрямую. И равна полному пути к модулю, когда он импортируется. [Подробнее о специальных переменных и методах](../16_additional_info/naming_conventions/underscore_names.md).
