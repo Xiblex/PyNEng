@@ -20,7 +20,7 @@ hostname {{ name }}
 interface Loopback0
  ip address 10.0.0.{{ id }} 255.255.255.255
 
-{% for vlan, name in vlans.iteritems() %}
+{% for vlan, name in vlans.items() %}
 vlan {{ vlan }}
  name {{ name }}
 {% endfor %}
@@ -113,7 +113,7 @@ router ospf 1
 
 Пример шаблона templates/if_vlans.txt:
 ```
-{% for intf, params in trunks.iteritems() %}
+{% for intf, params in trunks.items() %}
 interface {{ intf }}
  {% if params.action == 'add' %}
  switchport trunk allowed vlan add {{ params.vlans }}
@@ -171,7 +171,7 @@ interface Fa0/2
 
 Пример шаблона templates/if_for.txt с фильтром, в цикле for:
 ```
-{% for vlan, name in vlans.iteritems() if vlan > 15 %}
+{% for vlan, name in vlans.items() if vlan > 15 %}
 vlan {{ vlan }}
  name {{ name }}
 {% endfor %}
