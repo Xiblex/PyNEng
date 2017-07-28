@@ -60,7 +60,7 @@ index
 
 Для начала, импортируем класс clitable:
 ```python
-In [1]: import textfsm.clitable as clitable
+In [1]: import clitable
 ```
 
 Проверять работу clitable будем на последнем примере из прошлого раздела - выводе команды show ip route ospf. Считываем вывод, который хранится в файле output/sh_ip_route_ospf.txt, в строку:
