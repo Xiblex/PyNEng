@@ -6,6 +6,7 @@
 * [Iterator types](https://docs.python.org/3/library/stdtypes.html#iterator-types)
 * [Functional Programming HOWTO](https://docs.python.org/3/howto/functional.html)
 * [itertools](https://docs.python.org/3/library/itertools.html#module-itertools)
+* [PyMOTW itertools](https://pymotw.com/3/itertools/)
 
 Статьи:
 
