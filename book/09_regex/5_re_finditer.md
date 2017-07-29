@@ -66,6 +66,22 @@ Out[19]:
 
 ```
 
+Аналогичный результат можно получить с помощью генератора списков:
+```python
+In [20]: regex = '(\S+) +([\d.]+) +\w+ +\w+ +(up|down|administratively down) +(up|down)'
+
+In [21]: result = [match.groups() for match in re.finditer(regex, sh_ip_int_br)]
+
+In [22]: result
+Out[22]:
+[('FastEthernet0/0', '15.0.15.1', 'up', 'up'),
+ ('FastEthernet0/1', '10.0.12.1', 'up', 'up'),
+ ('FastEthernet0/2', '10.0.13.1', 'up', 'up'),
+ ('Loopback0', '10.1.1.1', 'up', 'up'),
+ ('Loopback100', '100.0.0.1', 'up', 'up')]
+
+```
+
 Теперь разберем тот же лог-файл, который использовался в подразделах search и match.
 
 В этом случае, вывод можно не перебирать построчно, а передать все содержимое файла (файл parse_log_finditer.py): 
