@@ -17,56 +17,6 @@
 Курсы по основам Python:
 * [Программирование на Python](https://stepik.org/course/%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-Python-67)
 
-### Регулярные выражения
-
-Статьи:
-* [Parse Cisco IOS configurations using RegEx](https://codingnetworker.com/2016/05/parse-cisco-ios-configurations-regex/)
-* [Using Python to generate Cisco configs](https://notalwaysthenetwork.com/2014/04/01/using-python-to-generate-cisco-configs/)
-
-Сайт для проверки регулярных выражений:
-* [regex101](https://regex101.com/)
-* [Визуализация регулярного выражения](https://regexper.com/)
-
-Руководства по использованию регулярных выражений:
-
-* [Regular Expression HOWTO](https://docs.python.org/3.6/howto/regex.html)
-* [Множество примеров использования регулярных выражений от основ до более сложных тем](http://www.rexegg.com/)
-* [Python 3 Module of the Week](https://pymotw.com/3/re/)
-
-
-### Базы данных
-
-Более подробное описание возможностей SQLite:
-* [SQLite tutorial](http://www.sqlitetutorial.net/)
-
-### Telnet, SSH
-
-Статьи:
-* [Netmiko Library](https://pynet.twb-tech.com/blog/automation/netmiko.html)
-* [Automate SSH connections with netmiko](https://codingnetworker.com/2016/03/automate-ssh-connections-with-netmiko/)
-* [Network Automation Using Python: BGP Configuration](http://www.networkcomputing.com/networking/network-automation-using-python-bgp-configuration/1423704194)
-
-### Jinja2
-
-Статьи:
-* [Network Configuration Templates Using Jinja2. Matt Oswalt](https://keepingitclassless.net/2014/03/network-config-templates-jinja2/)
-* [Python And Jinja2 Tutorial. Jeremy Schulman](http://packetpushers.net/python-jinja2-tutorial/)
-* [Configuration Generator with Python and Jinja2](https://codingnetworker.com/2015/09/configuration-generator-with-python-and-jinja2/)
-* [Custom filters for a Jinja2 based Config Generator](https://codingnetworker.com/2015/10/custom-filters-jinja2-config-generator/)
-
-### TextFSM
-Статьи:
-* [Programmatic Access to CLI Devices with TextFSM. Jason Edelman (26.02.2015)](http://jedelman.com/home/programmatic-access-to-cli-devices-with-textfsm/) - основы TextFSM и идеи о развитии, которые легли в основу модуля ntc-ansible
-* [Parse CLI outputs with TextFSM. Henry Ölsner (24.08.2015)](https://codingnetworker.com/2015/08/parse-cli-outputs-textfsm/) - пример использования TextFSM для разбора большого файла с выводом sh inventory. Подробнее объясняется синтаксис TextFSM
-* [Creating Templates for TextFSM and ntc_show_command. Jason Edelman (27.08.2015)](http://jedelman.com/home/creating-templates-for-textfsm-and-ntc_show_command/) - подробнее рассматривается синтаксис TextFSM и показаны примеры использования модуля ntc-ansible (обратите внимание, что синтаксис модуля уже немного изменился)
-* [TextFSM and Structured Data. Kirk Byers (22.10.2015)](https://pynet.twb-tech.com/blog/python/textfsm.html) - вводная статья о TextFSM. Тут не описывается синтаксис, но дается общее представление о том, что такое TextFSM и пример его использования
-
-Проекты, которые используют TextFSM:
-* [Модуль ntc-ansible](https://github.com/networktocode/ntc-ansible)
-
-Шаблоны TextFSM (из модуля ntc-ansible):
-* [ntc-templates](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates)
-
 
 ### Ansible
 
