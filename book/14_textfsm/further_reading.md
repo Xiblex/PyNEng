@@ -14,6 +14,6 @@
 * [Модуль ntc-ansible](https://github.com/networktocode/ntc-ansible)
 
 Шаблоны TextFSM (из модуля ntc-ansible):
-* [ntc-templates](https://github.com/networktocode/ntc-templates/tree/89c57342b47c9990f0708226fb3f268c6b8c1549/templates)
+* [ntc-templates](https://github.com/networktocode/ntc-templates/tree/master/templates)
 
 
