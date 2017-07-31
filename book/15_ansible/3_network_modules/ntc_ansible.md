@@ -159,7 +159,7 @@ $ ansible-playbook 2_ntc-ansible_save.yml
 
 ![Ansible playbook]({{ book.ansible_img_path }}7a_ntc_ansible_save.png)
 
-В результате, в каталоге all_facts повяляются соответствующие файлы для каждого маршрутизатора.
+В результате, в каталоге all_facts появляются соответствующие файлы для каждого маршрутизатора.
 Пример файла all_facts/192.168.100.1_sh_ip_int_br.json:
 ```
 [

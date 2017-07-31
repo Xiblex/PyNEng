@@ -8,12 +8,12 @@
 Но, скорее всего, в каком-то виде, надо будет читать о той же информации несколько раз.
 
 В этом разделе собраны ссылки на различные ресурсы по Python, связанные с сетями и нет.
-Эти русурсы позволят вам повторить информацию, почитать (посмотреть, послушать) то же самое, но другими словами.
+Эти ресурсы позволят вам повторить информацию, почитать (посмотреть, послушать) то же самое, но другими словами.
 Кроме того, даны несколько ресурсов для продолжения обучения.
 
 ## Подкасты об автоматизации с Python
 
-> Хорошо подходят для вдохновления темой автоматизации
+> Хорошо подходят для вдохновения темой автоматизации
 
 * [Packet Pushers Show 176 – Intro To Python & Automation For Network Engineers](http://packetpushers.net/podcast/podcasts/show-176-intro-to-python-automation-for-network-engineers/)
 * [Packet Pushers Show 198 – Kirk Byers On Network Automation With Python & Ansible](http://packetpushers.net/podcast/podcasts/show-198-kirk-byers-network-automation-python-ansible/)
