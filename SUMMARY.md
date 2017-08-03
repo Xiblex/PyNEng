@@ -206,7 +206,6 @@
         * [Итерируемый объект, итератор](book/16_additional_info/iterator_generator/iterable_and_iterator.md)
         * [List, dict, set comprehentions](book/16_additional_info/iterator_generator/x_comprehentions.md)
         * [Generator](book/16_additional_info/iterator_generator/generator.md)
-        * [Модуль itertools](book/16_additional_info/iterator_generator/itertools.md)
         * [Дополнительные материалы](book/16_additional_info/iterator_generator/further_reading.md)
 * [Полезные ссылки](resources/README.md)
     * [Материалы по темам курса](resources/1_course_additional_info.md)
