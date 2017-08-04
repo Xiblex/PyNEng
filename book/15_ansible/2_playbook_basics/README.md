@@ -76,7 +76,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 
 ![Ansible playbook]({{ book.ansible_img_path }}playbook_execution.png)
 
-> **Note** Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, использовалась команда ansible. А для playbook - ansible-playbook.
+> Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды, использовалась команда ansible. А для playbook - ansible-playbook.
 
 Для того, чтобы убедиться, что команды, которые указаны в задачах, выполнились на устройствах, запустите playbook с опцией -v (вывод сокращен):
 ```
@@ -110,7 +110,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 
 Еще один важный аспект - Ansible выдал сообщение:
 ```
-to retry, use: --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_raw.retry
+to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/15_ansible/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
 Если, при выполнении playbook, на каком-то устройстве возникла ошибка, Ansible создает специальный файл, который называется точно так же как playbook, но расширение меняется на retry.
@@ -127,7 +127,7 @@ to retry, use: --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_
 
 Настраиваем правильный пароль на маршрутизаторе 192.168.100.1, а затем перезапускаем playbook таким образом:
 ```
-$ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/nata/pyneng_course/chapter15/1_show_commands_with_raw.retry
+$ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/15_ansible/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
 ![Ansible playbook]({{ book.ansible_img_path }}playbook-retry.png)
@@ -163,3 +163,4 @@ $ ansible-playbook 1_show_commands_with_raw.yml --limit 192.168.100.1
 
 Аналогично, и с сетевым оборудованием.
 Если задача модуля выполнить команду в конфигурационном режиме, а она уже есть на устройстве, модуль не будет вносить изменения.
+

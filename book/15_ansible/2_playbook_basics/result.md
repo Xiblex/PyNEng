@@ -165,3 +165,4 @@ $ ansible-playbook 3_register_debug_when.yml
 ![Verbose playbook]({{ book.ansible_img_path }}3_register_debug_when.png)
 
 Так как команда была с ошибкой, сработало условие, которое описано в when и задача вывела сообщение, с помощью модуля debug.
+

@@ -33,3 +33,4 @@ $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 
 Также в Ansible модули разделены по функциональности.
 Список всех категорий находится в [документации](http://docs.ansible.com/ansible/modules_by_category.html).
+
