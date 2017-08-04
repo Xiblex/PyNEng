@@ -183,7 +183,7 @@
             * [lines (commands)](book/15_ansible/3_network_modules/ios_config_lines.md)
             * [parents](book/15_ansible/3_network_modules/ios_config_parents.md)
             * [Отображение обновлений](book/15_ansible/3_network_modules/ios_config_updates.md)
-            * [save](book/15_ansible/3_network_modules/ios_config_save.md)
+            * [save_when](book/15_ansible/3_network_modules/ios_config_save_when.md)
             * [backup](book/15_ansible/3_network_modules/ios_config_backup.md)
             * [defaults](book/15_ansible/3_network_modules/ios_config_defaults.md)
             * [after](book/15_ansible/3_network_modules/ios_config_after.md)
