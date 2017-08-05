@@ -193,6 +193,7 @@
             * [src](book/15_ansible/3_network_modules/ios_config_src.md)
         * [ntc_ansible](book/15_ansible/3_network_modules/ntc_ansible.md)
     * [Подробнее об Ansible](book/15_ansible/ansible_more.md)
+    * [Дополнительные материалы](book/15_ansible/further_reading.md)
     * [Задания](exercises/15_ansible/15_exercises.md)
 * [16. Дополнительная информация](book/16_additional_info/README.md)
     * [Полезные модули](book/16_additional_info/useful_modules/README.md)
