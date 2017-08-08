@@ -69,6 +69,7 @@
         * [Пример использования](book/07_functions/4_func_unpacking_and_var_args_example.md)
     * [Полезные функции](book/07_functions/useful_functions/README.md)
         * [Функция sorted](book/07_functions/useful_functions/sorted.md)
+        * [Функция enumerate](book/07_functions/useful_functions/enumerate.md)
         * [Функция lambda](book/07_functions/useful_functions/lambda.md)
         * [Функция zip](book/07_functions/useful_functions/zip.md)
         * [Функция map](book/07_functions/useful_functions/map.md)
