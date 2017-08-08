@@ -322,7 +322,10 @@ get_parser.set_defaults( func=get )
 
 if __name__ == '__main__':
     args = parser.parse_args()
-    args.func(args)
+    if not vars(args):
+        parser.print_usage()
+    else:
+        args.func(args)
 ```
 
 Теперь создается не только парсер, как в прошлом примере, но и вложенные парсеры.  
