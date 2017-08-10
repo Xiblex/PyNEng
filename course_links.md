@@ -1,12 +1,12 @@
 ## Ресурсы для обучения по книге
 
-> На Python 3.6 переведены разделы 1-12
+> На Python 3.6 переведены все разделы. Но они ещё не вычитаны
 
 Тут собраны ссылки на все ресурсы, которые пригодятся в процессе обучения.
 
 
 * [План обучения](schedule.md)
-* Виртуальные машины [Vagrant](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/PyNEng/tree/master/exercises/vm/vmware.md). В них установлены все пакеты, которые используются в курсе (почти все пакеты).
+* Виртуальные машины [Vagrant](https://github.com/natenka/pyneng-examples-exercises/blob/python3/exercises/vm/vagrant.md) или [VMware](https://github.com/natenka/pyneng-examples-exercises/blob/python3/exercises/vm/vmware.md). В них установлены все пакеты, которые используются в курсе (почти все пакеты).
 * [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/tree/python3)
 * [Команда PyNEng в Slack](https://pyneng-slack.herokuapp.com/) - используется для обсуждения книги, вопросов по заданиям и другим вопросов по автоматизации
 * [Презентации к курсу](https://github.com/natenka/pyneng-slides) - пригодятся для повторения материала
