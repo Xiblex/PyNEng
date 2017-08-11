@@ -2,6 +2,8 @@
 
 ###Автор: Наташа Самойленко
 
+[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/natenka)
+
 ## Эта ветка в процессе перевода на Python3.6
 
 <br>
