@@ -11,9 +11,10 @@ pip install netmiko
 
 Пример использования netmiko (файл 4_netmiko.py):
 ```python
-from netmiko import ConnectHandler
 import getpass
 import sys
+
+from netmiko import ConnectHandler
 
 
 COMMAND = sys.argv[1]
@@ -23,19 +24,21 @@ ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
+
 for IP in DEVICES_IP:
-    print("Connection to device {}".format( IP ))
+    print("Connection to device {}".format(IP))
     DEVICE_PARAMS = {'device_type': 'cisco_ios',
                      'ip': IP,
-                     'username':USER,
-                     'password':PASSWORD,
-                     'secret':ENABLE_PASS }
+                     'username': USER,
+                     'password': PASSWORD,
+                     'secret': ENABLE_PASS}
 
-    ssh = ConnectHandler(**DEVICE_PARAMS)
-    ssh.enable()
+    with ConnectHandler(**DEVICE_PARAMS) as ssh:
+        ssh.enable()
 
-    result = ssh.send_command(COMMAND)
-    print(result)
+        result = ssh.send_command(COMMAND)
+        print(result)
+
 ```
 
 Посмотрите насколько проще выглядит этот пример с netmiko.
@@ -44,7 +47,7 @@ for IP in DEVICES_IP:
 * DEVICE_PARAMS - это словарь, в котором указываются параметры устройства
  * device_type - это предопределенные значения, которые понимает netmiko
     * в данном случае, так как подключение выполняется к устройству с Cisco IOS, используется значение 'cisco_ios'
-* ```ssh = ConnectHandler(**DEVICE_PARAMS)``` - устанавливается соединение с устройством, на основе параметров, которые находятся в словаре
+* ```with ConnectHandler(**DEVICE_PARAMS) as ssh``` - устанавливается соединение с устройством, на основе параметров, которые находятся в словаре
  * две звездочки перед словарем, это распаковка словаря (подробнее в разделе [Распаковка аргументов](../07_functions/3b_func_unpacking_args.md))
 * ```ssh.enable()``` - переход в режим enable
  * пароль передается автоматически

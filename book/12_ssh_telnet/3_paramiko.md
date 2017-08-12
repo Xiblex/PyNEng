@@ -29,20 +29,20 @@ for IP in DEVICES_IP:
 
     client.connect(hostname=IP, username=USER, password=PASSWORD,
                    look_for_keys=False, allow_agent=False)
-    ssh = client.invoke_shell()
 
-    ssh.send("enable\n")
-    ssh.send(ENABLE_PASS + '\n')
-    time.sleep(1)
+    with client.invoke_shell() as ssh:
+        ssh.send("enable\n")
+        ssh.send(ENABLE_PASS + '\n')
+        time.sleep(1)
 
-    ssh.send("terminal length 0\n")
-    time.sleep(1)
-    print(ssh.recv(1000).decode('utf-8'))
+        ssh.send("terminal length 0\n")
+        time.sleep(1)
+        ssh.recv(1000).decode('utf-8')
 
-    ssh.send(COMMAND + "\n")
-    time.sleep(2)
-    result = ssh.recv(5000).decode('utf-8')
-    print(result)
+        ssh.send(COMMAND + "\n")
+        time.sleep(2)
+        result = ssh.recv(5000).decode('utf-8')
+        print(result)
 
 ```
 
@@ -59,7 +59,7 @@ for IP in DEVICES_IP:
     * ```password``` - пароль
     * ```look_for_keys``` - по умолчанию paramiko выполняет аутентификацию по ключам. Чтобы отключить это, надо поставить поставив False
     * ```allow_agent``` - paramiko может подключаться к локальному SSH агенту ОС. Это нужно при работе с ключами, а так как, в данном случае, аутентификация выполняется по логину/паролю, это нужно отключить.
- * ```ssh = client.invoke_shell()```
+ * ```with client.invoke_shell() as ssh```
     * после выполнения предыдущей команды уже есть подключение к серверу. Метод ```invoke_shell``` позволяет установить интерактивную сессию SSH с сервером.
  * Внутри установленной сессии выполняются команды и получаются данные:
     * ```ssh.send``` - отправляет указанную строку в сессию

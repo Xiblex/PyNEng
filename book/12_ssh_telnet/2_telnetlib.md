@@ -21,38 +21,41 @@ ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ').encode('utf-8')
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print("Connection to device {}".format( IP ))
-    t = telnetlib.Telnet(IP)
+    print("Connection to device {}".format(IP))
+    with telnetlib.Telnet(IP) as t:
 
-    t.read_until(b"Username:")
-    t.write(USER + b'\n')
+        t.read_until(b"Username:")
+        t.write(USER + b'\n')
 
-    t.read_until(b"Password:")
-    t.write(PASSWORD + b'\n')
-    t.write(b"enable\n")
+        t.read_until(b"Password:")
+        t.write(PASSWORD + b'\n')
+        t.write(b"enable\n")
 
-    t.read_until(b"Password:")
-    t.write(ENABLE_PASS + b'\n')
-    t.write(b"terminal length 0\n")
-    t.write(COMMAND + b'\n')
+        t.read_until(b"Password:")
+        t.write(ENABLE_PASS + b'\n')
+        t.write(b"terminal length 0\n")
+        t.write(COMMAND + b'\n')
 
-    time.sleep(5)
+        time.sleep(5)
 
-    output = t.read_very_eager().decode('utf-8')
-    print(output)
+        output = t.read_very_eager().decode('utf-8')
+        print(output)
+
 ```
 
 Первая особенность, которая бросается в глаза - в конце отправляемых команд, надо добавлять символ перевода строки.
 
+> Использование объекта Telnet как менеджера контекса добавлено в версии 3.6
+
 В остальном, telnetlib очень похож на pexpect:
-* ```t = telnetlib.Telnet(ip)``` - класс Telnet представляет соединение к серверу.
+* ```with telnetlib.Telnet(ip) as t``` - класс Telnet представляет соединение к серверу.
  * в данном случае, ему передается только IP-адрес, но можно передать и порт, к которому нужно подключаться
 * ```read_until``` - похож на метод ```expect``` в модуле pexpect. Указывает до какой строки следует считывать вывод
 * ```write``` - передать строку
 * ```read_very_eager``` - считать всё, что получается
 
 
-Выполнение скрипт:
+Выполнение скрипта:
 ```
 $ python 2_telnetlib.py "sh ip int br"
 Username: cisco

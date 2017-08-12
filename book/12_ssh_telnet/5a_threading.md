@@ -19,25 +19,29 @@
 
 Файл netmiko_function.py:
 ```python
-from netmiko import ConnectHandler
 import sys
 import yaml
+from netmiko import ConnectHandler
 
-COMMAND = sys.argv[1]
+#COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command):
+
+def connect_ssh(device_dict, commands):
 
     print("Connection to device {}".format( device_dict['ip'] ))
 
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
 
-    result = ssh.send_command(command)
-    print(result)
+        result = ssh.send_config_set(commands)
+        print(result)
+
+
+commands_to_send = ['logg 10.1.12.3', 'ip access-li ext TESST2', 'permit ip any any']
 
 for router in devices['routers']:
-    connect_ssh(router, COMMAND)
+    connect_ssh(router, commands_to_send)
 
 ```
 
@@ -72,21 +76,24 @@ sys     0m0.080s
 
 Пример использования модуля threading для подключения по SSH с помощью netmiko (файл netmiko_threading.py):
 ```python
-from netmiko import ConnectHandler
 import sys
 import yaml
 import threading
 
+from netmiko import ConnectHandler
+
+
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command):
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
 
-    print("Connection to device {}".format( device_dict['ip'] ))
-    print(result)
+def connect_ssh(device_dict, command):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+
+        print("Connection to device {}".format( device_dict['ip'] ))
+        print(result)
 
 
 def conn_threads(function, devices, command):
@@ -98,6 +105,7 @@ def conn_threads(function, devices, command):
 
     for th in threads:
         th.join()
+
 
 conn_threads(connect_ssh, devices['routers'], COMMAND)
 ```
@@ -141,23 +149,26 @@ sys     0m0.068s
 Пример использования потоков с получением данных (файл netmiko_threading_data.py):
 ```python
 # -*- coding: utf-8 -*-
-from netmiko import ConnectHandler
 import sys
 import yaml
 import threading
 from queue import Queue
+from pprint import pprint
+from netmiko import ConnectHandler
+
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command, queue):
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
-    print("Connection to device {}".format( device_dict['ip'] ))
 
-    #Добавляем словарь в очередь
-    queue.put({ device_dict['ip']: result })
+def connect_ssh(device_dict, command, queue):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+        print("Connection to device {}".format(device_dict['ip']))
+
+        #Добавляем словарь в очередь
+        queue.put({device_dict['ip']: result})
 
 
 def conn_threads(function, devices, command):
@@ -166,7 +177,7 @@ def conn_threads(function, devices, command):
 
     for device in devices:
         # Передаем очередь как аргумент, функции
-        th = threading.Thread(target = function, args = (device, command, q))
+        th = threading.Thread(target=function, args=(device, command, q))
         th.start()
         threads.append(th)
 
@@ -180,7 +191,8 @@ def conn_threads(function, devices, command):
 
     return results
 
-print(conn_threads(connect_ssh, devices['routers'], COMMAND))
+pprint(conn_threads(connect_ssh, devices['routers'], COMMAND))
+
 ```
 
 Обратите внимание, что в функции connect_ssh добавился аргумент queue.
@@ -190,28 +202,40 @@ print(conn_threads(connect_ssh, devices['routers'], COMMAND))
 * метод ```queue.get()``` равнозначен ```list.pop(0)```
 
 Для работы с потоками и модулем threading, лучше использовать очередь.
-Но, конкретно в данном примере, можно было бы использовать и список.
 
+Очередь лучше тем, что она поддерживает только две операции по изменению содержимого:
+* добавить элемент - ```queue.put()```
+* взять элемент - ```queue.get()```
 
-Пример со списком, скорее всего, будет проще понять. Поэтому ниже аналогичный код, но с использованием обычного списка, вместо очереди (файл netmiko_threading_data_list.py):
+А список, кроме этих операций, поддерживает изменение элементов, переприсваивание значений.
+И, при работе с потоками, используя эти операции можно получить совсем не тот результат, который ожидался.
+
+Но, пример со списком, скорее всего, будет проще понять.
+И, при использовании методов append и pop, никаких проблем не будет.
+
+Ниже аналогичный код, но с использованием обычного списка, вместо очереди (файл netmiko_threading_data_list.py):
 ```python
 # -*- coding: utf-8 -*-
-from netmiko import ConnectHandler
 import sys
 import yaml
 import threading
+from pprint import pprint
+
+from netmiko import ConnectHandler
+
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command, queue):
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
-    print("Connection to device {}".format( device_dict['ip'] ))
 
-    #Добавляем словарь в список
-    queue.append({ device_dict['ip']: result })
+def connect_ssh(device_dict, command, queue):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+        print("Connection to device {}".format( device_dict['ip'] ))
+
+        #Добавляем словарь в список
+        queue.append({ device_dict['ip']: result })
 
 
 def conn_threads(function, devices, command):
@@ -227,15 +251,10 @@ def conn_threads(function, devices, command):
     for th in threads:
         th.join()
 
-    # Эта часть нам не нужна, так как, при использовании списка,
-    # мы просто можем вернуть его
-    #results = []
-    #for t in threads:
-    #    results.append(q.get())
-
     return q
 
-print(conn_threads(connect_ssh, devices['routers'], COMMAND))
+result = conn_threads(connect_ssh, devices['routers'], COMMAND)
+pprint(result)
 
 ```
 
