@@ -213,6 +213,7 @@ pprint(conn_threads(connect_ssh, devices['routers'], COMMAND))
 Но, пример со списком, скорее всего, будет проще понять.
 И, при использовании методов append и pop, никаких проблем не будет.
 
+
 Ниже аналогичный код, но с использованием обычного списка, вместо очереди (файл netmiko_threading_data_list.py):
 ```python
 # -*- coding: utf-8 -*-
