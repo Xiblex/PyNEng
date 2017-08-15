@@ -2,6 +2,8 @@
 
 Документация:
 
+* [Compound statements (if, while, for, try)](https://docs.python.org/3/reference/compound_stmts.html)
+* [break, continue](https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops)
 * [Errors and Exceptions](https://docs.python.org/3.6/tutorial/errors.html)
 * [Built-in Exceptions](https://docs.python.org/3.6/library/exceptions.html)
 
@@ -12,5 +14,6 @@
 
 Stackoverflow:
 
+* [Why does python use 'else' after for and while loops?](https://stackoverflow.com/questions/9979970/why-does-python-use-else-after-for-and-while-loops)
 * [Is it a good practice to use try-except-else in Python?](https://stackoverflow.com/questions/16138232/is-it-a-good-practice-to-use-try-except-else-in-python)
 
