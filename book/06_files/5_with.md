@@ -1,6 +1,6 @@
 ## Конструкция with
 
->**Note** Конструкция with называется менеджер контекста.
+> Конструкция with называется менеджер контекста.
 
 В Python существует более удобный способ работы с файлами, чем те, которые использовались до сих пор - конструкция ```with```:
 ```python
@@ -81,8 +81,35 @@ ip ssh version 2
 !
 ```
 
-> Конструкция ```with``` может использоваться не только с файлами.
+### Открытие двух файлов
 
-> Подробнее об этом можно почитать по ссылке: http://stackoverflow.com/questions/3012488/what-is-the-python-with-statement-designed-for
+Иногда нужно работать одновременно с двумя файлами.
+Например, надо записать некоторые строки из одного файла, в другой.
 
+В таком случае, в блоке with можно открывать два файла таким образом:
+```python
+In [5]: with open('r1.txt') as src, open('result.txt', 'w') as dest:
+   ...:     for line in src:
+   ...:         if line.startswith('service'):
+   ...:             dest.write(line)
+   ...:
+
+In [6]: cat result.txt
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+
+```
+
+Это равнозначно таким двум блокам with:
+```python
+In [7]: with open('r1.txt') as src:
+   ...:     with open('result.txt', 'w') as dest:
+   ...:         for line in src:
+   ...:             if line.startswith('service'):
+   ...:                 dest.write(line)
+   ...:
+
+```
 
