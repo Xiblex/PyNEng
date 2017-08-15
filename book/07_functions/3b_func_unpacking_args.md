@@ -10,14 +10,33 @@
 
 ### Распаковка позиционных аргументов
 
-Для примера, используем функцию config_interface (файл func_args_var_unpacking.py): 
+Например, при форматировании строк, часто надо передать методу format несколько аргументов.
+И часто эти аргументы уже находятся в списке или кортеже.
+Чтобы их передать методу format, приходится использовать индексы, таким образом:
+```python
+In [1]: items = [1,2,3]
+
+In [2]: print('One: {}, Two: {}, Three: {}'.format(items[0], items[1], items[2]))
+One: 1, Two: 2, Three: 3
+```
+
+Но, вместо этого, можно воспользоваться распаковкой аргументов и сделать так:
+```python
+In [4]: items = [1,2,3]
+
+In [5]: print('One: {}, Two: {}, Three: {}'.format(*items))
+One: 1, Two: 2, Three: 3
+
+```
+
+Еще один пример, функция config_interface (файл func_args_unpacking.py): 
 ```python
 def config_interface(intf_name, ip_address, cidr_mask):
     interface = 'interface {}'
     no_shut = 'no shutdown'
     ip_addr = 'ip address {} {}'
     result = []
-    result.append(interface.format( intf_name ))
+    result.append(interface.format(intf_name))
     result.append(no_shut)
 
     mask_bits = int(cidr_mask.split('/')[-1])
@@ -25,7 +44,7 @@ def config_interface(intf_name, ip_address, cidr_mask):
     dec_mask = [str(int(bin_mask[i:i+8], 2)) for i in range(0,25,8)]
     dec_mask_str = '.'.join(dec_mask)
 
-    result.append(ip_addr.format( ip_address, dec_mask_str ))
+    result.append(ip_addr.format(ip_address, dec_mask_str))
     return result
 
 ```
@@ -105,12 +124,12 @@ Python сам 'распакует' список info и передаст в фу
 
 Аналогичным образом, можно распаковывать словарь, чтобы передать его как ключевые аргументы.
 
-Функция config_to_list:
+Функция config_to_list (файл func_args_unpacking.py):
 ```python
 def config_to_list(cfg_file, delete_excl=True,
                    delete_empty=True, strip_end=True):
     result = []
-    with open( cfg_file ) as f:
+    with open(cfg_file) as f:
         for line in f:
             if strip_end:
                 line = line.rstrip()

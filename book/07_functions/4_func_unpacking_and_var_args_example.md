@@ -10,7 +10,7 @@
 def config_to_list(cfg_file, delete_excl=True,
                    delete_empty=True, strip_end=True):
     result = []
-    with open( cfg_file ) as f:
+    with open(cfg_file) as f:
         for line in f:
             if strip_end:
                 line = line.rstrip()
@@ -23,7 +23,6 @@ def config_to_list(cfg_file, delete_excl=True,
     return result
 ```
 
-> Весь код функции можно вставить в ipython с помощью команды ```%cpaste```.
 
 Функция берет файл с конфигурацией, убирает часть строк и возвращает остальные строки как список.
 
