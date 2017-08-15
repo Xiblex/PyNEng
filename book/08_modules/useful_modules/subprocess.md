@@ -177,21 +177,22 @@ In [20]: print(result.returncode)
 
 ### Примеры использования модуля
 
-Пример использования модуля subprocess (файл subprocess_basic_run.py):
+Пример использования модуля subprocess (файл subprocess_run_basic.py):
 ```py
 import subprocess
 
 reply = subprocess.run(['ping', '-c', '3', '-n', '8.8.8.8'])
 
 if reply.returncode == 0:
-    print("Alive")
+    print('Alive')
 else:
-    print("Unreachable")
+    print('Unreachable')
+
 ```
 
-Результат выполнения будет таким:+
+Результат выполнения будет таким:
 ```py
-$ python subprocess_basic_run.py
+$ python subprocess_run_basic.py
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=54.0 ms
 64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.4 ms
@@ -205,7 +206,7 @@ Alive
 
 То есть, результат выполнения команды, выводится на стандартный поток вывода.
 
-Попробуем собрать всё в финальную функцию, которая будет проверять доступность IP-адреса (файл subprocess_ping_function.py):
+Функция ping_ip проверяет доступность IP-адреса и возвращает True и stdout, если адрес доступен или False и stderr, если адрес недоступен (файл subprocess_ping_function.py):
 ```py
 import subprocess
 
@@ -246,5 +247,5 @@ $ python subprocess_ping_function.py
 
 > Это вынесено в задания к разделу
 
-Если количество IP-адресов, которые нужно проверить, большое, можно использовать модуль multiprocessing, чтобы ускорить проверку.
+Если количество IP-адресов, которые нужно проверить, большое, можно использовать модуль threading или multiprocessing, чтобы ускорить проверку.
 

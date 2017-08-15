@@ -31,15 +31,13 @@ sw1_fast_int = {
 import sw_int_templates
 from sw_data import sw1_fast_int
 
-
 def generate_access_cfg(sw_dict):
     result = []
-    for intf in sw_dict['access']:
+    for intf, vlan in sw_dict['access'].items():
         result.append('interface FastEthernet' + intf)
-        for command in sw_int_templates.access_template:
+        for command in sw_temp.access_template:
             if command.endswith('access vlan'):
-                result.append(' {} {}'.format(command,
-                                              sw_dict['access'][intf]))
+                result.append(' {} {}'.format(command, vlan))
             else:
                 result.append(' {}'.format(command))
     return result
@@ -204,30 +202,30 @@ from sw_data import sw1_fast_int
 
 def generate_access_cfg(sw_dict):
     result = []
-    for intf in sw_dict['access']:
+    for intf, vlan in sw_dict['access'].items():
         result.append('interface FastEthernet' + intf)
         for command in sw_int_templates.access_template:
             if command.endswith('access vlan'):
-                result.append(' {} {}'.format( command, sw_dict['access'][intf] ))
+                result.append(' {} {}'.format(command, vlan))
             else:
-                result.append(' {}'.format( command ))
+                result.append(' {}'.format(command))
     return result
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print('\n'.join(generate_access_cfg(sw1_fast_int)))
 
 ```
 
 Обратите внимание на запись:
 ```python
-if __name__ == "__main__":
+if __name__ == '__main__':
     print('\n'.join(generate_access_cfg(sw1_fast_int)))
 ```
 
 Переменная ```__name__``` это специальная переменная, которая выставляется равной ```"__main__"```, если файл запускается как основная программа.
 И выставляется равной имени модуля, если модуль импортируется.
 
-Таким образом, условие ```if __name__ == "__main__"``` проверяет был ли файл запущен напрямую.
+Таким образом, условие ```if __name__ == '__main__'``` проверяет был ли файл запущен напрямую.
 
 Измените в файле generate_sw_cfg.py строку:
 ```python
