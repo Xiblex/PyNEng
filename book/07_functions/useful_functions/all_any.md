@@ -40,3 +40,38 @@ Out[9]: False
 In [10]: any( i.isdigit() for i in '10.1.1.a'.split('.'))
 Out[10]: True
 ```
+
+
+Например, с помощью any, можно заменить функцию ignore_command:
+```python
+def ignore_command(command, ignore):
+    '''
+    Функция проверяет содержится ли в команде слово из списка ignore.
+    * command - строка. Команда, которую надо проверить
+    * ignore - список. Список слов
+    * Возвращает True, если в команде содержится слово из списка ignore, False - если нет
+    '''
+    ignore = ['duplex', 'alias', 'Current configuration']
+
+    ignore_command = False
+
+    for word in ignore:
+        if word in command:
+            return True
+    return ignore_command
+```
+
+На такой вариант:
+```python
+def ignore_command(command, ignore):
+    '''
+    Функция проверяет содержится ли в команде слово из списка ignore.
+    command - строка. Команда, которую надо проверить
+    ignore - список. Список слов
+    Возвращает True, если в команде содержится слово из списка ignore, False - если нет
+    '''
+    ignore = ['duplex', 'alias', 'Current configuration']
+
+    return any(word in command for word in ignore)
+```
+
