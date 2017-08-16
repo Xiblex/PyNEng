@@ -10,7 +10,7 @@
 # -*- coding: utf-8 -*-
 from jinja2 import Template
 
-template_r1 = Template("""
+template_r1 = Template('''
 hostname {{name}}
 !
 interface Loopback10
@@ -49,7 +49,8 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
  !
-""")
+''')
+
 ```
 
 Файл routers_info.yml
@@ -80,7 +81,6 @@ router ospf 10
 ```python
 # -*- coding: utf-8 -*-
 import yaml
-from jinja2 import Template
 from router_template import template_r1
 
 routers = yaml.load(open('routers_info.yml'))
@@ -89,6 +89,7 @@ for router in routers:
     r1_conf = router['name']+'_r1.txt'
     with open(r1_conf,'w') as f:
         f.write(template_r1.render(router))
+
 ```
 
 Файл router_config_generator.py:
