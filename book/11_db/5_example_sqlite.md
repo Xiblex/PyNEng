@@ -40,7 +40,7 @@ print('Creating schema...')
 with open('dhcp_snooping_schema.sql', 'r') as f:
     schema = f.read()
     conn.executescript(schema)
-print("Done")
+print('Done')
 
 conn.close()
 
@@ -105,23 +105,21 @@ print('Creating schema...')
 with open('dhcp_snooping_schema.sql', 'r') as f:
     schema = f.read()
     conn.executescript(schema)
-print("Done")
+print('Done')
 
 print('Inserting DHCP Snooping data')
 
 for row in result:
     try:
         with conn:
-            query = """insert into dhcp (mac, ip, vlan, interface)
-                       values (?, ?, ?, ?)"""
+            query = '''insert into dhcp (mac, ip, vlan, interface)
+                       values (?, ?, ?, ?)'''
             conn.execute(query, row)
     except sqlite3.IntegrityError as e:
-        print("Error occured: ", e)
+        print('Error occured: ', e)
 
 conn.close()
-
 ```
-
 
 > Пока что, файл БД каждый раз надо удалять, так как скрипт пытается его создать при каждом запуске.
 
@@ -212,11 +210,11 @@ print('Inserting DHCP Snooping data')
 for row in result:
     try:
         with conn:
-            query = """insert into dhcp (mac, ip, vlan, interface)
-                       values (?, ?, ?, ?)"""
+            query = '''insert into dhcp (mac, ip, vlan, interface)
+                       values (?, ?, ?, ?)'''
             conn.execute(query, row)
     except sqlite3.IntegrityError as e:
-        print("Error occured: ", e)
+        print('Error occured: ', e)
 
 conn.close()
 
@@ -284,15 +282,15 @@ conn = sqlite3.connect(db_filename)
 #Позволяет далее обращаться к данным в колонках, по имени колонки
 conn.row_factory = sqlite3.Row
 
-print("\nDetailed information for host(s) with", key, value)
+print('\nDetailed information for host(s) with', key, value)
 print('-' * 40)
 
-query = "select * from dhcp where {} = ?".format( key )
+query = 'select * from dhcp where {} = ?'.format( key )
 result = conn.execute(query, (value,))
 
 for row in result:
     for k in keys:
-        print("{:12}: {}".format(k, row[k]))
+        print('{:12}: {}'.format(k, row[k]))
     print('-' * 40)
 
 ```
@@ -351,22 +349,22 @@ import sys
 
 db_filename = 'dhcp_snooping.db'
 
-query_dict = {'vlan': "select mac, ip, interface from dhcp where vlan = ?",
-              'mac': "select vlan, ip, interface from dhcp where mac = ?",
-              'ip': "select vlan, mac, interface from dhcp where ip = ?",
-              'interface': "select vlan, mac, ip from dhcp where interface = ?"}
+query_dict = {'vlan': 'select mac, ip, interface from dhcp where vlan = ?',
+              'mac': 'select vlan, ip, interface from dhcp where mac = ?',
+              'ip': 'select vlan, mac, interface from dhcp where ip = ?',
+              'interface': 'select vlan, mac, ip from dhcp where interface = ?'}
 
 
 key, value = sys.argv[1:]
 keys = query_dict.keys()
 
 if not key in keys:
-    print("Enter key from {}".format(', '.join(keys)))
+    print('Enter key from {}'.format(', '.join(keys)))
 else:
     conn = sqlite3.connect(db_filename)
     conn.row_factory = sqlite3.Row
 
-    print("\nDetailed information for host(s) with", key, value)
+    print('\nDetailed information for host(s) with', key, value)
     print('-' * 40)
 
     query = query_dict[key]
@@ -374,7 +372,7 @@ else:
 
     for row in result:
         for row_name in row.keys():
-            print("{:12}: {}".format(row_name, row[row_name]))
+            print('{:12}: {}'.format(row_name, row[row_name]))
         print('-' * 40)
 
 ```

@@ -19,23 +19,23 @@ data = [('0000.AAAA.CCCC', 'sw1', 'Cisco 3750', 'London, Green Str'),
         ('0000.AAAA.DDDD', 'sw3', 'Cisco 2960', 'London, Green Str'),
         ('0011.AAAA.CCCC', 'sw4', 'Cisco 3750', 'London, Green Str')]
 
-
 con = sqlite3.connect('sw_inventory3.db')
-con.execute("""create table switch
-               (mac text primary key, hostname text, model text, location text)""")
+con.execute('''create table switch
+               (mac text not NULL primary key, hostname text, model text, location text)''')
 
 try:
     with con:
-        query = "INSERT into switch values (?, ?, ?, ?)"
+        query = 'INSERT into switch values (?, ?, ?, ?)'
         con.executemany(query, data)
 
 except sqlite3.IntegrityError as e:
-    print("Error occured: ", e)
+    print('Error occured: ', e)
 
-for row in con.execute("select * from switch"):
+for row in con.execute('select * from switch'):
     print(row)
 
 con.close()
+
 ```
 
 Обратите внимание, что хотя транзакция будет откатываться, при возникновении исключения, само исключение всё равно надо перехватывать. 
@@ -79,11 +79,12 @@ def write_data_to_db(connection, query, data):
         with connection:
             connection.executemany(query, data)
     except sqlite3.IntegrityError as e:
-        print("Error occured: ", e)
+        print('Error occured: ', e)
         return False
     else:
-        print("Запись данных прошла успешно")
+        print('Запись данных прошла успешно')
         return True
+
 
 def get_all_from_db(connection, query):
     '''
@@ -100,18 +101,18 @@ def get_all_from_db(connection, query):
 if __name__ == '__main__':
     con = create_connection('sw_inventory3.db')
 
-    print("Создание таблицы...")
-    schema = """create table switch
-                (mac text primary key, hostname text, model text, location text)"""
-    con.execite(schema)
+    print('Создание таблицы...')
+    schema = '''create table switch
+                (mac text primary key, hostname text, model text, location text)'''
+    con.execute(schema)
 
-    query_insert = "INSERT into switch values (?, ?, ?, ?)"
-    query_get_all = "SELECT * from switch"
+    query_insert = 'INSERT into switch values (?, ?, ?, ?)'
+    query_get_all = 'SELECT * from switch'
 
-    print("Запись данных в БД:")
+    print('Запись данных в БД:')
     pprint(data)
     write_data_to_db(con, query_insert, data)
-    print("\nПроверка содержимого БД")
+    print('\nПроверка содержимого БД')
     pprint(get_all_from_db(con, query_get_all))
 
     con.close()

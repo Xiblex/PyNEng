@@ -131,7 +131,7 @@ In [13]: connection = sqlite3.connect('new_db.db')
 
 In [14]: cursor = connection.cursor()
 
-In [15]: cursor.executescript("""
+In [15]: cursor.executescript('''
     ...:     create table switches(
     ...:         hostname     text not NULL primary key,
     ...:         location     text
@@ -144,7 +144,7 @@ In [15]: cursor.executescript("""
     ...:         interface    text,
     ...:         switch       text not null references switches(hostname)
     ...:     );
-    ...: """)
+    ...: ''')
 Out[15]: <sqlite3.Cursor at 0x10efd67a0>
 ```
 
