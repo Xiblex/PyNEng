@@ -59,7 +59,7 @@ ssh.exit_enable_mode()
 
 Например:
 ```python
-result = ssh.send_command("show ip int br")
+result = ssh.send_command('show ip int br')
 ```
 
 Метод работает таким образом:
@@ -84,9 +84,9 @@ result = ssh.send_command("show ip int br")
 
 Пример использования:
 ```python
-commands = ["router ospf 1",
-            "network 10.0.0.0 0.255.255.255 area 0",
-            "network 192.168.100.0 0.0.0.255 area 1"]
+commands = ['router ospf 1',
+            'network 10.0.0.0 0.255.255.255 area 0',
+            'network 192.168.100.0 0.0.0.255 area 1']
 
 result = ssh.send_config_set(commands)
 ```
@@ -103,7 +103,7 @@ result = ssh.send_config_set(commands)
 
 Пример использования:
 ```python
-result = ssh.send_config_from_file("config_ospf.txt")
+result = ssh.send_config_from_file('config_ospf.txt')
 ```
 
 Метод открывает файл, считывает команды и передает их методу ```send_config_set```.
@@ -152,7 +152,7 @@ from netmiko import ConnectHandler
 
 
 COMMAND = sys.argv[1]
-USER = input("Username: ")
+USER = input('Username: ')
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
@@ -160,7 +160,7 @@ DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 
 for IP in DEVICES_IP:
-    print("Connection to device {}".format(IP))
+    print('Connection to device {}'.format(IP))
     DEVICE_PARAMS = {'device_type': 'cisco_ios_telnet',
                      'ip': IP,
                      'username':USER,

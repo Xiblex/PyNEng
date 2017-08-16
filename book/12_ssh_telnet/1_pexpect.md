@@ -80,14 +80,14 @@ import getpass
 import sys
 
 COMMAND = sys.argv[1]
-USER = input("Username: ")
+USER = input('Username: ')
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print("Connection to device {}".format(IP))
+    print('Connection to device {}'.format(IP))
     with pexpect.spawn('ssh {}@{}'.format(USER, IP)) as ssh:
 
         ssh.expect('Password:')
@@ -100,7 +100,7 @@ for IP in DEVICES_IP:
         ssh.sendline(ENABLE_PASS)
 
         ssh.expect('#')
-        ssh.sendline("terminal length 0")
+        ssh.sendline('terminal length 0')
 
         ssh.expect('#')
         ssh.sendline(COMMAND)

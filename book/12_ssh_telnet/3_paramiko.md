@@ -16,14 +16,14 @@ import sys
 import time
 
 COMMAND = sys.argv[1]
-USER = input("Username: ")
+USER = input('Username: ')
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
 DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 for IP in DEVICES_IP:
-    print("Connection to device {}".format( IP ))
+    print('Connection to device {}'.format( IP ))
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -31,19 +31,18 @@ for IP in DEVICES_IP:
                    look_for_keys=False, allow_agent=False)
 
     with client.invoke_shell() as ssh:
-        ssh.send("enable\n")
+        ssh.send('enable\n')
         ssh.send(ENABLE_PASS + '\n')
         time.sleep(1)
 
-        ssh.send("terminal length 0\n")
+        ssh.send('terminal length 0\n')
         time.sleep(1)
         ssh.recv(1000).decode('utf-8')
 
-        ssh.send(COMMAND + "\n")
+        ssh.send(COMMAND + '\n')
         time.sleep(2)
         result = ssh.recv(5000).decode('utf-8')
         print(result)
-
 ```
 
 Комментарии к скрипту:
@@ -139,16 +138,16 @@ R3#
 
 Поэтому, если нужно получить только вывод команды sh ip int br, то надо оставить ```recv```, но не делать print:
 ```python
-    ssh.send("enable\n")
+    ssh.send('enable\n')
     ssh.send(ENABLE_PASS + '\n')
     time.sleep(1)
 
-    ssh.send("terminal length 0\n")
+    ssh.send('terminal length 0\n')
     time.sleep(1)
     #Тут мы вызываем recv, но не выводим содержимое буфера
     ssh.recv(1000)
 
-    ssh.send(COMMAND + "\n")
+    ssh.send(COMMAND + '\n')
     time.sleep(3)
     result = ssh.recv(5000).decode('utf-8')
     print(result)

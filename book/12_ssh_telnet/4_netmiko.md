@@ -18,7 +18,7 @@ from netmiko import ConnectHandler
 
 
 COMMAND = sys.argv[1]
-USER = input("Username: ")
+USER = input('Username: ')
 PASSWORD = getpass.getpass()
 ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
 
@@ -26,7 +26,7 @@ DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
 
 
 for IP in DEVICES_IP:
-    print("Connection to device {}".format(IP))
+    print('Connection to device {}'.format(IP))
     DEVICE_PARAMS = {'device_type': 'cisco_ios',
                      'ip': IP,
                      'username': USER,
