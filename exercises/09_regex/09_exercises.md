@@ -16,10 +16,32 @@
 Проверить работу скрипта на примере вывода команды sh ip int br (файл sh_ip_int_br.txt).
 Например, попробуйте вывести информацию только по интерфейсу FastEthernet0/1.
 
+Пример работы скрипта:
+```
+$ python task_9_1.py sh_ip_int_br.txt "Fas"
+FastEthernet0/0            15.0.15.1       YES manual up                    up
+FastEthernet0/1            10.0.12.1       YES manual up                    up
+FastEthernet0/2            10.0.13.1       YES manual up                    up
+FastEthernet0/3            unassigned      YES unset  up                    down
+
+$ python task_9_1.py sh_ip_int_br.txt "manual"
+FastEthernet0/0            15.0.15.1       YES manual up                    up
+FastEthernet0/1            10.0.12.1       YES manual up                    up
+FastEthernet0/2            10.0.13.1       YES manual up                    up
+Loopback0                  10.1.1.1        YES manual up                    up
+Loopback100                100.0.0.1       YES manual up                    up
+
+$ python task_9_1.py sh_ip_int_br.txt "up +up"
+FastEthernet0/0            15.0.15.1       YES manual up                    up
+FastEthernet0/1            10.0.12.1       YES manual up                    up
+FastEthernet0/2            10.0.13.1       YES manual up                    up
+Loopback0                  10.1.1.1        YES manual up                    up
+Loopback100                100.0.0.1       YES manual up                    up
+```
+
 > В данном случае, скрипт будет работать как фильтр include в CLI Cisco.
 > Вы можете попробовать использовать регулярные выражения для [фильтрации вывода команд show](http://www.slideshare.net/NatashaSamoylenko/cisco-cli-filter-cheat-sheet).
 
-> Пример: sh ip int br | include up +up
 
 
 ### Задание 9.1a
@@ -28,6 +50,8 @@
 
 Проверьте регулярное выражение, используя скрипт, который был создан в задании 9.1,
 и файл sh_ip_int_br.txt.
+
+В файле задания нужно написать только регулярное выражение.
 
 
 ### Задание 9.1b
@@ -38,6 +62,9 @@
 Проверьте регулярное выражение, используя скрипт, который был создан в задании 9.1,
 и файл sh_ip_int_br.txt.
 
+В файле задания нужно написать только регулярное выражение.
+
+
 ### Задание 9.1c
 
 Проверить работу скрипта из задания 9.1 и регулярного выражения из задания 9.1a или 9.1b
@@ -46,6 +73,8 @@
 Если, в результате выполнения скрипта, были выведены не только строки
 с интерфейсами 0/1 и 0/3, исправить регулярное выражение.
 В результате, должны выводиться только строки с интерфейсами 0/1 и 0/3.
+
+В файле задания нужно написать только регулярное выражение.
 
 
 ### Задание 9.2
@@ -127,6 +156,9 @@ interface Ethernet0/1
 
 Проверьте функцию на конфигурации config_r2.txt и убедитесь, что интерфейсу
 Ethernet0/1 соответствует список из двух кортежей.
+
+Обратите внимание, что в данном случае, можно не проверять корректность IP-адреса,
+диапазоны адресов и так далее, так как обрабатывается вывод команды, а не ввод пользователя.
 
 
 ### Задание 9.4
