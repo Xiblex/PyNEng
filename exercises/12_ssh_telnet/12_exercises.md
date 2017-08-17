@@ -22,24 +22,7 @@
 * и команды command
 
 ```python
-import netmiko
-
 command = "sh ip int br"
-
-def send_show_command(device_list, command):
-    """
-    Функция подключается по SSH к устройствам из списка, и выполняет команду
-    на основании переданных аргументов.
-
-    Параметры функции:
-    - devices_list - список словарей с параметрами подключения к устройствам,
-      которым надо передать команды
-    - command - команда, которую надо выполнить
-    
-    Функция возвращает словарь с результатами выполнения команды:
-        - ключ - IP устройства
-        - значение - результат выполнения команды
-    """
 ```
 
 ### Задание 12.2
@@ -62,40 +45,24 @@ def send_show_command(device_list, command):
 
 ```python
 
-import netmiko
-
 commands = [ 'logging 10.255.255.1',
              'logging buffered 20010',
              'no logging console' ]
-
-def send_config_commands(device_list, config_commands):
-    """
-    Функция подключается по SSH к устройствам из списка,
-    и выполняет команды в конфигурационном режиме.
-
-    Параметры функции:
-        - devices_list - список словарей с параметрами подключения к устройствам, которым надо передать команды
-        - config_commands - список команд, которые надо выполнить
-    
-    Функция возвращает словарь с результатами выполнения команды:
-        - ключ - IP устройства
-        - значение - вывод с выполнением команд
-    """
-
-
 ```
 
 ### Задание 12.2a
 
 Дополнить функцию send_config_commands из задания 12.2
 
-Добавить аргумент output, который контролирует будет ли результат выполнения команд выводиться на стандартный поток вывода.
+Добавить аргумент output, который контролирует будет ли результат
+выполнения команд выводиться на стандартный поток вывода.
+
 По умолчанию, результат должен выводиться.
 
 
 ### Задание 12.2b
 
-Дополнить функцию send_config_commands из задания 12.2a или 12.2
+Переделать функцию send_config_commands из задания 12.2a или 12.2
 
 Добавить проверку на ошибки:
 * При выполнении команд, скрипт должен проверять результат на такие ошибки:
@@ -105,8 +72,46 @@ def send_config_commands(device_list, config_commands):
 функция должна выводить сообщение на стандартный поток вывода с информацией
 о том, какая ошибка возникла, при выполнении какой команды и на каком устройстве.
 
+При этом, параметр output также должен работать, но теперь он отвечает за вывод
+только тех команд, которые выполнились корректно.
+
+Функция send_config_commands теперь должна возвращать кортеж из двух словарей:
+* первый словарь с выводом команд, которые выполнились без ошибки
+* второй словарь с выводом команд, которые выполнились с ошибками
+
+
+Оба словаря в формате
+* ключ - IP устройства
+* значение -  вложенный словарь:
+   * ключ - команда
+   * значение - вывод с выполнением команд
+
 Проверить функцию на команде с ошибкой.
 
+
+### Задание 12.2c
+
+Переделать функцию send_config_commands из задания 12.2b
+
+Если при выполнении команды на одном из устройств возникла ошибка,
+спросить пользователя надо ли выполнять эту команду на других устройствах.
+
+Варианты ответа [y/n]:
+* y - выполнять команду на оставшихся устройствах
+* n - не выполнять команду на оставшихся устройствах
+
+Функция send_config_commands по-прежнему должна возвращать кортеж из двух словарей:
+* первый словарь с выводом команд, которые выполнились без ошибки
+* второй словарь с выводом команд, которые выполнились с ошибками
+
+
+Оба словаря в формате
+* ключ - IP устройства
+* значение -  вложенный словарь:
+   * ключ - команда
+   * значение - вывод с выполнением команд
+
+Проверить функцию на команде с ошибкой.
 
 
 ### Задание 12.3
@@ -120,11 +125,12 @@ def send_config_commands(device_list, config_commands):
 * config - список с командами, которые надо выполнить в конфигурационном режиме
 
 В зависимости от того, какой аргумент был передан, функция вызывает разные функции внутри.
+При вызове функции, всегда будет передаваться только один из аргументов show, config, filename.
 
 Далее комбинация из аргумента и соответствующей функции:
-* show -- функция send_show_command из задания 12.1
-* config -- функция send_config_commands из задания 12.2, 12.2a или 12.2b
-* filename -- функция send_commands_from_file (ее также надо написать по аналогии с предыдущими)
+* show - функция send_show_command из задания 12.1
+* config - функция send_config_commands из задания 12.2, 12.2a или 12.2b
+* filename - функция send_commands_from_file (ее также надо написать по аналогии с предыдущими)
 
 Функция возвращает словарь с результатами выполнения команды:
 * ключ - IP устройства
@@ -138,25 +144,12 @@ def send_config_commands(device_list, config_commands):
     * файла config.txt
 
 ```python
-from netmiko import ConnectHandler
 
-commands = [ 'logging 10.255.255.1',
-             'logging buffered 20010',
-             'no logging console' ]
+commands = ['logging 10.255.255.1',
+            'logging buffered 20010',
+            'no logging console' ]
 command = "sh ip int br"
 
-
-def send_show_command(device_list, show_command):
-    pass
-
-def send_config_commands(device_list, config_commands, output=True):
-    pass
-
-def send_commands_from_file(device_list, filename):
-    pass
-
-def send_commands(device_list, config=[], show='', filename=''):
-    pass
 ```
 
 
@@ -173,10 +166,11 @@ def send_commands(device_list, config=[], show='', filename=''):
 
 
 ### Задание 12.3b
+
 Дополнить функцию send_commands таким образом, чтобы перед подключением к устройствам по SSH,
 выполнялась проверка доступности устройства pingом (можно вызвать команду ping в ОС).
 
-> Как выполнять команды ОС, описано в разделе [subprocess](https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/useful_modules/subprocess.html). Там же есть пример функции с отправкой ping.
+> Как выполнять команды ОС, описано в разделе [subprocess](https://natenka.gitbooks.io/pyneng/content/v/python3.6/book/08_modules/useful_modules/subprocess.html). Там же есть пример функции с отправкой ping.
 
 Если устройство доступно, можно выполнять подключение.
 Если не доступно, вывести сообщение о том, что устройство с определенным IP-адресом недоступно
@@ -196,26 +190,36 @@ def send_commands(device_list, config=[], show='', filename=''):
  * переделать функцию send_commands, чтобы использовалась очередь и функция conn_threads по-прежнему возвращала словарь с результатами.
  * Проверить работу со списком команд, с командами из файла, с командой show 
 
+Подсказка: threading.Thread может передавать функции не только позиционные аргументы, но и ключевые:
+```python
+def conn_threads(function, arg1, arg2, **kwargs):
+
+    for some in something:
+        th = threading.Thread(target=function,
+                              args=(arg1, arg2),
+                              kwargs=kwargs)
+```
 
 Пример из раздела:
 ```python
-from netmiko import ConnectHandler
-import sys
-import yaml
 import threading
 from queue import Queue
+from pprint import pprint
+from netmiko import ConnectHandler
+
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
+
 def connect_ssh(device_dict, command, queue):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+        print("Connection to device {}".format(device_dict['ip']))
 
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
-    print("Connection to device {}".format( device_dict['ip'] )
-
-    queue.put({ device_dict['ip']: result })
+        #Добавляем словарь в очередь
+        queue.put({device_dict['ip']: result})
 
 
 def conn_threads(function, devices, command):
@@ -223,7 +227,8 @@ def conn_threads(function, devices, command):
     q = Queue()
 
     for device in devices:
-        th = threading.Thread(target = function, args = (device, command, q))
+        # Передаем очередь как аргумент, функции
+        th = threading.Thread(target=function, args=(device, command, q))
         th.start()
         threads.append(th)
 
@@ -231,12 +236,14 @@ def conn_threads(function, devices, command):
         th.join()
 
     results = []
+    # Берем результаты из очереди и добавляем их в список results
     for t in threads:
         results.append(q.get())
 
     return results
 
-print(conn_threads(connect_ssh, devices['routers'], COMMAND))
+pprint(conn_threads(connect_ssh, devices['routers'], COMMAND))
+
 ```
 
 
@@ -251,6 +258,10 @@ print(conn_threads(connect_ssh, devices['routers'], COMMAND))
 Изменить функцию соответственно, так, чтобы параллельных подключений выполнялось столько,
 сколько указано в аргументе limit.
 
+Теперь, если в сумме надо подключиться к 5 устройствам, а параметр limit = 2,
+функция выполнит подключения сначала к 1 и 2 устройству параллельно,
+затем аналогично к 3 и 4, и затем к 5.
+
 
 ### Задание 12.6
 
@@ -261,25 +272,37 @@ print(conn_threads(connect_ssh, devices['routers'], COMMAND))
  * переделать функцию send_commands, чтобы использовалась очередь и функция conn_processes по-прежнему возвращала словарь с результатами.
  * Проверить работу со списком команд, с командами из файла, с командой show
 
+Подсказка: multiprocessing.Process может передавать функции не только позиционные аргументы, но и ключевые:
+```python
+def conn_processes(function, arg1, arg2, **kwargs):
+
+    for some in something:
+        p = multiprocessing.Process(target=function,
+                                    args=(arg1, arg2),
+                                    kwargs=kwargs)
+```
 
 Пример из раздела:
 ```python
 import multiprocessing
-from netmiko import ConnectHandler
 import sys
 import yaml
+from pprint import pprint
+
+from netmiko import ConnectHandler
 
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command, queue):
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
 
-    print("Connection to device {}".format( device_dict['ip'] )
-    queue.put({device_dict['ip']: result})
+def connect_ssh(device_dict, command, queue):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+
+        print("Connection to device {}".format(device_dict['ip']))
+        queue.put({device_dict['ip']: result})
 
 
 def conn_processes(function, devices, command):
@@ -287,7 +310,8 @@ def conn_processes(function, devices, command):
     queue = multiprocessing.Queue()
 
     for device in devices:
-        p = multiprocessing.Process(target = function, args = (device, command, queue))
+        p = multiprocessing.Process(target=function,
+                                    args=(device, command, queue))
         p.start()
         processes.append(p)
 
@@ -300,7 +324,8 @@ def conn_processes(function, devices, command):
 
     return results
 
-print( conn_processes(connect_ssh, devices['routers'], COMMAND) )
+pprint((conn_processes(connect_ssh, devices['routers'], COMMAND)))
+
 ```
 
 ### Задание 12.7
@@ -313,4 +338,8 @@ print( conn_processes(connect_ssh, devices['routers'], COMMAND) )
 
 Изменить функцию соответственно, так, чтобы параллельных подключений выполнялось столько,
 сколько указано в аргументе limit.
+
+Теперь, если в сумме надо подключиться к 5 устройствам, а параметр limit = 2,
+функция выполнит подключения сначала к 1 и 2 устройству параллельно,
+затем аналогично к 3 и 4, и затем к 5.
 
