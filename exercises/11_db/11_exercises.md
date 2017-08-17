@@ -35,6 +35,8 @@
 
 ### Задание 11.1a
 
+Скопировать скрипт add_data.py из задания 11.1.
+
 Добавить в файл add_data.py, из задания 11.1, проверку на наличие БД:
 * если файл БД есть, записать данные
 * если файла БД нет, вывести сообщение, что БД нет и её необходимо сначала создать
@@ -58,6 +60,8 @@
  * отформатировать вывод в виде столбцов
 * если скрипт был вызван с двумя аргументами, вывести информацию из таблицы dhcp, которая соответствует полю и значению
 * если скрипт был вызван с любым другим количеством аргументов, вывести сообщение, что скрипт поддерживает только два или ноль аргументов
+
+> Обработка некорректного ввода аргумента будет выполняться в следующем задании
 
 Файл БД можно скопировать из прошлых заданий
 
@@ -136,7 +140,7 @@ $ python get_data.py vln 10
 В прошлых заданиях информация добавлялась в пустую БД.
 В этом задании, разбирается ситуация, когда в БД уже есть информация.
 
-Попробуйте выполнить скрипт add_data.py повторно, на существующей БД.
+Скопируйте скрипт add_data.py и попробуйте выполнить его повторно, на существующей БД.
 Должна возникнуть ошибка.
 
 При создании схемы БД, было явно указано, что поле MAC-адрес, должно быть уникальным.
@@ -174,12 +178,13 @@ $ python get_data.py vln 10
 
 > Для проверки корректности запроса SQL, можно выполнить его в командной строке, с помощью утилиты sqlite3.
 
-Для проверки задания и работы нового поля, попробуйте удалить пару строк из одного из фалов с выводом dhcp snooping.
+Для проверки задания и работы нового поля, попробуйте удалить пару строк из одного из файлов с выводом dhcp snooping.
 И после этого проверить, что удаление строки отображаются в таблице как неактивные.
 
 ### Задание 11.4
 
 Обновить файл get_data из задания 11.2 или 11.2a.
+Добавить поддержку столбца active, который мы добавили в задании 11.3.
 
 Теперь, при запросе информации, сначала должны отображаться активные записи,
 а затем, неактивные.
@@ -204,6 +209,24 @@ vlan        : 10
 interface   : FastEthernet0/4
 switch      : sw1
 ----------------------------------------
+
+$ python get_data1.py
+--------------------------------------------------------------------------------
+Active values:
+--------------------------------------------------------------------------------
+00:09:BB:3D:D6:58  10.1.10.2         10    FastEthernet0/1    sw1         1
+00:04:A3:3E:5B:69  10.1.5.2          5     FastEthernet0/10   sw1         1
+00:05:B3:7E:9B:60  10.1.5.4          5     FastEthernet0/9    sw1         1
+00:07:BC:3F:A6:50  10.1.10.6         10    FastEthernet0/3    sw1         1
+00:09:BC:3F:A6:50  192.168.100.100   1     FastEthernet0/7    sw1         1
+00:B4:A3:3E:5B:69  10.1.5.20         5     FastEthernet0/5    sw2         1
+00:C5:B3:7E:9B:60  10.1.5.40         5     FastEthernet0/9    sw2         1
+00:A9:BC:3F:A6:50  10.1.10.60        20    FastEthernet0/2    sw2         1
+--------------------------------------------------------------------------------
+Inactive values:
+--------------------------------------------------------------------------------
+00:A9:BB:3D:D6:58  10.1.10.20        10    FastEthernet0/7    sw2         0
+
 ``` 
 
 ### Задание 11.5
@@ -298,7 +321,7 @@ import parse_dhcp_snooping_functions as pds
 в файле parse_dhcp_snooping.py.
 
 В принципе, для выполнения задания, не обязательно разбираться с модулем argparse.
-Но, вы можете почитать о нем в разделе [Дополнительная информация](../../book/16_additional_info/useful_modules/argparse.md).
+Но, вы можете почитать о нем в разделе [Дополнительная информация](../../book/08_modules/useful_modules/argparse.md).
 
 Для того, чтобы было проще начать, попробуйте создать необходимые функции в файле
 parse_dhcp_snooping_functions.py и, например, просто выведите аргументы функций, используя print.
@@ -366,6 +389,23 @@ optional arguments:
   -n NAME     db filename
   -s SCHEMA   db schema filename
 
+
+$ python parse_dhcp_snooping.py create_db
+Creating DB dhcp_snooping.db with DB schema dhcp_snooping_schema.sql
+Creating schema...
+Done
+
+$ python parse_dhcp_snooping.py add sw1_dhcp_snooping.txt sw2_dhcp_snooping.txt sw3_dhcp_snooping.txt
+Reading info from file(s)
+sw1_dhcp_snooping.txt, sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt
+
+Adding data to db dhcp_snooping.db
+
+
+$ python parse_dhcp_snooping.py add -s switches.yml
+Adding switch data to database
+
+
 $ python parse_dhcp_snooping.py get
 Showing dhcp_snooping.db content...
 ----------------------------------------------------------------------
@@ -401,7 +441,12 @@ interface   : FastEthernet0/7
 switch      : sw2
 ----------------------------------------
 
-$ python parse_dhcp_snooping.py add sw1_dhcp_snooping.txt sw2_dhcp_snooping.txt sw3_dhcp_snooping.txt
-Reading info from file(s)
-sw1_dhcp_snooping.txt, sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt
+
+$ python parse_dhcp_snooping.py get -k vln -v 10
+usage: parse_dhcp_snooping.py get [-h] [--db DB_FILE]
+                                  [-k {mac,ip,vlan,interface,switch}]
+                                  [-v VALUE] [-a]
+parse_dhcp_snooping.py get: error: argument -k: invalid choice: 'vln' (choose from 'mac', 'ip', 'vlan', 'interface', 'switch')
+
 ```
+
