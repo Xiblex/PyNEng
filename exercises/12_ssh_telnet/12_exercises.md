@@ -192,12 +192,12 @@ command = "sh ip int br"
 
 Подсказка: threading.Thread может передавать функции не только позиционные аргументы, но и ключевые:
 ```python
-def conn_threads(function, arg1, arg2, **kwargs):
+def conn_threads(function, arg1, arg2, **kwargs_dict):
 
     for some in something:
         th = threading.Thread(target=function,
                               args=(arg1, arg2),
-                              kwargs=kwargs)
+                              kwargs=kwargs_dict)
 ```
 
 Пример из раздела:
@@ -274,12 +274,12 @@ pprint(conn_threads(connect_ssh, devices['routers'], COMMAND))
 
 Подсказка: multiprocessing.Process может передавать функции не только позиционные аргументы, но и ключевые:
 ```python
-def conn_processes(function, arg1, arg2, **kwargs):
+def conn_processes(function, arg1, arg2, **kwargs_dict):
 
     for some in something:
         p = multiprocessing.Process(target=function,
                                     args=(arg1, arg2),
-                                    kwargs=kwargs)
+                                    kwargs=kwargs_dict)
 ```
 
 Пример из раздела:
