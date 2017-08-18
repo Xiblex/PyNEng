@@ -25,15 +25,12 @@ from tabulate import tabulate
 template = sys.argv[1]
 output_file = sys.argv[2]
 
-f = open(template)
-output = open(output_file).read()
-
-re_table = textfsm.TextFSM(f)
-
-header = re_table.header
-result = re_table.ParseText(output)
-
-print(tabulate(result, headers=header))
+with open(template) as f, open(output_file) as output:
+    re_table = textfsm.TextFSM(f)
+    header = re_table.header
+    result = re_table.ParseText(output.read())
+    print(result)
+    print(tabulate(result, headers=header))
 
 ```
 
@@ -105,13 +102,12 @@ import clitable
 output_sh_ip_route_ospf = open('output/sh_ip_route_ospf.txt').read()
 
 cli_table = clitable.CliTable('index', 'templates')
-
-attributes = {'Command': 'show ip route ospf' , 'Vendor': 'Cisco'}
+attributes = {'Command': 'show ip route ospf', 'Vendor': 'Cisco'}
 
 cli_table.ParseCmd(output_sh_ip_route_ospf, attributes)
-print("CLI Table output:\n", cli_table)
 
-print("Formatted Table:\n", cli_table.FormattedTable())
+print('CLI Table output:\n', cli_table)
+print('Formatted Table:\n', cli_table.FormattedTable())
 
 data_rows = [list(row) for row in cli_table]
 header = list(cli_table.header)
@@ -127,7 +123,7 @@ for row in data_rows:
 Переделать функцию из задания 14.4:
 * добавить аргумент show_output, который контролирует будет ли выводиться результат обработки команды на стандартный поток вывода
  * по умолчанию False, что значит результат не будет выводиться
-* результат должен отображаться в виде, который возвращает метод FormattedTable (пример есть в разделе)
+* результат должен отображаться с помощью FormattedTable (пример есть в разделе)
 
 
 ### Задание 14.5
@@ -182,23 +178,25 @@ for row in data_rows:
 
 Пример из раздела multiprocessing:
 ```python
-
 import multiprocessing
-from netmiko import ConnectHandler
 import sys
 import yaml
+from pprint import pprint
+
+from netmiko import ConnectHandler
 
 
 COMMAND = sys.argv[1]
 devices = yaml.load(open('devices.yaml'))
 
-def connect_ssh(device_dict, command, queue):
-    ssh = ConnectHandler(**device_dict)
-    ssh.enable()
-    result = ssh.send_command(command)
 
-    print("Connection to device {}".format( device_dict['ip'])
-    queue.put({device_dict['ip']: result})
+def connect_ssh(device_dict, command, queue):
+    with ConnectHandler(**device_dict) as ssh:
+        ssh.enable()
+        result = ssh.send_command(command)
+
+        print('Connection to device {}'.format(device_dict['ip']))
+        queue.put({device_dict['ip']: result})
 
 
 def conn_processes(function, devices, command):
@@ -206,7 +204,8 @@ def conn_processes(function, devices, command):
     queue = multiprocessing.Queue()
 
     for device in devices:
-        p = multiprocessing.Process(target = function, args = (device, command, queue))
+        p = multiprocessing.Process(target=function,
+                                    args=(device, command, queue))
         p.start()
         processes.append(p)
 
@@ -219,7 +218,8 @@ def conn_processes(function, devices, command):
 
     return results
 
-print(conn_processes(connect_ssh, devices['routers'], COMMAND))
+
+pprint(conn_processes(connect_ssh, devices['routers'], COMMAND))
 
 ```
 
