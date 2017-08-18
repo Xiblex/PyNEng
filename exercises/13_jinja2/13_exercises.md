@@ -17,18 +17,19 @@
 ```python
 from jinja2 import Environment, FileSystemLoader
 import yaml
+import sys
 
-TEMPLATE_DIR, template = sys.argv[1].split('/')
+#$ python cfg_gen.py templates/for.txt data_files/for.yml
+TEMPLATE_DIR, template_file = sys.argv[1].split('/')
 VARS_FILE = sys.argv[2]
 
-env = Environment(loader = FileSystemLoader(TEMPLATE_DIR),
-                  trim_blocks=True)
-template = env.get_template(template)
+env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
+                  trim_blocks=True, lstrip_blocks=True)
+template = env.get_template(template_file)
 
 vars_dict = yaml.load(open(VARS_FILE))
 
 print(template.render(vars_dict))
-
 ```
 
 ### Задание 13.1a
@@ -46,10 +47,12 @@ print(template.render(vars_dict))
 ### Задание 13.1b
 
 Дополнить функцию generate_cfg_from_template из задания 13.1 или 13.1a:
-* добавить поддержку аргументов окружения (Environment)
 
 Функция generate_cfg_from_template должна принимать любые аргументы,
 которые принимает класс Environment и просто передавать их ему.
+
+То есть, надо добавить возможность контролировать аргументы trim_blocks, lstrip_blocks
+и любые другие аргументы Environment через функцию generate_cfg_from_template.
 
 Проверить функциональность на аргументах:
 * trim_blocks
@@ -109,10 +112,10 @@ data_dict = {'vlans': {
 * словаре data_dict
 
 ```python
-error_message = """
+error_message = '''
 Не получилось определить формат данных.
 Поддерживаются файлы с расширением .json, .yml, .yaml и словари Python
-"""
+'''
 
 data_dict = {'vlans': {
                         10: 'Marketing',
@@ -137,6 +140,7 @@ data_dict = {'vlans': {
 В шаблонах templates/alias.txt и templates/eem_int_desc.txt переменных нет.
 
 Создать шаблон templates/cisco_router_base.txt.
+
 В шаблон должно быть включено содержимое шаблонов:
 * templates/cisco_base.txt
 * templates/alias.txt
