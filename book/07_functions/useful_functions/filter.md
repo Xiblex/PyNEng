@@ -35,7 +35,7 @@ Out[6]: ['one', 'two', 'list', 'dict']
 
 ### List comprehension вместо filter
 
-Как правило, вместо map можно использовать list comprehension.
+Как правило, вместо filter можно использовать list comprehension.
 
 Примеры аналогичные приведенным выше, в варианте с list comprehension.
 
