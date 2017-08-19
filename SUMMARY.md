@@ -36,6 +36,7 @@
         * [Варианты создания множества](book/03_data_structures/8c_create_set.md)
     * [Преобразование типов](book/03_data_structures/9_convert_type.md)
     * [Проверка типов](book/03_data_structures/9a_check_type.md)
+    * [Дополнительные материалы](book/03_data_structures/further_reading.md)
     * [Задания](exercises/03_data_structures/03_exercises.md)
 * [4. Создание базовых скриптов](book/04_basic_scripts/README.md)
     * [Передача аргументов скрипту](book/04_basic_scripts/1_args.md)
