@@ -216,4 +216,3 @@
         * [Дополнительные материалы](book/16_additional_info/iterator_generator/further_reading.md)
 * [Продолжение обучения](resources/README.md)
 * [Отзывы](testimonials.md)
-* [Словарь терминов](GLOSSARY.md)
