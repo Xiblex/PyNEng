@@ -3,7 +3,7 @@
 * [Введение](README.md)
 * [О курсе](about.md)
 * [Ресурсы для обучения по книге](course_links.md)
-* [Как учиться по этому курсу](howto.md)
+* [Как учиться по этой книге](howto.md)
 * [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
 * [Благодарности](acknowledgments.md)
