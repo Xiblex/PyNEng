@@ -1,15 +1,47 @@
-##virtualenv, virtualenvwrapper
-
-
-__virtualenv__ - это инструмент, который позволяет создавать виртуальные окружения. 
+## Виртуальные окружения
 
 Виртуальные окружения:
+
 * позволяют изолировать различные проекты
 * зависимости, которых требуют разные проекты, находятся в разных местах
- * Например, если в проекте 1 требуется пакет версии 1.0, а в проекте 2 требуется тот же пакет, но версии 3.1
+* Например, если в проекте 1 требуется пакет версии 1.0, а в проекте 2 требуется тот же пакет, но версии 3.1
 * пакеты, которые установлены в виртуальных окружениях, не перебивают глобальные пакеты
 
-В курсе используется __virtualenvwrapper__: он позволяет немного проще работать с virtualenv.
+Начиная с версии Python 3.5, рекомендуется использовать такой способ создания виртуальных окружений:
+```
+$ python3.6 -m venv new/pyneng
+```
+
+> Вместо python3.6 может использоваться python или python3, в зависимости от того, как установлен Python 3.6
+
+Эта команда создает указанный каталог и все каталоги в пути, если они не были созданы.
+
+Команда создает такую структуру каталогов:
+```
+$ ls -ls new/pyneng
+total 16
+4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 21 14:50 bin
+4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 21 14:50 include
+4 drwxr-xr-x 3 vagrant vagrant 4096 Aug 21 14:50 lib
+4 -rw-r--r-- 1 vagrant vagrant   75 Aug 21 14:50 pyvenv.cfg
+```
+
+Для перехода в виртуальное окружение надо выполнить команду:
+```
+$ source new/pyneng/bin/activate
+```
+
+Для выхода из виртуального окружения, используется команда deactivate:
+```
+$ deactivate
+```
+
+> [Подробнее о модуле venv](https://docs.python.org/3/library/venv.html#module-venv)
+
+### virtualenvwrapper
+
+Еще один вариант создания виртуальных окружений - virtualenvwrapper.
+Он позволяет немного проще работать с виртуальными окружениями.
 
 Установка virtualenvwrapper с помощью pip:
 ```
@@ -23,8 +55,10 @@ export WORKON_HOME=~/venv
 . /usr/local/bin/virtualenvwrapper.sh
 ```
 
+> Если вы используете не bash, посмотрите поддерживается ли ваш shell в [документации](http://virtualenvwrapper.readthedocs.io/en/latest/install.html)
+
 WORKON_HOME - указывает расположение виртуальных окружений.
-А вторая строка - где находится скрипт, установленный с пакетом virtualenvwrapper):
+А вторая строка - где находится скрипт, установленный с пакетом virtualenvwrapper.
 
 Для того чтобы скрипт virtualenvwrapper.sh выполнился и можно было работать с виртуальными окружениями, надо перезапустить bash. Например, таким образом:
 ```
@@ -38,11 +72,11 @@ exec bash
 
 Создание нового виртуального окружения:
 ```
-$ mkvirtualenv PyNEng
+$ mkvirtualenv pyneng
 New python executable in PyNEng/bin/python
 Installing distribute........................done.
 Installing pip...............done.
-(PyNEng)$ 
+(pyneng)$ 
 ```
 
 В скобках перед стандартным приглашением отображается имя проекта (виртуального окружения).
@@ -56,7 +90,7 @@ Installing pip...............done.
 
 Теперь в том каталоге, который был указан в WORKON_HOME, создан каталог PyNEng:
 ```
-(PyNEng)$ ls -ls venv
+(pyneng)$ ls -ls venv
 total 52
 ....
 4 -rwxr-xr-x 1 nata nata   99 Sep 30 16:41 preactivate
@@ -64,26 +98,26 @@ total 52
 4 -rwxr-xr-x 1 nata nata   91 Sep 30 16:41 premkproject
 4 -rwxr-xr-x 1 nata nata  130 Sep 30 16:41 premkvirtualenv
 4 -rwxr-xr-x 1 nata nata  111 Sep 30 16:41 prermvirtualenv
-4 drwxr-xr-x 6 nata nata 4096 Sep 30 16:42 PyNEng
+4 drwxr-xr-x 6 nata nata 4096 Sep 30 16:42 pyneng
 ```
 
 Выйти из виртуального окружения:
 ```
-(PyNEng)$ deactivate 
+(pyneng)$ deactivate 
 $ 
 ```
 
 Для перехода в созданное виртуальное окружение, надо выполнить команду __workon__:
 ```
-$ workon PyNEng
-(PyNEng)$ 
+$ workon pyneng
+(pyneng)$ 
 ```
 
 Если необходимо перейти из одного виртуального окружения в другое, то необязательно делать __deactivate__, можно перейти сразу через workon:
 ```
 $ workon Test
-(Test)$ workon PyNEng
-(PyNEng)$ 
+(Test)$ workon pyneng
+(pyneng)$ 
 ```
 
 Если виртуальное окружение нужно удалить, используется команда __rmvirtualenv__:
@@ -95,7 +129,7 @@ $
 
 Посмотреть какие пакеты установлены в виртуальном окружении:
 ```
-(PyNEng)$ lssitepackages
+(pyneng)$ lssitepackages
 ANSI.py                                pexpect-3.3-py2.7.egg-info
 ANSI.pyc                               pickleshare-0.5-py2.7.egg-info
 decorator-4.0.4-py2.7.egg-info         pickleshare.py
@@ -126,7 +160,7 @@ pexpect                                traitlets-4.0.0-py2.7.egg-info
 
 Это делается таким образом:
 ```
-(PyNEng)$ pip freeze > requirements.txt
+(pyneng)$ pip freeze > requirements.txt
 ```
 
 Теперь в файле requirements.txt находятся все зависимости, с версиями пакетов (файл requirements.txt):
@@ -148,7 +182,7 @@ $ pip install -r requirements.txt
 
 Например, установим в виртуальном окружении пакет simplejson. 
 ```
-(PyNEng)$ pip install simplejson
+(pyneng)$ pip install simplejson
 ...
 Successfully installed simplejson
 Cleaning up...
@@ -156,7 +190,7 @@ Cleaning up...
 
 Если перейти в ipython (рассматривается в разделе [ipython](../02_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
 ```
-(PyNEng)$ ipython
+(pyneng)$ ipython
 
 In [1]: import simplejson
 
@@ -176,7 +210,7 @@ simplejson.compat              simplejson.simple_first
 
 Но, если выйти из виртуально окружения, и попытаться сделать то же самое, то такого модуля нет:
 ```python
-(PyNEng)$ deactivate 
+(pyneng)$ deactivate 
 
 $ ipython
 

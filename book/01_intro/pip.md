@@ -13,8 +13,6 @@ $ pip --version
 pip 9.0.1 from /home/vagrant/venv/py3_convert/lib/python3.6/site-packages (python 3.6)
 ```
 
-Если команда выдала ошибку, значит pip не установлен. Установить его можно так:
-```bash
-sudo apt-get install python-pip
-```
+Если команда выдала ошибку, значит pip не установлен.
+Установка pip описана в [документации](https://pip.pypa.io/en/stable/installing/)
 
