@@ -10,7 +10,7 @@
 * [1. Подготовка к работе](book/01_intro/README.md)
     * [ОС и редактор](book/01_intro/os_and_editor.md)
     * [Система управления пакетами pip](book/01_intro/pip.md)
-    * [virtualenv, virtualenvwrapper](book/01_intro/virtualenv.md)
+    * [Виртуальные окружения](book/01_intro/virtualenv.md)
     * [Интерпретатор Python \(проверка\)](book/01_intro/check_python.md)
     * [Задания](exercises/01_intro/01_exercises.md)
 * [2. Начало работы с Python](book/02_start/README.md)
