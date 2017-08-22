@@ -69,13 +69,13 @@ index c4307fa..137a221 100644
  * применить ACL к интерфейсу
 
  ACL должен быть таким:
-+```
++
  ip access-list extended INET-to-LAN
   permit tcp 10.0.1.0 0.0.0.255 any eq www
   permit tcp 10.0.1.0 0.0.0.255 any eq 22
   permit icmp any any
 -
-+```
++
 
  Проверьте работу playbook на маршрутизаторе R1.
 
@@ -96,14 +96,13 @@ commit 4c1821030d20b3682b67caf362fd777d098d9126
 Author: Наташа Самойленко <nataliya.samoylenko@gmail.com>
 Date:   Mon May 29 07:53:45 2017 +0300
 
-    Update README.md
+Update README.md
 
 diff --git a/tools/README.md b/tools/README.md
 index 2b6f380..4f8d4af 100644
 --- a/tools/README.md
 +++ b/tools/README.md
 @@ -1 +1,4 @@
- ## Инструменты
 +
 +Тут находятся PDF версии руководств по настройке инструментов, которые используются на курсе.
 ```
