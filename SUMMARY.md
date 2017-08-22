@@ -17,7 +17,7 @@
             * [Отображение статуса репозитория в приглашении](book/01_intro/git-github/git_basics_bash_status.md)
             * [Работа с Git](book/01_intro/git-github/git_basics_commands.md)
             * [Дополнительные возможности](book/01_intro/git-github/git_basics_additional.md)
-        * [Аутентификация на GitHub](book/01_intro/git-github/git_github_setup.md)
+        * [Аутентификация на GitHub](book/01_intro/git-github/git_github_auth.md)
         * [Добавление изменений в Git и GitHub](book/01_intro/git-github/git_github_changes.md)
         * [Работа с репозиторием заданий и примеров](book/01_intro/git-github/pyneng_github.md)
     * [Дополнительные материалы](book/01_intro/further_reading.md)
