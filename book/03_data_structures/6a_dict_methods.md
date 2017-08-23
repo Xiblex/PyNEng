@@ -179,3 +179,26 @@ In [37]: london
 Out[37]: {'location': 'London Str', 'vendor': 'Cisco'}
 ```
 
+### ```update```
+
+Метод update позволяет добавлять в словарь содержимое другого словаря:
+```python
+In [38]: r1 = {'name': 'London1', 'location': 'London Str'}
+
+In [39]: r1.update({'vendor': 'Cisco', 'ios':'15.2'})
+
+In [40]: r1
+Out[40]: {'ios': '15.2', 'location': 'London Str', 'name': 'London1', 'vendor': 'Cisco'}
+```
+
+Аналогичным образом можно обновить значения:
+```python
+In [41]: r1.update({'name': 'london-r1', 'ios':'15.4'})
+
+In [42]: r1
+Out[42]:
+{'ios': '15.4',
+ 'location': 'London Str',
+ 'name': 'london-r1',
+ 'vendor': 'Cisco'}
+```

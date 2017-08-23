@@ -8,3 +8,8 @@
 * [Sets basics](https://docs.python.org/3/tutorial/datastructures.html#sets). [More on sets](https://docs.python.org/3/library/stdtypes.html#set)
 * [Dict basics](https://docs.python.org/3/tutorial/datastructures.html#dictionaries). [More on dicts](https://docs.python.org/3/library/stdtypes.html#typesmapping)
 * [Common Sequence Operations](https://docs.python.org/3/library/stdtypes.html#typesseq-common)
+
+Форматирование строк:
+
+* [Примеры использования форматирования строк](https://pyformat.info/)
+* [Документация по форматированию строк](https://docs.python.org/3/library/string.html#format-string-syntax)

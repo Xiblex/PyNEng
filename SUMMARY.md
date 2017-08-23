@@ -80,6 +80,7 @@
         * [Распаковка аргументов](book/07_functions/3b_func_unpacking_args.md)
         * [Пример использования](book/07_functions/4_func_unpacking_and_var_args_example.md)
     * [Полезные функции](book/07_functions/useful_functions/README.md)
+        * [Функция print](book/07_functions/useful_functions/print.md)
         * [Функция sorted](book/07_functions/useful_functions/sorted.md)
         * [Функция enumerate](book/07_functions/useful_functions/enumerate.md)
         * [Функция lambda](book/07_functions/useful_functions/lambda.md)
