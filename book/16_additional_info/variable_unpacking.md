@@ -6,20 +6,20 @@
 
 Пример распаковки переменных:
 ```python
-In [6]: interface = ['FastEthernet0/1', '10.1.1.1', 'up', 'up']
+In [1]: interface = ['FastEthernet0/1', '10.1.1.1', 'up', 'up']
 
-In [7]: intf, ip, status, protocol = interface
+In [2]: intf, ip, status, protocol = interface
 
-In [8]: intf
-Out[8]: 'FastEthernet0/1'
+In [3]: intf
+Out[3]: 'FastEthernet0/1'
 
-In [9]: ip
-Out[9]: '10.1.1.1'
+In [4]: ip
+Out[4]: '10.1.1.1'
 ```
 
 Такой вариант намного удобней использовать, чем использование индексов:
 ```python
-In [10]: intf, ip, status, protocol = interface[0], interface[1], interface[2], interface[3]
+In [5]: intf, ip, status, protocol = interface[0], interface[1], interface[2], interface[3]
 ```
 
 При распаковке переменных, каждый элемент списка попадает в соответствующую переменную.
@@ -27,7 +27,7 @@ In [10]: intf, ip, status, protocol = interface[0], interface[1], interface[2], 
 
 Если переменных больше или меньше, возникнет исключение:
 ```python
-In [11]: intf, ip, status = interface
+In [6]: intf, ip, status = interface
 ------------------------------------------------------------
 ValueError                 Traceback (most recent call last)
 <ipython-input-11-a304c4372b1a> in <module>()
@@ -35,7 +35,7 @@ ValueError                 Traceback (most recent call last)
 
 ValueError: too many values to unpack (expected 3)
 
-In [12]: intf, ip, status, protocol, other = interface
+In [7]: intf, ip, status, protocol, other = interface
 ------------------------------------------------------------
 ValueError                 Traceback (most recent call last)
 <ipython-input-12-ac93e78b978c> in <module>()
@@ -53,20 +53,20 @@ ValueError: not enough values to unpack (expected 5, got 4)
 
 Если, например, из строки line надо получить только VLAN, MAC и интерфейс, надо все равно указать переменную для типа записи:
 ```python
-In [13]: line = '100    01bb.c580.7000    DYNAMIC     Gi0/1'
+In [8]: line = '100    01bb.c580.7000    DYNAMIC     Gi0/1'
 
-In [14]: vlan, mac, item_type, intf = line.split()
+In [9]: vlan, mac, item_type, intf = line.split()
 
-In [15]: vlan
-Out[15]: '100'
+In [10]: vlan
+Out[10]: '100'
 
-In [16]: intf
-Out[16]: 'Gi0/1'
+In [11]: intf
+Out[11]: 'Gi0/1'
 ```
 
 Но, если тип записи не нужен в дальнейшем, можно заменить переменную item_type нижним подчеркиванием:
 ```python
-In [17]: vlan, mac, _, intf = line.split()
+In [12]: vlan, mac, _, intf = line.split()
 ```
 
 Таким образом явно указывается то, что этот элемент не нужен.
@@ -74,15 +74,15 @@ In [17]: vlan, mac, _, intf = line.split()
 
 Нижнее подчеркивание можно использовать и несколько раз:
 ```python
-In [18]: dhcp = '00:09:BB:3D:D6:58   10.1.10.2        86250       dhcp-snooping   10    FastEthernet0/1'
+In [13]: dhcp = '00:09:BB:3D:D6:58   10.1.10.2        86250       dhcp-snooping   10    FastEthernet0/1'
 
-In [19]: mac, ip, _, _, vlan, intf = dhcp.split()
+In [14]: mac, ip, _, _, vlan, intf = dhcp.split()
 
-In [20]: mac
-Out[20]: '00:09:BB:3D:D6:58'
+In [15]: mac
+Out[15]: '00:09:BB:3D:D6:58'
 
-In [21]: vlan
-Out[21]: '10'
+In [16]: vlan
+Out[16]: '10'
 
 ```
 
@@ -93,46 +93,46 @@ Out[21]: '10'
 
 Например, так можно получить первый элемент в переменную first, а остальные в rest:
 ```python
-In [22]: vlans = [10, 11, 13, 30]
+In [18]: vlans = [10, 11, 13, 30]
 
-In [23]: first, *rest = vlans
+In [19]: first, *rest = vlans
 
-In [24]: first
-Out[24]: 10
+In [20]: first
+Out[20]: 10
 
-In [25]: rest
-Out[25]: [11, 13, 30]
+In [21]: rest
+Out[21]: [11, 13, 30]
 ```
 
 При этом, переменная со звездочкой всегда будет содержать список:
 ```python
-In [26]: vlans = (10, 11, 13, 30)
+In [22]: vlans = (10, 11, 13, 30)
 
-In [27]: first, *rest = vlans
+In [22]: first, *rest = vlans
 
-In [28]: first
-Out[28]: 10
+In [23]: first
+Out[23]: 10
 
-In [29]: rest
-Out[29]: [11, 13, 30]
+In [24]: rest
+Out[24]: [11, 13, 30]
 ```
 
 Если элемент всего один, в данном случае, распаковка все равно отработает:
 ```python
-In [32]: first, *rest = vlans
+In [25]: first, *rest = vlans
 
-In [34]: first
-Out[34]: 55
+In [26]: first
+Out[26]: 55
 
-In [35]: rest
-Out[35]: []
+In [27]: rest
+Out[27]: []
 ```
 
 Такая переменная со звездочкой может быть только одна, в выражении распаковки.
 ```python
-In [36]: vlans = (10, 11, 13, 30)
+In [28]: vlans = (10, 11, 13, 30)
 
-In [37]: first, *rest, *others = vlans
+In [29]: first, *rest, *others = vlans
   File "<ipython-input-37-dedf7a08933a>", line 1
     first, *rest, *others = vlans
                                  ^
@@ -141,31 +141,31 @@ SyntaxError: two starred expressions in assignment
 
 И конечно же, такая переменная может находиться не только в конце выражения:
 ```python
-In [38]: vlans = (10, 11, 13, 30)
+In [30]: vlans = (10, 11, 13, 30)
 
-In [39]: *rest, last = vlans
+In [31]: *rest, last = vlans
 
-In [40]: rest
-Out[40]: [10, 11, 13]
+In [32]: rest
+Out[32]: [10, 11, 13]
 
-In [41]: last
-Out[41]: 30
+In [33]: last
+Out[33]: 30
 ```
 
 Таким образом можно указать, что нужен первый, второй и послений элемент:
 ```python
-In [42]: cdp = 'SW1              Eth 0/0           140          S I      WS-C3750-  Eth 0/1'
+In [34]: cdp = 'SW1              Eth 0/0           140          S I      WS-C3750-  Eth 0/1'
 
-In [43]: name, l_intf, *other, r_intf = cdp.split()
+In [35]: name, l_intf, *other, r_intf = cdp.split()
 
-In [44]: name
-Out[44]: 'SW1'
+In [36]: name
+Out[36]: 'SW1'
 
-In [45]: l_intf
-Out[45]: 'Eth'
+In [37]: l_intf
+Out[37]: 'Eth'
 
-In [46]: r_intf
-Out[46]: '0/1'
+In [38]: r_intf
+Out[38]: '0/1'
 ```
 
 ### Примеры распаковки
@@ -176,37 +176,37 @@ Out[46]: '0/1'
 
 Распаковка range:
 ```python
-In [47]: first, *rest = range(1,6)
+In [39]: first, *rest = range(1,6)
 
-In [48]: first
-Out[48]: 1
+In [40]: first
+Out[40]: 1
 
-In [49]: rest
-Out[49]: [2, 3, 4, 5]
+In [41]: rest
+Out[41]: [2, 3, 4, 5]
 ```
 
 Распаковка zip:
 ```python
-In [50]: a = [1,2,3,4,5]
+In [42]: a = [1,2,3,4,5]
 
-In [51]: b = [100,200,300,400,500]
+In [43]: b = [100,200,300,400,500]
 
-In [52]: zip(a, b)
-Out[52]: <zip at 0xb4df4fac>
+In [44]: zip(a, b)
+Out[44]: <zip at 0xb4df4fac>
 
-In [53]: list(zip(a, b))
-Out[53]: [(1, 100), (2, 200), (3, 300), (4, 400), (5, 500)]
+In [45]: list(zip(a, b))
+Out[45]: [(1, 100), (2, 200), (3, 300), (4, 400), (5, 500)]
 
-In [54]: first, *rest, last = zip(a, b)
+In [46]: first, *rest, last = zip(a, b)
 
-In [55]: first
-Out[55]: (1, 100)
+In [47]: first
+Out[47]: (1, 100)
 
-In [56]: rest
-Out[56]: [(2, 200), (3, 300), (4, 400)]
+In [48]: rest
+Out[48]: [(2, 200), (3, 300), (4, 400)]
 
-In [57]: last
-Out[57]: (5, 500)
+In [49]: last
+Out[49]: (5, 500)
 ```
 
 
@@ -214,18 +214,18 @@ Out[57]: (5, 500)
 
 Пример цикла, который проходится по ключам:
 ```python
-In [58]: access_template = ['switchport mode access',
+In [50]: access_template = ['switchport mode access',
     ...:                    'switchport access vlan',
     ...:                    'spanning-tree portfast',
     ...:                    'spanning-tree bpduguard enable']
     ...:
 
-In [62]: access = {'0/12':10,
+In [51]: access = {'0/12':10,
     ...:           '0/14':11,
     ...:           '0/16':17}
     ...:
 
-In [63]: for intf in access:
+In [52]: for intf in access:
     ...:     print('interface FastEthernet' + intf)
     ...:     for command in access_template:
     ...:         if command.endswith('access vlan'):
@@ -253,7 +253,7 @@ interface FastEthernet0/16
 
 Вместо этого, можно проходиться по парам ключ, значение и сразу же распаковывать их в разные переменные:
 ```python
-In [64]: for intf, vlan in access.items():
+In [53]: for intf, vlan in access.items():
     ...:     print('interface FastEthernet' + intf)
     ...:     for command in access_template:
     ...:         if command.endswith('access vlan'):
@@ -265,8 +265,8 @@ In [64]: for intf, vlan in access.items():
 
 Пример распаковки элементов списка в цикле:
 ```python
-In [69]: table
-Out[69]:
+In [54]: table
+Out[54]:
 [['100', 'a1b2.ac10.7000', 'DYNAMIC', 'Gi0/1'],
  ['200', 'a0d4.cb20.7000', 'DYNAMIC', 'Gi0/2'],
  ['300', 'acb4.cd30.7000', 'DYNAMIC', 'Gi0/3'],
@@ -276,7 +276,7 @@ Out[69]:
  ['300', 'aa0b.cc70.7000', 'DYNAMIC', 'Gi0/7']]
 
 
-In [71]: for line in table:
+In [55]: for line in table:
     ...:     vlan, mac, _, intf = line
     ...:     print(vlan, mac, intf)
     ...:
@@ -291,7 +291,7 @@ In [71]: for line in table:
 
 Но еще лучше сделать так:
 ```python
-In [70]: for vlan, mac, _, intf in table:
+In [56]: for vlan, mac, _, intf in table:
     ...:     print(vlan, mac, intf)
     ...:
 100 a1b2.ac10.7000 Gi0/1

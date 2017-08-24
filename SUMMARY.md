@@ -225,5 +225,6 @@
         * [Generator](book/16_additional_info/iterator_generator/generator.md)
         * [Дополнительные материалы](book/16_additional_info/iterator_generator/further_reading.md)
     * [Распаковка переменных](book/16_additional_info/variable_unpacking.md)
+    * [Отличие между книгой для Python 2.7 и Python 3](book/16_additional_info/py2_vs_py3.md)
 * [Продолжение обучения](resources/README.md)
 * [Отзывы](testimonials.md)

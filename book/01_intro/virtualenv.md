@@ -70,9 +70,9 @@ exec bash
 
 #### Работа с виртуальными окружениями
 
-Создание нового виртуального окружения:
+Создание нового виртуального окружения в котором Python 3.6 используется по умолчанию:
 ```
-$ mkvirtualenv pyneng
+$ mkvirtualenv --python=/usr/local/bin/python3.6 pyneng
 New python executable in PyNEng/bin/python
 Installing distribute........................done.
 Installing pip...............done.

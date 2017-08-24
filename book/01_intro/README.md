@@ -47,8 +47,20 @@ __В курсе используются:__
 Если версия другая, надо установить Python 3.6.
 Для курса подойдут и версии Python 3.4, 3.5, но лучше использовать 3.6.
 
-> Установка Python 3.6, если его нет в ОС, выполняется самостоятельно.
+> Установка Python 3.6, если его нет в ОС, выполняется самостоятельно. Ниже приведен пример установки для Debian.
 
+Процедура установки Python 3.6 на Debian:
+```
+sudo apt-get install libsqlite3-dev
+wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
+tar xvf Python-3.6.0.tgz
+cd Python-3.6.0
+./configure --enable-optimizations --enable-loadable-sqlite-extensions
+make -j8
+sudo make altinstall
+```
+
+> Чтобы в виртуальном окружении по умолчанию использовался Python 3.6, создайте его таким образом: ```mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3```. Подробнее в подразделе по виртуальным окружениям.
 
 Если вы используете Windows, то, скорее всего, Python нужно будет установить.
 Один из самых простых вариантов для Windows, установить окружение [Anaconda](https://www.continuum.io/downloads).
