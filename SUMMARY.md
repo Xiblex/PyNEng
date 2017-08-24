@@ -224,5 +224,6 @@
         * [List, dict, set comprehentions](book/16_additional_info/iterator_generator/x_comprehentions.md)
         * [Generator](book/16_additional_info/iterator_generator/generator.md)
         * [Дополнительные материалы](book/16_additional_info/iterator_generator/further_reading.md)
+    * [Распаковка переменных](book/16_additional_info/variable_unpacking.md)
 * [Продолжение обучения](resources/README.md)
 * [Отзывы](testimonials.md)

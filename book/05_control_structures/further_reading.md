@@ -11,6 +11,7 @@
 
 * [Write Cleaner Python: Use Exceptions](https://jeffknupp.com/blog/2013/02/06/write-cleaner-python-use-exceptions/)
 * [Robust exception handling](http://eli.thegreenplace.net/2008/08/21/robust-exception-handling/)
+* [Python Exception Handling Techniques](https://doughellmann.com/blog/2009/06/19/python-exception-handling-techniques/)
 
 Stackoverflow:
 
