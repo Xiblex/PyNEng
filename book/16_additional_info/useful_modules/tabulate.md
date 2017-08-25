@@ -108,7 +108,6 @@ Loopback100      100.0.0.1  up        up
 ```
 
 
-
 ## Дополнительные материалы
 
 * [Документация tabulate](https://bitbucket.org/astanin/python-tabulate)
