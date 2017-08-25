@@ -227,6 +227,8 @@
     * [Функция lambda](book/16_additional_info/useful_functions/lambda.md)
     * [Функция map](book/16_additional_info/useful_functions/map.md)
     * [Функция filter](book/16_additional_info/useful_functions/filter.md)
+  * [Полезные модули](book/16_additional_info/useful_modules/README.md)
+    * [Модуль tabulate](book/16_additional_info/useful_modules/tabulate.md)
   * [Отличия Python 2.7 и Python 3](book/16_additional_info/py2_vs_py3.md)
 * [Продолжение обучения](resources/README.md)
 * [Отзывы](testimonials.md)
