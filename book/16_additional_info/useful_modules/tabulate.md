@@ -107,6 +107,76 @@ Loopback0        10.1.1.1   up        up
 Loopback100      100.0.0.1  up        up
 ```
 
+### Стиль таблицы
+
+tabulate поддерживает разные стили отображения таблицы.
+
+Формат grid:
+```
+In [24]: print(tabulate(list_of_dict, headers='keys', tablefmt="grid"))
++-----------------+-----------+----------+------------+
+| Interface       | IP        | Status   | Protocol   |
++=================+===========+==========+============+
+| FastEthernet0/0 | 15.0.15.1 | up       | up         |
++-----------------+-----------+----------+------------+
+| FastEthernet0/1 | 10.0.12.1 | up       | up         |
++-----------------+-----------+----------+------------+
+| FastEthernet0/2 | 10.0.13.1 | up       | up         |
++-----------------+-----------+----------+------------+
+| Loopback0       | 10.1.1.1  | up       | up         |
++-----------------+-----------+----------+------------+
+| Loopback100     | 100.0.0.1 | up       | up         |
++-----------------+-----------+----------+------------+
+
+```
+
+Таблица в формате Markdown:
+```
+In [25]: print(tabulate(list_of_dict, headers='keys', tablefmt='pipe'))
+| Interface       | IP        | Status   | Protocol   |
+|:----------------|:----------|:---------|:-----------|
+| FastEthernet0/0 | 15.0.15.1 | up       | up         |
+| FastEthernet0/1 | 10.0.12.1 | up       | up         |
+| FastEthernet0/2 | 10.0.13.1 | up       | up         |
+| Loopback0       | 10.1.1.1  | up       | up         |
+| Loopback100     | 100.0.0.1 | up       | up         |
+
+```
+
+Таблица в формате HTML:
+```
+In [26]: print(tabulate(list_of_dict, headers='keys', tablefmt='html'))
+<table>
+<thead>
+<tr><th>Interface      </th><th>IP       </th><th>Status  </th><th>Protocol  </th></tr>
+</thead>
+<tbody>
+<tr><td>FastEthernet0/0</td><td>15.0.15.1</td><td>up      </td><td>up        </td></tr>
+<tr><td>FastEthernet0/1</td><td>10.0.12.1</td><td>up      </td><td>up        </td></tr>
+<tr><td>FastEthernet0/2</td><td>10.0.13.1</td><td>up      </td><td>up        </td></tr>
+<tr><td>Loopback0      </td><td>10.1.1.1 </td><td>up      </td><td>up        </td></tr>
+<tr><td>Loopback100    </td><td>100.0.0.1</td><td>up      </td><td>up        </td></tr>
+</tbody>
+</table>
+
+```
+
+### Выравнивание столбцов
+
+Можно указывать выравнивание для столбцов:
+```python
+In [27]: print(tabulate(list_of_dict, headers='keys', tablefmt='pipe', stralign='center'))
+|    Interface    |    IP     |  Status  |  Protocol  |
+|:---------------:|:---------:|:--------:|:----------:|
+| FastEthernet0/0 | 15.0.15.1 |    up    |     up     |
+| FastEthernet0/1 | 10.0.12.1 |    up    |     up     |
+| FastEthernet0/2 | 10.0.13.1 |    up    |     up     |
+|    Loopback0    | 10.1.1.1  |    up    |     up     |
+|   Loopback100   | 100.0.0.1 |    up    |     up     |
+
+```
+
+Обратите внимание, что тут не только столбцы отобразились с выравниванием по центру, но и соответственно изменился синтаксис Markdown.
 
 ## Дополнительные материалы
 
