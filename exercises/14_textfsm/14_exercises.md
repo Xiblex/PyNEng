@@ -77,7 +77,7 @@ with open(template) as f, open(output_file) as output:
 
 ### Задание 14.4
 
-На основе примера из раздела [clitable](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/3_textfsm_clitable.html) сделать функцию parse_command_dynamic.
+На основе примера из раздела [clitable](../../book/14_textfsm/3_textfsm_clitable.md) сделать функцию parse_command_dynamic.
 
 Параметры функции:
 * словарь атрибутов, в котором находятся такие пары ключ: значение:

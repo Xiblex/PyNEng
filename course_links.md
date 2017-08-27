@@ -4,7 +4,7 @@
 
 
 * [План обучения](schedule.md)
-* [Варианты виртуальное машины для курса](https://natenka.gitbooks.io/pyneng/content/v/python3.6/book/01_intro/)
+* [Варианты виртуальное машины для курса](book/01_intro/README.md)
 * [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/tree/python3)
 * [Команда PyNEng в Slack](https://pyneng-slack.herokuapp.com/) - используется для обсуждения книги, вопросов по заданиям и другим вопросов по автоматизации
 * [Презентации к курсу](https://github.com/natenka/pyneng-slides) - пригодятся для повторения материала
