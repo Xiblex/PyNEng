@@ -4,7 +4,7 @@
 
 Метод __clear()__ позволяет очистить словарь:
 ```python
-In [1]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'IOS': '15.4'}
+In [1]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'ios': '15.4'}
 
 In [2]: london.clear()
 
@@ -61,26 +61,26 @@ Out[15]: 'Cisco'
 ```python
 In [16]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
-In [17]: london['IOS']
+In [17]: london['ios']
 ---------------------------------------------------------------------------
 KeyError                                  Traceback (most recent call last)
 <ipython-input-17-b4fae8480b21> in <module>()
-----> 1 london['IOS']
+----> 1 london['ios']
 
-KeyError: 'IOS'
+KeyError: 'ios'
 ```
 
 Метод __get()__ запрашивает ключ и, если его нет, вместо ошибки возвращает ```None```.
 ```python
 In [18]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
-In [19]: print(london.get('IOS'))
+In [19]: print(london.get('ios'))
 None
 ```
 
 Метод get() позволяет указывать другое значение, вместо ```None```:
 ```python
-In [20]: print(london.get('IOS', 'Ooops'))
+In [20]: print(london.get('ios', 'Ooops'))
 Ooops
 ```
 
@@ -90,27 +90,27 @@ Ooops
 ```python
 In [21]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
 
-In [22]: IOS = london.setdefault('IOS')
+In [22]: ios = london.setdefault('ios')
 
-In [23]: print(IOS)
+In [23]: print(ios)
 None
 
 In [24]: london
-Out[24]: {'IOS': None, 'location': 'London Str', 'name': 'London1', 'vendor': 'Cisco'}
+Out[24]: {'ios': None, 'location': 'London Str', 'name': 'London1', 'vendor': 'Cisco'}
 ```
 
 
 Второй аргумент позволяет указать, какое значение должно соответствовать ключу:
 ```python
-In [25]: Model = london.setdefault('Model', 'Cisco3580')
+In [25]: model = london.setdefault('model', 'Cisco3580')
 
-In [26]: print(Model)
+In [26]: print(model)
 Cisco3580
 
 In [27]: london
 Out[27]:
-{'IOS': None,
- 'Model': 'Cisco3580',
+{'ios': None,
+ 'model': 'Cisco3580',
  'location': 'London Str',
  'name': 'London1',
  'vendor': 'Cisco'}

@@ -15,7 +15,7 @@
 
 Пример словаря:
 ```python
-london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'IOS': '15.4'}
+london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model': '4451', 'ios': '15.4'}
 ```
 
 Можно записывать и так:
@@ -23,9 +23,9 @@ london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco', 'model
 london = {
         'id': 1,
         'name':'London',
-        'IT_VLAN':320,
-        'User_VLAN':1010,
-	    'Mngmt_VLAN':99,
+        'it_vlan':320,
+        'user_vlan':1010,
+	    'mngmt_vlan':99,
         'to_name': None,
         'to_id': None,
         'port':'G1/0/11'
@@ -59,36 +59,36 @@ london_co = {
 	'location': '21 New Globe Walk',
 	'vendor': 'Cisco',
 	'model': '4451',
-	'IOS': '15.4',
-	'IP': '10.255.0.1'
+	'ios': '15.4',
+	'ip': '10.255.0.1'
 	},
     'r2' : {
 	'hostname': 'london_r2',
 	'location': '21 New Globe Walk',
 	'vendor': 'Cisco',
 	'model': '4451',
-	'IOS': '15.4',
-	'IP': '10.255.0.2'
+	'ios': '15.4',
+	'ip': '10.255.0.2'
 	},
     'sw1' : {
 	'hostname': 'london_sw1',
 	'location': '21 New Globe Walk',
 	'vendor': 'Cisco',
 	'model': '3850',
-	'IOS': '3.6.XE',
-	'IP': '10.255.0.101'
+	'ios': '3.6.XE',
+	'ip': '10.255.0.101'
 	}
 }
 ```
 
 Получить значения из вложенного словаря можно так:
 ```python
-In [7]: london_co['r1']['IOS']
+In [7]: london_co['r1']['ios']
 Out[7]: '15.4'
 
 In [8]: london_co['r1']['model']
 Out[8]: '4451'
 
-In [9]: london_co['sw1']['IP']
+In [9]: london_co['sw1']['ip']
 Out[9]: '10.255.0.101'
 ```
