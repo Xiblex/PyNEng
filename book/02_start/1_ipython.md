@@ -1,4 +1,4 @@
-##Интерпретатор Python. iPython
+## Интерпретатор Python. iPython
 
 Интерпретатор позволяет получать моментальный отклик на выполненные действия.
 
@@ -64,6 +64,60 @@ In [5]: for i in range(5):
 4
 ```
 
+### help
+
+В ipython есть возможность посмотреть help по какому-то объекту, функции или методу:
+```python
+In [1]: help(str)
+Help on class str in module builtins:
+ 
+class str(object)
+ |  str(object='') -> str
+ |  str(bytes_or_buffer[, encoding[, errors]]) -> str
+ |
+ |  Create a new string object from the given object. If encoding or
+ |  errors is specified, then the object must expose a data buffer
+ |  that will be decoded using the given encoding and error handler.
+...
+ 
+In [2]: help(str.strip)
+Help on method_descriptor:
+ 
+strip(...)
+    S.strip([chars]) -> str
+ 
+    Return a copy of the string S with leading and trailing
+    whitespace removed.
+    If chars is given and not None, remove characters in chars instead.
+```
+
+Второй вариант:
+```python
+In [3]: ?str
+Init signature: str(self, /, *args, **kwargs)
+Docstring:
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+ 
+Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+Type:           type
+ 
+In [4]: ?str.strip
+Docstring:
+S.strip([chars]) -> str
+ 
+Return a copy of the string S with leading and trailing
+whitespace removed.
+If chars is given and not None, remove characters in chars instead.
+Type:      method_descriptor
+```
+
 ### print
 
 Функция print позволяет вывести информацию на стандартный поток вывода.
@@ -86,6 +140,8 @@ In [9]: print('one', 'two', 'three')
 one two three
 ```
  
+> Подробнее о [функции print](../07_functions/useful_functions/print.md)
+
 По умолчанию, в конце выражения будет перевод строки.
 Если необходимо, чтобы после вывода выражения не было перевода строки, надо указать дополнительный аргумент ```end```.
 
