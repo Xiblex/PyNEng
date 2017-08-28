@@ -5,5 +5,6 @@
 * os
 * argparse
 * ipaddress
-
+* pprint
+* tabulate
 
