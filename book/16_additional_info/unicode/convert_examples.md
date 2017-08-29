@@ -13,15 +13,15 @@ In [2]: result = subprocess.run(['ping', '-c', '3', '-n', '8.8.8.8'],
    ...:                         stdout=subprocess.PIPE)
    ...:
 
-In [4]: result.stdout
-Out[4]: b'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=59.4 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.4 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=55.1 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2002ms\nrtt min/avg/max/mdev = 54.470/56.346/59.440/2.220 ms\n'
+In [3]: result.stdout
+Out[3]: b'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=59.4 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.4 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=55.1 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2002ms\nrtt min/avg/max/mdev = 54.470/56.346/59.440/2.220 ms\n'
 ```
 
 Если дальше необходимо работать с этим выводом, надо сразу конвертировать его в строку:
 ```python
-In [7]: output = result.stdout.decode('utf-8')
+In [4]: output = result.stdout.decode('utf-8')
 
-In [8]: print(output)
+In [5]: print(output)
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=59.4 ms
 64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.4 ms
@@ -35,14 +35,14 @@ rtt min/avg/max/mdev = 54.470/56.346/59.440/2.220 ms
 Модуль subprocess поддерживает еще один вариант преобразования - параметр encoding.
 Если указать его при вызове функции run, результат будет получен в виде строки:
 ```python
-In [10]: result = subprocess.run(['ping', '-c', '3', '-n', '8.8.8.8'],
-    ...:                         stdout=subprocess.PIPE, encoding='utf-8')
-    ...:
+In [6]: result = subprocess.run(['ping', '-c', '3', '-n', '8.8.8.8'],
+   ...:                         stdout=subprocess.PIPE, encoding='utf-8')
+   ...:
 
-In [11]: result.stdout
-Out[11]: 'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=55.5 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.6 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=53.3 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2003ms\nrtt min/avg/max/mdev = 53.368/54.534/55.564/0.941 ms\n'
+In [7]: result.stdout
+Out[7]: 'PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=55.5 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.6 ms\n64 bytes from 8.8.8.8: icmp_seq=3 ttl=43 time=53.3 ms\n\n--- 8.8.8.8 ping statistics ---\n3 packets transmitted, 3 received, 0% packet loss, time 2003ms\nrtt min/avg/max/mdev = 53.368/54.534/55.564/0.941 ms\n'
 
-In [12]: print(result.stdout)
+In [8]: print(result.stdout)
 PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
 64 bytes from 8.8.8.8: icmp_seq=1 ttl=43 time=55.5 ms
 64 bytes from 8.8.8.8: icmp_seq=2 ttl=43 time=54.6 ms
@@ -83,23 +83,23 @@ print(output)
 
 Модуль pexpect как аргумент ожидает строку, а возвращает байты:
 ```python
-In [26]: import pexpect
+In [9]: import pexpect
 
-In [27]: output = pexpect.run('ls -ls')
+In [10]: output = pexpect.run('ls -ls')
 
-In [28]: output
-Out[28]: b'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
+In [11]: output
+Out[11]: b'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
 
-In [29]: output.decode('utf-8')
-Out[29]: 'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
+In [12]: output.decode('utf-8')
+Out[12]: 'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
 ```
 
 И также поддерживает вариант передачи кодировки через параметр encoding:
 ```python
-In [30]: output = pexpect.run('ls -ls', encoding='utf-8')
+In [13]: output = pexpect.run('ls -ls', encoding='utf-8')
 
-In [31]: output
-Out[31]: 'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
+In [14]: output
+Out[14]: 'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
 ```
 
 ### Выводы

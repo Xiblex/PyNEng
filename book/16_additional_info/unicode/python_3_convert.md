@@ -16,50 +16,50 @@
 
 Для преобразования строки в байты, используется метод __encode__:
 ```python
-In [45]: hi = 'привет'
+In [1]: hi = 'привет'
 
-In [46]: hi.encode('utf-8')
-Out[46]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
+In [2]: hi.encode('utf-8')
+Out[2]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
 
-In [48]: hi_bytes = hi.encode('utf-8')
+In [3]: hi_bytes = hi.encode('utf-8')
 ```
 
 Чтобы получить строку из байт, используется метод __decode__:
 ```python
-In [49]: hi_bytes
-Out[49]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
+In [4]: hi_bytes
+Out[4]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
 
-In [50]: hi_bytes.decode('utf-8')
-Out[50]: 'привет'
+In [5]: hi_bytes.decode('utf-8')
+Out[5]: 'привет'
 ```
 
 ### str.encode, bytes.decode
 
 Метод encode есть также в классе str (как и другие методы работы со строками):
 ```python
-In [54]: hi
-Out[54]: 'привет'
+In [6]: hi
+Out[6]: 'привет'
 
-In [55]: str.encode(hi, encoding='utf-8')
-Out[55]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
+In [7]: str.encode(hi, encoding='utf-8')
+Out[7]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
 ```
 
 А метод decode есть у класса bytes (как и другие методы):
 ```python
-In [57]: hi_bytes
-Out[57]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
+In [8]: hi_bytes
+Out[8]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
 
-In [58]: bytes.decode(hi_bytes, encoding='utf-8')
-Out[58]: 'привет'
+In [9]: bytes.decode(hi_bytes, encoding='utf-8')
+Out[9]: 'привет'
 ```
 
 В этих методах кодировка может указываться как ключевой аргумент (примеры выше) или как позиционный:
 ```python
-In [60]: hi_bytes
-Out[60]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
+In [10]: hi_bytes
+Out[10]: b'\xd0\xbf\xd1\x80\xd0\xb8\xd0\xb2\xd0\xb5\xd1\x82'
 
-In [61]: bytes.decode(hi_bytes, 'utf-8')
-Out[61]: 'привет'
+In [11]: bytes.decode(hi_bytes, 'utf-8')
+Out[11]: 'привет'
 ```
 
 ### Как работать с Юникод и байтами
