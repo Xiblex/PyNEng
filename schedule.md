@@ -22,10 +22,11 @@
 | 6 | [Функции](book/07_functions/README.md) | [Функции](exercises/07_functions/07_exercises.md) |
 | 7 | [Модули](book/08_modules/README.md)| [Модули](exercises/08_modules/08_exercises.md)
 | 8 | [Регулярные выражения](book/09_regex/README.md) | [Регулярные выражения](exercises/09_regex/09_exercises.html)|
-| 9 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
-| 10 | [Работа с базами данных](book/11_db/README.md) | [Базы данных](exercises/11_db/11_exercises.md) |
-| 11 | [Подключение к оборудованию](book/12_ssh_telnet/README.md)| [Подключение к оборудованию](exercises/12_ssh_telnet/12_exercises.md) |
-| 12 | [Шаблоны конфигураций с Jinja](book/13_jinja2/README.md)| [Jinja2](exercises/13_jinja2/13_exercises.md) |
-| 13 | [Обработка неструктурированного вывода команд с TextFSM](book/14_textfsm/README.md)| [TextFSM](exercises/14_textfsm/14_exercises.md) |
-| 14 | [Ansible](book/15_ansible/README.md) | [Ansible](exercises/15_ansible/15_exercises.md) |
+| 9 | [Unicode](book/16_additional_info/unicode/README.md) | - |
+| 10 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
+| 11 | [Работа с базами данных](book/11_db/README.md) | [Базы данных](exercises/11_db/11_exercises.md) |
+| 12 | [Подключение к оборудованию](book/12_ssh_telnet/README.md)| [Подключение к оборудованию](exercises/12_ssh_telnet/12_exercises.md) |
+| 13 | [Шаблоны конфигураций с Jinja](book/13_jinja2/README.md)| [Jinja2](exercises/13_jinja2/13_exercises.md) |
+| 14 | [Обработка неструктурированного вывода команд с TextFSM](book/14_textfsm/README.md)| [TextFSM](exercises/14_textfsm/14_exercises.md) |
+| 15 | [Ansible](book/15_ansible/README.md) | [Ansible](exercises/15_ansible/15_exercises.md) |
 
