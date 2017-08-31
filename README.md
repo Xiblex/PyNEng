@@ -4,14 +4,14 @@
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/natenka)
 
-## Эта ветка в процессе перевода на Python3.6
+## Книга переведена на Python 3.6
 
-<br>
 
-> #### Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
-> #### Все вопросы, предложения и замечания по книге также пишите в Slack
+### Обсуждение
 
-<br>
+Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
+
+Все вопросы, предложения и замечания по книге также пишите в Slack
 
 ## Зачем вам учиться программировать?
 
