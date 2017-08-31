@@ -57,99 +57,6 @@ headers = ['hostname', 'ios', 'image', 'uptime']
 
 ### Задание 10.2
 
-Создать функции:
-* generate_access_config - генерирует конфигурацию для access-портов, на основе словарей access и psecurity из файла sw_templates.yaml
-* generate_trunk_config - генерирует конфигурацию для trunk-портов, на основе словаря trunk из файла sw_templates.yaml
-* generate_mngmt_config - генерирует конфигурацию менеджмент настроек, на основе словаря mngmt из файла templates.yaml
-* generate_ospf_config - генерирует конфигурацию ospf, на основе словаря ospf из файла templates.yaml
-* generate_alias_config - генерирует конфигурацию alias, на основе словаря alias из файла templates.yaml
-* generate_switch_config - генерирует конфигурацию коммутатора, в зависимости от переданных параметров, использует для этого остальные функции
-
-```python
-
-access_dict = { 'FastEthernet0/12':10,
-                'FastEthernet0/14':11,
-                'FastEthernet0/16':17,
-                'FastEthernet0/17':150 }
-
-trunk_dict = { 'FastEthernet0/1':[10,20,30],
-               'FastEthernet0/2':[11,30],
-               'FastEthernet0/4':[17] }
-
-
-def generate_access_config(access, psecurity=False):
-    """
-    access - словарь access-портов,
-    для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/12':10,
-          'FastEthernet0/14':11,
-          'FastEthernet0/16':17}
-    psecurity - контролирует нужна ли настройка Port Security. По умолчанию значение False
-        - если значение True, то настройка выполняется с добавлением шаблона port_security
-        - если значение False, то настройка не выполняется
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-def generate_trunk_config(trunk):
-    """
-    trunk - словарь trunk-портов,
-    для которых необходимо сгенерировать конфигурацию, вида:
-        { 'FastEthernet0/1':[10,20],
-          'FastEthernet0/2':[11,30],
-          'FastEthernet0/4':[17] }
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-def generate_ospf_config(filename):
-    """
-    filename - имя файла в формате YAML, в котором находится шаблон ospf.
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-
-def generate_mngmt_config(filename):
-    """
-    filename - имя файла в формате YAML, в котором находится шаблон mngmt.
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-def generate_alias_config(filename):
-    """
-    filename - имя файла в формате YAML, в котором находится шаблон alias.
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-def generate_switch_config(access=True, psecurity=False, trunk=True,
-                           ospf=True, mngmt=True, alias=False):
-    """
-    Аргументы контролируют какие настройки надо выполнить.
-    По умолчанию, будет настроено все, кроме psecurity и alias.
-
-    Возвращает список всех команд, которые были сгенерированы на основе шаблона
-    """
-    pass
-
-# Сгенерировать конфигурации для разных коммутаторов:
-
-sw1 = generate_switch_config()
-sw2 = generate_switch_config(psecurity=True, alias=True)
-sw3 = generate_switch_config(ospf=False)
-
-```
-
-
-### Задание 10.3
-
 Создать функцию parse_sh_cdp_neighbors, которая обрабатывает
 вывод команды show cdp neighbors.
 
@@ -176,9 +83,9 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 
 Проверить работу функции на содержимом файла sh_cdp_n_sw1.txt
 
-### Задание 10.3a
+### Задание 10.2a
 
-С помощью функции parse_sh_cdp_neighbors из задания 10.3,
+С помощью функции parse_sh_cdp_neighbors из задания 10.2,
 обработать вывод команды sh cdp neighbor из файлов:
 * sh_cdp_n_sw1.txt
 * sh_cdp_n_r1.txt
@@ -204,9 +111,9 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 Не копировать код функции parse_sh_cdp_neighbors
 
 
-### Задание 10.3b
+### Задание 10.2b
 
-Переделать функциональность скрипта из задания 10.3a,
+Переделать функциональность скрипта из задания 10.2a,
 в функцию generate_topology_from_cdp.
 
 Функция generate_topology_from_cdp должна быть создана с параметрами:
@@ -218,7 +125,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
  * топология сохраняется только, если аргумент save_to_file указан равным True
 
 Функция возвращает словарь, который описывает топологию.
-Словарь должен быть в том же формате, что и в задании 10.3a.
+Словарь должен быть в том же формате, что и в задании 10.2a.
 
 Проверить работу функции generate_topology_from_cdp на файлах:
 * sh_cdp_n_sw1.txt
@@ -234,7 +141,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 Не копировать код функции parse_sh_cdp_neighbors
 
 
-### Задание 10.3c
+### Задание 10.2c
 
 С помощью функции draw_topology из файла draw_network_graph.py
 сгенерировать топологию, которая соответствует описанию в файле topology.yaml
@@ -249,9 +156,9 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 Не копировать код функции draw_topology.
 
 В итоге, должно быть сгенерировано изображение топологии.
-Результат должен выглядеть так же, как схема в файле task_10_3c_topology.svg
+Результат должен выглядеть так же, как схема в файле task_10_2c_topology.svg
 
-![task_10_3c_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/10_serialization/task_10_3c_topology.png)
+![task_10_2c_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/10_serialization/task_10_2c_topology.png)
 
 При этом:
 * Интерфейсы могут быть записаны с пробелом Fa 0/0 или без Fa0/0.
