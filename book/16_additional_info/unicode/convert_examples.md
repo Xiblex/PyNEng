@@ -102,6 +102,51 @@ In [14]: output
 Out[14]: 'total 8\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 28 12:16 concurrent_futures\r\n4 drwxr-xr-x 2 vagrant vagrant 4096 Aug  3 07:59 iterator_generator\r\n'
 ```
 
+### Работа с файлами
+
+До сих пор, при работе с файлами, использовалась такая конструкция:
+```python
+with open(filename) as f:
+    for line in f:
+        print(line)
+```
+
+Но, на самом деле, при чтении файла, происходит конвертация байт в строки.
+И при этом использовалась кодировка по умолчанию:
+```python
+In [1]: import locale
+
+In [2]: locale.getpreferredencoding()
+Out[2]: 'UTF-8'
+```
+
+Кодировка по умолчанию в файле:
+```python
+In [2]: f = open('r1.txt')
+
+In [3]: f
+Out[3]: <_io.TextIOWrapper name='r1.txt' mode='r' encoding='UTF-8'>
+```
+
+При работе с файлами, лучше явно указывать кодировку, так как в разных ОС она мжоет отличаться:
+```python
+In [4]: with open('r1.txt', encoding='utf-8') as f:
+   ...:     for line in f:
+   ...:         print(line, end='')
+   ...:
+!
+service timestamps debug datetime msec localtime show-timezone year
+service timestamps log datetime msec localtime show-timezone year
+service password-encryption
+service sequence-numbers
+!
+no ip domain lookup
+!
+ip ssh version 2
+!
+
+```
+
 ### Выводы
 
 Эти примеры показаны тут для того, чтобы показать, что разные модули могут по-разному подходить к вопросу конвертации между строками и байтами.
