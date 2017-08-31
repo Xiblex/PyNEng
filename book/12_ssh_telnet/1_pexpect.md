@@ -93,7 +93,7 @@ for IP in DEVICES_IP:
         ssh.expect('Password:')
         ssh.sendline(PASSWORD)
 
-        ssh.expect('>')
+        ssh.expect('[#>]')
         ssh.sendline('enable')
 
         ssh.expect('Password:')
@@ -122,6 +122,9 @@ for IP in DEVICES_IP:
  * ```sendline``` - когда строка появилась, отправляется команда
 * так происходит до конца цикла, и только последняя команда отличается:
  * ```before``` позволяет считать всё, что поймал pexpect до предыдущей подстроки в expect
+
+Обратите внимание на строку ```ssh.expect('[#>]')```.
+Метод expect ожидает не просто строку, а регулярное выражение.
 
 Выполнение скрипта выглядит так:
 ```python

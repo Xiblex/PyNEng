@@ -113,7 +113,7 @@ Out[23]: {'address': '10.0.12.1', 'intf': 'FastEthernet0/1'}
 И, в таком случае, можно добавить группы в регулярное выражение и полагаться на их имя, а не на порядок:
 
 ```python
-In [24]:  match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+[\w\s]+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
+In [24]:  match = re.search('(?P<intf>\S+)\s+(?P<address>[\d\.]+)\s+\w+\s+\w+\s+(?P<status>up|down|administratively down)\s+(?P<protocol>up|down)', line)
 
 In [25]: match.groupdict()
 Out[25]:
