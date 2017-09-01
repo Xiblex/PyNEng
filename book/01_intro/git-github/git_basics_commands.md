@@ -6,7 +6,7 @@
 
 Для этого в Git есть команда git status:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_status_0.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_0.png)
 
 
 Git сообщает, что мы находимся в ветке master (эта ветка создается сама и используется по умолчанию), и что ему нечего добавлять в коммит.
@@ -14,18 +14,18 @@ Git сообщает, что мы находимся в ветке master (эт�
 
 Создадим первый файл README и добавим в него пару произвольных строк текста:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/vi_readme.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/vi_readme.png)
 
 
 После этого приглашение выглядит таким образом:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/bash_prompt.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/bash_prompt.png)
 
 
 Почему-то в приглашении показано, что есть два файла, за которыми git еще не следит.
 Посмотрим в git status, откуда взялся второй файл:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_status_1.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_1.png)
 
 Git сообщает, что есть файлы, за которыми он не следит и подсказывает, какой командой это сделать.
 
@@ -48,7 +48,7 @@ Git сообщает, что есть файлы, за которыми он н�
 
 После этого git status показывает:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_status_2.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_2.png)
 
 
 Обратите внимание, что теперь в выводе нет файла .README.un~.
@@ -60,16 +60,16 @@ Git сообщает, что есть файлы, за которыми он н�
 
 Можно указать, что надо следить за конкретным файлом:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_add_readme.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_add_readme.png)
 
 Или за всеми файлами:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_add_all.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_add_all.png)
 
 
 Проверим, как теперь выглядит вывод git status:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_status_3.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_3.png)
 
 
 Теперь файлы находятся в секции "Changes to be committed".
@@ -81,12 +81,12 @@ Git сообщает, что есть файлы, за которыми он н�
 У команды git commit есть только один обязательный параметр - флаг ```-m```.
 Он позволяет указать сообщение для этого коммита:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_commit_1.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_commit_1.png)
 
 
 После этого git status отображает:
 
-![alt](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/git_status_4.png)
+![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_4.png)
 
 
 Фраза "working directory clean" обозначает, что нет изменений, которые нужно добавить в Git или закоммитить.

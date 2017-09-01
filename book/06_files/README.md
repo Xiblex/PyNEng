@@ -23,4 +23,4 @@
 * запись
 
 
-> В этом разделе рассматривается только необходимый минимум для работы с файлами. Подробнее, в [документации Python](https://docs.python.org/2/library/stdtypes.html#bltin-file-objects).
+> В этом разделе рассматривается только необходимый минимум для работы с файлами. Подробнее, в [документации Python](https://docs.python.org/3/library/stdtypes.html#bltin-file-objects).

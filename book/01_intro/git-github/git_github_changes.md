@@ -9,7 +9,7 @@
 * В открывшемся окне придумайте название репозиторию
 * По желанию можно нажать галочку "Initialize this repository with a README". Это создаст файл README.md, в котором будет находиться только название репозитория
 
-![create](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/github_new_repo.png)
+![create](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/github_new_repo.png)
 
 ## Копирование репозитория с GitHub
 

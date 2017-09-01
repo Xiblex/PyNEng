@@ -7,9 +7,8 @@
 * строка
 * список
 * словарь
-* функция ```range()```
-* любой итератор (например, ```enumerate()```)
-
+* функция [range()](../07_functions/useful_functions/range.md)
+* любой [итерируемый объект](../16_additional_info/iterator_generator/iterable_and_iterator.md)
 
 
 Цикл for проходится по строке:

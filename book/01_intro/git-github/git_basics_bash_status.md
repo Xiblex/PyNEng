@@ -37,5 +37,5 @@ $
 
 Если же перейти в репозиторий Git:
 
-![setup](https://raw.githubusercontent.com/natenka/PyNEng/python3.6/images/git/setup_prompt.png)
+![setup](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/setup_prompt.png)
 
