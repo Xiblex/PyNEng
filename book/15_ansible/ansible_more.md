@@ -11,4 +11,4 @@
 Эта информация вынесена в отдельный курс [Ansible для сетевых инженеров](https://www.gitbook.com/book/natenka/ansible-dlya-setevih-inzhenerov).
 Основы, которые рассматриваются тут, в курсе повторяются, поэтому, если вы прочитали весь раздел Ansible в этом курсе, можете начать сразу с четвертого раздела [Playbook](https://natenka.gitbooks.io/ansible-dlya-setevih-inzhenerov/content/book/4_playbooks/).
 
-Если какие-то темы не рассмотрены в курсе "Ansible для сетевых инженеров", не забывайте, что у Ansible отличная [документация](http://docs.ansible.com/ansible/index.html).
+Если какие-то темы не рассмотрены в курсе "Ansible для сетевых инженеров", не забывайте, что у Ansible отличная [документация](http://docs.ansible.com/ansible/devel/index.html).

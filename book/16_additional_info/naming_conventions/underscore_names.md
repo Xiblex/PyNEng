@@ -13,7 +13,7 @@ In [1]: line = '00:09:BB:3D:D6:58  10.1.10.2 86250   dhcp-snooping   10  FastEth
 
 In [2]: mac, ip, _, _, vlan, intf = line.split()
 
-In [3]: print mac, ip, vlan, intf
+In [3]: print(mac, ip, vlan, intf)
 00:09:BB:3D:D6:58 10.1.10.2 10 FastEthernet0/1
 ```
 
@@ -155,22 +155,22 @@ def multiply(a, b):
 
     return a * b
 
-if __name__ == "__main__":
-    print multiply(3, 5)
+if __name__ == '__main__':
+    print(multiply(3, 5))
 ```
 
 А переменная ```__file__``` может быть полезна в определении текущего пути к файлу скрипта:
 ```python
 import os
 
-print '__file__', __file__
-print os.path.abspath(__file__)
+print('__file__', __file__)
+print(os.path.abspath(__file__))
 ```
 
 Вывод будет таким:
 ```
 __file__ example2.py
-/Users/natasha/Desktop/current/pyneng_things/example2.py
+/home/vagrant/repos/tests/example2.py
 ```
 
 

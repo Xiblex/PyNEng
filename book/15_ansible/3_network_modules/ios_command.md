@@ -52,8 +52,8 @@ $ ansible-playbook 1_ios_command.yml
 ```
 {% endraw %}
 ![ios_command]({{ book.ansible_img_path }}2_ios_command.png)
-
 {% raw %}
+
 > В отличие от использования модуля raw, playbook не указывает, что были выполнены изменения.
 
 

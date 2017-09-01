@@ -2,7 +2,7 @@
 
 ### Ansible без привязки к сетевому оборудованию
 
-* [У Ansible очень хорошая документация](http://docs.ansible.com/ansible/)
+* [У Ansible очень хорошая документация](http://docs.ansible.com/devel/ansible/)
 
 * [Очень хорошая серия видео, с транскриптом и хорошими ссылками](https://sysadmincasts.com/episodes/43-19-minutes-with-ansible-part-1-4)
 * [Примеры использования Ansible](https://github.com/ansible/ansible-examples)
@@ -12,12 +12,12 @@
 
 Документация:
 
-* [Networking Support](http://docs.ansible.com/ansible/latest/intro_networking.html)
-* [Network Modules](http://docs.ansible.com/ansible/latest/list_of_network_modules.html)
-* [Network Debug and Troubleshooting Guide](http://docs.ansible.com/ansible/latest/network_debug_troubleshooting.html)
-* [ios_command](http://docs.ansible.com/ansible/latest/ios_command_module.html)
-* [ios_facts](http://docs.ansible.com/ansible/latest/ios_facts_module.html)
-* [ios_config](http://docs.ansible.com/ansible/latest/ios_config_module.html)
+* [Networking Support](http://docs.ansible.com/ansible/devel/intro_networking.html)
+* [Network Modules](http://docs.ansible.com/ansible/devel/list_of_network_modules.html)
+* [Network Debug and Troubleshooting Guide](http://docs.ansible.com/ansible/devel/network_debug_troubleshooting.html)
+* [ios_command](http://docs.ansible.com/ansible/devel/ios_command_module.html)
+* [ios_facts](http://docs.ansible.com/ansible/devel/ios_facts_module.html)
+* [ios_config](http://docs.ansible.com/ansible/devel/ios_config_module.html)
 
 
 Отличные видео от Ansible:

@@ -18,7 +18,7 @@ Ansible:
 * __Task__ —  задача. Вызывает модуль с указанными параметрами и переменными
 * __Module__ — модуль Ansible. Реализует определенные функции
 
-Список терминов в [документации](http://docs.ansible.com/ansible/glossary.html).
+Список терминов в [документации](http://docs.ansible.com/ansible/devel/glossary.html).
 
 ### Quick start
 

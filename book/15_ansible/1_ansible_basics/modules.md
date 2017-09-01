@@ -32,5 +32,5 @@ $ ansible cisco-routers -i myhosts -m raw -a "sh ip int br" -u cisco --ask-pass
 * __extra__ - это модули на данный момент устанавливаются с Ansible, но нет гарантии, что они и дальше будут устанавливаться с Ansible. Возможно, в будущем, их нужно будет устанавливать отдельно. Большинство этих модулей поддерживаются сообществом.
 
 Также в Ansible модули разделены по функциональности.
-Список всех категорий находится в [документации](http://docs.ansible.com/ansible/modules_by_category.html).
+Список всех категорий находится в [документации](http://docs.ansible.com/ansible/devel/modules_by_category.html).
 
