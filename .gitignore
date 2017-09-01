@@ -11,9 +11,9 @@ node_modules
 _book
 
 # eBook build output
-*.epub
-*.mobi
-pyneng.pdf
+#*.epub
+#*.mobi
+#pyneng.pdf
 
 # OS generated files #
 # ######################
