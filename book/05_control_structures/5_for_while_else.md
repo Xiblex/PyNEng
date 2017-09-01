@@ -21,7 +21,7 @@ In [1]: for num in range(5):
 Числа закончились
 ```
 
-Пример цикла for с else и break в цикле (из-за break, блок else не выполняется):
+Пример цикла for с else и break в цикле (из-за break блок else не выполняется):
 ```python
 In [2]: for num in range(5):
    ....:     if num == 3:
@@ -75,7 +75,7 @@ In [5]: while i < 5:
 Конец
 ```
 
-Пример цикла while с else и break в цикле (из-за break, блок else не выполняется):
+Пример цикла while с else и break в цикле (из-за break блок else не выполняется):
 ```python
 In [6]: i = 0
 

@@ -4,7 +4,7 @@
 * Numbers (числа)
 * Strings (строки)
 * Lists (списки)
-* Dictionary (словари)
+* Dictionaries (словари)
 * Tuples (кортежи)
 * Sets (множества)
 * Boolean
