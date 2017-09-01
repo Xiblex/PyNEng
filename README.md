@@ -9,6 +9,13 @@
 
 <br>
 
+### Книга также доступна в форматах
+
+* [PDF](https://github.com/natenka/PyNEng/raw/python2.7/ebook_formats/pyneng_2.7.pdf)
+* [EPUB](https://github.com/natenka/PyNEng/raw/python2.7/ebook_formats/pyneng_2.7.epub)
+* [MOBI](https://github.com/natenka/PyNEng/raw/python2.7/ebook_formats/pyneng_2.7.mobi)
+
+
 ## Зачем вам учиться программировать?
 
 Знание программирования для сетевого инженера, сравнимо со знанием английского.
@@ -45,7 +52,7 @@
 
 ### Ещё не решили нужен ли курс? Почитайте [отзывы](testimonials.md).
 
-### Обсуждение
+## Обсуждение
 
 Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
 
