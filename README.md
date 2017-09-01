@@ -4,7 +4,7 @@
 
 [![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/natenka)
 
-## Книга переведена на Python 3.6
+## Книга переведена на Python 3.6. [Что изменилось?](https://natenka.github.io/pyneng/pyneng-book-updated-to-python-3.6/)
 
 > [Версия книги для Python 2.7 по-прежнему доступна](https://natenka.gitbooks.io/pyneng/content/v/python2.7/)
 

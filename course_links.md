@@ -5,10 +5,10 @@
 
 * [План обучения](schedule.md)
 * [Варианты виртуальной машины для курса](book/01_intro/README.md)
-* [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/tree/python3)
+* [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/)
+* [Тесты](https://github.com/natenka/pyneng-examples-exercises/blob/master/tests.md)
 * [Команда PyNEng в Slack](https://pyneng-slack.herokuapp.com/) - используется для обсуждения книги, вопросов по заданиям и другим вопросов по автоматизации
 * [Презентации к курсу](https://github.com/natenka/pyneng-slides) - пригодятся для повторения материала
-* [PDF версия книги](https://github.com/pyneng/pyneng-online-jun-jul-2017/blob/master/pyneng-book/pyneng_book_python3.6.pdf) - постоянно обновляется, поэтому не забывайте проверять дату последнего обновления
 
 
 Почти в каждом разделе книги есть подраздел "Дополнительные материалы", в котором находятся полезные материалы и ссылки по теме, а также ссылки на документацию.
