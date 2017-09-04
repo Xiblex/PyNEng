@@ -28,7 +28,7 @@ sw1_fast_int = {
 
 Совмещаем всё вместе в файле generate_sw_int_cfg.py:
 ```python
-import sw_int_templates
+import sw_int_templates as sw_temp
 from sw_data import sw1_fast_int
 
 def generate_access_cfg(sw_dict):
