@@ -44,14 +44,13 @@ Out[9]: [100, 400, 900, 1600, 2500]
 ### List comprehension вместо map
 
 Как правило, вместо map можно использовать list comprehension.
-Чаще всего, вариант с list comprehension более понятный.
-А в некоторых случаях, даже быстрее.
+Чаще всего, вариант с list comprehension более понятный, а в некоторых случаях даже быстрее.
 
-> [Ответ Alex Martelli с сравнением map и list comprehension](https://stackoverflow.com/a/1247490)
+> [Ответ Alex Martelli со сравнением map и list comprehension](https://stackoverflow.com/a/1247490)
 
 Но map может быть эффективней в том случае, когда надо сгенерировать большое количество элементов, так как map - итератор, а list comprehension генерирует список.
 
-Примеры аналогичные приведенным выше, в варианте с list comprehension.
+Примеры, аналогичные приведенным выше, в варианте с list comprehension.
 
 Перевести все строки в верхний регистр:
 ```python
@@ -78,7 +77,7 @@ In [53]: [ 'vlan {}'.format(x) for x in vlans ]
 Out[53]: ['vlan 100', 'vlan 110', 'vlan 150', 'vlan 200', 'vlan 201', 'vlan 202']
 ```
 
-Для получения пар элементов, используется zip:
+Для получения пар элементов используется zip:
 ```python
 In [54]: nums = [1, 2, 3, 4, 5]
 

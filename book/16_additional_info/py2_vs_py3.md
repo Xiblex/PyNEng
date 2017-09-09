@@ -16,7 +16,7 @@ In [1]: line = 'test'
 In [2]: line2 = u'тест'
 ```
 
-В Python 3 строка - это тип str, но, кроме этого в Python 3 появился тип bytes:
+В Python 3 строка - это тип str, но, кроме этого, в Python 3 появился тип bytes:
 ```python
 In [3]: line = 'тест'
 
@@ -55,9 +55,9 @@ In [9]: print 1, 'test'
 SyntaxError: Missing parentheses in call to 'print'
 ```
 
-### [input, вместо raw_input](../04_basic_scripts/2_user_input.md)
+### [input вместо raw_input](../04_basic_scripts/2_user_input.md)
 
-В Python 2.7 для получения информации от пользователя в виде строки, использовалась функция raw_input:
+В Python 2.7 для получения информации от пользователя в виде строки использовалась функция raw_input:
 ```python
 In [10]: number = raw_input('Number: ')
 Number: 55
@@ -75,7 +75,7 @@ In [13]: number
 Out[13]: '55'
 ```
 
-### [range, вместо xrange](../07_functions/useful_functions/range.md)
+### [range вместо xrange](../07_functions/useful_functions/range.md)
 
 В Python 2.7 были две функции
 * range - возвращает список
@@ -93,7 +93,7 @@ In [16]: list(xrange(5))
 Out[16]: [0, 1, 2, 3, 4]
 ```
 
-В Python 3 есть только функция range и она возвращает итератор:
+В Python 3 есть только функция range, и она возвращает итератор:
 ```python
 In [17]: range(5)
 Out[17]: range(0, 5)
@@ -109,8 +109,8 @@ Out[18]: [0, 1, 2, 3, 4]
 
 #### dict.keys(), values(), items()
 
-Методы keys(), values(), items() в Python 3 возвращают "views", вместо списков.
-Особенность view заключается в том, что они меняются, вместе с изменением словаря.
+Методы keys(), values(), items() в Python 3 возвращают "views" вместо списков.
+Особенность view заключается в том, что они меняются вместе с изменением словаря.
 И фактически они лишь дают способ посмотреть на соответствующие объекты, но не создают их копию.
 
 В Python 3 нет методов:
@@ -162,7 +162,7 @@ In [27]: a, *b, c = [1,2,3,4,5]
 SyntaxError: invalid syntax
 ```
 
-### [Итератор, вместо списка](../16_additional_info/useful_functions/README.md)
+### [Итератор вместо списка](../16_additional_info/useful_functions/README.md)
 
 В Python 2.7 map, filter и zip возвращали список:
 ```python
@@ -194,7 +194,7 @@ Out[33]: <zip at 0xb4efc1ec>
 В версии Python 3.5 в модуле subprocess появилась новая функция - run.
 Она предоставляет более удобный интерфейс для работы с модулем и получения вывода команд.
 
-Соответственно, вместо функций call и check_output, используется функция run. 
+Соответственно, вместо функций call и check_output используется функция run. 
 Но функции call и check_output остались.
 
 ### Jinja2
@@ -206,8 +206,8 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 ```
 
-В самих шаблонах, как и в Python изменились методы словарей.
-Тут аналогично, вместо iteritems, надо использовать items.
+В самих шаблонах, как и в Python, изменились методы словарей.
+Тут, аналогично, вместо iteritems надо использовать items.
 
 ### Модули pexpect, telnetlib, paramiko
 
@@ -218,7 +218,7 @@ sys.setdefaultencoding('utf-8')
 ### Мелочи
 
 * Название модуля Queue сменилось на queue
-* С версии Python 3.6 объект csv.DictReader возвращает OrderedDict, вместо обычного словаря.
+* С версии Python 3.6 объект csv.DictReader возвращает OrderedDict вместо обычного словаря.
 
 ## Дополнительная информация
 

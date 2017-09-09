@@ -14,7 +14,7 @@ In [2]: sum_arg(1,2)
 Out[2]: 3
 ```
 
-Аналогичная анонимная функция lanbda:
+Аналогичная анонимная функция lambda:
 ```python
 In [3]: sum_arg = lambda a, b: a + b
 
