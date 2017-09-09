@@ -18,7 +18,7 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 
 ```
 
-С помощью оператора ORDER BY можно вывести записи в таблице switch отсортированными их по имени коммутаторов:
+С помощью оператора ORDER BY можно вывести записи в таблице switch, отсортировав их по имени коммутаторов:
 ```sql
 sqlite> SELECT * from switch ORDER BY hostname ASC;
 mac             hostname    model       location           mngmt_ip    mngmt_vid
@@ -47,7 +47,7 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 0070.A7AA.C5CC  sw7         Cisco 3650  London, Green Str  10.255.1.7  255
 ```
 
-Сортировка по IP-адресу, по убыванию:
+Сортировка по IP-адресу по убыванию:
 ```sql
 sqlite> SELECT * from switch ORDER BY mngmt_ip DESC;
 mac             hostname    model       location           mngmt_ip    mngmt_vid

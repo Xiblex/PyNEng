@@ -78,7 +78,7 @@ mac             hostname    model       location
 
 Метод executemany позволяет выполнить одну команду SQL для последовательности параметров (или для итератора).
 
-С помощью метода executemany, в таблицу switch можно добавить аналогичный список данных одной командой.
+С помощью метода executemany в таблицу switch можно добавить аналогичный список данных одной командой.
 
 Например, в таблицу switch надо добавить данные из списка data2:
 ```python
@@ -102,7 +102,7 @@ Out[11]: <sqlite3.Cursor at 0x10ee5e810>
 In [12]: connection.commit()
 ```
 
-После выполнения commit, данные доступны в таблице:
+После выполнения commit данные доступны в таблице:
 ```
 sqlite> select * from switch;
 mac             hostname    model       location
@@ -117,7 +117,7 @@ mac             hostname    model       location
 0000.1111.0004  sw8         Cisco 3750  London, Green Str
 ```
 
-Метод executemany подставил соответствующие кортежи в команду SQL и все данные добавились в таблицу.
+Метод executemany подставил соответствующие кортежи в команду SQL, и все данные добавились в таблицу.
 
 
 #### Метод executescript

@@ -20,7 +20,7 @@ sqlite> REPLACE INTO switch
    ...> VALUES ('0030.A3AA.C1CC', 'sw3', 'Cisco 3850', 'London, Green Str', '10.255.1.3', 255);
 ```
 
-Результатом любой из этих команд, будет замена модели коммутатора sw3:
+Результатом любой из этих команд будет замена модели коммутатора sw3:
 ```sql
 sqlite> SELECT * from switch;
 mac             hostname    model       location           mngmt_ip    mngmt_vid
