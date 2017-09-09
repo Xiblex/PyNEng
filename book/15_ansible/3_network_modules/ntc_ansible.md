@@ -18,7 +18,7 @@ ask_pass = True
 library = ./library
 ```
 
-После этого, нужно клонировать репозиторий ntc-ansible, находясь в каталоге library:
+После этого нужно клонировать репозиторий ntc-ansible, находясь в каталоге library:
 ```
 [~/pyneng_course/chapter15/library]
 $ git clone https://github.com/networktocode/ntc-ansible --recursive
@@ -45,7 +45,7 @@ Submodule path 'ntc-templates': checked out '89c57342b47c9990f0708226fb3f268c6b8
 pip install ntc-ansible
 ```
 
-При установке зависимостей, может появиться ошибка:
+При установке зависимостей может появиться ошибка:
 ```
 No matching distribution found for textfsm==1.0.1 (from pyntc->ntc-ansible)
 ```
@@ -54,14 +54,14 @@ No matching distribution found for textfsm==1.0.1 (from pyntc->ntc-ansible)
 
 > Если при установке возникнут другие проблемы, посмотрите другие варианты установки в [репозитории проекта](https://github.com/networktocode/ntc-ansible). 
 
-Так как в текущей версии Ansible уже есть модули, которые работают с сетевым оборудованием и позволяют выполнять команды, из всех возможностей ntc-ansible, наиболее полезной будет отправка команд show и получение структурированного вывода.
+Так как в текущей версии Ansible уже есть модули, которые работают с сетевым оборудованием и позволяют выполнять команды, из всех возможностей ntc-ansible наиболее полезной будет отправка команд show и получение структурированного вывода.
 За это отвечает модуль ntc_show_command.
 
 ## ntc_show_command
 
 Модуль использует netmiko для подключения к оборудованию (netmiko должен быть установлен) и, после выполнения команды, преобразует вывод команды show с помощью TextFSM в структурированный вывод (список словарей).
 
-Преобразование будет выполняться в том случае, если в файле index была найдена команда и для команды был найден шаблон.
+Преобразование будет выполняться в том случае, если в файле index была найдена команда, и для команды был найден шаблон.
 
 Как и с предыдущими сетевыми модулями, в ntc-ansible нужно указывать ряд параметров для подключения:
 * __connection__ - тут возможны два варианта: ssh (подключение netmiko) или offline (чтение из файла для тестовых целей)
@@ -70,7 +70,7 @@ No matching distribution found for textfsm==1.0.1 (from pyntc->ntc-ansible)
 * __host__ - IP-адрес или имя устройства
 * __username__ - имя пользователя
 * __password__ - пароль
-* __template_dir__ - путь к каталогу в котором находятся шаблоны (в текущем варианте установки они находятся в каталоге library/ntc-ansible/ntc-templates/templates
+* __template_dir__ - путь к каталогу, в котором находятся шаблоны (в текущем варианте установки они находятся в каталоге library/ntc-ansible/ntc-templates/templates
 
 
 Пример playbook 1_ntc_ansible.yml:
@@ -122,7 +122,7 @@ Start
 ```
 
 
-Для того, чтобы получить вывод про первый интерфейс, можно поменять вывод модуля debug, таким образом:
+Для того, чтобы получить вывод про первый интерфейс, можно поменять вывод модуля debug таким образом:
 ```
     - debug: var=result.response[0]
 ```
@@ -243,9 +243,9 @@ ls -ls library/ntc-ansible/ntc-templates/templates/
 
 Или в [репозитории проекта](https://github.com/networktocode/ntc-templates/tree/master/templates).
 
-Используя TextFSM можно самостоятельно создавать дополнительные шаблоны.
+Используя TextFSM, можно самостоятельно создавать дополнительные шаблоны.
 
-И, для того, чтобы ntc-ansible их использовал автоматически, добавить их в файл index (library/ntc-ansible/ntc-templates/templates/index):
+И для того, чтобы ntc-ansible их использовал автоматически, добавить их в файл index (library/ntc-ansible/ntc-templates/templates/index):
 ```
 
 # First line is the header fields for columns and is mandatory.

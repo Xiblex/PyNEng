@@ -3,8 +3,7 @@
 ### Ansible без привязки к сетевому оборудованию
 
 * [У Ansible очень хорошая документация](http://docs.ansible.com/devel/ansible/)
-
-* [Очень хорошая серия видео, с транскриптом и хорошими ссылками](https://sysadmincasts.com/episodes/43-19-minutes-with-ansible-part-1-4)
+* [Очень хорошая серия видео с транскриптом и хорошими ссылками](https://sysadmincasts.com/episodes/43-19-minutes-with-ansible-part-1-4)
 * [Примеры использования Ansible](https://github.com/ansible/ansible-examples)
 * [Примеры Playbook с демонстрацией различных возможностей](https://github.com/ansible/ansible-examples/tree/master/language_features)
 
