@@ -20,8 +20,9 @@
 
 ### GIL
 
+* [Can’t we get rid of the Global Interpreter Lock?](https://docs.python.org/3/faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock)
 * [GIL](http://asvetlov.blogspot.com/2011/07/gil.html) (на русском)
-* [Inside the Python GIL](http://www.dabeaz.com/python/GIL.pdf)
+* [Understanding the Python GIL](http://www.dabeaz.com/GIL/)
 * [Python threads and the GIL](http://jessenoller.com/blog/2009/02/01/python-threads-and-the-global-interpreter-lock)
 
 ### concurrent.futures
