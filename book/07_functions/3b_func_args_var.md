@@ -46,8 +46,8 @@ Out[4]: 1
 Можно создать и такую функцию:
 ```python
 In [5]: def sum_arg(*args):
-  ....:     print(arg)
-  ....:     return sum(arg)
+  ....:     print(args)
+  ....:     return sum(args)
   ....: 
 
 In [6]: sum_arg(1, 10, 20, 30)
