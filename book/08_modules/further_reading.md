@@ -7,6 +7,7 @@
 
 Документация:
 
+* [Python tutorial. Modules](https://docs.python.org/3/tutorial/modules.html)
 * [os](https://docs.python.org/3/library/os.html)
 * [argparse](https://docs.python.org/3/library/argparse.html)
 * [subprocess](https://docs.python.org/3/library/subprocess.html)
