@@ -211,6 +211,5 @@ Out[14]: 'Switch sw1'
 
 Таких специальных методов в Python очень много.
 Несколько полезных ссылок, где можно почитать про конкретный метод:
-* [документация](https://docs.python.org/2.7/reference/datamodel.html#specialnames)
-* [Dive Into Python 3](http://www.diveintopython3.net/special-method-names.html) - хотя тут примеры для Python3, большинство методов работают аналогично. В этой книге отлично расписаны эты методы.
-
+* [документация](https://docs.python.org/3.6/reference/datamodel.html#specialnames)
+* [Dive Into Python 3](http://www.diveintopython3.net/special-method-names.html)
