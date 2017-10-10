@@ -51,10 +51,10 @@ __В курсе используются:__
 
 Процедура установки Python 3.6 на Debian:
 ```
-sudo apt-get install libsqlite3-dev
-wget https://www.python.org/ftp/python/3.6.0/Python-3.6.0.tgz
-tar xvf Python-3.6.0.tgz
-cd Python-3.6.0
+sudo apt-get install python3-dev libffi-dev libssl-dev libsqlite3-dev
+wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+tar xvf Python-3.6.3.tgz
+cd Python-3.6.3
 ./configure --enable-optimizations --enable-loadable-sqlite-extensions
 make -j8
 sudo make altinstall
