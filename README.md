@@ -8,6 +8,14 @@
 
 > [Версия книги для Python 2.7 по-прежнему доступна](https://natenka.gitbooks.io/pyneng/content/v/python2.7/)
 
+
+## Обсуждение
+
+Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
+
+Все вопросы, предложения и замечания по книге также пишите в Slack
+
+
 ## Зачем вам учиться программировать?
 
 Знание программирования для сетевого инженера сравнимо со знанием английского.
@@ -44,12 +52,6 @@
 Эта книга будет полезна сетевым инженерам, которые хотят автоматизировать задачи, с которыми сталкиваются каждый день и/или хотели заняться программированием, но не знали, с какой стороны подойти.
 
 ### Ещё не решили, нужно ли читать книгу? Почитайте [отзывы](testimonials.md).
-
-## Обсуждение
-
-Для обсуждения книги и заданий используется [slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты.
-
-Все вопросы, предложения и замечания по книге также пишите в Slack
 
 -----
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
