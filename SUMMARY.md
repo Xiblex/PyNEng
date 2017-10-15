@@ -108,7 +108,7 @@
   * [Дополнительные материалы](book/08_modules/further_reading.md)
   * [Задания](exercises/08_modules/08_exercises.md)
 
-### Регулярные выражения
+### [Регулярные выражения](book/09_regex/README.md)
 
 * [9. Регулярные выражения](book/09_regex/README.md)
   * [Основы](book/09_regex/1_basics.md)
