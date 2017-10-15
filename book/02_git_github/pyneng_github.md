@@ -59,12 +59,12 @@ commit 98e393c27e7aae4b41878d9d979c7587bfeb24b4
 Author: Наташа Самойленко <nataliya.samoylenko@gmail.com>
 Date:   Fri Aug 18 17:32:07 2017 +0300
 
-    Update task_15_4.md
+    Update task_24_4.md
 
-diff --git a/exercises/15_ansible/task_15_4.md b/exercises/15_ansible/task_15_4.md
+diff --git a/exercises/24_ansible_for_network/task_24_4.md b/exercises/24_ansible_for_network/task_24_4.md
 index c4307fa..137a221 100644
---- a/exercises/15_ansible/task_15_4.md
-+++ b/exercises/15_ansible/task_15_4.md
+--- a/exercises/24_ansible_for_network/task_24_4.md
++++ b/exercises/24_ansible_for_network/task_24_4.md
 @@ -13,11 +13,12 @@
  * применить ACL к интерфейсу
 

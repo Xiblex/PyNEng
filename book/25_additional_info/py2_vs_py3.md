@@ -7,7 +7,7 @@
 
 > Со временем, эти обновления будут перенесены и в книгу по Python 2.7
 
-### [Unicode](./unicode/README.md)
+### [Unicode](../16_unicode/README.md)
 
 В Python 2.7 было два типа строк: str и unicode:
 ```python
@@ -26,7 +26,7 @@ Out[4]: b'\xd1\x82\xd0\xb5\xd1\x81\xd1\x82'
 In [5]: byte_str = b'test'
 ```
 
-### [Функция print](../07_functions/useful_functions/print.md)
+### [Функция print](../10_useful_functions/print.md)
 
 В Python 2.7 print был оператором:
 ```python
@@ -34,7 +34,7 @@ In [6]: print 1, 'test'
 1 test
 ```
 
-В Python 3 [print - функция](../07_functions/useful_functions/print.md):
+В Python 3 [print - функция](../10_useful_functions/print.md):
 ```python
 In [7]: print(1, 'test')
 1 test
@@ -55,7 +55,7 @@ In [9]: print 1, 'test'
 SyntaxError: Missing parentheses in call to 'print'
 ```
 
-### [input вместо raw_input](../04_basic_scripts/2_user_input.md)
+### [input вместо raw_input](../05_basic_scripts/2_user_input.md)
 
 В Python 2.7 для получения информации от пользователя в виде строки использовалась функция raw_input:
 ```python
@@ -75,7 +75,7 @@ In [13]: number
 Out[13]: '55'
 ```
 
-### [range вместо xrange](../07_functions/useful_functions/range.md)
+### [range вместо xrange](../10_useful_functions/range.md)
 
 В Python 2.7 были две функции
 * range - возвращает список
@@ -103,7 +103,7 @@ Out[18]: [0, 1, 2, 3, 4]
 ```
 
 
-### [Методы словарей](../03_data_structures/6a_dict_methods.md)
+### [Методы словарей](../04_data_structures/6a_dict_methods.md)
 
 Несколько изменений произошло в методах словарей.
 
@@ -137,7 +137,7 @@ In [22]: d.
            fromkeys()   keys()       setdefault()
 ```
 
-### [Распаковка переменных](./variable_unpacking.md)
+### [Распаковка переменных](../08_python_basic_examples/variable_unpacking.md)
 
 В Python 3 появилась возможность использовать ```*``` при распаковке переменных:
 ```python
@@ -162,7 +162,7 @@ In [27]: a, *b, c = [1,2,3,4,5]
 SyntaxError: invalid syntax
 ```
 
-### [Итератор вместо списка](../16_additional_info/useful_functions/README.md)
+### [Итератор вместо списка](../10_useful_functions/README.md)
 
 В Python 2.7 map, filter и zip возвращали список:
 ```python
@@ -189,7 +189,7 @@ Out[33]: <zip at 0xb4efc1ec>
 ```
 
 
-### [subprocess.run](../08_modules/useful_modules/subprocess.md)
+### [subprocess.run](../12_useful_modules/subprocess.md)
 
 В версии Python 3.5 в модуле subprocess появилась новая функция - run.
 Она предоставляет более удобный интерфейс для работы с модулем и получения вывода команд.

@@ -7,8 +7,8 @@
 * строка
 * список
 * словарь
-* функция [range()](../07_functions/useful_functions/range.md)
-* любой [итерируемый объект](../16_additional_info/iterator_generator/iterable_and_iterator.md)
+* функция [range()](../10_useful_functions/range.md)
+* любой [итерируемый объект](../13_iterator_generator/iterable_and_iterator.md)
 
 
 

@@ -156,7 +156,7 @@ R6           Fa 0/2          143           R S I           2811       Fa 0/0
 Не копировать код функции draw_topology.
 
 В итоге, должно быть сгенерировано изображение топологии.
-Результат должен выглядеть так же, как схема в файле task_10_2c_topology.svg
+Результат должен выглядеть так же, как схема в файле task_17_2c_topology.svg
 
 ![task_10_2c_topology](https://raw.githubusercontent.com/natenka/PyNEng/master/images/10_serialization/task_10_2c_topology.png)
 

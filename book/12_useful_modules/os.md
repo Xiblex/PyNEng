@@ -65,8 +65,8 @@ In [12]: os.path.basename(file)
 Out[12]: 'README.md'
 
 In [13]: os.path.dirname(file)
-Out[13]: 'Programming/PyNEng/book/16_additional_info'
+Out[13]: 'Programming/PyNEng/book/25_additional_info'
 
 In [14]: os.path.split(file)
-Out[14]: ('Programming/PyNEng/book/16_additional_info', 'README.md')
+Out[14]: ('Programming/PyNEng/book/25_additional_info', 'README.md')
 ```

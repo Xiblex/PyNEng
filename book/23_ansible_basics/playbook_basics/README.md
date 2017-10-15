@@ -14,9 +14,9 @@ Playbook (файл сценариев) — это файл, в котором о
 Playbook описываются в формате YAML.
 
 {% if book.book_name == "ansible_neteng" %}
-> Синтаксис YAML описан в [разделе YAML курса "Python для сетевых инженеров"](https://natenka.gitbooks.io/pyneng/content/book/10_serialization/3_yaml.html) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
+> Синтаксис YAML описан в [разделе YAML курса "Python для сетевых инженеров"](https://natenka.gitbooks.io/pyneng/content/book/17_serialization/3_yaml.html) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
 {% else %}
-> Синтаксис YAML описан в [разделе YAML](../../10_serialization/3_yaml.md) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
+> Синтаксис YAML описан в [разделе YAML](../../17_serialization/3_yaml.md) или в [документации Ansible](http://docs.ansible.com/ansible/YAMLSyntax.html).
 {% endif %}
 
 ### Пример синтаксиса playbook
@@ -110,7 +110,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 
 Еще один важный аспект - Ansible выдал сообщение:
 ```
-to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/15_ansible/2_playbook_basics/1_show_commands_with_raw.retry
+to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/23_ansible/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
 Если при выполнении playboo, на каком-то устройстве возникла ошибка, Ansible создает специальный файл, который называется точно так же, как playbook, но расширение меняется на retry.
@@ -127,7 +127,7 @@ to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/1
 
 Настраиваем правильный пароль на маршрутизаторе 192.168.100.1, а затем перезапускаем playbook таким образом:
 ```
-$ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/15_ansible/2_playbook_basics/1_show_commands_with_raw.retry
+$ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/23_ansible_basics/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
 ![Ansible playbook]({{ book.ansible_img_path }}playbook-retry.png)

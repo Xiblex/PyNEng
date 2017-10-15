@@ -1,6 +1,6 @@
 # ntc-ansible
 
-__ntc-ansible__ - это модуль для работы с сетевым оборудованием, который не только выполняет команды на оборудовании, но и обрабатывает вывод команд и преобразует с помощью {% if book.book_name == "ansible_neteng" %}[TextFSM](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/).{% else %}[TextFSM](../../4_textfsm/).{% endif %}
+__ntc-ansible__ - это модуль для работы с сетевым оборудованием, который не только выполняет команды на оборудовании, но и обрабатывает вывод команд и преобразует с помощью {% if book.book_name == "ansible_neteng" %}[TextFSM](https://natenka.gitbooks.io/pyneng/content/book/22_textfsm/).{% else %}[TextFSM](../../22_textfsm/).{% endif %}
 
 {% raw %}
 Этот модуль не входит в число core модулей Ansible, поэтому его нужно установить.
@@ -262,8 +262,8 @@ cisco_ios_show_aliases.template,  .*, cisco_ios, sh[[ow]] alia[[ses]]
 ```
 
 {% if book.book_name == "ansible_neteng" %}
-Синтаксис шаблонов и файла index описаны в разделе [TextFSM курса "Python для сетевых инженеров"](https://natenka.gitbooks.io/pyneng/content/book/14_textfsm/).
+Синтаксис шаблонов и файла index описаны в разделе [TextFSM курса "Python для сетевых инженеров"](https://natenka.gitbooks.io/pyneng/content/book/22_textfsm/).
 {% else %}
-Синтаксис шаблонов и файла index описаны в разделе [TextFSM](../../14_textfsm/).
+Синтаксис шаблонов и файла index описаны в разделе [TextFSM](../../22_textfsm/).
 {% endif %}
 

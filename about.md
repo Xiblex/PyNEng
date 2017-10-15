@@ -1,25 +1,5 @@
 # О книге
 
-## Краткое содержание книги
-
-* [1. Подготовка к работе](book/01_intro/README.md)
-* [2. Начало работы с Python](book/02_start/README.md)
-* [3. Типы данных в Python](book/03_data_structures/README.md)
-* [4. Создание базовых скриптов](book/04_basic_scripts/README.md)
-* [5. Контроль хода программы](book/05_control_structures/README.md)
-* [6. Работа с файлами](book/06_files/README.md)
-* [7. Функции](book/07_functions/README.md)
-* [8. Модули](book/08_modules/README.md)
-* [9. Регулярные выражения](book/09_regex/README.md)
-* [10. Сериализация данных](book/10_serialization/README.md)
-* [11. Работа с базами данных](book/11_db/README.md)
-* [12. Подключение к оборудованию](book/12_ssh_telnet/README.md)
-* [13. Шаблоны конфигураций с Jinja](book/13_jinja2/README.md)
-* [14. TextFSM. Обработка вывода команд](book/14_textfsm/README.md)
-* [15. Ansible](book/15_ansible/README.md)
-* [16. Дополнительная информация](book/16_additional_info/README.md)
-* [Продолжение обучения](resources/README.md)
-
 Разделы 1-2 посвящены подготовке к работе с Python: установке пакетов, выбору редактора и ОС.
 Кроме того, в них рассматриваются система установки пакетов Python и способ изоляции разных версий Python и пакетов Python друг от друга.
 
