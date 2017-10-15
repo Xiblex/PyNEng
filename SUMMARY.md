@@ -72,7 +72,8 @@
     * [Конструкция with](book/06_files/5_with.md)
     * [Дополнительные материалы](book/06_files/further_reading.md)
     * [Задания](exercises/06_files/06_exercises.md)
-  * [Распаковка переменных](book/16_additional_info/variable_unpacking.md)  
+  * [Примеры совмещения пройденных тем](book/16_additional_info/README.md)
+    * [Распаковка переменных](book/16_additional_info/variable_unpacking.md)  
 
 * [Повторное использование кода](book/07_functions/README.md)
   * [7. Функции](book/07_functions/README.md)
@@ -113,7 +114,7 @@
 
 * [Регулярные выражения](book/09_regex/README.md)
   * [Основы](book/09_regex/1_basics.md)
-  * [Специальные символы в регулярных выражениях](book/09_regex/2_spec_sym.md)
+  * [Синтаксис регулярных выражений](book/09_regex/2_spec_sym.md)
     * [Наборы символов](book/09_regex/2a_spec_sym_sets.md)
     * [Символы повторения](book/09_regex/2b_spec_sym_repetition.md)
     * [Специальные символы](book/09_regex/2c_spec_sym.md)
@@ -239,7 +240,7 @@
   * [Подробнее об Ansible](book/15_ansible/ansible_more.md)
   * [Дополнительные материалы](book/15_ansible/further_reading.md)
   * [Задания](exercises/15_ansible/15_exercises.md)
-* [16. Дополнительная информация](book/16_additional_info/README.md)
+* [Дополнительная информация](book/16_additional_info/README.md)
   * [Соглашение об именах](book/16_additional_info/naming_conventions/README.md)
     * [Подчеркивание в именах](book/16_additional_info/naming_conventions/underscore_names.md)
   * [Полезные функции](book/16_additional_info/useful_functions/README.md)
