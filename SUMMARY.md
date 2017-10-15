@@ -7,6 +7,9 @@
 * [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
 * [Благодарности](acknowledgments.md)
+
+### Основы Python
+
 * [1. Подготовка к работе](book/01_intro/README.md)
   * [ОС и редактор](book/01_intro/os_and_editor.md)
   * [Система управления пакетами pip](book/01_intro/pip.md)
@@ -71,6 +74,9 @@
   * [Конструкция with](book/06_files/5_with.md)
   * [Дополнительные материалы](book/06_files/further_reading.md)
   * [Задания](exercises/06_files/06_exercises.md)
+
+### Повторное использование кода
+
 * [7. Функции](book/07_functions/README.md)
   * [Создание функций](book/07_functions/1_create_func.md)
   * [Пространства имен. Области видимости](book/07_functions/2_namespace.md)
@@ -101,6 +107,9 @@
     * [Модуль pprint](book/08_modules/useful_modules/pprint.md)
   * [Дополнительные материалы](book/08_modules/further_reading.md)
   * [Задания](exercises/08_modules/08_exercises.md)
+
+### Регулярные выражения
+
 * [9. Регулярные выражения](book/09_regex/README.md)
   * [Основы](book/09_regex/1_basics.md)
   * [Специальные символы в регулярных выражениях](book/09_regex/2_spec_sym.md)
@@ -124,6 +133,9 @@
     * [re.sub](book/09_regex/5_re_sub.md)
   * [Дополнительные материалы](book/09_regex/further_reading.md)
   * [Задания](exercises/09_regex/09_exercises.md)
+
+### Сериализация данных
+
 * [10. Сериализация данных](book/10_serialization/README.md)
   * [CSV](book/10_serialization/1_csv.md)
   * [JSON](book/10_serialization/2_json.md)
@@ -155,6 +167,10 @@
     * [Пример использования SQLite](book/11_db/5_example_sqlite.md)
   * [Дополнительные материалы](book/11_db/further_reading.md)
   * [Задания](exercises/11_db/11_exercises.md)
+
+### Подключение к оборудованию
+
+
 * [12. Подключение к оборудованию](book/12_ssh_telnet/README.md)
   * [Ввод пароля](book/12_ssh_telnet/0_password.md)
   * [Pexpect](book/12_ssh_telnet/1_pexpect.md)
