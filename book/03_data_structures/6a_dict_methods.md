@@ -1,6 +1,6 @@
 ### Полезные методы для работы со словарями
 
-####```clear()```
+#### ```clear()```
 
 Метод __clear()__ позволяет очистить словарь:
 ```python
@@ -12,7 +12,7 @@ In [3]: london
 Out[3]: {}
 ```
 
-####```copy()```
+#### ```copy()```
 
 Метод __copy()__ позволяет создать полную копию словаря. 
 
@@ -55,7 +55,7 @@ In [15]: london2['vendor']
 Out[15]: 'Cisco'
 ```
 
-####```get()```
+#### ```get()```
 
 Если при обращении к словарю указывается ключ, которого нет в словаре, возникает ошибка:
 ```python
@@ -84,7 +84,7 @@ In [20]: print(london.get('ios', 'Ooops'))
 Ooops
 ```
 
-####```setdefault()```
+#### ```setdefault()```
 
 Метод __setdefault()__ ищет ключ и, если его нет, вместо ошибки создает ключ со значением ```None```.
 ```python
@@ -99,16 +99,21 @@ In [24]: london
 Out[24]: {'ios': None, 'location': 'London Str', 'name': 'London1', 'vendor': 'Cisco'}
 ```
 
+Но, если ключ есть, setdefault возвращает значение, которое ему соответствует:
+```python
+In [25]: london.setdefault('name')
+Out[25]: 'London1'
+```
 
 Второй аргумент позволяет указать, какое значение должно соответствовать ключу:
 ```python
-In [25]: model = london.setdefault('model', 'Cisco3580')
+In [26]: model = london.setdefault('model', 'Cisco3580')
 
-In [26]: print(model)
+In [27]: print(model)
 Cisco3580
 
-In [27]: london
-Out[27]:
+In [28]: london
+Out[28]:
 {'ios': None,
  'model': 'Cisco3580',
  'location': 'London Str',
@@ -116,8 +121,18 @@ Out[27]:
  'vendor': 'Cisco'}
 ```
 
+Метод setdefault заменяет такую конструкцию:
+```python
+In [30]: if key in london:
+    ...:     value = london[key]
+    ...: else:
+    ...:     london[key] = 'somevalue'
+    ...:     value = london[key]
+    ...:
+```
 
-####```keys(), values(), items()```
+
+#### ```keys(), values(), items()```
 
 Методы __keys()__, __values()__, __items()__:
 ```python
@@ -168,7 +183,7 @@ Out[34]: ['name', 'location', 'vendor', 'ip']
 
 ```
 
-####```del```
+#### ```del```
 Удалить ключ и значение:
 ```python
 In [35]: london = {'name': 'London1', 'location': 'London Str', 'vendor': 'Cisco'}
@@ -202,3 +217,5 @@ Out[42]:
  'name': 'london-r1',
  'vendor': 'Cisco'}
 ```
+
+

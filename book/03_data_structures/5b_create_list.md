@@ -34,3 +34,9 @@ Out[6]:
  'FastEthernet0/9']
 ```
 
+Генераторы списков требуют понимания работы цикла for и даже после этого, могут быть немного необычны.
+
+
+После 6 раздела, можно вернуться к этой теме и почитать о них подробнее в разделе [Дополнительная информация](https://natenka.gitbooks.io/pyneng/content/book/16_additional_info/iterator_generator/x_comprehensions.html).
+
+
