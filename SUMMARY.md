@@ -7,9 +7,6 @@
 * [Пример плана обучения](schedule.md)
 * [FAQ](faq.md)
 * [Благодарности](acknowledgments.md)
-
-### Основы Python
-
 * [1. Подготовка к работе](book/01_intro/README.md)
   * [ОС и редактор](book/01_intro/os_and_editor.md)
   * [Система управления пакетами pip](book/01_intro/pip.md)
@@ -75,7 +72,7 @@
   * [Дополнительные материалы](book/06_files/further_reading.md)
   * [Задания](exercises/06_files/06_exercises.md)
 
-* Повторное использование кода
+* [Повторное использование кода](book/07_functions/README.md)
 
   * [7. Функции](book/07_functions/README.md)
     * [Создание функций](book/07_functions/1_create_func.md)
@@ -132,8 +129,6 @@
   * [Дополнительные материалы](book/09_regex/further_reading.md)
   * [Задания](exercises/09_regex/09_exercises.md)
 
-### Сериализация данных
-
 * [10. Сериализация данных](book/10_serialization/README.md)
   * [CSV](book/10_serialization/1_csv.md)
   * [JSON](book/10_serialization/2_json.md)
@@ -165,9 +160,6 @@
     * [Пример использования SQLite](book/11_db/5_example_sqlite.md)
   * [Дополнительные материалы](book/11_db/further_reading.md)
   * [Задания](exercises/11_db/11_exercises.md)
-
-### Подключение к оборудованию
-
 
 * [12. Подключение к оборудованию](book/12_ssh_telnet/README.md)
   * [Ввод пароля](book/12_ssh_telnet/0_password.md)
