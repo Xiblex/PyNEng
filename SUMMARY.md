@@ -8,7 +8,7 @@
   * [FAQ](faq.md)
   * [Благодарности](acknowledgments.md)
 
-* [I. Основы Python](book/Part_1_README.md)
+* [I. Основы Python](book/Part_I.md)
   * [1. Подготовка к работе](book/01_intro/README.md)
     * [ОС и редактор](book/01_intro/os_and_editor.md)
     * [Система управления пакетами pip](book/01_intro/pip.md)
@@ -77,7 +77,7 @@
   * [8. Примеры совмещения пройденных тем](book/08_python_basic_examples/README.md)
     * [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md)  
 
-* [II. Повторное использование кода](book/Part_2_README.md)
+* [II. Повторное использование кода](book/Part_II.md)
   * [9. Функции](book/09_functions/README.md)
     * [Создание функций](book/09_functions/1_create_func.md)
     * [Пространства имен. Области видимости](book/09_functions/2_namespace.md)
@@ -114,7 +114,7 @@
     * [Generator](book/13_iterator_generator/generator.md)
     * [Дополнительные материалы](book/13_iterator_generator/further_reading.md)
 
-* [III. Регулярные выражения](book/Part_3_README.md)
+* [III. Регулярные выражения](book/Part_III.md)
   * [14. Синтаксис регулярных выражений](book/14_regex/README.md)
     * [Наборы символов](book/14_regex/2a_spec_sym_sets.md)
     * [Символы повторения](book/14_regex/2b_spec_sym_repetition.md)
@@ -136,7 +136,7 @@
     * [re.sub](book/15_module_re/5_re_sub.md)
     * [Дополнительные материалы](book/15_module_re/further_reading.md)
     * [Задания](exercises/15_module_re/15_exercises.md)
-* [IV. Запись и передача данных](book/Part_4_README.md)
+* [IV. Запись и передача данных](book/Part_IV.md)
   * [16. Unicode](book/16_unicode/README.md)
     * [Стандарт Unicode](book/16_unicode/unicode_standard.md)
     * [Unicode в Python 3](book/16_unicode/python_3_unicode.md)
@@ -176,7 +176,7 @@
     * [Дополнительные материалы](book/18_db/further_reading.md)
     * [Задания](exercises/18_db/18_exercises.md)
 
-* [V. Работа с сетевым оборудованием](book/Part_5_README.md)
+* [V. Работа с сетевым оборудованием](book/Part_V.md)
   * [19. Подключение к оборудованию](book/19_ssh_telnet/README.md)
     * [Ввод пароля](book/19_ssh_telnet/0_password.md)
     * [Pexpect](book/19_ssh_telnet/1_pexpect.md)
@@ -215,7 +215,7 @@
     * [CLI Table](book/22_textfsm/3_textfsm_clitable.md)
     * [Дополнительные материалы](book/22_textfsm/further_reading.md)
     * [Задания](exercises/22_textfsm/22_exercises.md)
-* [VI. Ansible](book/Part_6_README.md)
+* [VI. Ansible](book/Part_VI.md)
   * [23. Основы Ansible](book/23_ansible_basics/README.md)
     * [Инвентарный файл](book/23_ansible_basics/inventory.md)
     * [Ad-Hoc команды](book/23_ansible_basics/ad-hoc.md)
