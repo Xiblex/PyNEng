@@ -1,8 +1,8 @@
-## Iterator, comprehensions, generator expression
+## Iterator, generator expression
 
-В этом подразделе рассматриваются:
+В этом разделе рассматриваются:
 
-* итерируемые объекты (iterable) и итератор (iterator)
-* генераторы списков, словарей, множеств (list, dict, set comprehensions)
+* итерируемые объекты (iterable)
+* итераторы (iterator)
 * генераторные выражения (generator expression)
 

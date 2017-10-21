@@ -76,6 +76,7 @@
     * [Задания](exercises/07_files/07_exercises.md)
   * [8. Примеры совмещения пройденных тем](book/08_python_basic_examples/README.md)
     * [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md)  
+    * [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md)
 
 * [II. Повторное использование кода](book/Part_II.md)
   * [9. Функции](book/09_functions/README.md)
@@ -108,9 +109,9 @@
     * [Модуль tabulate](book/12_useful_modules/tabulate.md)
     * [Модуль pprint](book/12_useful_modules/pprint.md)
     * [Дополнительные материалы](book/11_modules/further_reading.md)
-  * [13. Итераторы, генераторы списков, словарей и множеств](book/13_iterator_generator/README.md)
-    * [Итерируемый объект, итератор](book/13_iterator_generator/iterable_and_iterator.md)
-    * [List, dict, set comprehensions](book/13_iterator_generator/x_comprehensions.md)
+  * [13. Итераторы, итерируемые объекты и генераторы](book/13_iterator_generator/README.md)
+    * [Итерируемый объект](book/13_iterator_generator/iterable.md)
+    * [Итератор](book/13_iterator_generator/iterator.md)
     * [Generator](book/13_iterator_generator/generator.md)
     * [Дополнительные материалы](book/13_iterator_generator/further_reading.md)
 
