@@ -303,8 +303,3 @@ In [56]: for vlan, mac, _, intf in table:
 300 aa0b.cc70.7000 Gi0/7
 ```
 
-### Дополнительные материалы
-
-* [Ответ на stackoverflow со множеством вариантов распаковки](https://stackoverflow.com/questions/6967632/unpacking-extended-unpacking-and-nested-extended-unpacking)
-* [PEP 3132 -- Extended Iterable Unpacking](https://www.python.org/dev/peps/pep-3132/)
-

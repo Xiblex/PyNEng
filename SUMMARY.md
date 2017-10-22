@@ -74,9 +74,10 @@
     * [Конструкция with](book/07_files/5_with.md)
     * [Дополнительные материалы](book/07_files/further_reading.md)
     * [Задания](exercises/07_files/07_exercises.md)
-  * [8. Примеры совмещения пройденных тем](book/08_python_basic_examples/README.md)
+  * [8. Примеры использования основ](book/08_python_basic_examples/README.md)
     * [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md)  
     * [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md)
+    * [Дополнительные материалы](book/08_python_basic_examples/further_reading.md)
 
 * [II. Повторное использование кода](book/Part_II.md)
   * [9. Функции](book/09_functions/README.md)
