@@ -77,6 +77,7 @@
   * [8. Примеры использования основ](book/08_python_basic_examples/README.md)
     * [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md)  
     * [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md)
+    * [Работа со словарями](book/08_python_basic_examples/working_with_dicts.md)
     * [Дополнительные материалы](book/08_python_basic_examples/further_reading.md)
 
 * [II. Повторное использование кода](book/Part_II.md)
