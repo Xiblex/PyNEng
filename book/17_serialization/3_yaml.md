@@ -136,12 +136,12 @@ pip install pyyaml
 Чтение из YAML (файл yaml_read.py):
 ```python
 import yaml
-import pprint
+from pprint import pprint
 
 with open('info.yaml') as f:
     templates = yaml.load(f)
 
-pprint.pprint(templates)
+pprint(templates)
 
 ```
 
