@@ -25,7 +25,7 @@ mac             hostname    model       location           mngmt_ip    mngmt_vid
 sqlite> DELETE from switch where hostname = 'sw8';
 ```
 
-Теперь в таблице нет строки с коммутатором sw:
+Теперь в таблице нет строки с коммутатором sw8:
 ```sql
 sqlite> SELECT * from switch;
 mac             hostname    model       location           mngmt_ip    mngmt_vid
