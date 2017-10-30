@@ -193,7 +193,7 @@
     * [Задания](exercises/19_ssh_telnet/19_exercises.md)
   * [20. Одновременное подключение к нескольким устройствам](book/20_concurrent_connections/README.md)
     * [Измерение времени выполнения скрипта](book/20_concurrent_connections/measure_script_execution_time.md)
-    * [Потоки в CPython](book/20_concurrent_connections/cpython_gil.md)
+    * [Процессы и потоки в CPython](book/20_concurrent_connections/cpython_gil.md)
     * [Модуль threading](book/20_concurrent_connections/threading.md)
     * [Модуль multiprocessing](book/20_concurrent_connections/multiprocessing.md)
     * [Модуль concurrent.futures](book/20_concurrent_connections/concurrent_futures/README.md)
