@@ -185,6 +185,7 @@
   * [19. Подключение к оборудованию](book/19_ssh_telnet/README.md)
     * [Ввод пароля](book/19_ssh_telnet/0_password.md)
     * [Pexpect](book/19_ssh_telnet/1_pexpect.md)
+        * [Пример использования pexpect](book/19_ssh_telnet/1_pexpect_example.md)
     * [Telnetlib](book/19_ssh_telnet/2_telnetlib.md)
     * [Paramiko](book/19_ssh_telnet/3_paramiko.md)
     * [Netmiko](book/19_ssh_telnet/4_netmiko.md)

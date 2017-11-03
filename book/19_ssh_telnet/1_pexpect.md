@@ -57,124 +57,109 @@ total 44
 
 Класс ```spawn``` поддерживает больше возможностей. Он позволяет взаимодействовать с вызванной программой, отправляя данные и ожидая ответ.
 
-Простой пример использования pexpect.spawn:
+Например, таким образом можно инициировать соединение SSH:
 ```python
-t = pexpect.spawn('ssh user@10.1.1.1')
-
-t.expect('Password:')
-t.sendline('userpass')
-t.expect('>')
+In [5]: ssh = pexpect.spawn('ssh cisco@192.168.100.1')
 ```
 
-Сначала выполняется подключение по SSH, затем pexpect ожидает строку ```Password:```.
-Как только эта строка появилась, отправляется пароль.
-После отправки pexpect ожидает строку ```>```.
-
-
-### Пример использования pexpect
-
-Пример использования pexpect для подключения к оборудованию и передачи команды show (файл 1_pexpect.py):
+После выполнения этой строки, подключение готово.
+Теперь необходимо указать какую строку ожидать.
+В данном случае, надо дождаться запроса о пароле:
 ```python
-import pexpect
-import getpass
-import sys
-
-COMMAND = sys.argv[1]
-USER = input('Username: ')
-PASSWORD = getpass.getpass()
-ENABLE_PASS = getpass.getpass(prompt='Enter enable password: ')
-
-DEVICES_IP = ['192.168.100.1','192.168.100.2','192.168.100.3']
-
-for IP in DEVICES_IP:
-    print('Connection to device {}'.format(IP))
-    with pexpect.spawn('ssh {}@{}'.format(USER, IP)) as ssh:
-
-        ssh.expect('Password:')
-        ssh.sendline(PASSWORD)
-
-        ssh.expect('[#>]')
-        ssh.sendline('enable')
-
-        ssh.expect('Password:')
-        ssh.sendline(ENABLE_PASS)
-
-        ssh.expect('#')
-        ssh.sendline('terminal length 0')
-
-        ssh.expect('#')
-        ssh.sendline(COMMAND)
-
-        ssh.expect('#')
-        print(ssh.before.decode('utf-8'))
-
+In [6]: ssh.expect('[Pp]assword')
+Out[6]: 0
 ```
 
-Комментарии с скрипту:
-* команда, которую нужно выполнить, передается как аргумент
-* затем запрашивается логин, пароль и пароль на режим enable
- * пароли запрашиваются с помощью модуля getpass
-* ```ip_list``` - это список IP-адресов устройств, к которым будет выполняться подключение
-* в цикле выполняется подключение к устройствам из списка
-* в классе spawn выполняется подключение по SSH к текущему адресу, используя указанное имя пользователя
-* после этого начинают чередоваться пары методов: expect и sendline
- * ```expect``` - ожидание подстроки
- * ```sendline``` - когда строка появилась, отправляется команда
-* так происходит до конца цикла, и только последняя команда отличается:
- * ```before``` позволяет считать всё, что поймал pexpect до предыдущей подстроки в expect
- 
-> Обратите внимание на строку ```ssh.expect('[#>]')```.
-> Метод expect ожидает не просто строку, а регулярное выражение.
+Обратите внимание как описана строка, которую ожидает pexpect: ```[Pp]assword```.
+Это регулярное выражение, которое описывает строку password или Password.
+То есть, методу expect можно передавать регулярное выражение как аргумент.
 
-Выполнение скрипта выглядит так:
+Метод expect вернул число 0 в результате работы.
+Это число указывает, что совпадение было найдено и что это элемент с индексом ноль.
+Индекс тут фигурирует из-за того, что expect можно передавать список строк.
+Например, можно передать список с двумя элементами:
 ```python
-$ python 1_pexpect.py "sh ip int br"
-Username: nata
-Password:
-Enter enable secret:
-Connection to device 192.168.100.1
+In [7]: ssh = pexpect.spawn('ssh cisco@192.168.100.1')
+
+In [8]: ssh.expect(['password', 'Password'])
+Out[8]: 1
+```
+
+Обратите внимание, что теперь возвращается 1.
+Это значит, что совпадением было слово Password.
+
+Теперь можно отправлять пароль. Для этого используется команда sendline:
+```python
+In [9]: ssh.sendline('cisco')
+Out[9]: 6
+```
+
+Команда sendline отправляет строку, автоматически добавляет к ней перевод строки на основе значения os.linesep, а затем возвращает число указывающее сколько байт было записано.
+
+> В pexpect есть несколько вариантов отправки команд, не только sendline.
+
+
+Для того чтобы попасть в режим enable цикл expect-sendline повторяется:
+```python
+In [10]: ssh.expect('[>#]')
+Out[10]: 0
+
+In [11]: ssh.sendline('enable')
+Out[11]: 7
+
+In [12]: ssh.expect('[Pp]assword')
+Out[12]: 0
+
+In [13]: ssh.sendline('cisco')
+Out[13]: 6
+
+In [14]: ssh.expect('[>#]')
+Out[14]: 0
+```
+
+Теперь можно отправлять команду:
+```python
+In [15]: ssh.sendline('sh ip int br')
+Out[15]: 13
+```
+
+После отправки команды, pexpect надо указать до какого момента считать вывод.
+Указываем, что считать надо до #:
+```python
+In [16]: ssh.expect('#')
+Out[16]: 0
+```
+
+Вывод команды находится в атрибуте before:
+```python
+In [17]: ssh.before
+Out[17]: b'sh ip int br\r\nInterface                  IP-Address      OK? Method Status                Protocol\r\nEthernet0/0                192.168.100.1   YES NVRAM  up                    up      \r\nEthernet0/1                192.168.200.1   YES NVRAM  up                    up      \r\nEthernet0/2                19.1.1.1        YES NVRAM  up                    up      \r\nEthernet0/3                192.168.230.1   YES NVRAM  up                    up      \r\nEthernet0/3.100            10.100.0.1      YES NVRAM  up                    up      \r\nEthernet0/3.200            10.200.0.1      YES NVRAM  up                    up      \r\nEthernet0/3.300            10.30.0.1       YES NVRAM  up                    up      \r\nR1'
+```
+
+Так как результат выводится в виде последовательности байтов, надо конвертировать ее в строку:
+```python
+In [18]: show_output = ssh.before.decode('utf-8')
+
+In [19]: print(show_output)
 sh ip int br
-Interface              IP-Address      OK? Method Status                Protocol
-FastEthernet0/0        192.168.100.1   YES NVRAM  up                    up
-FastEthernet0/1        unassigned      YES NVRAM  up                    up
-FastEthernet0/1.10     10.1.10.1       YES manual up                    up
-FastEthernet0/1.20     10.1.20.1       YES manual up                    up
-FastEthernet0/1.30     10.1.30.1       YES manual up                    up
-FastEthernet0/1.40     10.1.40.1       YES manual up                    up
-FastEthernet0/1.50     10.1.50.1       YES manual up                    up
-FastEthernet0/1.60     10.1.60.1       YES manual up                    up
-FastEthernet0/1.70     10.1.70.1       YES manual up                    up
+Interface                  IP-Address      OK? Method Status                Protocol
+Ethernet0/0                192.168.100.1   YES NVRAM  up                    up
+Ethernet0/1                192.168.200.1   YES NVRAM  up                    up
+Ethernet0/2                19.1.1.1        YES NVRAM  up                    up
+Ethernet0/3                192.168.230.1   YES NVRAM  up                    up
+Ethernet0/3.100            10.100.0.1      YES NVRAM  up                    up
+Ethernet0/3.200            10.200.0.1      YES NVRAM  up                    up
+Ethernet0/3.300            10.30.0.1       YES NVRAM  up                    up
 R1
-Connection to device 192.168.100.2
-sh ip int br
-Interface              IP-Address      OK? Method Status                Protocol
-FastEthernet0/0        192.168.100.2   YES NVRAM  up                    up
-FastEthernet0/1        unassigned      YES NVRAM  up                    up
-FastEthernet0/1.10     10.2.10.1       YES manual up                    up
-FastEthernet0/1.20     10.2.20.1       YES manual up                    up
-FastEthernet0/1.30     10.2.30.1       YES manual up                    up
-FastEthernet0/1.40     10.2.40.1       YES manual up                    up
-FastEthernet0/1.50     10.2.50.1       YES manual up                    up
-FastEthernet0/1.60     10.2.60.1       YES manual up                    up
-FastEthernet0/1.70     10.2.70.1       YES manual up                    up
-R2
-Connection to device 192.168.100.3
-sh ip int br
-Interface              IP-Address      OK? Method Status                Protocol
-FastEthernet0/0        192.168.100.3   YES NVRAM  up                    up
-FastEthernet0/1        unassigned      YES NVRAM  up                    up
-FastEthernet0/1.10     10.3.10.1       YES manual up                    up
-FastEthernet0/1.20     10.3.20.1       YES manual up                    up
-FastEthernet0/1.30     10.3.30.1       YES manual up                    up
-FastEthernet0/1.40     10.3.40.1       YES manual up                    up
-FastEthernet0/1.50     10.3.50.1       YES manual up                    up
-FastEthernet0/1.60     10.3.60.1       YES manual up                    up
-FastEthernet0/1.70     10.3.70.1       YES manual up                    up
-R3
 ```
 
-Обратите внимание, что, так как в последнем expect указано, что надо ожидать подстроку ```#```, метод before показал и команду, и имя хоста.
+Завершается сессия вызовом метода close:
+```python
+In [20]: ssh.close()
 
+In [21]: ssh.closed
+Out[21]: False
+```
 
 ### Специальные символы в shell
 
@@ -197,7 +182,8 @@ In [5]: print(p.before.decode('utf-8'))
 
 ```
 
-#### pexpect.EOF
+### pexpect.EOF
+
 В предыдущем примере встретилось использование pexpect.EOF.
 
 > EOF (end of file) — конец файла
@@ -216,74 +202,15 @@ In [6]: p.expect('nattaur')
 EOF                                       Traceback (most recent call last)
 <ipython-input-9-9c71777698c2> in <module>()
 ----> 1 p.expect('nattaur')
-
-/Library/Python/2.7/site-packages/pexpect/spawnbase.pyc in expect(self, pattern, timeout, searchwindowsize, async)
-    313         compiled_pattern_list = self.compile_pattern_list(pattern)
-    314         return self.expect_list(compiled_pattern_list,
---> 315                 timeout, searchwindowsize, async)
-    316
-    317     def expect_list(self, pattern_list, timeout=-1, searchwindowsize=-1,
-
-/Library/Python/2.7/site-packages/pexpect/spawnbase.pyc in expect_list(self, pattern_list, timeout, searchwindowsize, async)
-    337             return expect_async(exp, timeout)
-    338         else:
---> 339             return exp.expect_loop(timeout)
-    340
-    341     def expect_exact(self, pattern_list, timeout=-1, searchwindowsize=-1,
-
-/Library/Python/2.7/site-packages/pexpect/expect.pyc in expect_loop(self, timeout)
-    100                     timeout = end_time - time.time()
-    101         except EOF as e:
---> 102             return self.eof(e)
-    103         except TIMEOUT as e:
-    104             return self.timeout(e)
-
-/Library/Python/2.7/site-packages/pexpect/expect.pyc in eof(self, err)
-     47             if err is not None:
-     48                 msg = str(err) + '\n' + msg
----> 49             raise EOF(msg)
-     50
-     51     def timeout(self, err=None):
-
-EOF: End Of File (EOF). Exception style platform.
-<pexpect.pty_spawn.spawn object at 0xb4f7366c>
-command: /bin/bash
-args: ['/bin/bash', '-c', 'ls -ls | grep pexpect']
-buffer (last 100 chars): b''
-before (last 100 chars): b'4 -rw-r--r-- 1 vagrant vagrant 3203 Jul 14 07:15 1_pexpect.py\r\n'
-after: <class 'pexpect.exceptions.EOF'>
-match: None
-match_index: None
-exitstatus: 0
-flag_eof: True
-pid: 3189
-child_fd: 16
-closed: False
-timeout: 30
-delimiter: <class 'pexpect.exceptions.EOF'>
-logfile: None
-logfile_read: None
-logfile_send: None
-maxread: 2000
-ignorecase: False
-searchwindowsize: None
-delaybeforesend: 0.05
-delayafterclose: 0.1
-delayafterterminate: 0.1
-searcher: searcher_re:
-    0: re.compile("b'py3_convert'")
-
+...
 ```
 
 Но, если передать в expect EOF, ошибки не будет.
 
-### Возможности pexpect.expect
+### Метод pexpect.expect
 
-```pexpect.expect``` в качестве шаблона может принимать не только строку.
-
-
-Что может использоваться как шаблон в pexpect.expect:
-* строка
+В pexpect.expect как шаблон может использоваться:
+* регулярное выражение
 * EOF - этот шаблон позволяет среагировать на исключение EOF
 * TIMEOUT - исключение timeout (по умолчанию значение timeout = 30 секунд)
 * compiled re
