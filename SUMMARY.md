@@ -187,6 +187,7 @@
     * [Pexpect](book/19_ssh_telnet/1_pexpect.md)
         * [Пример использования pexpect](book/19_ssh_telnet/1_pexpect_example.md)
     * [Telnetlib](book/19_ssh_telnet/2_telnetlib.md)
+        * [Пример использования telnetlib](book/19_ssh_telnet/2_telnetlib_example.md)
     * [Paramiko](book/19_ssh_telnet/3_paramiko.md)
     * [Netmiko](book/19_ssh_telnet/4_netmiko.md)
       * [Возможности netmiko](book/19_ssh_telnet/4a_netmiko_details.md)
