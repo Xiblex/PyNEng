@@ -6,6 +6,7 @@
 * [telnetlib](https://docs.python.org/3/library/telnetlib.html)
 * [paramiko Client](http://docs.paramiko.org/en/2.0/api/client.html)
 * [paramiko Channel](http://docs.paramiko.org/en/2.0/api/channel.html)
+* [netmiko](http://netmiko.readthedocs.io/en/stable/genindex.html)
 * [threading](https://docs.python.org/3/library/threading.html)
 * [multiprocessing](https://docs.python.org/3/library/multiprocessing.html)
 * [queue](https://docs.python.org/3/library/queue.html)
