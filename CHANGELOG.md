@@ -54,7 +54,7 @@
 
 ### 01.09.2017 Версия книги для Python 3 стала основной
 
-Информация обо всех изменениях доступна [тут](https://natenka.github.io/pyneng/pyneng-book-updated-to-python-3.6/).
+Все изменения описаны в [статье](https://natenka.github.io/pyneng/pyneng-book-updated-to-python-3.6/).
 
 Содержимое книги обновлено до Python версии 3.6.
 Все примеры, задания и содержимое книги протестированы.
