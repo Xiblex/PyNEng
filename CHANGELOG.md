@@ -1,5 +1,19 @@
 ## Изменения в книге
 
+### Задания 20.2, 20.2 изменены. Задания 20.3, 20.3a удалены.
+
+Задания 20.2, 20.2a переписаны, чтобы в них предполагалось использование concurrent.futures.
+Задания 20.3, 20.3a удалены.
+
+### 05.11.2017 Подразделы threading и multiprocessing перенесены в раздел [Дополнительная информация](https://natenka.gitbooks.io/pyneng/content/book/25_additional_info/threading_multiprocessing/)
+
+В этих разделах рассматриваются только основы модулей threading и multiprocessing.
+При этом, задача запуска функции в потоках и процессах намного проще решается в модуле concurrent.futures.
+К тому же, при использовании concurrent.futures не надо переписывать существующий код.
+
+На случай если задача будет более сложная и функционала concurrent.futures не хватит, оставлены основы  модулей threading и multiprocessing.
+Конечно, этих основ недостаточно чтобы решать более сложные задачи, но это неплохой старт.
+
 ### 21.10.2017 Подраздел list, dict, set comprehensions перенесен в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
 
 ### 15.10.2017 Реорганизация книги
