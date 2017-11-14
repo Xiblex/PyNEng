@@ -143,7 +143,6 @@ ansible_connection: local
 * __port__ - к какому порту подключаться
 * __username__ - имя пользователя
 * __password__ - пароль
-* __transport__ - тип подключения: CLI или API. По умолчанию - cli
 * __authorize__ - нужно ли переходить в привилегированный режим (enable, для Cisco)
 * __auth_pass__ - пароль для привилегированного режима
 
@@ -162,7 +161,6 @@ ansible_connection: local
         host: "{{ inventory_hostname }}"
         username: cisco
         password: cisco
-        transport: cli
 ```
 
 Аргументы созданы как переменная ```cli``` в playbook, а затем передаются как переменная аргументу provider:
@@ -172,7 +170,6 @@ ansible_connection: local
       host: "{{ inventory_hostname }}"
       username: cisco
       password: cisco
-      transport: cli
 
   tasks:
     - name: run show version
@@ -192,7 +189,6 @@ cli:
   host: "{{ inventory_hostname }}"
   username: cisco
   password: cisco
-  transport: cli
   authorize: yes
   auth_pass: cisco
 ```
@@ -254,7 +250,6 @@ cli:
   host: "{{ inventory_hostname }}"
   username: "cisco"
   password: "cisco"
-  transport: cli
   authorize: yes
   auth_pass: "cisco"
 ```

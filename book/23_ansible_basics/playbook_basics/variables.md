@@ -136,7 +136,6 @@ cli:
   host: "{{ inventory_hostname }}"
   username: "cisco"
   password: "cisco"
-  transport: cli
   authorize: yes
   auth_pass: "cisco"
 
