@@ -66,3 +66,23 @@ $ ansible-playbook 6_ios_config_defaults.yml
 
 ![6e_ios_config_default]({{ book.ansible_img_path }}6e_ios_config_defaults.png)
 
+
+Если на оборудовании большой конфигурационный файл, может возникнуть такая ошибка:
+```
+fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg": "unable to retrieve current config", "stderr": "timeout trying to send command: b'show running-config all'", "stderr_lines": ["timeout trying to send command: b'show running-config all'"]}
+```
+
+Так происходит из-за того, что Ansible не дождался приглашения.
+По умолчанию, Ansible ждет вывода команды 10 секунд и для большого конфигурационного файла этого может быть недостаточно.
+
+Установить большее значение таймаута можно в переменной cli, в файле group_vars/all.yml:
+```
+cli:
+  host: "{{ inventory_hostname }}"
+  username: "cisco"
+  password: "cisco"
+  authorize: yes
+  auth_pass: "cisco"
+  timeout: 100
+```
+

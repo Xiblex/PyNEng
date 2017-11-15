@@ -40,8 +40,6 @@ $ ansible-playbook 11_ios_config_src.yml -v
 ```
 ![6j_ios_config_src]({{ book.ansible_img_path }}6j_ios_config_src.png)
 
-Неприятная особенность параметра src в том, что не видно, какие изменения были внесены.
-Но, возможно, в следующих версиях Ansible это будет исправлено.
 
 Теперь на маршрутизаторе настроен ACL:
 ```

@@ -26,7 +26,7 @@ file prompt quiet
 Еще один вариант - самостоятельно сделать сохранение, используя модуль ios_command.
 
 {% raw %}
-Playbook 4_ios_config_save.yml:
+Playbook 4_ios_config_save_when.yml:
 ```yml
 ---
 
@@ -44,9 +44,10 @@ Playbook 4_ios_config_save.yml:
         lines:
           - login local
           - transport input ssh
-        #save: yes - в версии 2.2 не работает корректно
+        #save_when: modified
         provider: "{{ cli }}"
       register: cfg
+
 
     - name: Save config
       ios_command:
@@ -61,7 +62,7 @@ Playbook 4_ios_config_save.yml:
 
 Выполнение playbook:
 ```
-$ ansible-playbook 4_ios_config_save.yml
+$ ansible-playbook 4_ios_config_save_when.yml
 ```
 
 ![6c_ios_config_save]({{ book.ansible_img_path }}6c_ios_config_save_2.png)
