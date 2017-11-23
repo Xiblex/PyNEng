@@ -11,7 +11,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pprint import pprint
 from datetime import datetime
 import time
-from itertools import repeat
 
 import yaml
 from netmiko import ConnectHandler
@@ -94,7 +93,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pprint import pprint
 from datetime import datetime
 import time
-from itertools import repeat
 
 import yaml
 from netmiko import ConnectHandler
@@ -224,7 +222,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pprint import pprint
 from datetime import datetime
 import time
-from itertools import repeat
 
 import yaml
 from netmiko import ConnectHandler
@@ -295,7 +292,6 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from pprint import pprint
 from datetime import datetime
 import time
-from itertools import repeat
 
 import yaml
 from netmiko import ConnectHandler
