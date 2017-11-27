@@ -113,7 +113,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/23_ansible/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
-Если при выполнении playboo, на каком-то устройстве возникла ошибка, Ansible создает специальный файл, который называется точно так же, как playbook, но расширение меняется на retry.
+Если при выполнении playbook, на каком-то устройстве возникла ошибка, Ansible создает специальный файл, который называется точно так же, как playbook, но расширение меняется на retry.
 (Если вы выполняете задания параллельно, то этот файл должен появиться у вас)
 
 В этом файле хранится имя или адрес устройства, на котором возникла ошибка.
