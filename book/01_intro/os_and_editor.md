@@ -9,14 +9,16 @@
 
 Популярные редакторы для разных ОС (vim и emacs не указаны):
 * Linux:
+ * geany
  * gEdit
  * nano
  * Sublime Text
- * geany
 * Mac OS
+ * geany
  * TextMate
  * TextWrangler
 * Windows:
+ * geany
  * Notepad++
 
 Для начала работы можно взять первый из списка для соответствующей операционной системы.
