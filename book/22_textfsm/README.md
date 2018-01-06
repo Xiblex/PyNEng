@@ -72,7 +72,7 @@ VRF info: (vrf in name/id, vrf out name/id)
   4 79.0.0.9  4 msec *  1 msec
 '''
 
-template = open('traceroute.textfsm')
+template = open('traceroute.template')
 fsm = textfsm.TextFSM(template)
 result = fsm.ParseText(traceroute)
 
@@ -92,7 +92,7 @@ $ python parse_traceroute.py
 
 Разберемся с содержимым скрипта:
 * traceroute - это переменная, которая содержит вывод команды traceroute
-* ```template = open('traceroute.textfsm')``` - содержимое файла с шаблоном TextFSM считывается в переменную template
+* ```template = open('traceroute.template')``` - содержимое файла с шаблоном TextFSM считывается в переменную template
 * ```fsm = textfsm.TextFSM(template)``` - класс, который обрабатывает шаблон и создает из него объект в TextFSM
 * ```result = fsm.ParseText(traceroute)``` - метод, который обрабатывает переданный вывод согласно шаблону и возвращает список списков, в котором каждый элемент - это обработанная строка
 * В конце выводится заголовок: ```print(fsm.header)```, который содержит имена переменных и результат обработки
