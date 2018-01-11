@@ -26,11 +26,13 @@
     * [Добавление изменений в Git и GitHub](book/02_git_github/git_github_changes.md)
     * [Работа с репозиторием заданий и примеров](book/02_git_github/pyneng_github.md)
 
+    * [Задания](exercises/02_git_github/02_exercises.md)
   * [3. Начало работы с Python](book/03_start/README.md)
     * [Синтаксис Python](book/03_start/0_syntax.md)
     * [Интерпретатор Python. iPython](book/03_start/1_ipython.md)
       * [Магия iPython](book/03_start/1a_ipython_magic.md)
     * [Переменные](book/03_start/2_variables.md)
+    * [Задания](exercises/03_start/03_exercises.md)
   * [4. Типы данных в Python](book/04_data_structures/README.md)
     * [Числа](book/04_data_structures/3_numbers.md)
     * [Строки \(Strings\)](book/04_data_structures/4_strings.md)

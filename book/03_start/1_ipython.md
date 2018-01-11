@@ -25,6 +25,18 @@ iPython позволяет намного больше, чем стандарт�
 pip install ipython
 ```
 
+После этого зайти в ipython можно таким образом:
+```
+$ ipython
+Python 3.6.3 (default, Oct  9 2017, 11:46:27)
+Type 'copyright', 'credits' or 'license' for more information
+IPython 6.2.1 -- An enhanced Interactive Python. Type '?' for help.
+
+In [1]:
+```
+
+> Для выхода напишите `quit`
+
 __Далее как интерпретатор будет использоваться iPython.__
 
 
