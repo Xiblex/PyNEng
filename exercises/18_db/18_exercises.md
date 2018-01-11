@@ -4,7 +4,7 @@
 
 ### Задание 18.1
 
-На основе файла create_sqlite_ver3.py из раздела, необходимо создать два скрипта:
+На основе файла [create_sqlite_ver3.py](https://github.com/natenka/pyneng-examples-exercises/blob/master/examples/18_db/create_sqlite_ver3.py) из примеров раздела, необходимо создать два скрипта:
 * create_db.py
  * сюда должна быть вынесена функциональность по созданию БД:
   * должна выполняться проверка наличия файла БД
