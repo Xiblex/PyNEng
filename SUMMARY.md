@@ -115,6 +115,7 @@
     * [Модуль tabulate](book/12_useful_modules/tabulate.md)
     * [Модуль pprint](book/12_useful_modules/pprint.md)
     * [Дополнительные материалы](book/11_modules/further_reading.md)
+    * [Задания](exercises/12_useful_modules/12_exercises.md)
   * [13. Итераторы, итерируемые объекты и генераторы](book/13_iterator_generator/README.md)
     * [Итерируемый объект](book/13_iterator_generator/iterable.md)
     * [Итератор](book/13_iterator_generator/iterator.md)
