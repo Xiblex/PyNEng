@@ -18,9 +18,10 @@
 from jinja2 import Environment, FileSystemLoader
 import yaml
 import sys
+import os
 
 #$ python cfg_gen.py templates/for.txt data_files/for.yml
-TEMPLATE_DIR, template_file = sys.argv[1].split('/')
+TEMPLATE_DIR, template = os.path.split(sys.argv[1])
 VARS_FILE = sys.argv[2]
 
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
@@ -32,21 +33,10 @@ vars_dict = yaml.load(open(VARS_FILE))
 print(template.render(vars_dict))
 ```
 
+
 ### Задание 21.1a
 
-Переделать функцию generate_cfg_from_template:
-* добавить поддержку использования шаблона, который находится в текущем каталоге
-
-Для проверки, скопируйте один из шаблонов из каталога templates,
-в текущий каталог скрипта.
-
-Можно проверить на тех же шаблоне и данных, что и в прошлом задании:
-* шаблоне templates/for.txt (но скопировать его в текущий каталог) и данных data_files/for.yml
-
-
-### Задание 21.1b
-
-Дополнить функцию generate_cfg_from_template из задания 21.1 или 21.1a:
+Дополнить функцию generate_cfg_from_template из задания 21.1:
 
 Функция generate_cfg_from_template должна принимать любые аргументы,
 которые принимает класс Environment и просто передавать их ему.
@@ -59,9 +49,9 @@ print(template.render(vars_dict))
 * lstrip_blocks
 
 
-### Задание 21.1c
+### Задание 21.1b
 
-Дополнить функцию generate_cfg_from_template из задания 21.1, 21.1a или 21.1b:
+Дополнить функцию generate_cfg_from_template из задания 21.1 или 21.1a:
 * добавить поддержку разных форматов для файла с данными
 
 Должны поддерживаться такие форматы:
@@ -93,9 +83,9 @@ data_dict = {'vlans': {
 ```
 
 
-### Задание 21.1d
+### Задание 21.1c
 
-Переделать функцию generate_cfg_from_template из задания 21.1, 21.1a, 21.1b или 21.1c:
+Переделать функцию generate_cfg_from_template из задания 21.1, 21.1a или 21.1b:
 * сделать автоматическое распознавание разных форматов для файла с данными
 * для передачи разных типов данных, должен использоваться один и тот же параметр data
 
@@ -149,14 +139,11 @@ data_dict = {'vlans': {
 При этом, нельзя копировать текст шаблонов.
 
 Проверьте шаблон templates/cisco_router_base.txt,
-с помощью функции generate_cfg_from_template из задания 21.1-21.1d.
+с помощью функции generate_cfg_from_template из задания 21.1-21.1c.
 Не копируйте код функции.
 
-В качестве данных, используйте словарь router_info
+В качестве данных, используйте файл data_files/router_info.yml
 
-```python
-router_info = { 'hostname': 'R1' }
-```
 
 ### Задание 21.3
 
@@ -194,7 +181,7 @@ router_info = { 'hostname': 'R1' }
 Все команды должны быть в соответствующих режимах.
 
 Проверьте получившийся шаблон templates/ospf.txt, на данных в файле data_files/ospf.yml,
-с помощью функции generate_cfg_from_template из задания 21.1-21.1d.
+с помощью функции generate_cfg_from_template из задания 21.1-21.1c.
 Не копируйте код функции.
 
 ### Задание 21.3a
@@ -211,7 +198,7 @@ router_info = { 'hostname': 'R1' }
 
 
 Проверьте получившийся шаблон templates/ospf.txt, на данных в файле data_files/ospf2.yml,
-с помощью функции generate_cfg_from_template из задания 21.1-21.1d.
+с помощью функции generate_cfg_from_template из задания 21.1-21.1c.
 Не копируйте код функции.
 
 
@@ -230,7 +217,7 @@ router_info = { 'hostname': 'R1' }
 
 
 Проверьте получившийся шаблон templates/ospf.txt, на данных в файле data_files/ospf3.yml,
-с помощью функции generate_cfg_from_template из задания 21.1-21.1d.
+с помощью функции generate_cfg_from_template из задания 21.1-21.1c.
 Не копируйте код функции.
 
 ### Задание 21.4
@@ -263,6 +250,6 @@ interface Gi0/10
 
 Проверьте шаблон templates/add_vlan_to_switch.txt
 на данных в файле data_files/add_vlan_to_switch.yaml,
-с помощью функции generate_cfg_from_template из задания 21.1-21.1d.
+с помощью функции generate_cfg_from_template из задания 21.1-21.1c.
 Не копируйте код функции.
 
