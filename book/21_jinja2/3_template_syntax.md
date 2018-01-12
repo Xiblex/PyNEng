@@ -26,8 +26,9 @@
 from jinja2 import Environment, FileSystemLoader
 import yaml
 import sys
+import os
 
-TEMPLATE_DIR, template = sys.argv[1].split('/')
+TEMPLATE_DIR, template = os.path.split(sys.argv[1])
 VARS_FILE = sys.argv[2]
 
 env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
