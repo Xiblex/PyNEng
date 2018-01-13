@@ -1,4 +1,4 @@
-Все задания и вспомогательные файлы можно скачать в [репозитории](https://github.com/natenka/pyneng-examples-exercises/tree/python3).
+Все задания и вспомогательные файлы можно скачать в [репозитории](https://github.com/natenka/pyneng-examples-exercises/).
 
 <br>
 
