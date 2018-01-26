@@ -25,7 +25,7 @@
     * [Аутентификация на GitHub](book/02_git_github/git_github_auth.md)
     * [Добавление изменений в Git и GitHub](book/02_git_github/git_github_changes.md)
     * [Работа с репозиторием заданий и примеров](book/02_git_github/pyneng_github.md)
-
+    * [Дополнительные материалы](book/02_git_github/further_reading.md)
     * [Задания](exercises/02_git_github/02_exercises.md)
   * [3. Начало работы с Python](book/03_start/README.md)
     * [Синтаксис Python](book/03_start/0_syntax.md)
