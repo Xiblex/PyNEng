@@ -44,11 +44,10 @@ Out[10]: True
 
 Например, с помощью any, можно заменить функцию ignore_command:
 ```python
-def ignore_command(command, ignore):
+def ignore_command(command):
     '''
     Функция проверяет содержится ли в команде слово из списка ignore.
     * command - строка. Команда, которую надо проверить
-    * ignore - список. Список слов
     * Возвращает True, если в команде содержится слово из списка ignore, False - если нет
     '''
     ignore = ['duplex', 'alias', 'Current configuration']
@@ -63,11 +62,10 @@ def ignore_command(command, ignore):
 
 На такой вариант:
 ```python
-def ignore_command(command, ignore):
+def ignore_command(command):
     '''
     Функция проверяет содержится ли в команде слово из списка ignore.
     command - строка. Команда, которую надо проверить
-    ignore - список. Список слов
     Возвращает True, если в команде содержится слово из списка ignore, False - если нет
     '''
     ignore = ['duplex', 'alias', 'Current configuration']
