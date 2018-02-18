@@ -163,7 +163,7 @@ In [30]: print(keys)
 dict_keys(['name', 'location', 'vendor'])
 ```
 
-Сейчас переменной keys соответствует view dict_keys, в котором три ключа: name, locationa и vendor.
+Сейчас переменной keys соответствует view dict_keys, в котором три ключа: name, location и vendor.
 
 Но, если мы добавим в словарь еще одну пару ключ-значение, объект keys тоже поменяется:
 
