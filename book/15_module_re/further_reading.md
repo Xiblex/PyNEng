@@ -2,6 +2,7 @@
 
 Регулярные выражения в Python:
 
+* [Регулярные выражения в Python от простого к сложному. Подробности, примеры, картинки, упражнения](https://habrahabr.ru/post/349860/)
 * [Regular Expression HOWTO](https://docs.python.org/3.6/howto/regex.html)
 * [Python 3 Module of the Week. Модуль re](https://pymotw.com/3/re/)
 
