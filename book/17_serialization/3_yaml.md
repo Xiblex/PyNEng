@@ -195,7 +195,7 @@ with open('sw_templates.yaml', 'w') as f:
     yaml.dump(to_yaml, f)
 
 with open('sw_templates.yaml') as f:
-    print f.read()
+    print(f.read())
 
 ```
 
