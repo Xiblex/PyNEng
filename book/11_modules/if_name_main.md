@@ -1,204 +1,122 @@
 ## ```if __name__ == "__main__"```
 
-Иногда скрипт, который вы создали, может выполняться и самостоятельно, и может быть импортирован как модуль другим скриптом.
+Достаточно часто скрипт может выполняться и самостоятельно, и может быть импортирован как модуль другим скриптом.
 
-Добавим ещё один скрипт к предыдущему примеру, который будет импортировать функцию из файла generate_sw_int_cfg.py.
-
-Файл sw_cfg_templates.py с шаблонами конфигурации:
+Например, скрипт filter_functions.py содержит такой код:
 ```python
-basic_cfg = """
-service timestamps debug datetime msec localtime show-timezone year
-service timestamps log datetime msec localtime show-timezone year
-service password-encryption
-service sequence-numbers
-!
-no ip domain lookup
-!
-"""
+from pprint import pprint
 
-lines_cfg = """
-!
-line con 0
- logging synchronous
- history size 100
-line vty 0 4
- logging synchronous
- history size 100
- transport input ssh
-!
-"""
+
+def filter_file_lines(filename, substring):
+    result = []
+    with open(filename) as f:
+        for line in f:
+            if substring in line:
+                result.append(line)
+    return result
+
+
+pprint(filter_file_lines('config_r1.txt', 'ip address'))
 ```
 
-В файле generate_sw_cfg.py импортируются шаблоны из sw_cfg_templates.py и функции из предыдущих файлов:
+В скрипте содержится одна функция, которая отбирает из файла только те строки, в которых содержится указанная подстрока.
+
+Результат выполнения скрипта:
+```
+$ python filter_functions.py
+[' ip address 10.1.1.1 255.255.255.255\n',
+ ' ip address 10.0.13.1 255.255.255.0\n',
+ ' no ip address\n',
+ ' ip address 10.0.19.1 255.255.255.0\n',
+ ' no ip address\n',
+ ' no ip address\n']
+```
+
+Скрипт get_data.py импортирует функцию filter_file_lines из скрипта filter_functions.py и использует её для получения строк в которых содержится слово interface:
 ```python
-from sw_data import sw1_fast_int
-from generate_sw_int_cfg import generate_access_cfg
-from sw_cfg_templates import basic_cfg, lines_cfg
+from filter_functions import filter_file_lines
+from pprint import pprint
 
-
-print(basic_cfg)
-print('\n'.join(generate_access_cfg(sw1_fast_int)))
-print(lines_cfg)
+pprint(filter_file_lines('config_r1.txt', 'interface'))
 ```
 
-В результате должны отобразиться такие части конфигурации, по порядку:
-шаблон basic_cfg, настройка интерфейсов, шаблон lines_cfg.
-
-
-> Обратите внимание, что из файла можно импортировать несколько объектов:
->```python
->from sw_cfg_templates import basic_cfg, lines_cfg
->```
-
-Результат выполнения:
+Выполнение скрипта get_data.py выглядит таким образом:
 ```
-$ python generate_sw_cfg.py
-interface FastEthernet0/12
- switchport mode access
- switchport access vlan 10
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/14
- switchport mode access
- switchport access vlan 11
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/16
- switchport mode access
- switchport access vlan 17
- spanning-tree portfast
- spanning-tree bpduguard enable
-
-service timestamps debug datetime msec localtime show-timezone year
-service timestamps log datetime msec localtime show-timezone year
-service password-encryption
-service sequence-numbers
-!
-no ip domain lookup
-!
-
-interface FastEthernet0/12
- switchport mode access
- switchport access vlan 10
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/14
- switchport mode access
- switchport access vlan 11
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/16
- switchport mode access
- switchport access vlan 17
- spanning-tree portfast
- spanning-tree bpduguard enable
-
-!
-line con 0
- logging synchronous
- history size 100
-line vty 0 4
- logging synchronous
- history size 100
- transport input ssh
-!
+$ python get_data.py
+[' ip address 10.1.1.1 255.255.255.255\n',
+ ' ip address 10.0.13.1 255.255.255.0\n',
+ ' no ip address\n',
+ ' ip address 10.0.19.1 255.255.255.0\n',
+ ' no ip address\n',
+ ' no ip address\n']
+['interface Loopback0\n',
+ 'interface Tunnel0\n',
+ 'interface Ethernet0/0\n',
+ 'interface Ethernet0/1\n',
+ 'interface Ethernet0/2\n',
+ 'interface Ethernet0/3\n',
+ 'interface Ethernet0/3.100\n',
+ 'interface Ethernet1/0\n',
+ ' event neighbor-discovery interface regexp .*Ethernet.* cdp add\n',
+ ' action 3.0 cli command "interface $_nd_local_intf_name"\n']
 ```
 
+Полученный вывод содержит не только список со строками, в которых содержится слово interface, но и вывод из скрипта filter_functions.py.
 
-Полученный вывод не совсем правильный: перед строками шаблона basic_cfg идет лишняя конфигурация интерфейсов.
+Так происходит из-за того, что при импорте модуля, Python выполняет его.
 
+> Python выполняет весь модуль, независимо от того как именно импортируется модуль: `import module`, `from module import function` или `from module import *`.
 
-Так получилось из-за строки print в файле generate_sw_int_cfg.py:
-```python
-print('\n'.join(generate_access_cfg(sw1_fast_int)))
-```
-
-Когда скрипт импортирует какой-то модуль, всё, что находится в модуле, выполняется.
-И, так как в данном случае, в файле generate_sw_int_cfg.py есть строка с print, на стандартный поток вывода попадает результат выполнения этого выражения при запуске файла generate_sw_int_cfg.py.
 
 В Python есть специальный прием, который позволяет указать, что какой-то код должен выполняться, только когда файл запускается напрямую.
 
-Файл generate_sw_int_cfg2.py:
+
+Файл filter_functions.py:
 ```python
-import sw_int_templates
-from sw_data import sw1_fast_int
+from pprint import pprint
 
 
-def generate_access_cfg(sw_dict):
+def filter_file_lines(filename, substring):
     result = []
-    for intf, vlan in sw_dict['access'].items():
-        result.append('interface FastEthernet' + intf)
-        for command in sw_int_templates.access_template:
-            if command.endswith('access vlan'):
-                result.append(' {} {}'.format(command, vlan))
-            else:
-                result.append(' {}'.format(command))
+    with open(filename) as f:
+        for line in f:
+            if substring in line:
+                result.append(line)
     return result
 
-if __name__ == '__main__':
-    print('\n'.join(generate_access_cfg(sw1_fast_int)))
 
+if __name__ == "__main__":
+    pprint(filter_file_lines('config_r1.txt', 'ip address'))
 ```
 
 Обратите внимание на запись:
 ```python
 if __name__ == '__main__':
-    print('\n'.join(generate_access_cfg(sw1_fast_int)))
+    pprint(filter_file_lines('config_r1.txt', 'ip address'))
 ```
 
-Переменная ```__name__``` - это специальная переменная, которая выставляется равной ```"__main__"```, если файл запускается как основная программа, и выставляется равной имени модуля, если модуль импортируется.
+Переменная ```__name__``` - это специальная переменная, которая будет равна ```"__main__"```, если файл запускается как основная программа, и выставляется равной имени модуля, если модуль импортируется.
 
 Таким образом, условие ```if __name__ == '__main__'``` проверяет, был ли файл запущен напрямую.
 
-Измените в файле generate_sw_cfg.py строку:
-```python
-from generate_sw_int_cfg import generate_access_cfg
+Теперь, при выполнении скрипта get_data.py, вывод такой:
+```
+$ python get_data.py
+['interface Loopback0\n',
+ 'interface Tunnel0\n',
+ 'interface Ethernet0/0\n',
+ 'interface Ethernet0/1\n',
+ 'interface Ethernet0/2\n',
+ 'interface Ethernet0/3\n',
+ 'interface Ethernet0/3.100\n',
+ 'interface Ethernet1/0\n',
+ ' event neighbor-discovery interface regexp .*Ethernet.* cdp add\n',
+ ' action 3.0 cli command "interface $_nd_local_intf_name"\n']
 ```
 
-на строку:
-```python
-from generate_sw_int_cfg2 import generate_access_cfg
-```
+Строки, которые находятся в блоке ```if __name__ == '__main__'``` не выполняются при импорте.
 
-И попробуйте запустить скрипт:
-```python
-$ python generate_sw_cfg.py
+При выводе информации на стандартный поток вывода, проще всего заметить тот факт, что модуль выполняется при импорте, но гораздо больше проблем возникает когда, например, надо импортировать функцию из скрипта, который выполняет подклюнение к сотням устройств.
+В таком случае, во время импорта будет выполняться подключение, а только затем сможет выполниться скрипт, который импортировал другой модуль.
 
-service timestamps debug datetime msec localtime show-timezone year
-service timestamps log datetime msec localtime show-timezone year
-service password-encryption
-service sequence-numbers
-!
-no ip domain lookup
-!
-
-interface FastEthernet0/12
- switchport mode access
- switchport access vlan 10
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/14
- switchport mode access
- switchport access vlan 11
- spanning-tree portfast
- spanning-tree bpduguard enable
-interface FastEthernet0/16
- switchport mode access
- switchport access vlan 17
- spanning-tree portfast
- spanning-tree bpduguard enable
-
-!
-line con 0
- logging synchronous
- history size 100
-line vty 0 4
- logging synchronous
- history size 100
- transport input ssh
-!
-
-```
-
-Теперь print из файла generate_sw_int_cfg2.py не выводится.
-
+> При создании функции, она не выполняется, поэтому в блок ```if __name__ == '__main__'``` выносится код, который вызывает функции.
