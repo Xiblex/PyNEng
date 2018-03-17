@@ -156,9 +156,6 @@ R1
 Завершается сессия вызовом метода close:
 ```python
 In [20]: ssh.close()
-
-In [21]: ssh.closed
-Out[21]: False
 ```
 
 ### Специальные символы в shell
