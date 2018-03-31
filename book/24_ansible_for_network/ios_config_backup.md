@@ -10,8 +10,6 @@ Playbook 5_ios_config_backup.yml:
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -23,7 +21,6 @@ Playbook 5_ios_config_backup.yml:
           - login local
           - transport input ssh
         backup: yes
-        provider: "{{ cli }}"
 ```
 
 {% endraw %}

@@ -19,8 +19,6 @@
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -32,7 +30,6 @@
           - ip address 192.168.230.1 255.255.255.0
         after:
           - no shutdown
-        provider: "{{ cli }}"
 ```
 
 Первый запуск playbook, с внесением изменений:
@@ -58,8 +55,6 @@ $ ansible-playbook 7_ios_config_after.yml -v
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -73,7 +68,6 @@ $ ansible-playbook 7_ios_config_after.yml -v
         after:
           - end
           - write
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 

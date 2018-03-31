@@ -27,8 +27,6 @@ ip access-list extended IN_to_OUT
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -40,7 +38,6 @@ ip access-list extended IN_to_OUT
           - permit tcp 10.0.1.0 0.0.0.255 any eq www
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 
@@ -87,8 +84,6 @@ Playbook 9_ios_config_match_exact.yml (будет постепенно допо�
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -101,7 +96,6 @@ Playbook 9_ios_config_match_exact.yml (будет постепенно допо�
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
           - deny   ip any any
-        provider: "{{ cli }}"
 ```
 
 {% endraw %}
@@ -132,8 +126,6 @@ ip access-list extended IN_to_OUT
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -148,7 +140,6 @@ ip access-list extended IN_to_OUT
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
           - deny   ip any any
-        provider: "{{ cli }}"
 ```
 
 {% endraw %}
@@ -190,8 +181,6 @@ ip access-list extended IN_to_OUT
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -207,7 +196,6 @@ ip access-list extended IN_to_OUT
           - permit icmp any any
           - deny   ip any any
         match: exact
-        provider: "{{ cli }}"
 ```
 
 {% endraw %}
@@ -240,8 +228,6 @@ ip access-list extended IN_to_OUT
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -257,7 +243,6 @@ ip access-list extended IN_to_OUT
           - permit icmp any any
           - deny   ip any any
         match: exact
-        provider: "{{ cli }}"
 ```
 
 {% endraw %}
@@ -306,8 +291,6 @@ Playbook 9_ios_config_match_strict.yml:
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -322,7 +305,6 @@ Playbook 9_ios_config_match_strict.yml:
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
         match: strict
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 
@@ -349,8 +331,6 @@ $ ansible-playbook 9_ios_config_match_strict.yml -v
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -365,7 +345,6 @@ $ ansible-playbook 9_ios_config_match_strict.yml -v
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
         match: none
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 

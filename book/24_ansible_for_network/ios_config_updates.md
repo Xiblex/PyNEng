@@ -10,8 +10,6 @@ Playbook 2_ios_config_parents_basic.yml:
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -22,7 +20,6 @@ Playbook 2_ios_config_parents_basic.yml:
         lines:
           - login local
           - transport input ssh
-        provider: "{{ cli }}"
 
 ```
 {% endraw %}
@@ -54,8 +51,6 @@ $ ansible-playbook 2_ios_config_parents_basic.yml -v
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -66,7 +61,6 @@ $ ansible-playbook 2_ios_config_parents_basic.yml -v
         lines:
           - login local
           - transport input ssh
-        provider: "{{ cli }}"
       register: cfg
 
     - name: Show config updates

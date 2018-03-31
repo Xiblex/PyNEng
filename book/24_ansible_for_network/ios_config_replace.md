@@ -25,8 +25,6 @@ ip access-list extended IN_to_OUT
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -41,7 +39,6 @@ ip access-list extended IN_to_OUT
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
           - deny   ip any any
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 
@@ -87,8 +84,6 @@ Playbook 10_ios_config_replace_block.yml:
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -104,7 +99,6 @@ Playbook 10_ios_config_replace_block.yml:
           - permit icmp any any
           - deny   ip any any
         replace: block
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 

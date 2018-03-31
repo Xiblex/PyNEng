@@ -16,8 +16,6 @@ line vty 0 4
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -28,7 +26,6 @@ line vty 0 4
         lines:
           - login local
           - transport input ssh
-        provider: "{{ cli }}"
 
 ```
 {% endraw %}
@@ -57,8 +54,6 @@ policy-map OUT_QOS
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -69,7 +64,6 @@ policy-map OUT_QOS
           - class class-default
         lines:
           - shape average 100000000 1000000
-        provider: "{{ cli }}"
 ```
 
 

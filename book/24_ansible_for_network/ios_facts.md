@@ -32,6 +32,7 @@
  * dir
  * show version
  * show interfaces
+ * show ip interface
  * show ipv6 interface
  * show lldp
  * show lldp neighbors detail
@@ -40,7 +41,6 @@
 ```
 - ios_facts:
     gather_subset: all
-    provider: "{{ cli }}"
 ```
 
 Собрать только подмножество interfaces:
@@ -48,7 +48,6 @@
 - ios_facts:
     gather_subset:
       - interfaces
-    provider: "{{ cli }}"
 ```
 
 Собрать всё, кроме hardware:
@@ -56,7 +55,6 @@
 - ios_facts:
     gather_subset:
       - "!hardware"
-    provider: "{{ cli }}"
 ```
 
 Ansible собирает такие факты:
@@ -82,15 +80,12 @@ Ansible собирает такие факты:
 
 - name: Collect IOS facts
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: Facts
       ios_facts:
         gather_subset: all
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 
@@ -120,15 +115,12 @@ Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
 
 - name: Collect IOS facts
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: Facts
       ios_facts:
         gather_subset: all
-        provider: "{{ cli }}"
 
     - name: Show ansible_net_all_ipv4_addresses fact
       debug: var=ansible_net_all_ipv4_addresses
@@ -159,15 +151,12 @@ Playbook 3_ios_facts.yml собирает всю информацию об ус�
 
 - name: Collect IOS facts
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: Facts
       ios_facts:
         gather_subset: all
-        provider: "{{ cli }}"
       register: ios_facts_result
 
     #- name: Create all_facts dir

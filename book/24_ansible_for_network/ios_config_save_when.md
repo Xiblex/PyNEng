@@ -32,8 +32,6 @@ Playbook 4_ios_config_save_when.yml:
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -45,7 +43,6 @@ Playbook 4_ios_config_save_when.yml:
           - login local
           - transport input ssh
         #save_when: modified
-        provider: "{{ cli }}"
       register: cfg
 
 
@@ -53,7 +50,6 @@ Playbook 4_ios_config_save_when.yml:
       ios_command:
         commands:
           - write
-        provider: "{{ cli }}"
       when: cfg.changed
 ```
 {% endraw %}

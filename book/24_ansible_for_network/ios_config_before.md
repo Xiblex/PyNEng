@@ -18,8 +18,6 @@ Playbook 8_ios_config_before.yml:
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -33,7 +31,6 @@ Playbook 8_ios_config_before.yml:
           - permit tcp 10.0.1.0 0.0.0.255 any eq www
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
-        provider: "{{ cli }}"
 ```
 
 В playbook 8_ios_config_before.yml ACL IN_to_OUT сначала удаляется с помощью параметра before, а затем создается заново.

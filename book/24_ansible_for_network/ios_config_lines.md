@@ -11,8 +11,6 @@
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -20,7 +18,6 @@
       ios_config:
         lines:
           - service password-encryption
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 > Используется переменная cli, которая указана в файле group_vars/all.yml.
@@ -58,8 +55,6 @@ $ ansible-playbook 1_ios_config_lines.yml
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -70,7 +65,6 @@ $ ansible-playbook 1_ios_config_lines.yml
           - no ip http server
           - no ip http secure-server
           - no ip domain lookup
-        provider: "{{ cli }}"
 ```
 
 Результат выполнения:

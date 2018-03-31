@@ -24,15 +24,12 @@
 
 - name: Run show commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: run sh ip int br
       ios_command:
         commands: show ip int br
-        provider: "{{ cli }}"
       register: sh_ip_int_br_result
 
     - name: Debug registered var
@@ -67,8 +64,6 @@ Playbook 2_ios_command.yml выполняет несколько команд и
 
 - name: Run show commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -77,7 +72,6 @@ Playbook 2_ios_command.yml выполняет несколько команд и
         commands:
           - show ip int br
           - sh ip route
-        provider: "{{ cli }}"
       register: show_result
 
     - name: Debug registered var
@@ -134,8 +128,6 @@ Ansible обнаружил ошибку и возвращает сообщени
 
 - name: Run show commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -144,8 +136,6 @@ Ansible обнаружил ошибку и возвращает сообщени
         commands: ping 192.168.100.100
         wait_for:
           - result[0] contains 'Success rate is 100 percent'
-        provider: "{{ cli }}"
-
 ```
 
 В playbook всего одна задача, которая отправляет команду ping 192.168.100.100, и проверяет, есть ли в выводе команды фраза 'Success rate is 100 percent'.
@@ -179,8 +169,6 @@ Playbook  3_ios_command_wait_for_interval.yml выполняет две попы
 
 - name: Run show commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -191,7 +179,6 @@ Playbook  3_ios_command_wait_for_interval.yml выполняет две попы
           - result[0] contains 'Success rate is 100 percent'
         retries:  2
         interval: 12
-        provider: "{{ cli }}"
 ```
 
 

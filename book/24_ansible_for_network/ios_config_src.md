@@ -13,15 +13,12 @@
 
 - name: Run cfg commands on router
   hosts: 192.168.100.1
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: Config ACL
       ios_config:
         src: templates/acl_cfg.txt
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 
@@ -129,15 +126,12 @@ ospf_ints:
 
 - name: Run cfg commands on router
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
     - name: Config OSPF
       ios_config:
         src: templates/ospf.j2
-        provider: "{{ cli }}"
 ```
 {% endraw %}
 

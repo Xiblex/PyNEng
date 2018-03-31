@@ -21,8 +21,6 @@
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -33,7 +31,6 @@
         lines:
           - ip address 192.168.200.1 255.255.255.0
           - ip mtu 1500
-        provider: "{{ cli }}"
 ```
 
 Если добавить параметр ```defaults: yes```, изменения уже не будут внесены, если не хватало только команды ip mtu 1500 (playbook 6_ios_config_defaults.yml):
@@ -42,8 +39,6 @@
 
 - name: Run cfg commands on routers
   hosts: cisco-routers
-  gather_facts: false
-  connection: local
 
   tasks:
 
@@ -55,7 +50,6 @@
           - ip address 192.168.200.1 255.255.255.0
           - ip mtu 1500
         defaults: yes
-        provider: "{{ cli }}"
 ```
 
 Запуск playbook:
@@ -66,23 +60,4 @@ $ ansible-playbook 6_ios_config_defaults.yml
 
 ![6e_ios_config_default]({{ book.ansible_img_path }}6e_ios_config_defaults.png)
 
-
-Если на оборудовании большой конфигурационный файл, может возникнуть такая ошибка:
-```
-fatal: [192.168.100.3]: FAILED! => {"changed": false, "failed": true, "msg": "unable to retrieve current config", "stderr": "timeout trying to send command: b'show running-config all'", "stderr_lines": ["timeout trying to send command: b'show running-config all'"]}
-```
-
-Так происходит из-за того, что Ansible не дождался приглашения.
-По умолчанию, Ansible ждет вывода команды 10 секунд и для большого конфигурационного файла этого может быть недостаточно.
-
-Установить большее значение таймаута можно в переменной cli, в файле group_vars/all.yml:
-```
-cli:
-  host: "{{ inventory_hostname }}"
-  username: "cisco"
-  password: "cisco"
-  authorize: yes
-  auth_pass: "cisco"
-  timeout: 100
-```
 
