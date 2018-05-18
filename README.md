@@ -2,7 +2,7 @@
 
 ### Автор: Наташа Самойленко
 
-[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/natenka)
+![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/natenka)
 
 ## Книга переведена на Python 3.6. [Что изменилось?](https://natenka.github.io/pyneng/pyneng-book-updated-to-python-3.6/)
 
