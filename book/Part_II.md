@@ -19,7 +19,7 @@
 Конечно же, копирование функции так же неудобно, как и копирование обычного кода.
 Для повторного использования кода из другого скрипта Python используются модули.
 
-[Одинадцатый раздел](https://natenka.gitbooks.io/pyneng/content/book/11_modules/) посвящен созданию собственных модулей, а в [двенадцатом разделе](https://natenka.gitbooks.io/pyneng/content/book/12_useful_modules/) рассматриваются полезные модули из стандартной библиотеки Python.
+[Одиннадцатый раздел](https://natenka.gitbooks.io/pyneng/content/book/11_modules/) посвящен созданию собственных модулей, а в [двенадцатом разделе](https://natenka.gitbooks.io/pyneng/content/book/12_useful_modules/) рассматриваются полезные модули из стандартной библиотеки Python.
 
 [Последний раздел](https://natenka.gitbooks.io/pyneng/content/book/13_iterator_generator/) этой части посвящен итерируемым объектам, итераторам и генераторам.
 
