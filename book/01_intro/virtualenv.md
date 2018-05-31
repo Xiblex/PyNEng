@@ -24,7 +24,7 @@ export WORKON_HOME=~/venv
 . /usr/local/bin/virtualenvwrapper.sh
 ```
 
-> Если вы используете не bash, посмотрите, поддерживается ли ваш shell в [документации](http://virtualenvwrapper.readthedocs.io/en/latest/install.html)
+> Если Вы используете не bash, посмотрите, поддерживается ли ваш shell в [документации](http://virtualenvwrapper.readthedocs.io/en/latest/install.html)
 
 WORKON_HOME - указывает расположение виртуальных окружений.
 А вторая строка - где находится скрипт, установленный с пакетом virtualenvwrapper.
