@@ -29,7 +29,7 @@ $ sudo apt-get install git
 ### Первичная настройка Git
 
 Для начала работы с Git необходимо указать имя и email пользователя, которые будут использоваться в commit.
-Если вы планируете работать с GitHub, тут надо указать имя пользователя и email, которые используются на GitHub:
+Если Вы планируете работать с GitHub, тут надо указать имя пользователя и email, которые используются на GitHub:
 ```
 $ git config --global user.name "username"
 $ git config --global user.email "username.user@example.com"

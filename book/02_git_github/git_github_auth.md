@@ -51,5 +51,5 @@ $ ssh -T git@github.com
 Hi username! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-Теперь вы готовы работать с Git и GitHub.
+Теперь Вы готовы работать с Git и GitHub.
 
