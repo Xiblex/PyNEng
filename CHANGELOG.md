@@ -18,7 +18,7 @@
 На случай если задача будет более сложная и функционала concurrent.futures не хватит, оставлены основы  модулей threading и multiprocessing.
 Конечно, этих основ недостаточно, чтобы решать более сложные задачи, но это неплохой старт.
 
-### 21.10.2017 Подраздел list, dict, set comprehensions перенесен в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
+### 21.10.2017 Подраздел list, dict, set comprehensions перенесён в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
 
 ### 15.10.2017 Реорганизация книги
 
@@ -41,7 +41,7 @@
 * Подраздел о Git и GitHub вынесен в отдельный [раздел](https://natenka.gitbooks.io/pyneng/content/book/02_git_github/)
 * Раздел функции разделен на две части: [Функции](https://natenka.gitbooks.io/pyneng/content/book/09_functions/) и [Полезные встроенные функции](https://natenka.gitbooks.io/pyneng/content/book/10_useful_functions/)
 * Раздел модули разделен на две части: [Модули](https://natenka.gitbooks.io/pyneng/content/book/11_modules/) и [Полезные модули](https://natenka.gitbooks.io/pyneng/content/book/12_useful_modules/)
-* Раздел Unicode перенесен в главу [Запись и передача данных](https://natenka.gitbooks.io/pyneng/content/book/Part_IV.html)
+* Раздел Unicode перенесён в главу [Запись и передача данных](https://natenka.gitbooks.io/pyneng/content/book/Part_IV.html)
 
 ### 14.10.2017 В подраздел [Работа с файлами в формате CSV](https://natenka.gitbooks.io/pyneng/content/book/17_serialization/1_csv.html) добавлена информация о DictWriter
 
