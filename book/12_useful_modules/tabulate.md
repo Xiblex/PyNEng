@@ -187,4 +187,4 @@ In [27]: print(tabulate(list_of_dict, headers='keys', tablefmt='pipe', stralign=
 * [Tabulate 0.7.1 with LaTeX & MediaWiki tables](https://txt.arboreus.com/2013/12/12/tabulate-0-7-1-with-latex-tables-named-tuples-etc.html)
 
 Stackoverflow:
-* [Printing Lists as Tabular Data](https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data). Обратите внимание на [ответ](https://stackoverflow.com/a/26937531) - в нем указаны другие аналоги tabulate.
+* [Printing Lists as Tabular Data](https://stackoverflow.com/questions/9535954/printing-lists-as-tabular-data). Обратите внимание на [ответ](https://stackoverflow.com/a/26937531) - в нём указаны другие аналоги tabulate.
