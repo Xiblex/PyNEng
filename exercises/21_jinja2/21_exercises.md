@@ -122,7 +122,7 @@ data_dict = {'vlans': {
 ### Задание 21.2
 
 На основе конфигурации config_r1.txt, создать шаблоны:
-* templates/cisco_base.txt - в нем должны быть все строки, кроме настройки alias и event manager
+* templates/cisco_base.txt - в нём должны быть все строки, кроме настройки alias и event manager
  * имя хоста должно быть переменной hostname
 * templates/alias.txt - в этот шаблон перенести все alias
 * templates/eem_int_desc.txt - в этом шаблоне должен быть event manager applet
