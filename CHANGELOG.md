@@ -18,7 +18,7 @@
 На случай если задача будет более сложная и функционала concurrent.futures не хватит, оставлены основы  модулей threading и multiprocessing.
 Конечно, этих основ недостаточно, чтобы решать более сложные задачи, но это неплохой старт.
 
-### 21.10.2017 Подраздел list, dict, set comprehensions перенесён в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
+### 21.10.2017 Подраздел [List, dict, set comprehensions](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html) перенесён в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
 
 ### 15.10.2017 Реорганизация книги
 
