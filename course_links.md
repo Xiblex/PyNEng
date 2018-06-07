@@ -3,12 +3,12 @@
 Тут собраны ссылки на все ресурсы, которые пригодятся в процессе обучения.
 
 
-* [План обучения](schedule.md)
-* [Варианты виртуальной машины для курса](book/01_intro/README.md)
-* [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/)
-* [Тесты](https://github.com/natenka/pyneng-examples-exercises/blob/master/tests.md)
-* [Команда PyNEng в Slack](https://pyneng-slack.herokuapp.com/) - используется для обсуждения книги, вопросов по заданиям и другим вопросов по автоматизации
-* [Презентации к курсу](https://github.com/natenka/pyneng-slides) - пригодятся для повторения материала
+* [План обучения](schedule.md).
+* [Варианты виртуальной машины для курса](book/01_intro/README.md).
+* [Репозиторий с примерами и заданиями](https://github.com/natenka/pyneng-examples-exercises/).
+* [Тесты](https://github.com/natenka/pyneng-examples-exercises/blob/master/tests.md).
+* [Команда PyNEng в Slack](https://pyneng-slack.herokuapp.com/) используется для обсуждения книги, вопросов по заданиям и других вопросов по автоматизации.
+* [Презентации к курсу](https://github.com/natenka/pyneng-slides) пригодятся для повторения материала.
 
 
 Почти в каждом разделе книги есть подраздел "Дополнительные материалы", в котором находятся полезные материалы и ссылки по теме, а также ссылки на документацию.
