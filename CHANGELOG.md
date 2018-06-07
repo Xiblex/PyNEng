@@ -37,7 +37,7 @@
 
 Изменения по разделам:
 
-* Добавлен раздел [Примеры использования основ](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/) - в нём показаны примеры на основе пройденных тем, а также находятся подразделы [Распаковка переменных](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/variable_unpacking.html) и [List, dict, set comprehensions](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
+* Добавлен раздел [Примеры использования основ](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/) – в нём показаны примеры на основе пройденных тем, а также находятся подразделы [Распаковка переменных](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/variable_unpacking.html) и [List, dict, set comprehensions](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
 * Подраздел о Git и GitHub вынесен в отдельный [раздел](https://natenka.gitbooks.io/pyneng/content/book/02_git_github/)
 * Раздел функции разделен на две части: [Функции](https://natenka.gitbooks.io/pyneng/content/book/09_functions/) и [Полезные встроенные функции](https://natenka.gitbooks.io/pyneng/content/book/10_useful_functions/)
 * Раздел модули разделен на две части: [Модули](https://natenka.gitbooks.io/pyneng/content/book/11_modules/) и [Полезные модули](https://natenka.gitbooks.io/pyneng/content/book/12_useful_modules/)
