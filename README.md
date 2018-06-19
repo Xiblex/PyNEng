@@ -2,7 +2,7 @@
 
 ## Обсуждение
 
-Для обсуждения книги и заданий используется [Slack](https://pyneng-slack.herokuapp.com/). Обсуждения на GitBook закрыты. Все вопросы, предложения и замечания по книге также пишите в Slack.
+Для обсуждения книги и заданий используется [Slack](https://pyneng-slack.herokuapp.com). Обсуждения на [GitBook](https://legacy.gitbook.com/book/natenka/pyneng/details) закрыты. Все вопросы, предложения и замечания по книге также пишите в [Slack](https://pyneng-slack.herokuapp.com).
 
 ## Зачем Вам учиться программировать?
 
