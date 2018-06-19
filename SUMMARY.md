@@ -1,7 +1,7 @@
 # Summary
 
 * [Введение](README.md)
-  * [О курсе](about.md)
+  * [О книге](about.md)
   * [Изменения в книге](CHANGELOG.md)
   * [Ресурсы для обучения по книге](course_links.md)
   * [Как учиться по этой книге](howto.md)
