@@ -2,11 +2,11 @@
 
 Здесь собраны ссылки на все ресурсы, которые пригодятся в процессе обучения:
 
-* [План обучения](schedule.md);
+* [Пример плана обучения](schedule.md);
 * [Варианты виртуальной машины для курса](book/01_intro/README.md);
-* [Репозиторий](https://github.com/natenka/pyneng-examples-exercises/)с примерами и заданиями;
+* [Репозиторий](https://github.com/natenka/pyneng-examples-exercises/) с примерами и заданиями;
 * [Тесты](https://github.com/natenka/pyneng-examples-exercises/blob/master/tests.md);
 * [Команда PyNEng](https://pyneng-slack.herokuapp.com/) в Slack используется для обсуждения книги, вопросов по заданиям и других вопросов по автоматизации;
-* [Презентации](https://github.com/natenka/pyneng-slides) пригодятся для повторения материала.
+* [Презентации](https://github.com/natenka/pyneng-slides/) пригодятся для повторения материала.
 
 Почти в каждой части книги есть глава Дополнительные материалы, в которой находятся полезные материалы и ссылки по теме, а также ссылки на документацию. Кроме того, я сделала [подборку](https://natenka.github.io/pyneng-resources/) ресурсов по Python для сетевых инженеров, где можно найти много полезных статей, книг, видео курсов и подкастов.
