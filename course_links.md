@@ -6,7 +6,7 @@
 * [варианты виртуальной машины для курса](book/01_intro/README.md);
 * [репозиторий](https://github.com/natenka/pyneng-examples-exercises/) с примерами и заданиями;
 * [тесты](https://github.com/natenka/pyneng-examples-exercises/blob/master/tests.md);
-* [команда PyNEng](https://pyneng-slack.herokuapp.com/) в Slack используется для обсуждения книги, вопросов по заданиям и других вопросов по автоматизации;
+* [команда PyNEng](https://pyneng-slack.herokuapp.com/) в Slack;
 * [презентации](https://github.com/natenka/pyneng-slides/) пригодятся для повторения материала.
 
 Почти в каждой части книги есть глава Дополнительные материалы, в которой находятся полезные материалы и ссылки по теме, а также ссылки на документацию. Кроме того, я сделала [подборку](https://natenka.github.io/pyneng-resources/) ресурсов по Python для сетевых инженеров, где можно найти много полезных статей, книг, видео курсов и подкастов.
