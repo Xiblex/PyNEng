@@ -1,41 +1,20 @@
 ## Изменения в книге
 
-### 28.11.2017 В задании 19.2b добавлены примеры команд с ошибками
+* 28.11.2017 – в задании 19.2b добавлены примеры команд с ошибками;
+* 15.11.2017 – примеры в части про Ansible проверены на Ansible версии 2.4.1;
+* 05.11.2017 – задания 20.2, 20.2a переписаны, чтобы в них предполагалось использование concurrent.futures, задания 20.3, 20.3a удалены;
+* 05.11.2017 – главы про модули threading и multiprocessing перенесены в часть [Дополнительная информация](book/25_additional_info/README.md). В этих главах рассматриваются только основы модулей threading и multiprocessing, при этом, задача запуска функции в потоках и процессах намного проще решается в модуле concurrent.futures. К тому же, при его использовании, не надо переписывать существующий код. На случай, если задача будет более сложная и функционала concurrent.futures не хватит, оставлены основы модулей threading и multiprocessing. Разумеется, этих основ недостаточно, чтобы решать более сложные задачи, но это неплохой старт;
+* 21.10.2017 – раздел [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md) перенесён в [главу 8](book/08_python_basic_examples/README.md)
+* 15.10.2017 – реорганизация книги. Книга разделена на главы:
 
-### 15.11.2017 Примеры в разделах по Ansible проверены на Ansible версии 2.4.1
+** [Глава I. Основы Python](book/Part_I.md)
+** [Глава II. Повторное использование кода](book/Part_II.md)
+** [Глава III. Регулярные выражения](book/Part_III.md)
+** [Глава IV. Запись и передача данных](book/Part_IV.md)
+** [Глава V. Работа с сетевым оборудованием](book/Part_V.md)
+** [Глава VI. Ansible](book/Part_VI.md)
 
-### 05.11.2017 Задания 20.2, 20.2a изменены. Задания 20.3, 20.3a удалены.
-
-Задания 20.2, 20.2a переписаны, чтобы в них предполагалось использование concurrent.futures.
-Задания 20.3, 20.3a удалены.
-
-### 05.11.2017 Подразделы threading и multiprocessing перенесены в раздел [Дополнительная информация](https://natenka.gitbooks.io/pyneng/content/book/25_additional_info/threading_multiprocessing/)
-
-В этих разделах рассматриваются только основы модулей threading и multiprocessing.
-При этом, задача запуска функции в потоках и процессах намного проще решается в модуле concurrent.futures.
-К тому же, при использовании concurrent.futures не надо переписывать существующий код.
-
-На случай если задача будет более сложная и функционала concurrent.futures не хватит, оставлены основы  модулей threading и multiprocessing.
-Конечно, этих основ недостаточно, чтобы решать более сложные задачи, но это неплохой старт.
-
-### 21.10.2017 Подраздел [List, dict, set comprehensions](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html) перенесён в [8 раздел](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html)
-
-### 15.10.2017 Реорганизация книги
-
-Книга разделена на главы:
-
-* [Глава I. Основы Python](https://natenka.gitbooks.io/pyneng/content/book/Part_I.html)
-* [Глава II. Повторное использование кода](https://natenka.gitbooks.io/pyneng/content/book/Part_II.html)
-* [Глава III. Регулярные выражения](https://natenka.gitbooks.io/pyneng/content/book/Part_III.html)
-* [Глава IV. Запись и передача данных](https://natenka.gitbooks.io/pyneng/content/book/Part_IV.html)
-* [Глава V. Работа с сетевым оборудованием](https://natenka.gitbooks.io/pyneng/content/book/Part_V.html)
-* [Глава VI. Ansible](https://natenka.gitbooks.io/pyneng/content/book/Part_VI.html)
-
-
-Изменена нумерация разделов и некоторые разделы разбиты на части.
-Названия разделов и нумерация заданий изменены соответственно в [репозитории pyneng-examples-exercises](https://github.com/natenka/pyneng-examples-exercises).
-
-Изменения по разделам:
+Изменена нумерация глав и некоторые разделы разбиты на несколько. Названия разделов и нумерация заданий изменены соответственно в [репозитории](https://github.com/natenka/pyneng-examples-exercises). Изменения по разделам:
 
 * Добавлен раздел [Примеры использования основ](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/) – в нём показаны примеры на основе пройденных тем, а также находятся подразделы [Распаковка переменных](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/variable_unpacking.html) и [List, dict, set comprehensions](https://natenka.gitbooks.io/pyneng/content/book/08_python_basic_examples/x_comprehensions.html).
 * Подраздел о Git и GitHub вынесен в отдельный [раздел](https://natenka.gitbooks.io/pyneng/content/book/02_git_github/).
