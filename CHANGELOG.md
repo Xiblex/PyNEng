@@ -16,7 +16,7 @@
 
 Изменена нумерация глав и некоторые разделы разбиты на несколько. Названия разделов и нумерация заданий изменены соответственно в [репозитории](https://github.com/natenka/pyneng-examples-exercises). Изменения по разделам:
 
- * добавлена глава [Примеры использования основ](book/08_python_basic_examples/README.md). В ней показаны примеры на основе пройденных тем, а также находятся разделы [Распаковка переменных](book/08_python_basic_examples/README.md) и [List, dict, set comprehensions](book/08_python_basic_examples/README.md);
+ * добавлена глава [Примеры использования основ](book/08_python_basic_examples/README.md). В ней показаны примеры на основе пройденных тем, а также находятся разделы [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md) и [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md);
  * раздел о Git и GitHub вынесен в отдельную [Главу 2](book/02_git_github/README.md);
  * глава Функции разделена на две части: [Функции](book/09_functions/README.md) и [Полезные встроенные функции](book/10_useful_functions/README.md);
  * глава Модули разделена на две части: [Модули](book/11_modules/README.md) и [Полезные модули](book/12_useful_modules/README.md).
