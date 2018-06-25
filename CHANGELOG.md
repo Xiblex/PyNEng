@@ -17,10 +17,10 @@
 Изменена нумерация глав и некоторые разделы разбиты на несколько. Названия разделов и нумерация заданий изменены соответственно в [репозитории](https://github.com/natenka/pyneng-examples-exercises). Изменения по разделам:
 
  * добавлена глава [Примеры использования основ](book/08_python_basic_examples/README.md). В ней показаны примеры на основе пройденных тем, а также находятся разделы [Распаковка переменных](book/08_python_basic_examples/variable_unpacking.md) и [List, dict, set comprehensions](book/08_python_basic_examples/x_comprehensions.md);
- * раздел о Git и GitHub вынесен в отдельную [Главу 2](book/02_git_github/README.md);
- * глава Функции разделена на две части: [Функции](book/09_functions/README.md) и [Полезные встроенные функции](book/10_useful_functions/README.md);
- * глава Модули разделена на две части: [Модули](book/11_modules/README.md) и [Полезные модули](book/12_useful_modules/README.md).
- * раздел Unicode перенесён в часть под названием [Запись и передача данных](book/Part_IV.md).
+ * раздел о Git и GitHub преобразован в [Главу 2](book/02_git_github/README.md);
+ * глава о функциях разделена на две части: [Функции](book/09_functions/README.md) и [Полезные встроенные функции](book/10_useful_functions/README.md);
+ * глава о модулях разделена на две части: [Модули](book/11_modules/README.md) и [Полезные модули](book/12_useful_modules/README.md).
+ * глава о Unicode перенесена в часть [Запись и передача данных](book/Part_IV.md).
 
 * 14.10.2017 – в главу [Работа с файлами в формате CSV](book/17_serialization/README.md) добавлена информация о DictWriter;
 * 27.09.2017 – раздел [Форматирование строк](book/04_data_structures/4b_string_format.md) разделён на две части. Ранее примеры со старым и новым вариантом форматирования строк были перемешаны, теперь идёт сначала новый вариант форматирования строк, затем старый;
