@@ -164,7 +164,7 @@ Successfully installed simplejson
 Cleaning up...
 ```
 
-Если перейти в ipython (рассматривается в разделе [ipython](../02_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
+Если перейти в ipython (рассматривается в разделе [ipython](../03_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
 ```
 (pyneng)$ ipython
 
