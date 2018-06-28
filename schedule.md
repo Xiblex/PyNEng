@@ -5,7 +5,7 @@
 | Неделя | Темы | Задания |
 | :--: | -- | -- |
 | 0 | [Подготовка к работе](book/01_intro/README.md) | [Подготовка к работе](exercises/01_intro/01_exercises.md) |
-| 1 | [Начало работы с Python](book/02_start/README.md) | - |
+| 1 | [Начало работы с Python](book/03_start/README.md) | - |
 | 2 | [Типы данных в Python](book/03_data_structures/README.md) | [Типы данных в Python](exercises/03_data_structures/03_exercises.md) |
 | 3 | [Создание базовых скриптов](book/04_basic_scripts/README.md) | [Создание базовых скриптов](exercises/04_basic_scripts/04_exercises.md) |
 | 4 | [Контроль хода программы](book/05_control_structures/README.md) | [Контроль хода программы](exercises/05_control_structures/05_exercises.md) |
