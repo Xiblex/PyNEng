@@ -13,7 +13,7 @@
 | 6 | [Функции](book/09_functions/README.md) | [Функции](exercises/09_functions/09_exercises.md) |
 | 7 | [Модули](book/11_modules/README.md)| [Модули](exercises/11_modules/11_exercises.md) |
 | 8 | [Регулярные выражения](book/15_regex/README.md) | [Регулярные выражения](exercises/15_regex/15_exercises.md) |
-| 9 | [Unicode](book/16_additional_info/unicode/README.md) | - |
+| 9 | [Unicode](book/16_unicode/README.md) | - |
 | 10 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
 | 11 | [Работа с базами данных](book/11_db/README.md) | [Работа с базами данных](exercises/11_db/11_exercises.md) |
 | 12 | [Подключение к оборудованию](book/12_ssh_telnet/README.md) | [Подключение к оборудованию](exercises/12_ssh_telnet/12_exercises.md) |
