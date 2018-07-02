@@ -16,7 +16,7 @@
 | 9 | [Unicode](book/16_unicode/README.md) | - |
 | 10 | [Сериализация данных](book/17_serialization/README.md) | [Сериализация данных](exercises/17_serialization/17_exercises.md) |
 | 11 | [Работа с базами данных](book/18_db/README.md) | [Работа с базами данных](exercises/18_db/18_exercises.md) |
-| 12 | [Подключение к оборудованию](book/12_ssh_telnet/README.md) | [Подключение к оборудованию](exercises/12_ssh_telnet/12_exercises.md) |
-| 13 | [Шаблоны конфигураций с Jinja2](book/13_jinja2/README.md) | [Шаблоны конфигураций с Jinja2](exercises/13_jinja2/13_exercises.md) |
+| 12 | [Подключение к оборудованию](book/19_ssh_telnet/README.md) | [Подключение к оборудованию](exercises/19_ssh_telnet/19_exercises.md) |
+| 13 | [Шаблоны конфигураций с Jinja2](book/21_jinja2/README.md) | [Шаблоны конфигураций с Jinja2](exercises/21_jinja2/21_exercises.md) |
 | 14 | [Обработка вывода команд TextFSM](book/14_textfsm/README.md) | [Обработка вывода команд TextFSM](exercises/14_textfsm/14_exercises.md) |
 | 15 | [Ansible](book/15_ansible/README.md) | [Ansible](exercises/15_ansible/15_exercises.md) |
