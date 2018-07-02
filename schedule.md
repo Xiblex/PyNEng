@@ -18,5 +18,5 @@
 | 11 | [Работа с базами данных](book/18_db/README.md) | [Работа с базами данных](exercises/18_db/18_exercises.md) |
 | 12 | [Подключение к оборудованию](book/19_ssh_telnet/README.md) | [Подключение к оборудованию](exercises/19_ssh_telnet/19_exercises.md) |
 | 13 | [Шаблоны конфигураций с Jinja2](book/21_jinja2/README.md) | [Шаблоны конфигураций с Jinja2](exercises/21_jinja2/21_exercises.md) |
-| 14 | [Обработка вывода команд TextFSM](book/22_textfsm/README.md) | [Обработка вывода команд TextFSM](exercises/22_textfsm/22_exercises.md) |
-| 15 | [Ansible](book/24_ansible/README.md) | [Ansible](exercises/24_ansible/24_exercises.md) |
+| 14 | [Обработка вывода команд с TextFSM](book/22_textfsm/README.md) | [Обработка вывода команд с TextFSM](exercises/22_textfsm/22_exercises.md) |
+| 15 | [Ansible](book/24_ansible_for_network/README.md) | [Ansible](exercises/24_ansible_for_network/24_exercises.md) |
