@@ -8,7 +8,7 @@
 | 1 | [Начало работы с Python](book/03_start/README.md) | - |
 | 2 | [Типы данных в Python](book/04_data_structures/README.md) | [Типы данных в Python](exercises/04_data_structures/04_exercises.md) |
 | 3 | [Создание базовых скриптов](book/05_basic_scripts/README.md) | [Создание базовых скриптов](exercises/05_basic_scripts/05_exercises.md) |
-| 4 | [Контроль хода программы](book/05_control_structures/README.md) | [Контроль хода программы](exercises/05_control_structures/05_exercises.md) |
+| 4 | [Контроль хода программы](book/06_control_structures/README.md) | [Контроль хода программы](exercises/06_control_structures/05_exercises.md) |
 | 5 | [Работа с файлами](book/06_files/README.md) | [Работа с файлами](exercises/06_files/06_exercises.md) |
 | 6 | [Функции](book/07_functions/README.md) | [Функции](exercises/07_functions/07_exercises.md) |
 | 7 | [Модули](book/08_modules/README.md)| [Модули](exercises/08_modules/08_exercises.md) |
