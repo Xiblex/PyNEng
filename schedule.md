@@ -10,8 +10,8 @@
 | 3 | [Создание базовых скриптов](book/05_basic_scripts/README.md) | [Создание базовых скриптов](exercises/05_basic_scripts/05_exercises.md) |
 | 4 | [Контроль хода программы](book/06_control_structures/README.md) | [Контроль хода программы](exercises/06_control_structures/06_exercises.md) |
 | 5 | [Работа с файлами](book/07_files/README.md) | [Работа с файлами](exercises/07_files/07_exercises.md) |
-| 6 | [Функции](book/07_functions/README.md) | [Функции](exercises/07_functions/07_exercises.md) |
-| 7 | [Модули](book/08_modules/README.md)| [Модули](exercises/08_modules/08_exercises.md) |
+| 6 | [Функции](book/08_functions/README.md) | [Функции](exercises/08_functions/08_exercises.md) |
+| 7 | [Модули](book/09_modules/README.md)| [Модули](exercises/09_modules/09_exercises.md) |
 | 8 | [Регулярные выражения](book/09_regex/README.md) | [Регулярные выражения](exercises/09_regex/09_exercises.html) |
 | 9 | [Unicode](book/16_additional_info/unicode/README.md) | - |
 | 10 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
