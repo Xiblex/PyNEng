@@ -12,7 +12,7 @@
 | 5 | [Работа с файлами](book/07_files/README.md) | [Работа с файлами](exercises/07_files/07_exercises.md) |
 | 6 | [Функции](book/09_functions/README.md) | [Функции](exercises/09_functions/09_exercises.md) |
 | 7 | [Модули](book/11_modules/README.md)| [Модули](exercises/11_modules/11_exercises.md) |
-| 8 | [Регулярные выражения](book/09_regex/README.md) | [Регулярные выражения](exercises/09_regex/09_exercises.html) |
+| 8 | [Регулярные выражения](book/15_regex/README.md) | [Регулярные выражения](exercises/15_regex/15_exercises.md) |
 | 9 | [Unicode](book/16_additional_info/unicode/README.md) | - |
 | 10 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
 | 11 | [Работа с базами данных](book/11_db/README.md) | [Работа с базами данных](exercises/11_db/11_exercises.md) |
