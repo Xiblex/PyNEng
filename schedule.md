@@ -14,8 +14,8 @@
 | 7 | [Модули](book/11_modules/README.md)| [Модули](exercises/11_modules/11_exercises.md) |
 | 8 | [Регулярные выражения](book/15_module_re/README.md) | [Регулярные выражения](exercises/15_module_re/15_exercises.md) |
 | 9 | [Unicode](book/16_unicode/README.md) | - |
-| 10 | [Сериализация данных](book/10_serialization/README.md) | [Сериализация данных](exercises/10_serialization/10_exercises.md) |
-| 11 | [Работа с базами данных](book/11_db/README.md) | [Работа с базами данных](exercises/11_db/11_exercises.md) |
+| 10 | [Сериализация данных](book/17_serialization/README.md) | [Сериализация данных](exercises/17_serialization/17_exercises.md) |
+| 11 | [Работа с базами данных](book/18_db/README.md) | [Работа с базами данных](exercises/18_db/18_exercises.md) |
 | 12 | [Подключение к оборудованию](book/12_ssh_telnet/README.md) | [Подключение к оборудованию](exercises/12_ssh_telnet/12_exercises.md) |
 | 13 | [Шаблоны конфигураций с Jinja2](book/13_jinja2/README.md) | [Шаблоны конфигураций с Jinja2](exercises/13_jinja2/13_exercises.md) |
 | 14 | [Обработка вывода команд TextFSM](book/14_textfsm/README.md) | [Обработка вывода команд TextFSM](exercises/14_textfsm/14_exercises.md) |
