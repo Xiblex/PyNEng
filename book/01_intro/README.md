@@ -46,7 +46,7 @@
 Процедура установки Python 3.6 на Debian:
 
 ```
-sudo apt-get install python3-dev libffi-dev libssl-dev libsqlite3-dev
+sudo apt-get install build-essential ca-certificates curl gcc libbz2-dev libffi-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libsqlite3-dev llvm make python3-dev tk-dev wget xz-utils zlib1g-dev
 wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
 tar xvf Python-3.6.3.tgz
 cd Python-3.6.3
@@ -55,13 +55,13 @@ make -j8
 sudo make altinstall
 ```
 
-Чтобы в виртуальном окружении по умолчанию использовался Python 3.6, создайте его таким образом: ```mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3```. Подробнее в подразделе по виртуальным окружениям.
+Чтобы в виртуальном окружении по умолчанию использовался Python 3.6, создайте его таким образом (подробнее в разделе по виртуальным окружениям):
 
-Если Вы используете Windows, то, скорее всего, Python нужно будет установить.
-Один из самых простых вариантов для Windows - установить окружение [Anaconda](https://www.continuum.io/downloads).
-В окружении также есть IDE Spyder, который можно использовать вместо редактора.
+```
+mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3
+```
 
-> Для установки Ansible понадобится Linux.
+Если Вы используете Windows, то, скорее всего, Python нужно будет установить. Один из самых простых вариантов для Windows – установить окружение [Anaconda](https://www.continuum.io/downloads/). В окружении есть IDE Spyder, который можно использовать вместо редактора. Windows не рекомендована в качестве ОС для прохождения курса, например потому, что на ней нельзя установить Ansible.
 
 ### Выбор редактора
 
