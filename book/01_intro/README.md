@@ -61,7 +61,7 @@ sudo make altinstall
 mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3
 ```
 
-Если Вы используете Windows, то, скорее всего, Python нужно будет установить. Один из самых простых вариантов для Windows – установить окружение [Anaconda](https://www.continuum.io/downloads/). В окружении есть IDE Spyder ([Integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment)), который можно использовать вместо редактора. Windows не рекомендована в качестве ОС для прохождения курса, например потому, что на ней нельзя установить Ansible.
+Если Вы используете Windows, то, скорее всего, Python нужно будет установить. Один из самых простых вариантов для Windows – установить окружение [Anaconda](https://www.continuum.io/downloads/). В окружении есть IDE Spyder ([Integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment)), который можно использовать вместо редактора. Windows не рекомендована в качестве ОС для обучения, например потому, что на ней нельзя установить Ansible.
 
 ### Выбор редактора
 
