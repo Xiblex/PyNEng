@@ -28,7 +28,7 @@ $ pip uninstall tabulate
 Кроме того, иногда необходимо обновить пакет:
 
 ```
-$ pip install --upgrade netmiko
+$ pip install --upgrade tabulate
 ```
 
 #### pip или pip3
