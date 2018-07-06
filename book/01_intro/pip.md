@@ -17,10 +17,6 @@ pip 9.0.1 from /home/vagrant/venv/py3_convert/lib/python3.6/site-packages (pytho
 
 ```
 $ pip install tabulate
-
-Collecting tabulate
-Installing collected packages: tabulate
-Successfully installed tabulate-0.8.1
 ```
 
 Удаление пакета выполняется таким образом:
