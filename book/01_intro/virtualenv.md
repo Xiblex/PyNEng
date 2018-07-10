@@ -150,10 +150,10 @@ $ deactivate
 
 Подробнее о модуле venv в [документации](https://docs.python.org/3/library/venv.html#module-venv).
 
-
 #### Установка пакетов
 
 Например, установим в виртуальном окружении пакет simplejson. 
+
 ```
 (pyneng)$ pip install simplejson
 ...
@@ -161,7 +161,7 @@ Successfully installed simplejson
 Cleaning up...
 ```
 
-Если перейти в ipython (рассматривается в разделе [ipython](../02_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
+Если перейти в IPython (рассматривается в разделе [IPython](../02_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
 ```
 (pyneng)$ ipython
 
