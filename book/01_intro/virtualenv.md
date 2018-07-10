@@ -60,7 +60,7 @@ total 52
 4 drwxr-xr-x 6 nata nata 4096 Sep 30 16:42 pyneng
 ```
 
-Выйти из виртуального окружения:
+Выход из виртуального окружения:
 
 ```
 (pyneng)$ deactivate 
