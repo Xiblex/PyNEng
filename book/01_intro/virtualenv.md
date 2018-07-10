@@ -161,7 +161,8 @@ Successfully installed simplejson
 Cleaning up...
 ```
 
-Если перейти в IPython (рассматривается в разделе [IPython](../02_start/1_ipython.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
+Если перейти в IPython (рассматривается в [главе 3](book/03_start/README.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
+
 ```
 (pyneng)$ ipython
 
@@ -181,8 +182,9 @@ simplejson.absolute_import     simplejson.scanner
 simplejson.compat              simplejson.simple_first
 ```
 
-Но если выйти из виртуально окружения и попытаться сделать то же самое, то такого модуля нет:
-```python
+Но если выйти из виртуального окружения и попытаться сделать то же самое, то такого модуля нет:
+
+```py
 (pyneng)$ deactivate 
 
 $ ipython
