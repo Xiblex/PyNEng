@@ -148,7 +148,7 @@ $ source new/pyneng/bin/activate
 $ deactivate
 ```
 
-[Подробнее о модуле venv](https://docs.python.org/3/library/venv.html#module-venv).
+Подробнее о модуле venv в [документации](https://docs.python.org/3/library/venv.html#module-venv).
 
 
 #### Установка пакетов
