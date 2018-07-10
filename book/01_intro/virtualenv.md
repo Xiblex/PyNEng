@@ -163,7 +163,7 @@ Cleaning up...
 
 Если перейти в IPython (рассматривается в [главе 3](book/03_start/README.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
 
-```
+```python
 (pyneng)$ ipython
 
 In [1]: import simplejson
@@ -184,7 +184,7 @@ simplejson.compat              simplejson.simple_first
 
 Но если выйти из виртуального окружения и попытаться сделать то же самое, то такого модуля нет:
 
-```py
+```python
 (pyneng)$ deactivate 
 
 $ ipython
