@@ -33,7 +33,7 @@ exec bash
 ```
 
 
-> Такой вариант может быть не всегда правильным. Подробнее в ответе на [stackoverflow](http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in).
+Такой вариант может быть не всегда правильным. Подробнее на [Stack Overflow](http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in).
 
 #### Работа с виртуальными окружениями
 
