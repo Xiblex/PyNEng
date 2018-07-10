@@ -24,7 +24,7 @@ export WORKON_HOME=~/venv
 . /usr/local/bin/virtualenvwrapper.sh
 ```
 
-Если Вы используете командный интерпретатор, отличный от bash, посмотрите, поддерживается ли он в [документации](http://virtualenvwrapper.readthedocs.io/en/latest/install.html). Переменная окружения VIRTUALENVWRAPPER_PYTHON указывает на бинарный файл командной строки Python, WORKON_HOME – на расположение виртуальных окружений. Третья строка указывает где находится скрипт, установленный с пакетом virtualenvwrapper. Для того, чтобы скрипт virtualenvwrapper.sh выполнился и можно было работать с виртуальными окружениями, надо перезапустить bash.
+Если Вы используете командный интерпретатор, отличный от bash, посмотрите, поддерживается ли он в [документации](http://virtualenvwrapper.readthedocs.io/en/latest/install.html) virtualenvwrapper. Переменная окружения VIRTUALENVWRAPPER_PYTHON указывает на бинарный файл командной строки Python, WORKON_HOME – на расположение виртуальных окружений. Третья строка указывает где находится скрипт, установленный с пакетом virtualenvwrapper. Для того, чтобы скрипт virtualenvwrapper.sh выполнился и можно было работать с виртуальными окружениями, надо перезапустить bash.
 
 Перезапуск командного интерпретатора:
 
