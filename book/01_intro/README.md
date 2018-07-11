@@ -45,7 +45,7 @@
 
 Процедура установки Python 3.6 на Debian:
 
-```
+```shell
 sudo apt-get install build-essential ca-certificates curl gcc libbz2-dev libffi-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libsqlite3-dev llvm make python3-dev tk-dev wget xz-utils zlib1g-dev
 wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
 tar xvf Python-3.6.3.tgz
@@ -57,7 +57,7 @@ sudo make altinstall
 
 Чтобы в виртуальном окружении по умолчанию использовался Python 3.6, создайте это окружение следующим образом (подробнее в разделе по виртуальным окружениям):
 
-```
+```shell
 mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3
 ```
 
