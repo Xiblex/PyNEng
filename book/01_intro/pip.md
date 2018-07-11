@@ -4,7 +4,7 @@
 
 Проверка версии pip:
 
-```
+```shellsession
 $ pip --version
 pip 9.0.1 from /home/vagrant/venv/py3_convert/lib/python3.6/site-packages (python 3.6)
 ```
@@ -15,19 +15,19 @@ pip 9.0.1 from /home/vagrant/venv/py3_convert/lib/python3.6/site-packages (pytho
 
 Для установки модулей используется команда pip install:
 
-```
+```shellsession
 $ pip install tabulate
 ```
 
 Удаление пакета выполняется таким образом:
 
-```
+```shellsession
 $ pip uninstall tabulate
 ```
 
 Кроме того, иногда необходимо обновить пакет:
 
-```
+```shellsession
 $ pip install --upgrade tabulate
 ```
 
@@ -37,14 +37,14 @@ $ pip install --upgrade tabulate
 
 Вариант, когда pip соответствует Python 2.7:
 
-```
+```shellsession
 $ pip --version
 pip 9.0.1 from /usr/local/lib/python2.7/dist-packages (python 2.7)
 ```
 
 Вариант, когда pip3 соответствует Python 3.4:
 
-```
+```shellsession
 $ pip3 --version
 pip 1.5.6 from /usr/lib/python3/dist-packages (python 3.4)
 ```
@@ -53,7 +53,7 @@ pip 1.5.6 from /usr/lib/python3/dist-packages (python 3.4)
 
 Также можно использовать альтернативный вариант вызова pip:
 
-```
+```shellsession
 $ python3.6 -m pip install tabulate
 ```
 
