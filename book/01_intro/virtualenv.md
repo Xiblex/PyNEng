@@ -12,13 +12,13 @@
 
 Установка virtualenvwrapper с помощью pip:
 
-```
-sudo pip3.6 install virtualenvwrapper
+```shellsession
+$ sudo pip3.6 install virtualenvwrapper
 ```
 
 После установки, в файле .bashrc, находящимся в домашней папке текущего пользователя, нужно добавить несколько строк:
 
-```
+```shell
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3.6
 export WORKON_HOME=~/venv
 . /usr/local/bin/virtualenvwrapper.sh
@@ -28,8 +28,8 @@ export WORKON_HOME=~/venv
 
 Перезапуск командного интерпретатора:
 
-```
-exec bash
+```shellsession
+$ exec bash
 ```
 
 Такой вариант может быть не всегда правильным. Подробнее на [Stack Overflow](http://stackoverflow.com/questions/2518127/how-do-i-reload-bashrc-without-logging-out-and-back-in).
@@ -38,7 +38,7 @@ exec bash
 
 Создание нового виртуального окружения, в котором Python 3.6 используется по умолчанию:
 
-```
+```shellsession
 $ mkvirtualenv --python=/usr/local/bin/python3.6 pyneng
 New python executable in PyNEng/bin/python
 Installing distribute........................done.
@@ -48,7 +48,7 @@ Installing pip...............done.
 
 В скобках перед стандартным приглашением отображается имя виртуального окружения. Это означает, что Вы находитесь в нём. В virtualenvwrapper по Tab работает автодополнение имени виртуального окружения. Это особенно удобно в тех случаях, когда виртуальных окружений много. Теперь в том каталоге, который был указан в переменной окружения WORKON_HOME, создан каталог pyneng:
 
-```
+```shellsession
 (pyneng)$ ls -ls venv
 total 52
 ....
@@ -62,21 +62,21 @@ total 52
 
 Выход из виртуального окружения:
 
-```
+```shellsession
 (pyneng)$ deactivate 
 $ 
 ```
 
 Для перехода в созданное виртуальное окружение надо выполнить команду workon:
 
-```
+```shellsession
 $ workon pyneng
 (pyneng)$ 
 ```
 
 Если необходимо перейти из одного виртуального окружения в другое, то необязательно делать deactivate, можно перейти сразу через workon:
 
-```
+```shellsession
 $ workon Test
 (Test)$ workon pyneng
 (pyneng)$ 
@@ -84,7 +84,7 @@ $ workon Test
 
 Если виртуальное окружение нужно удалить, то надо использовать команду rmvirtualenv:
 
-```
+```shellsession
 $ rmvirtualenv Test
 Removing Test...
 $ 
@@ -92,7 +92,7 @@ $
 
 Посмотреть, какие пакеты установлены в виртуальном окружении можно командой lssitepackages:
 
-```
+```shellsession
 (pyneng)$ lssitepackages
 ANSI.py                                pexpect-3.3-py2.7.egg-info
 ANSI.pyc                               pickleshare-0.5-py2.7.egg-info
@@ -119,7 +119,7 @@ pexpect                                traitlets-4.0.0-py2.7.egg-info
 
 Начиная с версии 3.5, в Python рекомендуется использовать модуль venv для создания виртуальных окружений:
 
-```
+```shellsession
 $ python3.6 -m venv new/pyneng
 ```
 
@@ -127,7 +127,7 @@ $ python3.6 -m venv new/pyneng
 
 Команда создаёт следующую структуру каталогов:
 
-```
+```shellsession
 $ ls -ls new/pyneng
 total 16
 4 drwxr-xr-x 2 vagrant vagrant 4096 Aug 21 14:50 bin
@@ -138,13 +138,13 @@ total 16
 
 Для перехода в виртуальное окружение надо выполнить команду:
 
-```
+```shellsession
 $ source new/pyneng/bin/activate
 ```
 
 Для выхода из виртуального окружения используется команда deactivate:
 
-```
+```shellsession
 $ deactivate
 ```
 
@@ -154,7 +154,7 @@ $ deactivate
 
 Например, установим в виртуальном окружении пакет simplejson. 
 
-```
+```shellsession
 (pyneng)$ pip install simplejson
 ...
 Successfully installed simplejson
@@ -163,7 +163,7 @@ Cleaning up...
 
 Если перейти в IPython (рассматривается в [главе 3](../03_start/README.md)) и импортировать simplejson, то он доступен и никаких ошибок нет:
 
-```python
+```shellsession
 (pyneng)$ ipython
 
 In [1]: import simplejson
@@ -184,7 +184,7 @@ simplejson.compat              simplejson.simple_first
 
 Но если выйти из виртуального окружения и попытаться сделать то же самое, то такого модуля нет:
 
-```python
+```shellsession
 (pyneng)$ deactivate 
 
 $ ipython
