@@ -9,6 +9,6 @@
 
 Редакторы и IDE:
 
-* [Редакторы](https://wiki.python.org/moin/PythonEditors/)
-* [IDE](https://wiki.python.org/moin/IntegratedDevelopmentEnvironments/)
+* [PythonEditors](https://wiki.python.org/moin/PythonEditors/)
+* [IntegratedDevelopmentEnvironments](https://wiki.python.org/moin/IntegratedDevelopmentEnvironments/)
 * [VIM and Python - a Match Made in Heaven](https://realpython.com/blog/python/vim-and-python-a-match-made-in-heaven/)
