@@ -1,7 +1,7 @@
 ## Интерпретатор Python (проверка)
 
 Перед началом работы надо проверить, что при вызове интерпретатора Python вывод будет таким:
-```shellscript
+```shellsession
 $ python
 Python 3.6.0 (default, May 31 2017, 07:04:38)
 [GCC 4.9.2] on linux
