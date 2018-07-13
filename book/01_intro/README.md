@@ -45,20 +45,20 @@
 
 Процедура установки Python 3.6 на Debian:
 
-```
-sudo apt-get install build-essential ca-certificates curl gcc libbz2-dev libffi-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libsqlite3-dev llvm make python3-dev tk-dev wget xz-utils zlib1g-dev
-wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
-tar xvf Python-3.6.3.tgz
-cd Python-3.6.3
-./configure --enable-optimizations --enable-loadable-sqlite-extensions
-make -j8
-sudo make altinstall
+```shellsession
+$ sudo apt-get install build-essential ca-certificates curl gcc libbz2-dev libffi-dev libncurses5-dev libncursesw5-dev libreadline-dev libssl-dev libsqlite3-dev llvm make python3-dev tk-dev wget xz-utils zlib1g-dev
+$ wget https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tgz
+$ tar xvf Python-3.6.3.tgz
+$ cd Python-3.6.3
+$ ./configure --enable-optimizations --enable-loadable-sqlite-extensions
+$ make -j8
+$ sudo make altinstall
 ```
 
 Чтобы в виртуальном окружении по умолчанию использовался Python 3.6, создайте это окружение следующим образом (подробнее в разделе по виртуальным окружениям):
 
-```
-mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3
+```shellsession
+$ mkvirtualenv --python=/usr/local/bin/python3.6 pyneng-py3
 ```
 
 Если Вы используете Windows, то, скорее всего, Python нужно будет установить. Один из самых простых вариантов для Windows – установить окружение [Anaconda](https://www.continuum.io/downloads/). В окружении есть IDE Spyder ([Integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment)), который можно использовать вместо редактора. Windows не рекомендована в качестве ОС для обучения, например потому, что на ней нельзя установить Ansible.

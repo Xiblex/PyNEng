@@ -14,7 +14,7 @@
     * [ОС и редактор](book/01_intro/os_and_editor.md)
     * [Система управления пакетами pip](book/01_intro/pip.md)
     * [Виртуальные окружения](book/01_intro/virtualenv.md)
-    * [Интерпретатор Python \(проверка\)](book/01_intro/check_python.md)
+    * [Интерпретатор Python](book/01_intro/check_python.md)
     * [Дополнительные материалы](book/01_intro/further_reading.md)
     * [Задания](exercises/01_intro/01_exercises.md)
   * [2. Использование Git и GitHub](book/02_git_github/README.md)
