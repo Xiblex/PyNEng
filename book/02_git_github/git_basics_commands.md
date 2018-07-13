@@ -21,7 +21,7 @@ $ echo "test" >> README
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/bash_prompt.png)
 
-В приглашении показано, что есть два файла, за которыми Git еще не следит:
+В приглашении показано, что есть два файла, за которыми Git ещё не следит:
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_1.png)
 
