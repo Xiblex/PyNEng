@@ -12,7 +12,7 @@
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_diff.png)
 
-Если добавить изменения, внесённые в файлы в staging командой git add и ещё раз выполнить команду git diff, то она ничего не покажет:
+Если добавить изменения, внесённые в файлы, в staging командой git add и ещё раз выполнить команду git diff, то она ничего не покажет:
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_add_git_diff.png)
 
