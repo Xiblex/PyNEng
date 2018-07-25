@@ -8,7 +8,7 @@
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_status_5.png)
 
-Команда git diff показывает, какие изменения были внесены с последнего коммита:
+Команда git diff показывает, какие изменения были внесены с момента последнего коммита:
 
 ![alt](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/git_diff.png)
 
