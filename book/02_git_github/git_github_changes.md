@@ -1,6 +1,6 @@
-# Работа с Git и GitHub
+### Работа со своим репозиторием
 
-## Создание репозитория на GitHub
+#### Создание репозитория на GitHub
 
 * Залогиниться на [GitHub](https://github.com/)
 * В правом верхнем углу нажать плюс и выбрать "New repository", чтобы создать новый репозиторий
@@ -9,11 +9,12 @@
 
 ![create](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/github_new_repo.png)
 
-## Копирование репозитория с GitHub
+#### Копирование репозитория с GitHub
 
 Для локальной работы с созданным репозиторием его нужно скопировать.
 Для этого используется команда git clone:
-```
+
+```shellsession
 $ git clone ssh://git@github.com/pyneng/online-2-natasha-samoylenko.git
 Cloning into 'online-2-natasha-samoylenko'...
 remote: Counting objects: 241, done.
@@ -33,7 +34,7 @@ Checking connectivity... done.
 
 В этом каталоге теперь находится содержимое репозитория на GitHub.
 
-## Работа с репозиторием
+#### Работа с репозиторием
 
 Предыдущая команда не просто скопировала репозиторий локально, но и настроила соответствующим образом Git:
 
@@ -57,23 +58,22 @@ Checking connectivity... done.
 * первый шаг - обновляет локальный репозиторий
 * последний шаг - загружает изменения на GitHub
 
-### Синхронизация из GitHub в локальный репозиторий
+#### Синхронизация из GitHub в локальный репозиторий
 
 > Все команды выполняются внутри каталога репозитория (в примере выше - online-2-natasha-samoylenko)
 
 Команда git pull:
-```
-$ git pull
-```
 
 Если содержимое локального репозитория одинаково с удаленным репозиторием на GitHub, вывод будет таким:
-```
+
+```shellsession
 $ git pull
 Already up-to-date.
 ```
 
 Если что-то было изменено, вывод будет примерно таким:
-```
+
+```shellsession
 $ git pull
 remote: Counting objects: 5, done.
 remote: Compressing objects: 100% (1/1), done.
@@ -85,34 +85,24 @@ Updating 89c04b6..fc4c721
 Fast-forward
  exercises/03_data_structures/task_3_3.py | 2 ++
  1 file changed, 2 insertions(+)
-
 ```
 
-### Добавление новых файлов или изменений в существующих файлах
+#### Добавление новых файлов или изменений в существующих файлах
 
-Если необходимо добавить конкретный файл (в данном случае - README.md):
-```
-$ git add README.md
-```
+Если необходимо добавить конкретный файл (в данном случае - README.md) git add README.md
 
-Добавление всех новых файлов или изменений в существующих:
-```
-$ git add .
-```
+Добавление всех новых файлов или изменений в существующих git add .
 
-### Commit
+#### Commit
 
 При выполнении commit обязательно надо указать сообщение.
-Будет лучше, если сообщение будет со смыслом, а не просто "update" или подобное:
+Будет лучше, если сообщение будет со смыслом, а не просто "update" или подобное: git commit -m "Сделал задания 4.1-4.3"
 
-```
-$ git commit -m "Сделал задания 4.1-4.3"
-```
-
-### Push на GitHub
+#### Push на GitHub
 
 Для загрузки всех локальных изменений на GitHub используется git push:
-```
+
+```shellsession
 $ git push origin master
 Counting objects: 5, done.
 Compressing objects: 100% (5/5), done.
@@ -124,5 +114,3 @@ To ssh://git@github.com/pyneng/online-2-natasha-samoylenko.git
 ```
 
 > Перед выполнением git push можно выполнить команду ```$ git log -p origin/master..``` - она покажет, какие изменения Вы собираетесь добавлять в свой репозиторий на GitHub.
-
-
