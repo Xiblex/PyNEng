@@ -4,7 +4,7 @@
 
 > Такая же [инструкция](https://help.github.com/articles/connecting-to-github-with-ssh/) на GitHub
 
-Генерация нового SSH ключа (используйте email, который привязан к GitHub):
+Генерация нового SSH-ключа (используйте e-mail, который привязан к GitHub):
 
 ```shellsession
 $ ssh-keygen -t rsa -b 4096 -C "github_email@gmail.com"
