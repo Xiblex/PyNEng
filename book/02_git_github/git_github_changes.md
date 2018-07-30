@@ -10,7 +10,7 @@
 * в правом верхнем углу нажать плюс и выбрать "New repository", чтобы создать новый репозиторий;
 * в открывшемся окне надо ввести название репозитория";
 
-> Можно поставить галку "Initialize this repository with a README". Это создаст файл README.md, в котором будет находиться только название репозитория
+Можно поставить галку "Initialize this repository with a README". Это создаст файл README.md, в котором будет находиться только название репозитория.
 
 ![create](https://raw.githubusercontent.com/natenka/PyNEng/master/images/git/github_new_repo.png)
 
