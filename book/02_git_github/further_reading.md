@@ -1,8 +1,8 @@
-## Дополнительные материалы
+### Дополнительные материалы
 
 Документация:
 
-* [Informative git prompt for bash and fish](https://github.com/magicmonty/bash-git-prompt)
+* [Informative git prompt for bash and fish](https://github.com/magicmonty/bash-git-prompt/)
 * [Authenticating to GitHub](https://help.github.com/categories/authenticating-to-github/)
 * [Connecting to GitHub with SSH](https://help.github.com/articles/connecting-to-github-with-ssh/)
 
