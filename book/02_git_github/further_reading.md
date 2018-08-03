@@ -6,7 +6,7 @@
 * [Authenticating to GitHub](https://help.github.com/categories/authenticating-to-github/);
 * [Connecting to GitHub with SSH](https://help.github.com/articles/connecting-to-github-with-ssh/).
 
-Git/GitHub:
+Про Git/GitHub:
 
 * [GitHowTo](https://githowto.com/ru) - интерактивный howto на русском;
 * [git/github guide. a minimal tutorial](http://kbroman.org/github_tutorial/) - минимально необходимые знания для работы с Git и GitHub;
