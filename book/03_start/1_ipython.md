@@ -13,7 +13,7 @@
 pip install ipython
 ```
 
-После этого, зайти в IPython можно таким образом:
+После этого, зайти в IPython можно следующим образом:
 
 ```shellsession
 $ ipython
