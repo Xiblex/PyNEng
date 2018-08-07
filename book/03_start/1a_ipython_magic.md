@@ -97,7 +97,7 @@ A is bigger
 
 Коротко информацию можно посмотреть в самом IPython командой %quickref:
 
-```python
+```
 IPython -- An enhanced Interactive Python - Quick Reference Card
 ===========================================================
 
