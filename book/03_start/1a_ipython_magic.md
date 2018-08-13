@@ -1,11 +1,11 @@
-## Magic commands
+#### Magic commands
 
-В IPython есть специальные команды, которые упрощают работу с интерпретатором.
-Все они начинаются на %.
+В IPython есть специальные "магические" команды, которые упрощают работу с интерпретатором. Все они начинаются со знака процента.
 
-#### ```%history```
+##### %history
 
-Например, команда __```%history```__ позволяет просмотреть историю текущей сессии:
+Например, %history позволяет просмотреть историю введённых пользователем команд в текущей сессии IPython:
+
 ```python
 In [1]: a = 10
 
@@ -24,13 +24,14 @@ if a > b:
 %history
 ```
 
-Таким образом можно скопировать какой-то блок кода.
+С помощью %history можно скопировать нужный блок кода.
 
-#### ```%cpaste```
+##### %cpaste
 
-Еще одна очень полезная волшебная команда ```%cpaste```
+Ещё одна очень полезная "волшебная" команда это %cpaste.
 
-При вставке кода с отступами в IPython из-за автоматических отступов самого IPython начинает сдвигаться код:
+При вставке кода с отступами в IPython, из-за автоматических отступов самого IPython, код начинает дополнительно сдвигаться:
+
 ```python
 In [1]: a = 10
 
@@ -64,12 +65,10 @@ IndentationError: unindent does not match any outer indentation level
 If you want to paste code into IPython, try the %paste and %cpaste magic functions.
 ```
 
-Обратите внимание на последнюю строку. IPython подсказывает, какой командой воспользоваться, чтобы корректно вставить такой код.
+Обратите внимание на последнюю строку – IPython подсказывает, какой командой воспользоваться, чтобы корректно вставить такой код. Команды %paste и %cpaste работают немного по-разному.
 
+При использовании %cpaste, после того, как все строки скопированы, надо завершить работу команды, набрав "--":
 
-Команды %paste и %cpaste работают немного по-разному.
-
-__%cpaste__ (после того, как все строки скопированы, надо завершить работу команды, набрав '--'):
 ```python
 In [9]: %cpaste
 Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
@@ -81,7 +80,8 @@ Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
 A is bigger
 ```
 
-__%paste__ (требует установленного Tkinter):
+%paste (требует установленного Tkinter):
+
 ```python
 In [10]: %paste
 if a > b:
@@ -93,10 +93,11 @@ else:
 A is bigger
 ```
 
-Подробнее об IPython можно почитать в [документация IPython](http://ipython.readthedocs.io/en/stable/index.html).
+Подробнее об IPython можно почитать в [документации](http://ipython.readthedocs.io/en/stable/index.html) IPython.
 
 Коротко информацию можно посмотреть в самом IPython командой %quickref:
-```python
+
+```
 IPython -- An enhanced Interactive Python - Quick Reference Card
 ===========================================================
 
@@ -144,4 +145,3 @@ _oh              : Output history
 %hist 1/2-8      : Command history containing lines 2-8 of session 1.
 %hist 1/ ~2/     : Command history of session 1 and 2 sessions before current.
 ```
-
