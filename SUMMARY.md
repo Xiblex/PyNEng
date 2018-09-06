@@ -253,6 +253,18 @@
     * [Подробнее об Ansible](book/24_ansible_for_network/ansible_more.md)
     * [Дополнительные материалы](book/24_ansible_for_network/further_reading.md)
     * [Задания](exercises/24_ansible_for_network/24_exercises.md)
+* [VII. Объектно-ориентированное программирование](book/Part_VII.md)
+  * [25. Основы ООП](book/25_oop_basics/README.md)
+    * [Создание класса](book/25_oop_basics/create_class.md)
+    * [Создание методов](book/25_oop_basics/create_methods.md)
+    * [self](book/25_oop_basics/self.md)
+    * [Метод `__init__`](book/25_oop_basics/init_method.md)
+    * [Область видимости](book/25_oop_basics/class_namespace.md)
+    * [Переменные класса](book/25_oop_basics/class_variables.md)
+    * [](book/25_oop_basics/)
+    * [](book/25_oop_basics/)
+
+
 * [Дополнительная информация](book/25_additional_info/README.md)
   * [Соглашение об именах](book/25_additional_info/naming_conventions/README.md)
     * [Подчеркивание в именах](book/25_additional_info/naming_conventions/underscore_names.md)
