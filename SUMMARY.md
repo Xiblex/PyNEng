@@ -261,8 +261,6 @@
     * [Метод `__init__`](book/25_oop_basics/init_method.md)
     * [Область видимости](book/25_oop_basics/class_namespace.md)
     * [Переменные класса](book/25_oop_basics/class_variables.md)
-    * [](book/25_oop_basics/)
-    * [](book/25_oop_basics/)
 
 
 * [Дополнительная информация](book/25_additional_info/README.md)
