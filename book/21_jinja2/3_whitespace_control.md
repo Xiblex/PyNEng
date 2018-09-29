@@ -1,5 +1,3 @@
-{% raw %}
-
 ## Контроль символов whitespace
 
 ### trim_blocks, lstrip_blocks
@@ -243,4 +241,3 @@ router bgp {{ bgp.local_as }}
  {%- endfor -%}
 ```
 
-{% endraw %}

@@ -1,4 +1,3 @@
-{% raw %}
 ## Синтаксис шаблонов Jinja2
 
 До сих пор в примерах шаблонов Jinja2 использовалась только подстановка переменных.
@@ -55,4 +54,3 @@ $ python cfg_gen.py templates/variables.txt data_files/vars.yml
 > Параметры trim_blocks и lstrip_blocks описаны в следующем подразделе.
 
 
-{% endraw %}
