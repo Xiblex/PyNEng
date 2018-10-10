@@ -37,14 +37,14 @@
 $ ansible-playbook 7_ios_config_after.yml -v
 ```
 {% endraw %}
-![6f_ios_config_after.png]({{ book.ansible_img_path }}6f_ios_config_after.png)
+![6f_ios_config_after.png](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after.png)
 
 
 Второй запуск playbook (изменений нет, поэтому команда no shutdown не выполняется):
 ```
 $ ansible-playbook 7_ios_config_after.yml -v
 ```
-![6f_ios_config_after_no_change]({{ book.ansible_img_path }}6f_ios_config_after_no_change.png)
+![6f_ios_config_after_no_change](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after_no_change.png)
 
 {% raw %}
 Рассмотрим ещё один пример использования after.
@@ -75,6 +75,6 @@ $ ansible-playbook 7_ios_config_after.yml -v
 ```
 $ ansible-playbook 7_ios_config_after_save.yml -v
 ```
-![6f_ios_config_after_save]({{ book.ansible_img_path }}6f_ios_config_after_save.png)
+![6f_ios_config_after_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after_save.png)
 
 

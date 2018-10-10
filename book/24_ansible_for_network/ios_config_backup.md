@@ -29,7 +29,7 @@ Playbook 5_ios_config_backup.yml:
 ```
 $ ansible-playbook 5_ios_config_backup.yml -v
 ```
-![6d_ios_config_backup]({{ book.ansible_img_path }}6d_ios_config_backup.png)
+![6d_ios_config_backup](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6d_ios_config_backup.png)
 
 
 В каталоге backup теперь находятся файлы такого вида (при каждом запуске playbook они перезаписываются):

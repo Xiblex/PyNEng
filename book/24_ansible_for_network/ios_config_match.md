@@ -45,7 +45,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 9_ios_config_match_line.yml -v
 ```
-![6h_ios_config_match_line]({{ book.ansible_img_path }}6h_ios_config_match_line.png)
+![6h_ios_config_match_line](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_line.png)
 
 
 Обратите внимание, что в списке updates только две из трёх строк ACL.
@@ -103,7 +103,7 @@ Playbook 9_ios_config_match_exact.yml (будет постепенно допо�
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
 ```
-![6h_ios_config_match_exact]({{ book.ansible_img_path }}6h_ios_config_match_exact_1.png)
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_exact_1.png)
 
 
 Теперь ACL выглядит так:
@@ -158,7 +158,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
 ```
-![6h_ios_config_match_exact]({{ book.ansible_img_path }}6h_ios_config_match_exact_2.png)
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_exact_2.png)
 
 
 И, соответственно, на маршрутизаторе:
@@ -203,7 +203,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
 ```
-![6h_ios_config_match_exact]({{ book.ansible_img_path }}6h_ios_config_match_exact_final.png)
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_exact_final.png)
 
 
 Теперь результат такой:
@@ -264,7 +264,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
 ```
-![6h_ios_config_match_exact]({{ book.ansible_img_path }}6h_ios_config_match_exact_final_2.png)
+![6h_ios_config_match_exact](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_exact_final_2.png)
 
 Это значит, что при использовании ```match:exact``` важно, чтобы был какой-то способ удалить конфигурацию, если она не соответствует тому, что должно быть (или чтобы команды перезаписывались).
 Иначе эта задача будет выполняться каждый раз при запуске playbook.
@@ -312,7 +312,7 @@ Playbook 9_ios_config_match_strict.yml:
 ```
 $ ansible-playbook 9_ios_config_match_strict.yml -v
 ```
-![6h_ios_config_match_strict]({{ book.ansible_img_path }}6h_ios_config_match_strict.png)
+![6h_ios_config_match_strict](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_strict.png)
 
 
 Так как изменений не было, ACL остался таким же.
@@ -352,7 +352,7 @@ $ ansible-playbook 9_ios_config_match_strict.yml -v
 ```
 $ ansible-playbook 9_ios_config_match_none.yml -v
 ```
-![6h_ios_config_match_none]({{ book.ansible_img_path }}6h_ios_config_match_none.png)
+![6h_ios_config_match_none](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6h_ios_config_match_none.png)
 
 
 Использование ```match: none``` подходит в тех случаях, когда, независимо от текущей конфигурации, нужно отправить все команды.

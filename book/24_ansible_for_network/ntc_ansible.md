@@ -105,7 +105,7 @@ No matching distribution found for textfsm==1.0.1 (from pyntc->ntc-ansible)
 $ ansible-playbook 1_ntc-ansible.yml
 ```
 
-![Ansible playbook]({{ book.ansible_img_path }}7_ntc_ansible.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7_ntc_ansible.png)
 
 
 {% raw %}
@@ -164,7 +164,7 @@ $ ansible-playbook 2_ntc-ansible_save.yml
 ```
 {% endraw %}
 
-![Ansible playbook]({{ book.ansible_img_path }}7a_ntc_ansible_save.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7a_ntc_ansible_save.png)
 
 В результате, в каталоге all_facts появляются соответствующие файлы для каждого маршрутизатора.
 Пример файла all_facts/192.168.100.1_sh_ip_int_br.json:

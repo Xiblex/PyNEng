@@ -61,5 +61,5 @@ Playbook 4_ios_config_save_when.yml:
 $ ansible-playbook 4_ios_config_save_when.yml
 ```
 
-![6c_ios_config_save]({{ book.ansible_img_path }}6c_ios_config_save_2.png)
+![6c_ios_config_save](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6c_ios_config_save_2.png)
 

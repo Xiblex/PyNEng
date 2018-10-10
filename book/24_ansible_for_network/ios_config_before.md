@@ -42,12 +42,12 @@ Playbook 8_ios_config_before.yml:
 ```
 $ ansible-playbook 8_ios_config_before.yml -v
 ```
-![6g_ios_config_before]({{ book.ansible_img_path }}6g_ios_config_before.png)
+![6g_ios_config_before](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6g_ios_config_before.png)
 
 
 Запуск playbook без изменений (команда в списке before не выполняется):
 ```
 $ ansible-playbook 8_ios_config_before.yml -v
 ```
-![6g_ios_config_before_no_updates]({{ book.ansible_img_path }}6g_ios_config_before_no_updates.png)
+![6g_ios_config_before_no_updates](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6g_ios_config_before_no_updates.png)
 

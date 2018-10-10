@@ -35,7 +35,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 11_ios_config_src.yml -v
 ```
-![6j_ios_config_src]({{ book.ansible_img_path }}6j_ios_config_src.png)
+![6j_ios_config_src](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6j_ios_config_src.png)
 
 
 Теперь на маршрутизаторе настроен ACL:
@@ -52,7 +52,7 @@ ip access-list extended IN_to_OUT
 ```
 $ ansible-playbook 11_ios_config_src.yml -v
 ```
-![6j_ios_config_src_2]({{ book.ansible_img_path }}6j_ios_config_src_2.png)
+![6j_ios_config_src_2](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6j_ios_config_src_2.png)
 
 
 {% raw %}
@@ -140,7 +140,7 @@ ospf_ints:
 ```
 $ ansible-playbook 11_ios_config_src_jinja.yml -v
 ```
-![6j_ios_config_src_jinja]({{ book.ansible_img_path }}6j_ios_config_src_jinja.png)
+![6j_ios_config_src_jinja](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6j_ios_config_src_jinja.png)
 
 Теперь на всех маршрутизаторах настроен OSPF:
 ```
@@ -176,7 +176,7 @@ router ospf 1
 ```
 $ ansible-playbook 11_ios_config_src_jinja.yml -v
 ```
-![6j_ios_config_src_jinja_2]({{ book.ansible_img_path }}6j_ios_config_src_jinja_2.png)
+![6j_ios_config_src_jinja_2](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6j_ios_config_src_jinja_2.png)
 
 ### Совмещение с другими параметрами
 

@@ -94,7 +94,7 @@ Ansible собирает такие факты:
 $ ansible-playbook 1_ios_facts.yml
 ```
 
-![5_ios_facts]({{ book.ansible_img_path }}5_ios_facts.png)
+![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts.png)
 
 
 
@@ -104,7 +104,7 @@ $ ansible-playbook 1_ios_facts.yml -v
 Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
 ```
 
-![5_ios_facts]({{ book.ansible_img_path }}5_ios_facts_verbose.png)
+![5_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts_verbose.png)
 
 После того, как Ansible собрал факты с устройства, все факты доступны как переменные в playbook, шаблонах и т.д.
 
@@ -135,7 +135,7 @@ Using /home/nata/pyneng_course/chapter15/ansible.cfg as config file
 $ ansible-playbook 2_ios_facts_debug.yml
 ```
 
-![5_ios_facts_debug]({{ book.ansible_img_path }}5_ios_facts_debug.png)
+![5_ios_facts_debug](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5_ios_facts_debug.png)
 
 ### Сохранение фактов
 
@@ -199,7 +199,7 @@ Playbook 3_ios_facts.yml собирает всю информацию об ус�
 $ ansible-playbook 3_ios_facts.yml
 ```
 
-![5a_ios_facts]({{ book.ansible_img_path }}5a_ios_facts.png)
+![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5a_ios_facts.png)
 
 После этого в каталоге all_facts находятся такие файлы:
 ```
@@ -237,5 +237,5 @@ $ ansible-playbook 3_ios_facts.yml
 $ ansible-playbook 3_ios_facts.yml
 ```
 
-![5a_ios_facts]({{ book.ansible_img_path }}5a_ios_facts_no_change.png)
+![5a_ios_facts](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/5a_ios_facts_no_change.png)
 
