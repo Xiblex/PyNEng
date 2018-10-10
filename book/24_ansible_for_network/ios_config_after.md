@@ -1,4 +1,3 @@
-{% raw %}
 ## after
 
 Параметр __after__ указывает, какие команды выполнить после команд в списке lines (или commands).
@@ -36,7 +35,6 @@
 ```
 $ ansible-playbook 7_ios_config_after.yml -v
 ```
-{% endraw %}
 ![6f_ios_config_after.png](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after.png)
 
 
@@ -46,7 +44,6 @@ $ ansible-playbook 7_ios_config_after.yml -v
 ```
 ![6f_ios_config_after_no_change](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6f_ios_config_after_no_change.png)
 
-{% raw %}
 Рассмотрим ещё один пример использования after.
 
 С помощью after можно сохранять конфигурацию устройства (playbook 7_ios_config_after_save.yml):
@@ -69,7 +66,6 @@ $ ansible-playbook 7_ios_config_after.yml -v
           - end
           - write
 ```
-{% endraw %}
 
 Результат выполнения playbook (изменения только на маршрутизаторе 192.168.100.1):
 ```

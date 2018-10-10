@@ -1,4 +1,3 @@
-{% raw %}
 ## match
 
 Параметр __match__  указывает, как именно нужно сравнивать команды (что считается изменением):
@@ -39,7 +38,6 @@ ip access-list extended IN_to_OUT
           - permit tcp 10.0.1.0 0.0.0.255 any eq 22
           - permit icmp any any
 ```
-{% endraw %}
 
 Результат выполнения playbook:
 ```
@@ -77,7 +75,6 @@ ip access-list extended IN_to_OUT
  deny   ip any any
 ```
 
-{% raw %}
 Playbook 9_ios_config_match_exact.yml (будет постепенно дополняться):
 ```yml
 ---
@@ -98,7 +95,6 @@ Playbook 9_ios_config_match_exact.yml (будет постепенно допо�
           - deny   ip any any
 ```
 
-{% endraw %}
 Если запустить playbook, результат будет таким:
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
@@ -119,7 +115,6 @@ ip access-list extended IN_to_OUT
 Конечно же, в таком случае последнее правило никогда не сработает.
 
 
-{% raw %}
 Можно добавить к этому playbook параметр before и сначала удалить ACL, а затем применять команды:
 ```yml
 ---
@@ -142,7 +137,6 @@ ip access-list extended IN_to_OUT
           - deny   ip any any
 ```
 
-{% endraw %}
 Если применить playbook к последнему состоянию маршрутизатора, то изменений не будет никаких, так как все строки уже есть.
 
 Попробуем начать с такого состояния ACL:
@@ -174,7 +168,6 @@ ip access-list extended IN_to_OUT
 
 Но, так как в playbook ACL сначала удаляется, а затем применяется список команд lines, получилось, что в итоге в ACL одна строка.
 
-{% raw %}
 Поможет в такой ситуации вариант ```match: exact```:
 ```yml
 ---
@@ -198,7 +191,6 @@ ip access-list extended IN_to_OUT
         match: exact
 ```
 
-{% endraw %}
 Применение playbook 9_ios_config_match_exact.yml к текущему состоянию маршрутизатора (в ACL одна строка):
 ```
 $ ansible-playbook 9_ios_config_match_exact.yml -v
@@ -220,7 +212,6 @@ ip access-list extended IN_to_OUT
 
 
 И для того, чтобы окончательно разобраться с параметром ```match: exact```, ещё один пример.
-{% raw %}
 
 Закомментируем в playbook строки с удалением ACL:
 ```yml
@@ -245,7 +236,6 @@ ip access-list extended IN_to_OUT
         match: exact
 ```
 
-{% endraw %}
 В начало ACL добавлена строка:
 ```
 ip access-list extended IN_to_OUT
@@ -284,7 +274,6 @@ ip access-list extended IN_to_OUT
  deny   ip any any
 ```
 
-{% raw %}
 Playbook 9_ios_config_match_strict.yml:
 ```yml
 ---
@@ -306,7 +295,6 @@ Playbook 9_ios_config_match_strict.yml:
           - permit icmp any any
         match: strict
 ```
-{% endraw %}
 
 Выполнение playbook:
 ```
@@ -324,7 +312,6 @@ $ ansible-playbook 9_ios_config_match_strict.yml -v
 
 Использование ```match: none``` отключает идемпотентность задачи: каждый раз при выполнении playbook будут отправляться команды, которые указаны в задаче.
 
-{% raw %}
 Пример playbook 9_ios_config_match_none.yml:
 ```yml
 ---
@@ -346,7 +333,6 @@ $ ansible-playbook 9_ios_config_match_strict.yml -v
           - permit icmp any any
         match: none
 ```
-{% endraw %}
 
 Каждый раз при запуске playbook результат будет таким:
 ```

@@ -1,4 +1,3 @@
-{% raw %}
 ## lines (commands)
 
 Самый простой способ использовать модуль ios_config - отправлять команды глобального конфигурационного режима с параметром lines.
@@ -19,7 +18,6 @@
         lines:
           - service password-encryption
 ```
-{% endraw %}
 > Используется переменная cli, которая указана в файле group_vars/all.yml.
 
 Результат выполнения playbook:
@@ -48,7 +46,6 @@ $ ansible-playbook 1_ios_config_lines.yml
 
 > Обязательно пишите команды полностью, а не сокращенно. И обращайте внимание, что для некоторых команд IOS сам добавляет параметры. Если писать команду не в том виде, в котором она реально видна в конфигурационном файле, модуль не будет идемпотентен. Он будет всё время считать, что команды нет, и вносить изменения каждый раз. 
 
-{% raw %}
 Параметр lines позволяет отправлять и несколько команд (playbook 1_ios_config_mult_lines.yml):
 ```
 ---
@@ -71,7 +68,6 @@ $ ansible-playbook 1_ios_config_lines.yml
 ```
 $ ansible-playbook 1_ios_config_mult_lines.yml
 ```
-{% endraw %}
 
 ![6_ios_config_mult_lines](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6_ios_config_mult_lines.png)
 

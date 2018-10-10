@@ -1,4 +1,3 @@
-{% raw %}
 ## Модуль ios_command
 
 Модуль __ios_command__ отправляет команду show на устройство под управлением IOS и возвращает результат выполнения команды.
@@ -45,9 +44,7 @@
 ```
 $ ansible-playbook 1_ios_command.yml
 ```
-{% endraw %}
 ![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/2_ios_command.png)
-{% raw %}
 
 > В отличие от использования модуля raw, playbook не указывает, что были выполнены изменения.
 
@@ -83,7 +80,6 @@ Playbook 2_ios_command.yml выполняет несколько команд и
 ```
 $ ansible-playbook 2_ios_command.yml
 ```
-{% endraw %}
 ![ios_command](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/2a_ios_command.png)
 
 Обе команды выполнились на всех устройствах.

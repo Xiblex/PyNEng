@@ -1,4 +1,3 @@
-{% raw %}
 ## defaults
 
 Параметр __defaults__ указывает, нужно ли собирать всю информацию с устройства, в том числе и значения по умолчанию.
@@ -56,7 +55,6 @@
 ```
 $ ansible-playbook 6_ios_config_defaults.yml
 ```
-{% endraw %}
 
 ![6e_ios_config_default](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6e_ios_config_defaults.png)
 

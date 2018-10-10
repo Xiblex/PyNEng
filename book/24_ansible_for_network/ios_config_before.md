@@ -1,4 +1,3 @@
-{% raw %}
 ## before
 
 Параметр __before__ указывает, какие действия выполнить до команд в списке lines.
@@ -36,7 +35,6 @@ Playbook 8_ios_config_before.yml:
 В playbook 8_ios_config_before.yml ACL IN_to_OUT сначала удаляется с помощью параметра before, а затем создается заново.
 
 Таким образом, в ACL всегда находятся только те строки, которые заданы в списке lines.
-{% endraw %}
 
 Запуск playbook с изменениями:
 ```

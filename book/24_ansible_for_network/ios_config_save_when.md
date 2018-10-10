@@ -25,7 +25,6 @@ file prompt quiet
 
 Еще один вариант - самостоятельно сделать сохранение, используя модуль ios_command.
 
-{% raw %}
 Playbook 4_ios_config_save_when.yml:
 ```yml
 ---
@@ -52,7 +51,6 @@ Playbook 4_ios_config_save_when.yml:
           - write
       when: cfg.changed
 ```
-{% endraw %}
 
 > Надо внести изменения на маршрутизаторе 192.168.100.1. Например, изменить строку transport input all на transport input ssh.
 

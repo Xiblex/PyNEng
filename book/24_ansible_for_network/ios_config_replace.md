@@ -1,4 +1,3 @@
-{% raw %}
 ## replace
 
 Параметр replace указывает, как именно нужно заменять конфигурацию:
@@ -40,7 +39,6 @@ ip access-list extended IN_to_OUT
           - permit icmp any any
           - deny   ip any any
 ```
-{% endraw %}
 
 Выполнение playbook:
 ```
@@ -77,7 +75,6 @@ ip access-list extended IN_to_OUT
  permit icmp any any
 ```
 
-{% raw %}
 Playbook 10_ios_config_replace_block.yml:
 ```yml
 ---
@@ -100,7 +97,6 @@ Playbook 10_ios_config_replace_block.yml:
           - deny   ip any any
         replace: block
 ```
-{% endraw %}
 
 Выполнение playbook:
 ```

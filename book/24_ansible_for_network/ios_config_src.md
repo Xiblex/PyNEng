@@ -1,4 +1,3 @@
-{% raw %}
 ## src
 
 Параметр __src__ позволяет указывать путь к файлу конфигурации или шаблону конфигурации, которую нужно загрузить на устройство.
@@ -20,7 +19,6 @@
       ios_config:
         src: templates/acl_cfg.txt
 ```
-{% endraw %}
 
 В файле templates/acl_cfg.txt находится такая конфигурация:
 ```
@@ -55,7 +53,6 @@ $ ansible-playbook 11_ios_config_src.yml -v
 ![6j_ios_config_src_2](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/6j_ios_config_src_2.png)
 
 
-{% raw %}
 ### Шаблон Jinja2
 
 В параметре src можно указывать шаблон Jinja2.
@@ -133,7 +130,6 @@ ospf_ints:
       ios_config:
         src: templates/ospf.j2
 ```
-{% endraw %}
 
 Так как Ansible сам найдет переменные в каталоге host_vars, их не нужно указывать.
 Можно сразу запускать playbook:

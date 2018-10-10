@@ -2,7 +2,6 @@
 
 __ntc-ansible__ - это модуль для работы с сетевым оборудованием, который не только выполняет команды на оборудовании, но и обрабатывает вывод команд и преобразует с помощью {% if book.book_name == "ansible_neteng" %}[TextFSM](https://natenka.gitbooks.io/pyneng/content/book/22_textfsm/).{% else %}[TextFSM](../../22_textfsm/).{% endif %}
 
-{% raw %}
 Этот модуль не входит в число core модулей Ansible, поэтому его нужно установить.
 
 Но прежде нужно указать Ansible, где искать сторонние модули.
@@ -97,7 +96,6 @@ No matching distribution found for textfsm==1.0.1 (from pyntc->ntc-ansible)
 
     - debug: var=result
 ```
-{% endraw %}
 
 
 Результат выполнения playbook:
@@ -108,7 +106,6 @@ $ ansible-playbook 1_ntc-ansible.yml
 ![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7_ntc_ansible.png)
 
 
-{% raw %}
 В переменной response находится структурированный вывод в виде списка словарей.
 Ключи в словарях получены на основании переменных, которые описаны в шаблоне library/ntc-ansible/ntc-templates/templates/cisco_ios_show_ip_int_brief.template (единственное отличие - регистр):
 ```
@@ -162,7 +159,6 @@ Start
 ```
 $ ansible-playbook 2_ntc-ansible_save.yml
 ```
-{% endraw %}
 
 ![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/7a_ntc_ansible_save.png)
 
