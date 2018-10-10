@@ -67,14 +67,14 @@ Playbook описываются в формате YAML.
 
 И тот же playbook с отображением элементов:
 
-![Ansible playbook]({{ book.ansible_img_path }}playbook.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/playbook.png)
 
 Так выглядит выполнение playbook:
 ```
 $ ansible-playbook 1_show_commands_with_raw.yml
 ```
 
-![Ansible playbook]({{ book.ansible_img_path }}playbook_execution.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/playbook_execution.png)
 
 > Обратите внимание, что для запуска playbook используется другая команда. Для ad-hoc команды использовалась команда ansible. А для playbook - ansible-playbook.
 
@@ -83,7 +83,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml
 $ ansible-playbook 1_show_commands_with_raw.yml -v
 ```
 
-![Verbose playbook]({{ book.ansible_img_path }}playbook-verbose.png)
+![Verbose playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/playbook-verbose.png)
 
 В следующих разделах мы научимся отображать эти данные в нормальном формате и посмотрим, что с ними можно делать.
 
@@ -101,7 +101,7 @@ $ ansible-playbook 1_show_commands_with_raw.yml -v
 $ ansible-playbook 1_show_commands_with_raw.yml
 ```
 
-![Ansible playbook]({{ book.ansible_img_path }}playbook_failed_execution.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/playbook_failed_execution.png)
 
 Обратите внимание на ошибку в выполнении первой задачи для маршрутизатора 192.168.100.1.
 
@@ -130,7 +130,7 @@ to retry, use: --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/2
 $ ansible-playbook 1_show_commands_with_raw.yml --limit @/home/vagrant/repos/pyneng-examples-exercises/examples/23_ansible_basics/2_playbook_basics/1_show_commands_with_raw.retry
 ```
 
-![Ansible playbook]({{ book.ansible_img_path }}playbook-retry.png)
+![Ansible playbook](https://raw.githubusercontent.com/natenka/PyNEng/master/images/15_ansible/playbook-retry.png)
 
 Ansible взял список устройств, которые перечислены в файле retry, и выполнил playbook только для них.
 
