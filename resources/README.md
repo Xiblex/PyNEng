@@ -36,6 +36,7 @@ Python позволяет делать достаточно многое обл�
 
 Книги:
 
+* [Network Programmability and Automation: Skills for the Next-Generation Network Engineer](https://www.amazon.com/Network-Programmability-Automation-Next-Generation-Engineer/dp/1491931256)
 * [Mastering Python Networking (Eric Chou)](https://www.packtpub.com/networking-and-servers/mastering-python-networking) - отчасти перекликается с тем, что рассматривалось в этой книге, но в ней есть и много новых тем. Плюс, рассматриваются примеры не только на оборудовании Cisco, но Juniper и Arista.
 
 
@@ -68,7 +69,9 @@ Python позволяет делать достаточно многое обл�
 * [SaltStack](https://saltstack.com/) - аналог Ansible
 * [Scapy](https://github.com/secdev/scapy) - сетевая утилита, которая позволяет манипулировать сетевыми пакетами
 * [StackStorm](https://stackstorm.com/) - StackStorm is event-driven automation commonly used for auto-remediation, security responses, facilitated troubleshooting, complex deployments, and more
-
+* [netdev](https://github.com/selfuryon/netdev)
+* [Nornir](https://github.com/nornir-automation/nornir)
+* [eNMS](https://github.com/afourmy/eNMS)
 
 ## Python без привязки к сетевому оборудованию
 
@@ -78,15 +81,17 @@ Python позволяет делать достаточно многое обл�
 * [Dive Into Python 3](http://www.diveintopython3.net/index.html) - в этой книге рассматриваются более продвинутые темы и она отлично подойдет для 2-3 книги по Python
 * [Problem Solving with Algorithms and Data Structures using Python](http://interactivepython.org/runestone/static/pythonds/index.html) - отличная книга по структурам данных и алгоритмам. Много примеров и домашних заданий. Написана простым, понятным языком. [На русском](http://aliev.me/runestone/)
 * [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) - в этой книге можно найти много идей по автоматизации ежедневной работы. Тут рассматриваются такие темы: работа с файлами PDF, Excel, Word, отправка писем, работа с картинками, работа в веб. [На русском](https://www.ozon.ru/context/detail/id/137673590/)
+* [Python tricks](https://www.amazon.com/Python-Tricks-Buffet-Awesome-Features/dp/1775093301)
 
 Курсы:
 
 * [MITx - 6.00.1x Introduction to Computer Science and Programming Using Python](https://www.edx.org/course/introduction-computer-science-mitx-6-00-1x-9) - очень хороший курс по Python. Отличный вариант для продолжения обучения после книги. В нём Вы и повторите пройденный материал по основам Python, но под другим углом и узнаете много нового. В курсе много практических заданий и он достаточно интенсивный.
 * [Python от Computer Science Center](https://www.youtube.com/playlist?list=PLlb7e2G7aSpTTNp7HBYzCBByaE1h54ruW) - отличные видеолекции по Python. Тут есть и немного основ и более продвинутые темы
-
+* [Курсы от Talk Python](https://training.talkpython.fm/courses/all)
 
 Сайты с задачами:
 
+* [Bites of Py](https://codechalleng.es/bites/)
 * [HackerRank](https://www.hackerrank.com/) - на этом сайте задачи разбиты по областям: алгоритмы, регулярные выражения, базы данных и другие. Но есть и базовые задачи 
 * [CheckIO - online game for Python and JavaScript coders](https://checkio.org/)
 
