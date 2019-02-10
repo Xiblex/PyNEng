@@ -52,12 +52,10 @@ def ignore_command(command):
     '''
     ignore = ['duplex', 'alias', 'Current configuration']
 
-    ignore_command = False
-
     for word in ignore:
         if word in command:
             return True
-    return ignore_command
+    return False
 ```
 
 На такой вариант:
