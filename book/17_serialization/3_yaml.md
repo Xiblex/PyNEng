@@ -232,7 +232,7 @@ with open('sw_templates.yaml', 'w') as f:
     yaml.dump(to_yaml, f, default_flow_style=False)
 
 with open('sw_templates.yaml') as f:
-    print f.read()
+    print(f.read())
 ```
 
 Теперь содержимое файла sw_templates.yaml выглядит таким образом:
