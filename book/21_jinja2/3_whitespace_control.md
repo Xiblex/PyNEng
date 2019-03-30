@@ -40,7 +40,8 @@ router bgp 100
 
 При добавлении флага trim_blocks таким образом:
 ```python
-env = Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True)
+env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
+                  trim_blocks=True)
 ```
 
 Результат выполнения будет таким:
@@ -57,7 +58,7 @@ router bgp 100
 Были удалены пустые строки после блока.
 
 Но перед строками ```neighbor ... remote-as``` появились два пробела.
-Так получилось из-за того, что перед блоком ```{% for ibgp in bgp.ibgp_neighbors %}``` стоит пробел.
+Так получилось из-за того, что перед блоком for стоит пробел.
 После того, как был отключен лишний перевод строки, пробелы и табы перед блоком добавляются к первой строке блока.
 
 Но это не влияет на следующие строки.
@@ -67,7 +68,8 @@ router bgp 100
 
 Если добавить аргумент ```lstrip_blocks=True``` таким образом:
 ```
-env = Environment(loader = FileSystemLoader(TEMPLATE_DIR), trim_blocks=True, lstrip_blocks=True)
+env = Environment(loader=FileSystemLoader(TEMPLATE_DIR),
+                  trim_blocks=True, lstrip_blocks=True)
 ```
 
 Результат выполнения будет таким:
