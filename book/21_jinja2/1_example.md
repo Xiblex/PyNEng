@@ -109,9 +109,8 @@ for router in routers:
 $ python router_config_generator.py
 ```
 
-В результате получатся три конфигурационных файла:
-
-{% codetabs name="Liverpool_r1.txt", type="text" -%}
+В результате получатся три конфигурационных файла такого вида:
+```
 hostname Liverpool
 !
 interface Loopback10
@@ -151,84 +150,4 @@ router ospf 10
  auto-cost reference-bandwidth 10000
  network 10.0.0.0 0.255.255.255 area 0
 !
-{%- language name="Bristol_r1.txt", type="py" -%}
-hostname Bristol
-!
-interface Loopback10
- description MPLS loopback
- ip address 10.10.12.1 255.255.255.255
-!
-interface GigabitEthernet0/0
- description WAN to Bristol sw1 G0/1
-!
-interface GigabitEthernet0/0.1121
- description MPLS to LONDON
- encapsulation dot1Q 1121
- ip address 10.12.1.2 255.255.255.252
- ip ospf network point-to-point
- ip ospf hello-interval 1
- ip ospf cost 10
-!
-interface GigabitEthernet0/1
- description LAN Bristol to sw1 G0/2
-!
-interface GigabitEthernet0/1.793
- description PW IT Bristol - LONDON
- encapsulation dot1Q 793
- xconnect 10.10.1.1 1211 encapsulation mpls
-  backup peer 10.10.1.2 1221
-  backup delay 1 1
-!
-interface GigabitEthernet0/1.1510
- description PW BS Bristol - LONDON
- encapsulation dot1Q 1510
- xconnect 10.10.1.1 11211 encapsulation mpls
-  backup peer 10.10.1.2 11221
-  backup delay 1 1
-!
-router ospf 10
- router-id 10.10.12.1
- auto-cost reference-bandwidth 10000
- network 10.0.0.0 0.255.255.255 area 0
-!
-{%- language name="Coventry_r1.txt", type="py" -%}
-hostname Coventry
-!
-interface Loopback10
- description MPLS loopback
- ip address 10.10.14.1 255.255.255.255
-!
-interface GigabitEthernet0/0
- description WAN to Coventry sw1 G0/1
-!
-interface GigabitEthernet0/0.1141
- description MPLS to Manchester
- encapsulation dot1Q 1141
- ip address 10.14.1.2 255.255.255.252
- ip ospf network point-to-point
- ip ospf hello-interval 1
- ip ospf cost 10
-!
-interface GigabitEthernet0/1
- description LAN Coventry to sw1 G0/2
-!
-interface GigabitEthernet0/1.892
- description PW IT Coventry - Manchester
- encapsulation dot1Q 892
- xconnect 10.10.2.1 1411 encapsulation mpls
-  backup peer 10.10.2.2 1421
-  backup delay 1 1
-!
-interface GigabitEthernet0/1.1650
- description PW BS Coventry - Manchester
- encapsulation dot1Q 1650
- xconnect 10.10.2.1 21411 encapsulation mpls
-  backup peer 10.10.2.2 21421
-  backup delay 1 1
-!
-router ospf 10
- router-id 10.10.14.1
- auto-cost reference-bandwidth 10000
- network 10.0.0.0 0.255.255.255 area 0
-!
-{%- endcodetabs %}
+```
