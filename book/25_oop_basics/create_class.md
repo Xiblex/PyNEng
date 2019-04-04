@@ -28,7 +28,7 @@ In [6]: sw1.model = 'Cisco 3850'
 
 В другом экземпляре класса Switch, переменные могут быть другие:
 ```python
-In [7]: sw1 = Switch()
+In [7]: sw2 = Switch()
 
 In [8]: sw2.hostname = 'sw2'
 
