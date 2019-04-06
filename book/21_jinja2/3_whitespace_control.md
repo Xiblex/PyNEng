@@ -198,7 +198,7 @@ router bgp 100
 
 ```
 
-Если добавить минут в конец блока:
+Если добавить минус в конец блока:
 ```
 router bgp {{ bgp.local_as }}
  {% for ibgp in bgp.ibgp_neighbors %}
